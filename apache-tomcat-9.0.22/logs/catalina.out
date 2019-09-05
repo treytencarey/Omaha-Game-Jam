@@ -1,0 +1,207 @@
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+05-Sep-2019 05:38:57.855 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.22
+05-Sep-2019 05:38:57.866 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Jul 4 2019 14:20:06 UTC
+05-Sep-2019 05:38:57.870 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.22.0
+05-Sep-2019 05:38:57.871 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+05-Sep-2019 05:38:57.871 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            4.15.0-1044-aws
+05-Sep-2019 05:38:57.871 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+05-Sep-2019 05:38:57.871 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-11-openjdk-amd64
+05-Sep-2019 05:38:57.872 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           11.0.4+11-post-Ubuntu-1ubuntu218.04.3
+05-Sep-2019 05:38:57.872 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Ubuntu
+05-Sep-2019 05:38:57.872 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:38:57.873 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:38:57.898 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+05-Sep-2019 05:38:57.898 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+05-Sep-2019 05:38:57.898 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+05-Sep-2019 05:38:57.898 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/opt/capstone/apache-tomcat-9.0.22/conf/logging.properties
+05-Sep-2019 05:38:57.898 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+05-Sep-2019 05:38:57.899 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+05-Sep-2019 05:38:57.899 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+05-Sep-2019 05:38:57.899 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+05-Sep-2019 05:38:57.899 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+05-Sep-2019 05:38:57.899 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:38:57.899 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:38:57.899 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/opt/capstone/apache-tomcat-9.0.22/temp
+05-Sep-2019 05:38:57.900 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib]
+05-Sep-2019 05:38:58.597 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:38:58.660 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:38:58.667 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [1,282] milliseconds
+05-Sep-2019 05:38:58.794 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+05-Sep-2019 05:38:58.794 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.22]
+05-Sep-2019 05:38:58.810 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/host-manager]
+05-Sep-2019 05:38:59.379 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/host-manager] has finished in [569] ms
+05-Sep-2019 05:38:59.383 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/ROOT]
+05-Sep-2019 05:38:59.440 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/ROOT] has finished in [57] ms
+05-Sep-2019 05:38:59.441 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/docs]
+05-Sep-2019 05:38:59.492 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/docs] has finished in [51] ms
+05-Sep-2019 05:38:59.492 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/manager]
+05-Sep-2019 05:38:59.551 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/manager] has finished in [59] ms
+05-Sep-2019 05:38:59.555 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/examples]
+05-Sep-2019 05:39:00.057 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/examples] has finished in [501] ms
+05-Sep-2019 05:39:00.064 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:39:00.096 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:39:00.115 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [1,446] milliseconds
+05-Sep-2019 05:44:40.128 INFO [Catalina-utility-1] org.apache.catalina.users.MemoryUserDatabase.backgroundProcess Reloading memory user database [UserDatabase] from updated source [file:/opt/capstone/apache-tomcat-9.0.22/conf/tomcat-users.xml]
+05-Sep-2019 05:45:48.591 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+05-Sep-2019 05:45:48.592 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:45:48.594 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:45:48.595 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+05-Sep-2019 05:45:48.668 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:45:48.671 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:45:48.672 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:45:48.673 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+05-Sep-2019 05:49:17.818 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.22
+05-Sep-2019 05:49:17.824 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Jul 4 2019 14:20:06 UTC
+05-Sep-2019 05:49:17.825 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.22.0
+05-Sep-2019 05:49:17.825 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+05-Sep-2019 05:49:17.825 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            4.15.0-1044-aws
+05-Sep-2019 05:49:17.825 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+05-Sep-2019 05:49:17.828 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-11-openjdk-amd64
+05-Sep-2019 05:49:17.828 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           11.0.4+11-post-Ubuntu-1ubuntu218.04.3
+05-Sep-2019 05:49:17.828 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Ubuntu
+05-Sep-2019 05:49:17.828 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:49:17.828 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:49:17.850 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+05-Sep-2019 05:49:17.850 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+05-Sep-2019 05:49:17.850 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+05-Sep-2019 05:49:17.850 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/opt/capstone/apache-tomcat-9.0.22/conf/logging.properties
+05-Sep-2019 05:49:17.850 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+05-Sep-2019 05:49:17.852 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+05-Sep-2019 05:49:17.853 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+05-Sep-2019 05:49:17.853 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+05-Sep-2019 05:49:17.853 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+05-Sep-2019 05:49:17.853 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:49:17.853 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:49:17.853 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/opt/capstone/apache-tomcat-9.0.22/temp
+05-Sep-2019 05:49:17.855 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib]
+05-Sep-2019 05:49:18.558 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:49:18.616 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:49:18.623 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [1,262] milliseconds
+05-Sep-2019 05:49:18.750 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+05-Sep-2019 05:49:18.751 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.22]
+05-Sep-2019 05:49:18.766 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/host-manager]
+05-Sep-2019 05:49:19.316 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/host-manager] has finished in [550] ms
+05-Sep-2019 05:49:19.316 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/ROOT]
+05-Sep-2019 05:49:19.366 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/ROOT] has finished in [50] ms
+05-Sep-2019 05:49:19.370 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/docs]
+05-Sep-2019 05:49:19.415 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/docs] has finished in [45] ms
+05-Sep-2019 05:49:19.416 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/manager]
+05-Sep-2019 05:49:19.467 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/manager] has finished in [51] ms
+05-Sep-2019 05:49:19.471 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/examples]
+05-Sep-2019 05:49:19.956 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/examples] has finished in [485] ms
+05-Sep-2019 05:49:19.964 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:49:19.996 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:49:19.999 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [1,375] milliseconds
+05-Sep-2019 05:49:40.415 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+05-Sep-2019 05:49:40.415 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:49:40.422 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:49:40.423 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+05-Sep-2019 05:49:40.496 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:49:40.503 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:49:40.504 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:49:40.505 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+05-Sep-2019 05:50:54.828 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.22
+05-Sep-2019 05:50:54.838 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Jul 4 2019 14:20:06 UTC
+05-Sep-2019 05:50:54.839 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.22.0
+05-Sep-2019 05:50:54.839 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+05-Sep-2019 05:50:54.839 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            4.15.0-1044-aws
+05-Sep-2019 05:50:54.839 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+05-Sep-2019 05:50:54.839 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-11-openjdk-amd64
+05-Sep-2019 05:50:54.839 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           11.0.4+11-post-Ubuntu-1ubuntu218.04.3
+05-Sep-2019 05:50:54.839 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Ubuntu
+05-Sep-2019 05:50:54.839 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:50:54.840 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:50:54.861 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+05-Sep-2019 05:50:54.861 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+05-Sep-2019 05:50:54.861 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+05-Sep-2019 05:50:54.862 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/opt/capstone/apache-tomcat-9.0.22/conf/logging.properties
+05-Sep-2019 05:50:54.862 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+05-Sep-2019 05:50:54.862 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+05-Sep-2019 05:50:54.862 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+05-Sep-2019 05:50:54.862 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+05-Sep-2019 05:50:54.862 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+05-Sep-2019 05:50:54.866 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:50:54.866 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:50:54.867 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/opt/capstone/apache-tomcat-9.0.22/temp
+05-Sep-2019 05:50:54.867 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib]
+05-Sep-2019 05:50:55.556 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:50:55.615 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:50:55.623 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [1,314] milliseconds
+05-Sep-2019 05:50:55.759 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+05-Sep-2019 05:50:55.759 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.22]
+05-Sep-2019 05:50:55.774 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/host-manager]
+05-Sep-2019 05:50:56.325 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/host-manager] has finished in [551] ms
+05-Sep-2019 05:50:56.327 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/ROOT]
+05-Sep-2019 05:50:56.387 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/ROOT] has finished in [61] ms
+05-Sep-2019 05:50:56.388 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/docs]
+05-Sep-2019 05:50:56.429 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/docs] has finished in [41] ms
+05-Sep-2019 05:50:56.433 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/manager]
+05-Sep-2019 05:50:56.483 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/manager] has finished in [50] ms
+05-Sep-2019 05:50:56.484 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/examples]
+05-Sep-2019 05:50:56.995 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/examples] has finished in [511] ms
+05-Sep-2019 05:50:57.000 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:50:57.016 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:50:57.019 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [1,395] milliseconds
+05-Sep-2019 05:51:35.581 INFO [http-nio-8080-exec-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] has started
+05-Sep-2019 05:51:35.644 INFO [http-nio-8080-exec-1] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] is completed
+05-Sep-2019 05:52:12.839 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+05-Sep-2019 05:52:12.840 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:52:12.843 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:52:12.845 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+05-Sep-2019 05:52:12.943 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:52:12.946 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:52:12.948 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:52:12.949 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+05-Sep-2019 05:55:57.955 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.22
+05-Sep-2019 05:55:57.962 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Jul 4 2019 14:20:06 UTC
+05-Sep-2019 05:55:57.963 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.22.0
+05-Sep-2019 05:55:57.963 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+05-Sep-2019 05:55:57.963 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            4.15.0-1044-aws
+05-Sep-2019 05:55:57.963 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+05-Sep-2019 05:55:57.963 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-11-openjdk-amd64
+05-Sep-2019 05:55:57.963 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           11.0.4+11-post-Ubuntu-1ubuntu218.04.3
+05-Sep-2019 05:55:57.963 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Ubuntu
+05-Sep-2019 05:55:57.963 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:55:57.964 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:55:57.987 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+05-Sep-2019 05:55:57.988 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+05-Sep-2019 05:55:57.988 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+05-Sep-2019 05:55:57.988 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/opt/capstone/apache-tomcat-9.0.22/conf/logging.properties
+05-Sep-2019 05:55:57.989 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+05-Sep-2019 05:55:57.989 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+05-Sep-2019 05:55:57.991 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+05-Sep-2019 05:55:57.991 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+05-Sep-2019 05:55:57.991 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+05-Sep-2019 05:55:57.991 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:55:57.991 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/opt/capstone/apache-tomcat-9.0.22
+05-Sep-2019 05:55:57.991 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/opt/capstone/apache-tomcat-9.0.22/temp
+05-Sep-2019 05:55:57.991 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib]
+05-Sep-2019 05:55:58.715 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:55:58.774 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:55:58.779 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [1,297] milliseconds
+05-Sep-2019 05:55:58.915 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+05-Sep-2019 05:55:58.915 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.22]
+05-Sep-2019 05:55:58.931 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/host-manager]
+05-Sep-2019 05:55:59.486 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/host-manager] has finished in [553] ms
+05-Sep-2019 05:55:59.487 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/ROOT]
+05-Sep-2019 05:55:59.542 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/ROOT] has finished in [55] ms
+05-Sep-2019 05:55:59.546 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/docs]
+05-Sep-2019 05:55:59.588 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/docs] has finished in [42] ms
+05-Sep-2019 05:55:59.593 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/manager]
+05-Sep-2019 05:55:59.677 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/manager] has finished in [84] ms
+05-Sep-2019 05:55:59.678 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/examples]
+05-Sep-2019 05:56:00.213 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/capstone/apache-tomcat-9.0.22/webapps/examples] has finished in [535] ms
+05-Sep-2019 05:56:00.220 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:56:00.254 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:56:00.271 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [1,491] milliseconds
+05-Sep-2019 05:56:14.906 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+05-Sep-2019 05:56:14.907 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:56:14.915 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:56:14.916 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+05-Sep-2019 05:56:14.998 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:56:15.001 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+05-Sep-2019 05:56:15.005 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+05-Sep-2019 05:56:15.006 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
