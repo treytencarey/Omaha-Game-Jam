@@ -1,0 +1,12 @@
+package utils;
+
+import java.time.Year;
+
+public class Utils {
+	public static final String PROJNAME = "Grants Database";
+	
+	public static int getCurrentYear()
+	{
+		return Year.now().getValue();
+	}
+}

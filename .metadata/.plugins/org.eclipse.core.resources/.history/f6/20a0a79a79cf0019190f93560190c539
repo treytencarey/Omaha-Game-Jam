@@ -1,0 +1,328 @@
+package database;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.CharBuffer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import project.Main;
+import utils.Utils;
+
+@WebServlet("/databaseServlet")
+public class Database extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	public static final String AUTH_DB = Main.context.getRealPath("/Databases/grants.db");
+	
+	public static Map<String, String> getQueryMap(String query)  
+	{  
+	    String[] params = query.split("&");  
+	    Map<String, String> map = new HashMap<String, String>();  
+	    for (String param : params)  
+	    {  
+	        String name = param.split("=")[0];  
+	        String value = param.split("=")[1];  
+	        map.put(name, value);  
+	    }  
+	    return map;  
+	}
+	
+	protected void doPost(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		
+		boolean settingSessionAttribute = request.getParameter("setSessionAttribute") != null;
+		if (settingSessionAttribute)
+		{
+			String attr = request.getParameter("attribute");
+			Object val = request.getParameter("value");
+			session.setAttribute(attr, val);
+			return;
+		}
+		
+		boolean deletingRow = request.getParameter("deleteRow") != null;
+		if (deletingRow)
+		{
+			String PKey = request.getParameter("PKey");
+			String table = request.getParameter("table");
+			
+			// ProgressionNotes has different steps to updating
+			if (table.equals("ProgressionNotes"))
+			{
+				try {
+					Database.executeUpdate("DELETE FROM Progressions WHERE PKey=" + PKey);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					System.out.println("DEL: " + table);
+					Database.executeUpdate("DELETE FROM " + table + " WHERE PKEY=" + PKey);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			response.sendRedirect(session.getAttribute("curPage").toString());
+			return;
+		}
+		
+		boolean insertingRow = request.getParameter("insertRow") != null;
+		if (insertingRow)
+		{
+			String table = request.getParameter("table");
+			String values = request.getParameter("values");
+			
+			// ProgressionNotes has different steps to updating
+			if (table.equals("ProgressionNotes"))
+			{
+				String SponsorPKey = getQueryMap(session.getAttribute("curPage").toString().substring(session.getAttribute("curPage").toString().indexOf("?")+1)).get("id");
+				try {
+					Database.executeUpdate("INSERT INTO Progressions (SponsorPKey) VALUES (" + SponsorPKey + ")");
+					String PKey = Database.executeQuery("SELECT MAX(PKey) as PKey FROM Progressions WHERE SponsorPKey=" + SponsorPKey).get(0).get("PKey").toString();
+					Database.executeUpdate("INSERT INTO ProgressionNotes (ProgressionPKey) VALUES (" + PKey + ")");
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					System.out.println("INSERT INTO " + table + ((values == null) ? " DEFAULT VALUES" : " " + values));
+					Database.executeUpdate("INSERT INTO " + table + ((values == null) ? " DEFAULT VALUES" : " " + values));
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			response.sendRedirect(session.getAttribute("curPage").toString());
+			return;
+		}
+
+		boolean editingSQLTable = request.getParameter("editSQLTable") != null;
+		if (editingSQLTable)
+		{
+			String table = request.getParameter("table").toString();
+			String PKey = request.getParameter("PKey").toString();
+			String col = request.getParameter("col").toString();
+			String str = request.getParameter("str").toString();
+			str = str.replace("'", "''");
+			
+			int PKeyLoc = -1;
+			for (int i = 0; i < getSQLTable().get(0).size(); i++)
+			{
+				if (getSQLTable().get(0).get(i).equals("PKey")) {
+					PKeyLoc = i;
+				}
+			}
+			if (PKeyLoc == -1)
+			{
+				System.out.println("ERROR: Couldn't find PKey column. PKey needs to be an identifier to know which row to update.");
+				return;
+			}
+			
+			// ProgressionNotes has different steps to updating
+			if (table.equals("ProgressionNotes"))
+			{
+				try {
+					Database.executeUpdate("DELETE FROM " + table + " WHERE ProgressionPKey=" + PKey);
+					for (int len = 0; len < str.length(); len += 255)
+					{
+						Database.executeUpdate("INSERT INTO " + table + " VALUES (" + PKey + ", '" + str.substring(len, (str.length() < len+255) ? str.length() : len+255) + "', " + String.valueOf(len/255+1) + ")");
+					}
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else
+			{
+				try {
+					Database.executeUpdate("UPDATE " + table + " SET " + col + "='" + str + "' WHERE PKEY=" + PKey);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public static boolean executeUpdate(String sql) throws ClassNotFoundException {
+		return Database.executeUpdate(sql, Database.AUTH_DB);
+	}
+	public static boolean executeUpdate(String sql, String dbName) throws ClassNotFoundException
+	{
+		// load the sqlite-JDBC driver using the current class loader
+	    Class.forName("org.sqlite.JDBC");
+	
+	    Connection connection = null;
+	    try
+	    {
+			// create a database connection
+			connection = DriverManager.getConnection("jdbc:sqlite:" + dbName);
+			
+			Statement statement = connection.createStatement();
+			statement.setQueryTimeout(30);  // set timeout to 30 sec.
+			
+			statement.executeUpdate(sql);
+			return true;
+		}
+	    catch (SQLException e)
+	    {
+	    	System.err.println(e.getMessage());
+	    }       
+	    finally
+	    {         
+			try {
+				if(connection != null)
+					connection.close();
+			}
+			catch(SQLException e)
+			{  // Use SQLException class instead.          
+				System.err.println(e); 
+			}
+	    }
+	    return false;
+	}
+	
+	public static List<Map<String, Object>> executeQuery(String sql) throws ClassNotFoundException
+	{
+		return Database.executeQuery(sql, Database.AUTH_DB);
+	}
+	public static List<Map<String, Object>> executeQuery(String sql, String dbName) throws ClassNotFoundException
+	{
+		List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
+		
+		// load the sqlite-JDBC driver using the current class loader
+	    Class.forName("org.sqlite.JDBC");
+	
+	    Connection connection = null;
+	    try
+	    {
+			// create a database connection
+			connection = DriverManager.getConnection("jdbc:sqlite:" + dbName);
+			
+			Statement statement = connection.createStatement();
+			statement.setQueryTimeout(30);  // set timeout to 30 sec.
+			
+			ResultSet resultset = statement.executeQuery(sql);
+			
+		    Map<String, Object> row = null;
+
+		    ResultSetMetaData metaData = resultset.getMetaData();
+		    Integer columnCount = metaData.getColumnCount();
+
+		    while (resultset.next()) {
+		        row = new LinkedHashMap<String, Object>();
+		        for (int i = 1; i <= columnCount; i++) {
+		            row.put(metaData.getColumnName(i), resultset.getObject(i));
+		        }
+		        resultList.add(row);
+		    }
+		}
+	    catch (SQLException e)
+	    {
+	    	System.err.println(e.getMessage());
+	    }       
+	    finally
+	    {         
+			try {
+				if(connection != null)
+					connection.close();
+			}
+			catch(SQLException e)
+			{  // Use SQLException class instead.          
+				System.err.println(e); 
+			}
+	    }
+	    return resultList;
+	}
+	
+	private static List<List<String>> sqlTable;
+	public static void setSQLTable(String sql, HttpSession session)
+	{
+		String table = sql.substring(sql.lastIndexOf("FROM ")+5);
+		table = table.substring(0,(table.indexOf(" ") == -1) ? table.length() : table.indexOf(" "));
+		session.setAttribute("sqldataTable", table);
+		
+		setSQLTable(sql);
+	}
+	public static void setSQLTable(String sql, HttpSession session, String table)
+	{
+		session.setAttribute("sqldataTable", table);
+		
+		setSQLTable(sql);
+	}
+	public static void setSQLTable(String sql)
+	{
+		List<List<String>> result = new ArrayList<List<String>>();
+		
+		List<Map<String, Object>> data = null;
+		try {
+			data = Database.executeQuery(sql);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			sqlTable = result;
+			return;
+		}
+		
+		if (data.size() == 0)
+		{
+			sqlTable = result;
+			return;
+		}
+		
+		List<String> cols = new ArrayList<String>(data.get(0).keySet());
+		for (int i = cols.size()-1; i >= 0; i--)
+			if (cols.get(i).startsWith("-"))
+				cols.remove(i);
+		result.add(cols);
+		
+		for (int i = 0; i < data.size(); i++)
+		{
+			List<String> row = new ArrayList<String>();
+			
+			for (int n = 0; n < cols.size(); n++)
+			{
+				try {
+					row.add(data.get(i).get(cols.get(n)).toString());
+				} catch (Exception e) { row.add(""); }
+			}
+			
+			result.add(row);
+		}
+		
+		sqlTable = result;
+	}
+	public static List<List<String>> getSQLTable()
+	{
+		return sqlTable;
+	}
+}
