@@ -39,7 +39,7 @@ import utils.Utils;
 public class Database extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	public static final String AUTH_DB = Main.context.getRealPath("/Databases/accounts.db");
+	public static final String AUTH_DB = Main.context.getRealPath("/Databases/db.db");
 	
 	public static Map<String, String> getQueryMap(String query)  
 	{  
@@ -61,13 +61,20 @@ public class Database extends HttpServlet {
 		// This is where forms will be submitted by using databaseServlet
 	}
 	
-	public static boolean executeUpdate(String sql) throws ClassNotFoundException {
+	public static String executeUpdate(String sql) {
 		return Database.executeUpdate(sql, Database.AUTH_DB);
 	}
-	public static boolean executeUpdate(String sql, String dbName) throws ClassNotFoundException
+	public static String executeUpdate(String sql, String dbName)
 	{
 		// load the sqlite-JDBC driver using the current class loader
-	    Class.forName("org.sqlite.JDBC");
+		try
+		{
+			Class.forName("org.sqlite.JDBC");
+		} catch (ClassNotFoundException e)
+		{
+			return "INTERNAL ERROR"; // User may see this error, so make it ambiguous for them
+		}
+	    String err = "";
 	
 	    Connection connection = null;
 	    try
@@ -79,7 +86,6 @@ public class Database extends HttpServlet {
 			statement.setQueryTimeout(30);  // set timeout to 30 sec.
 			
 			statement.executeUpdate(sql);
-			return true;
 		}
 	    catch (SQLException e)
 	    {
@@ -96,19 +102,24 @@ public class Database extends HttpServlet {
 				System.err.println(e); 
 			}
 	    }
-	    return false;
+	    return err;
 	}
 	
-	public static List<Map<String, Object>> executeQuery(String sql) throws ClassNotFoundException
+	public static List<Map<String, Object>> executeQuery(String sql)
 	{
 		return Database.executeQuery(sql, Database.AUTH_DB);
 	}
-	public static List<Map<String, Object>> executeQuery(String sql, String dbName) throws ClassNotFoundException
+	public static List<Map<String, Object>> executeQuery(String sql, String dbName)
 	{
 		List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
 		
 		// load the sqlite-JDBC driver using the current class loader
-	    Class.forName("org.sqlite.JDBC");
+	    try {
+	    	Class.forName("org.sqlite.JDBC");
+	    } catch (ClassNotFoundException e)
+	    {
+	    	return resultList;
+	    }
 	
 	    Connection connection = null;
 	    try
