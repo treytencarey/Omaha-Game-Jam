@@ -1,0 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<%@page import="project.a2Main" %>
+	<% for (a2Main.questions.Entry<Integer, String> entry : map.entrySet()) {
+		System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
+	} %>
+</body>
+</html>

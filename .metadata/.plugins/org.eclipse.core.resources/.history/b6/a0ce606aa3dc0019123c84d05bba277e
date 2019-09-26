@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<%@page import="java.util.Map" %>
+	<%@page import="project.a2Main" %>
+	<%
+	// Loop through the stored questions so we can display them
+	for (Map.Entry<Integer, String> entry : a2Main.questions.entrySet()) {
+	%>
+		<% // Display the question %>
+		<a>Question: <%= entry.getValue() %></a><br/>
+		<% // Check if the question has an answer. If it does, display the answer. If not, display a link to the question to edit %>
+		<% String answer = a2Main.answers.get(entry.getKey()); %>
+		<% if (answer.length() > 0) { %>
+			<a>Answer:   <%= answer %></a>
+		<% } else { %>
+			<a href="a2Index.jsp?id=<%= entry.getKey() %>">Click here to answer this question.</a>
+		<% } %>
+		<br/><br/>
+	<%
+	} %>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<%@page import="project.a2Main" %>
+	<%
+	Integer questionId = null;
+	String question = null;
+	if (request.getParameter("id") != null) {
+		questionId = Integer.parseInt(request.getParameter("id"));
+		question = a2Main.questions.get(questionId);
+	} %>
+	<a>Enter your question and answer:</a>
+	<form action="mainServlet" method="post">
+		<input type="text" name="question" value="<%= (request.getParameter("id") != null) ?  : "" %>"><br/>
+		<input type="text" name="answer"><br/>
+		<button name="submitQuestionButton">Submit</button>
+	</form>
+</body>
+</html>

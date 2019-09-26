@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<a href="/a2Question.jsp">Click here to ask a question</a>
+	<div id="question" style="display: none;">
+		<a>Question:</a>
+		<input></input>
+	</div>
+	<script>
+		document.getElementById("question").style.display = "block";
+	</script>
+</body>
+</html>

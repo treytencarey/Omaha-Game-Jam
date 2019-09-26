@@ -1,6 +1,0 @@
-package database;
-
-@WebServlet("/databaseServlet")
-public class Account extends HttpServlet {
-
-}
