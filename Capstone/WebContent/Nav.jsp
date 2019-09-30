@@ -35,7 +35,13 @@ ul.topnav li.right {float: right;}
 <% session.setAttribute("curPage", request.getRequestURI() + ((request.getQueryString() != null) ? "?" + request.getQueryString() : "")); %>
 <ul class="topnav">
   <li><a href="index.jsp">Home</a></li>
+  <li><a href="index.jsp">Events</a></li>
+  <li><a href="index.jsp">Games</a></li>
+  <li><a href="index.jsp">Gallery</a></li>
+  <li><a href="index.jsp">Awards</a></li>
 </ul>
+
+<%@include  file="UserBar.jsp" %>
 
 <div style="text-align: center;"><a style="font-size: 2em;">${Utils.PROJNAME}</a></div>
 <br/>
