@@ -10,3 +10,4 @@
 !Capstone/**/*.css
 !Capstone/**/*.db
 !Capstone/WebContent/WEB-INF/lib/*.jar
+/.metadata/
