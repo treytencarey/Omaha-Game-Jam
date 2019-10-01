@@ -1,34 +1,39 @@
 <style>
 body {margin: 0;}
 
-un.userbar {
+ul.userbar {
   display: block;
   list-style-type: none;
   margin: 0;
-  padding: 3px 3px;
+  padding: 2px 2px;
   overflow: hidden;
   background-color: #002bdc;
   color: #bfbfbf;
 }
 
-un.userbar li {display: inline-block;}
+ul.userbar li {display: inline-block;}
 
-un.userbar li a {
+ul.userbar li a {
   color: white;
   text-align: center;
   text-decoration: none;
 }
 
-un.userbar li a:hover {text-decoration: underline;}
+ul.userbar li.right {float:right;}
+
+ul.userbar li a:hover {text-decoration: underline;}
 
 @media screen and (max-width: 600px) {
   ul.userbar li {float: none;}
 }
 </style>
-<un class="userbar">
   <% if (session.getAttribute("accountPKey") == null) { %>
-  You are not logged in. | <li><a href="index.jsp">Log in</a></li> or <li><a href="index.jsp">Register?</a></li>
+<ul class="userbar">
+  <li>You are not logged in. | <a href="index.jsp">Log in</a> or <li><a href="index.jsp">Register?</a></li>
+</ul>
   <% } else { %>
-  Logged in as <%= session.getAttribute("accountEmail") %> | Logout
-  <% } %>
-</un>
+<ul class="userbar">
+  <li>Logged in as <%= session.getAttribute("accountEmail") %> | <form style="display:inline-block" action = "accountServlet" method = "post"><button name="logout"><a>Logout</a></button></form></li>
+  <li class="right"><a>Submit a Game</a> | <a>My Profile</a></li>
+</ul>
+<% } %>
