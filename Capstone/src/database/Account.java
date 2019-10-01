@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import sun.misc.BASE64Encoder;
+import java.util.Base64;
 
 @WebServlet("/accountServlet")
 public class Account extends HttpServlet {
@@ -106,7 +106,7 @@ public class Account extends HttpServlet {
 	    Cipher c = Cipher.getInstance(ALGORITHM);
 	    c.init(Cipher.ENCRYPT_MODE, key);
 	    byte[] encValue = c.doFinal(valueToEnc.getBytes());
-	    String encryptedValue = new BASE64Encoder().encode(encValue);
+	    String encryptedValue = Base64.getEncoder().encodeToString(encValue); // new BASE64Encoder().encode(encValue);
 	    return encryptedValue;
 	}
 

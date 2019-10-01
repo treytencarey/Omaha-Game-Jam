@@ -1,3 +1,0 @@
-INDEX VERSION 1.131
-C:\Users\treyt\Desktop\Capstone\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1859083951.index
-\Capstone\src

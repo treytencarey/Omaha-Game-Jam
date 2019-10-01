@@ -1,0 +1,12 @@
+# Ignore everything
+*
+
+# Don't ignore these
+!*/
+!/readme.md
+!.gitignore
+!Capstone/**/*.java
+!Capstone/**/*.jsp
+!Capstone/**/*.css
+!Capstone/**/*.db
+!Capstone/WebContent/WEB-INF/lib/*.jar
