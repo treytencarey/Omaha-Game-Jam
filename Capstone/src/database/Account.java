@@ -77,7 +77,8 @@ public class Account extends HttpServlet {
 			
 			String accountPKey = map.get("PKey").toString();
 			
-			session.setAttribute("accountPKey",accountPKey);
+			session.setAttribute("accountPKey", accountPKey);
+			session.setAttribute("accountEmail", email); 
 			
 			return true;
 		}
