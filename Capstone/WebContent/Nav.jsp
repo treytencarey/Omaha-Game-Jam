@@ -13,6 +13,115 @@
 #profileDropdown {
   margin-right: 13px;
 }
+#validationPass1 {
+	margin-right: 2px;
+}
+#validationPass2 {
+	margin-left: 2px;
+}
+.modal-login {
+	width: 350px;
+}
+.modal-login .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+}
+.modal-login .modal-header {
+	border-bottom: none;
+       position: relative;
+	justify-content: center;
+}
+.modal-login .close {
+       position: absolute;
+	top: -10px;
+	right: -10px;
+}
+.modal-login h4 {
+	color: #636363;
+	text-align: center;
+	font-size: 26px;
+	margin-top: 0;
+}
+.modal-login .modal-content {
+	color: #999;
+	border-radius: 1px;
+   	margin-bottom: 15px;
+       background: #fff;
+	border: 1px solid #f3f3f3;
+       box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+       padding: 25px;
+   }
+.modal-login .form-group {
+	margin-bottom: 20px;
+}
+.modal-login label {
+	font-weight: normal;
+	font-size: 13px;
+}
+.modal-login .form-control {
+	min-height: 38px;
+	padding-left: 5px;
+	box-shadow: none !important;
+	border-width: 0 0 1px 0;
+	border-radius: 0;
+}
+.modal-login .form-control:focus {
+	border-color: #ccc;
+}
+.modal-login .input-group-addon {
+	max-width: 42px;
+	text-align: center;
+	background: none;
+	border-width: 0 0 1px 0;
+	padding-left: 5px;
+	border-radius: 0;
+}
+.modal-login .btn {        
+    font-size: 16px;
+    font-weight: bold;
+	background: #19aa8d;
+    border-radius: 3px;
+	border: none;
+	min-width: 140px;
+    outline: none !important;
+}
+.modal-login .btn:hover, .modal-login .btn:focus {
+	background: #179b81;
+}
+.modal-login .hint-text {
+	text-align: center;
+	padding-top: 5px;
+	font-size: 13px;
+}
+.modal-login .modal-footer {
+	color: #999;
+	border-color: #dee4e7;
+	text-align: center;
+	margin: 0 -25px -25px;
+	font-size: 13px;
+	justify-content: center;
+}
+.modal-login a {
+	color: #fff;
+	text-decoration: underline;
+}
+.modal-login a:hover {
+	text-decoration: none;
+}
+.modal-login a {
+	color: #19aa8d;
+	text-decoration: none;
+}	
+.modal-login a:hover {
+	text-decoration: underline;
+}
+.modal-login .fa {
+	font-size: 21px;
+}
+i {
+	margin-top: 10px;
+}
 </style>
 <%@page import = "utils.Utils" %>
 
@@ -49,10 +158,12 @@
 	    	<li><button id="loginBtn" class="btn btn-link my-2 my-sm-0" name="login"><a id="loginBtn" href="#loginModal" class="trigger-btn" data-toggle="modal">Login</a></button></li>
 	    <%	} else { %>
 	    	<li>
-	    		<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    		<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	    			<%= session.getAttribute("accountEmail") %>
 	    		</button>
 	    		<div id="profileDropdown" class="dropdown-menu dropdown-menu-right">
+	    			<a class="dropdown-item" href="#">Submit Game</a>
+	    			<a class="dropdown-item" href="#">My Profile</a>
 	    			<div class="dropdown-divider"></div>
 	    			<form class="dropdown-item" action = "accountServlet" method = "post">
 						<!-- <a class="trigger-btn logInOutBtn" name="logout">Logout</a> -->
@@ -98,7 +209,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form action = "accountServlet" method = "post">
+				<form action="accountServlet" method = "post">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -117,7 +228,7 @@
 					<p class="hint-text"><a href="#">Forgot Password?</a></p>
 				</form>
 			</div>
-			<div class="modal-footer">Don't have an account? <a href="#registerModal" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Create one</a></div>
+			<div class="modal-footer"><a href="#registerModal" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Create account</a></div>
 		</div>
 	</div>
 </div>
@@ -131,25 +242,28 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form action = "accountServlet" method = "post">
+				<form class="needs-validation" action="accountServlet" method = "post">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
-							<input type="email" class="form-control" name="email" placeholder="Email" required="required">
+							<input id="validationEmail" type="email" class="form-control" name="email" placeholder="Email" required="required">
 						</div>
+						<label>You can use letters, numbers & periods</label>
 					</div>
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-							<input type="password" class="form-control" name="password" placeholder="Password" required="required">
+							<input id="validationPass1" type="password" class="form-control" name="password" placeholder="Password" required="required">
+							<input id="validationPass2" type="password" class="form-control" name="password2" placeholder="Confirm" required="required">
 						</div>
+						<label>Use 8 or more characters with a mix of letters, numbers & symbols</label>
 					</div>
 					<div class="form-group">
 						<button type="submit" name="registerButton" class="btn btn-primary btn-block btn-lg">Register</button>
 					</div>
 				</form>
 			</div>
-			<div class="modal-footer">Already have an account? <a href="#loginModal" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Login</a></div>
+			<div class="modal-footer"><a href="#loginModal" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Sign in instead</a></div>
 		</div>
 	</div>
 </div>
