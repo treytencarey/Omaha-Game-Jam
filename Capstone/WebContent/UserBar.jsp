@@ -29,7 +29,7 @@ ul.userbar li a:hover {text-decoration: underline;}
 </style>
   <% if (session.getAttribute("accountPKey") == null) { %>
 <ul class="userbar">
-  <li>You are not logged in. | <a href="index.jsp">Log in</a> or <li><a href="index.jsp">Register?</a></li>
+  <li>You are not logged in. | <a>Log in</a> or <li><a>Register</a></li>
 </ul>
   <% } else { %>
 <ul class="userbar">
