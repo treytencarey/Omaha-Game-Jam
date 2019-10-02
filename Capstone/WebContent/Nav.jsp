@@ -6,10 +6,12 @@
   padding: 0px;
 }
 #logoutBtn {
-  display: block;
-  color: white;
+  color: black;
   text-decoration: none;
   padding: 0px;
+}
+#profileDropdown {
+  margin-right: 13px;
 }
 </style>
 <%@page import = "utils.Utils" %>
@@ -38,18 +40,32 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Awards</a>
       </li>
+      <%	if (session.getAttribute("accountPKey") == null) { %>
+      
+      <%	} %>
     </ul>
-    <%	if (session.getAttribute("accountPKey") == null) { %>
-    	<form>
-    		<!-- <a id="loginBtn" href="#loginModal" class="trigger-btn logInOutBtn" data-toggle="modal">Login</a> -->
-    		<button id="loginBtn" class="btn btn-link my-2 my-sm-0" name="login"><a id="loginBtn" href="#loginModal" class="trigger-btn" data-toggle="modal">Login</a></button>
-    	</form>
-    <%	} else { %>
-			<form action = "accountServlet" method = "post">
-				<!-- <a class="trigger-btn logInOutBtn" name="logout">Logout</a> -->
-				<button id="logoutBtn" class="btn btn-link my-2 my-sm-0" name="logout">Logout</button>
-			</form>
-	<%	} %>
+    <ul class="navbar-nav navbar-right">
+	    <%	if (session.getAttribute("accountPKey") == null) { %>
+	    	<li><button id="loginBtn" class="btn btn-link my-2 my-sm-0" name="login"><a id="loginBtn" href="#loginModal" class="trigger-btn" data-toggle="modal">Login</a></button></li>
+	    <%	} else { %>
+	    	<li>
+	    		<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    			<%= session.getAttribute("accountEmail") %>
+	    		</button>
+	    		<div id="profileDropdown" class="dropdown-menu dropdown-menu-right">
+	    			<div class="dropdown-divider"></div>
+	    			<form class="dropdown-item" action = "accountServlet" method = "post">
+						<!-- <a class="trigger-btn logInOutBtn" name="logout">Logout</a> -->
+						<button id="logoutBtn" class="btn btn-link my-2 my-sm-0" name="logout">Logout</button>
+					</form>
+	    		</div>
+	    	</li>
+				<!-- <form action = "accountServlet" method = "post">
+					<a class="trigger-btn logInOutBtn" name="logout">Logout</a>
+					<button id="logoutBtn" class="btn btn-link my-2 my-sm-0" name="logout">Logout</button>
+				</form> -->
+		<%	} %>
+	</ul>
     <!-- <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
