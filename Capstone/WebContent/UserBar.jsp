@@ -29,7 +29,7 @@ ul.userbar li a:hover {text-decoration: underline;}
 </style>
   <% if (session.getAttribute("accountPKey") == null) { %>
 <ul class="userbar">
-  <li>You are not logged in. | <a>Log in</a> or <li><a>Register</a></li>
+  <li>Log in to create a profile and submit games.</li>
 </ul>
   <% } else { %>
 <ul class="userbar">
