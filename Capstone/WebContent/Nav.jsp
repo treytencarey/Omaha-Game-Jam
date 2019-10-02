@@ -3,6 +3,13 @@
   display: block;
   color: white;
   text-decoration: none;
+  padding: 0px;
+}
+#logoutBtn {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 0px;
 }
 </style>
 <%@page import = "utils.Utils" %>
@@ -23,12 +30,12 @@
     <%	if (session.getAttribute("accountPKey") == null) { %>
     	<form>
     		<!-- <a id="loginBtn" href="#loginModal" class="trigger-btn logInOutBtn" data-toggle="modal">Login</a> -->
-    		<button class="btn btn-outline-success my-2 my-sm-0" name="login"><a id="loginBtn" href="#loginModal" class="trigger-btn" data-toggle="modal">Login</a></button>
+    		<button id="loginBtn" class="btn btn-link my-2 my-sm-0" name="login"><a id="loginBtn" href="#loginModal" class="trigger-btn" data-toggle="modal">Login</a></button>
     	</form>
     <%	} else { %>
 			<form action = "accountServlet" method = "post">
 				<!-- <a class="trigger-btn logInOutBtn" name="logout">Logout</a> -->
-				<button class="btn btn-outline-success my-2 my-sm-0" name="logout">Logout</button>
+				<button id="logoutBtn" class="btn btn-link my-2 my-sm-0" name="logout">Logout</button>
 			</form>
 	<%	} %>
     <!-- <form class="form-inline my-2 my-lg-0">
