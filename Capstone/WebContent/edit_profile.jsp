@@ -1,66 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="database.Database,java.util.List,java.util.Map" %>
-	
-<%!
-// After querying and getting a map of results, use this to retreive a value.
-private String tryGetParam(Map<?, ?> map, String name)
-{
-	String res; 
-	try
-	{
-		res = map.get(name).toString();
-	}
-	catch(NullPointerException npe)
-	{
-		res = "";
-	}
-	
-	return res;
-}
-%>
+	import="profile.ProfileBean" %>
 	
 <%
-// If redirected from edit_profile after an update, try to put the requested fields into the DB.
-if (request.getParameter("name") != null)
-{
-	//int id = 2;
-	String idStr = session.getAttribute("accountPKey").toString();
-	
-	// Check whether to update or insert
-	List<?> result = Database.executeQuery( String.format("SELECT COUNT(*) FROM Profiles WHERE AccountID=%s", idStr) );
-	if (result.size() > 0)
-	{
-		Map<?, ?> map = (Map<?, ?>) result.get(0);
-		int count = Integer.parseInt( map.get("COUNT(*)").toString() );
-
-		String pu = request.getParameter("picURL");
-		String n = request.getParameter("name");
-		String b = request.getParameter("bio");
-		String w = request.getParameter("site");
-		String s = request.getParameter("skills");
-		
-
-		String cmd;
-		if (count == 0)
-		{
-			cmd = String.format("INSERT INTO Profiles (AccountID, ProfilePicURL, Name, Bio, Website, SkillsList) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",
-					idStr, pu, n, b, w, s);
-		}
-		else
-		{
-			cmd = String.format("UPDATE Profiles SET ProfilePicURL = '%s', Name = '%s', Bio = '%s', Website = '%s', SkillsList = '%s' WHERE AccountID=%s",
-					pu, n, b, w, s, idStr);
-		}
-		// Execute the command
-		Database.executeUpdate(cmd);
-	}
+ProfileBean p = (ProfileBean)request.getAttribute("profile");
 %>
-<p>Updated successfully!</p>	
-<%
-}
-%>	
-
 
 <!DOCTYPE html>
 <html>
@@ -69,32 +13,31 @@ if (request.getParameter("name") != null)
 <title>Edit Profile</title>
 </head>
 <body>
+
+<form action="view">
+	<input type="hidden" name="id" value="<%= session.getAttribute("accountPKey").toString() %>">
+	<input type="submit" value="View as guest">
+</form>
+
+<%
+if ( (boolean)request.getAttribute("updateSuccessful") )
+{
+	out.println("Update successful!");
+}
+%>
+
 	<h2>Profile info</h2>
 
-	<%
-	// Query Profiles to fill in inputs with existing fields
-	String picURL, name, bio, site, skills;
-	picURL = name = bio = site = skills = "";
-	List<?> result = Database.executeQuery( String.format("SELECT * FROM Profiles WHERE AccountID=%s", session.getAttribute("accountPKey").toString()) );
-	if (result.size() > 0)
-	{
-		Map<?, ?> map = (Map<?, ?>) result.get(0);
-		picURL = tryGetParam(map, "ProfilePicURL");
-		name = tryGetParam(map, "Name");
-		bio = tryGetParam(map, "Bio");
-		site = tryGetParam(map, "Website");
-		skills = tryGetParam(map, "SkillsList");
-	}
-	%>
-	<form action="edit_profile.jsp" method="POST">
-		Profile picture: <input type="image" src="<%= picURL %>"><br>
-		Name: <input name="name" value="<%= name %>"><br>
-		Bio: <textarea rows="3" name="bio"><%= bio %></textarea><br>
-		Website: <input name="site" value="<%= site %>"><br>
-		Skills: <textarea rows="3" name="skills"><%= skills %></textarea><br>
+	<form action="edit" method="POST">
+		Profile picture: <input type="image" src="/profile/pics/<%= p.getId() %>"><br>
+		Name: <input name="name" value="<%= p.getName() %>" ><br>
+		Bio: <textarea rows="3" name="bio"><%= p.getBio() %></textarea><br>
+		Website: <input name="site" value="<%= p.getSite() %>"><br>
+		Skills: <textarea rows="3" name="skills"><%= p.getSkills() %></textarea><br>
 		<input type="submit" value="Update profile">
 	</form>
 	
+	<!--
 	<h2>Account</h2>
 	<form>
 		Email: <input type="email"><br>
@@ -108,6 +51,7 @@ if (request.getParameter("name") != null)
 		Confirm new password: <input type="password"><br>
 		<input type="submit" value="Update password">
 	</form>
+	-->
 
 </body>
 </html>
