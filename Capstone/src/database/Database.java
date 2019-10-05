@@ -61,6 +61,11 @@ public class Database extends HttpServlet {
 		// This is where forms will be submitted by using databaseServlet
 	}
 	
+	public static String formatString(String str)
+	{
+		return str.replace("'", "''");
+	}
+	
 	public static String executeUpdate(String sql) {
 		return Database.executeUpdate(sql, Database.AUTH_DB);
 	}
