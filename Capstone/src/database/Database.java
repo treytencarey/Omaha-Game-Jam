@@ -61,6 +61,11 @@ public class Database extends HttpServlet {
 		// This is where forms will be submitted by using databaseServlet
 	}
 	
+	public static String formatString(String str)
+	{
+		return str.replace("'", "''");
+	}
+	
 	public static String executeUpdate(String sql) {
 		return Database.executeUpdate(sql, Database.AUTH_DB);
 	}
@@ -161,5 +166,21 @@ public class Database extends HttpServlet {
 			}
 	    }
 	    return resultList;
+	}
+	
+	// With a map of results from the DB, get the passed parameter. If null, return "" instead.
+	public static String tryGetValue(Map<?, ?> map, String name)
+	{
+		String res; 
+		try
+		{
+			res = map.get(name).toString();
+		}
+		catch(NullPointerException npe)
+		{
+			res = "";
+		}
+		
+		return res;
 	}
 }
