@@ -10,5 +10,6 @@
 !Capstone/**/*.css
 !Capstone/**/*.db
 !Capstone/WebContent/WEB-INF/lib/*.jar
+!Servers/Tomcat-config/web.xml
 /bin/
 /.metadata/
