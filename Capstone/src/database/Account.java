@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import project.User;
+import project.Admin;
+
 import java.util.Base64;
 
 @WebServlet("/accountServlet")
@@ -79,7 +82,7 @@ public class Account extends HttpServlet {
 
 			session.setAttribute("accountPKey",accountPKey);
 			session.setAttribute("accountEmail",email);
-
+			
 			return true;
 		}
 	    return false;
