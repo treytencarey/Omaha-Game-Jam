@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="database.Database" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,18 +13,185 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	
-	<link rel="stylesheet" href="styles.css">
+	<link type="text/css" rel="stylesheet" href="style.css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
+<!-- A lot of this page is hard-coded at the moment as a sort of proof of concept -->
+<!-- Admins will be able to update the homepage in the future -->
+<style>
+	.pagePadding {
+		padding: 15px;
+	}
+	
+	.aboutSection {
+		background-color: #242424;
+		color: #e6e6e6;
+		margin-left: auto;
+	  	margin-right: auto;
+		width: 75%;
+		display: block;
+		text-align: center;
+	}
+	
+	.imgOverlay {
+	  	position: absolute; 
+	  	transition: .3s ease;
+		bottom: 0; 
+	  	background: #000;
+	  	background: rgba(0, 0, 0, 0.5);
+	  	color: #e6e6e6; 
+	  	width: 100%;
+	  	transition: .3s ease;
+	  	padding: 30px;
+	  	color: white;
+	  	text-align: center;
+	  	font-size: 20px;
+	  	opacity:0;
+	}
+	
+	.overlayTitle {
+		color: white;
+	  	font-size: 20px;
+	  	font-weight: bold;
+	  	position: absolute;
+	  	top: 30%;
+	  	left: 30%;
+	  	-webkit-transform: translate(-50%, -50%);
+	  	-ms-transform: translate(-50%, -50%);
+	  	transform: translate(-50%, -50%);
+	  	white-space: nowrap;
+	}
+	
+	.overlaySubtitle {
+		color: white;
+	  	font-size: 15px;
+	  	position: absolute;
+	  	top: 70%;
+	  	left: 30%;
+	  	-webkit-transform: translate(-50%, -50%);
+	  	-ms-transform: translate(-50%, -50%);
+	  	transform: translate(-50%, -50%);
+	  	white-space: nowrap;
+	  	width: 100%;
+	  	word-wrap: break-word;
+	}
+	
+	.overlayBtn {
+		display: inline-block;
+		position: absolute;
+		-webkit-transform: translate(-50%, -50%);
+	  	-ms-transform: translate(-50%, -50%);
+	  	transform: translate(-50%, -50%);
+	  	right: 10%;
+	  	width: 15%;
+	}
+	
+	.mainEventParent {
+		display: block;
+		margin-left: auto;
+	  	margin-right: auto;
+	  	max-width: 50em;
+	  	max-height: 50em;
+	  	position: relative;
+	}
+	
+	.mainEventParent:hover .imgOverlay {
+		opacity: 1;
+	}
+	
+	.mainEventImg {
+	  	object-fit: contain;
+	  	max-width: 100%;
+   		max-height: 100%;
+   		width: auto;
+   		height: auto;
+	}
+	
+	.card-img-top {
+    	width: 100%;
+    	height: 12vw;
+    	object-fit: cover;
+	}
+	
+	@media only screen and (max-width: 600px) {
+  		.imgOverlay {
+    		opacity: 1;
+  		}
+  		.overlayTitle {
+  			font-size: 15px;
+  		}
+  		.overlaySubtitle {
+  			font-size: 12px;
+  		}
+	}
+</style>
 <body>
 	<%@include  file="Nav.jsp" %>
 	<div style="text-align: center;">
-		<b style="font-size: 1.5em;">Login or Register</b><br/>
-		<%	if (session.getAttribute("accountPKey") == null) { %>
-				<h2>You are NOT logged in</h2>
-		<%	} else { %>
-				<h2>You are logged in</h2>
-		<%	} %>
+	</div>
+	
+	<div class="mainEventParent">
+		<img class="mainEventImg rounded" src="./images/gamejam.png"/>
+		<div class="imgOverlay">
+    		<div class="overlayTitle">Upcoming Event</div>
+    		<div class="overlaySubtitle">November 6th 2019 - November 9th 2019</div>
+    		<a class="btn btn-primary btn-med overlayBtn" href="#" role="button">Details</a>
+    	</div>
+  	</div>
+  	
+  	<div class="pagePadding"></div>
+  	
+  	<div class="container h-100" style="text-align: center;">
+  		<div class="card-deck col-md-12">
+			<div class="card">
+				<a href="#"><img class="card-img-top" src="./images/cancer.jpeg"/></a>
+			  		<div class="card-body dark">
+			  			<h5 class="card-title">Game Jammer Creates Game That Cures Cancer</h5>
+			  			<p class="card-text">"It's a miracle, the game is so good that the consequences of smoking cigarettes for decades just disappeared from my lungs." - Local Gamer</p>
+			  		</div>
+		  	</div>
+		  	<div class="card">
+			 	<a href="#"><img class="card-img-top" src="./images/squidward.jpg"/></a>
+				<div class="card-body dark">
+			  		<h5 class="card-title">2019 Game Awards</h5>
+			  		<p class="card-text">See what awaits you if you're a good programmer.</p>
+			  	</div>
+		  	</div>
+		  	<div class="card">
+			 	<a href="#"><img class="card-img-top" src="./images/its_spherical.jpg"/></a>
+				<div class="card-body dark">
+			  		<h5 class="card-title">GameSphere Challenge</h5>
+			  		<p class="card-text">In an upcoming event, Game Jammers will create a game for the GameSphere.</p>
+			  	</div>
+		  	</div>
+	  	</div>
+  	</div>
+  	
+	<div class="jumbotron aboutSection">
+  		<h1 class="display-5">About Omaha Game Jam</h1>
+  		<hr class="my-2" style="background-color: #3b3b3b">
+  		<div style="font-size: 18px">
+  			<p>Omaha Game Jam is a free 2 day game development event where participants build games from scratch around a secret theme. At the end of dev time, everyone presents, plays, and votes on superlative awards. Individuals 18+ and teams are welcome!</p>
+  			<p style="font-size: 15px">There are currently <%=Database.executeQuery("SELECT COUNT(*) FROM Accounts").size() %> registered Game Jammers.</p>
+  		</div>
+  		<%	if (session.getAttribute("accountPKey") == null) { %>
+  			<p class="lead">
+    			<a class="btn btn-primary btn-med" href="#" role="button">Register Now!</a>
+  			</p>
+  		<% } %>
 	</div>
 </body>
+<footer class="page-footer font-small mdb-color darken-3">
+	<div class="container">
+		<div class="row justify-content-center">
+	        <div class="mb-5 flex-center" style="text-align:center;">
+	        	<p style="font-size: 22px; font-weight:bold;">Get in Touch</p>
+	        	<hr class="my-2" style="background-color: #3b3b3b">
+	        	RHO Interactive Entertainment<br>
+	        	charles@rhointeractive.com<br>
+	        	402-979-6894
+	        </div>
+		</div>
+	</div>
+</footer>
 </html>
