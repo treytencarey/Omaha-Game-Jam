@@ -140,7 +140,18 @@
 		
 		
 	<% } catch (Exception e) { %>
-		No profile has been created for this account yet.
-	<% } %>
+		<% if (request.getParameter("id").equals(session.getAttribute("accountPKey"))) { %>
+			<div class="container emp-profile">
+           		<form action="edit">
+		    		<div class="row">
+		    			<h3 style="color: black;">No profile has been created for this account yet.</h3>
+	    			</div>
+	    			<div class="row">
+		    			<input type="submit" class="btn btn-success" name="btnAddMore" value="Edit Profile"/>
+		            </div>
+	        	</form>
+            </div>
+	<% }
+	} %>
 </body>
 </html>
