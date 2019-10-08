@@ -11,20 +11,13 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	
-	<link rel="stylesheet" href="styles.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-	
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/profileStyle.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
 </head>
 <body>
 	<%@include  file="Nav.jsp" %>
 	
-	<form action="view">
-		<input type="hidden" name="id" value="<%= session.getAttribute("accountPKey").toString() %>">
-		<input style="border: 1px solid black;" type="submit" value="View as guest">
-	</form>
-	
-	<h2>Profile info</h2>
-
 	<%@page import="database.Profile" %>
 	<%	Profile p;
 		
@@ -34,14 +27,143 @@
 			p = new Profile();
 		}
 	%>
-	Profile picture: <%@include  file="components/fileUpload/action_file.jsp" %><br>
-	<form action="/Capstone/profileServlet" method="post">
-		Name: <input style="border: 1px solid black;" name="name" value="<%= p.getName() %>" ><br>
-		Bio: <textarea style="border: 1px solid black;" rows="3" name="bio"><%= p.getBio() %></textarea><br>
-		Website: <input style="border: 1px solid black;" name="site" value="<%= p.getWebsite() %>"><br>
-		Skills: <textarea style="border: 1px solid black;" rows="3" name="skills"><%= p.getSkills() %></textarea><br>
-		<input style="border: 1px solid black;" type="submit" name="update" value="Update profile">
-	</form>
+	
+	<div class="container emp-profile">
+            
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg" alt=""/>
+                            <div class="file btn btn-lg btn-primary">
+                                Change Photo
+                                <input type="file" name="file"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        <%= p.getName() %>
+                                    </h5>
+                                    <h6>
+                                        <%= p.getBio() %>
+                                    </h6>
+                                    <p class="proile-rating">Attending Game Jam 2019 : <span>Yes</span></p>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Games</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                    	<form action="view">
+                    		<input type="hidden" name="id" value="<%= session.getAttribute("accountPKey").toString() %>">
+                    		<input type="submit" class="profile-edit-btn" name="btnAddMore" value="View as Guest"/>
+                   		</form>
+                    </div>
+                </div>
+                <form action="/Capstone/profileServlet" method="post">
+	                <div class="row">
+	                    <div class="col-md-4">
+	                        <div class="profile-work">
+	                            <p>WORK LINK</p>
+	                            <a href="<%= p.getWebsite() %>">Website Link</a><br/>                       
+	                            <p>SKILLS</p>
+	                            <%
+	                            	String[] skills = p.getSkills().split("\n"); 
+		                            for(String s : skills) {
+	                           	%>
+		                            	<a href=""><%= s %></a><br/>
+	                           	<%
+		                            }
+	                            %>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-8">
+	                        <div class="tab-content profile-tab" id="myTabContent">
+	                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+	                                        <div class="row">
+	                                            <div class="col-md-6">
+	                                                <label>Name</label>
+	                                            </div>
+	                                            <div class="col-md-6">
+	                                            	<input type="text" name="name" class="form-control" id="nameInput" value="<%= p.getName() %>">
+	                                            </div>
+	                                        </div>
+	                                        <div class="row">
+	                                            <div class="col-md-6">
+	                                                <label>Bio</label>
+	                                            </div>
+	                                            <div class="col-md-6">
+	                                            	<input type="text" name="bio" class="form-control" id="bioInput" value="<%= p.getBio() %>">
+	                                            </div>
+	                                        </div>
+	                                        <div class="row">
+	                                            <div class="col-md-6">
+	                                                <label>Website</label>
+	                                            </div>
+	                                            <div class="col-md-6">
+	                                            	<input type="text" name="site" class="form-control" id="bioInput" value="<%= p.getWebsite() %>">
+	                                            </div>
+	                                        </div>
+	                                        <div class="row">
+	                                            <div class="col-md-6">
+	                                                <label>Skills</label>
+	                                            </div>
+	                                            <div class="col-md-6">
+	                                            	<textarea class="form-control" id="skillsInput" name="skills" rows="5"><%= p.getSkills() %></textarea>
+	                                            </div>
+	                                        </div>
+	                            </div>
+	                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                	<div class="container">
+										<div class="row">
+											<div class="row">
+									            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+									                <a class="thumbnail" href="#" data-image-id="">
+									                    <img class="img-thumbnail"
+									                         src="https://i.imgur.com/3Ry6Cvl.jpg"
+									                         alt="Doom">
+									                </a>
+									            </div>
+									            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+									                <a class="thumbnail" href="#" data-image-id="">
+									                    <img class="img-thumbnail"
+									                         src="http://icons.iconarchive.com/icons/papirus-team/papirus-apps/512/minecraft-icon.png"
+									                         alt="Minecraft">
+									                </a>
+									            </div>
+									            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+									                <a class="thumbnail" href="#" data-image-id="">
+									                    <img class="img-thumbnail"
+									                         src="https://images-na.ssl-images-amazon.com/images/I/519is%2BiWW%2BL.png"
+									                         alt="Pong">
+									                </a>
+									            </div>
+									        </div>
+										</div>
+									</div>
+	                            </div>
+	                            <div style="float: right;">
+		                            <% if (session.getAttribute("updateProfileMessage") != null && session.getAttribute("updateProfileMessage").toString().length() > 0) { %>
+									 	   <div style="display: inline-block; margin-right: 20px; color: green;">
+									 	   	${sessionScope.updateProfileMessage}
+									 	   </div>
+									 <% 	session.setAttribute("updateProfileMessage", "");
+									 } %>
+									 <input style="display: inline-block;" type="submit" class="btn btn-success" name="update" value="Save Profile">
+								 </div>
+	                        </div>
+	                    </div>
+	                    
+	                </div>
+	                
+                </form>
+        </div>
 
 </body>
 </html>

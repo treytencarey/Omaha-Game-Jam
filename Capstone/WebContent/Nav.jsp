@@ -1,128 +1,6 @@
-<style>
-#loginBtn {
-  display: block;
-  color: white;
-  text-decoration: none;
-  padding: 0px;
-}
-#logoutBtn {
-  color: black;
-  text-decoration: none;
-  padding: 0px;
-}
-#profileDropdown {
-  margin-right: 13px;
-}
-#validationPass1 {
-	margin-right: 2px;
-}
-#validationPass2 {
-	margin-left: 2px;
-}
-.modal-login {
-	width: 350px;
-}
-.modal-login .modal-content {
-	padding: 20px;
-	border-radius: 5px;
-	border: none;
-}
-.modal-login .modal-header {
-	border-bottom: none;
-       position: relative;
-	justify-content: center;
-}
-.modal-login .close {
-       position: absolute;
-	top: -10px;
-	right: -10px;
-}
-.modal-login h4 {
-	color: #636363;
-	text-align: center;
-	font-size: 26px;
-	margin-top: 0;
-}
-.modal-login .modal-content {
-	color: #999;
-	border-radius: 1px;
-   	margin-bottom: 15px;
-       background: #fff;
-	border: 1px solid #f3f3f3;
-       box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-       padding: 25px;
-   }
-.modal-login .form-group {
-	margin-bottom: 20px;
-}
-.modal-login label {
-	font-weight: normal;
-	font-size: 13px;
-}
-.modal-login .form-control {
-	min-height: 38px;
-	padding-left: 5px;
-	box-shadow: none !important;
-	border-width: 0 0 1px 0;
-	border-radius: 0;
-}
-.modal-login .form-control:focus {
-	border-color: #ccc;
-}
-.modal-login .input-group-addon {
-	max-width: 42px;
-	text-align: center;
-	background: none;
-	border-width: 0 0 1px 0;
-	padding-left: 5px;
-	border-radius: 0;
-}
-.modal-login .btn {
-    font-size: 16px;
-    font-weight: bold;
-	background: #19aa8d;
-    border-radius: 3px;
-	border: none;
-	min-width: 140px;
-    outline: none !important;
-}
-.modal-login .btn:hover, .modal-login .btn:focus {
-	background: #179b81;
-}
-.modal-login .hint-text {
-	text-align: center;
-	padding-top: 5px;
-	font-size: 13px;
-}
-.modal-login .modal-footer {
-	color: #999;
-	border-color: #dee4e7;
-	text-align: center;
-	margin: 0 -25px -25px;
-	font-size: 13px;
-	justify-content: center;
-}
-.modal-login a {
-	color: #fff;
-	text-decoration: underline;
-}
-.modal-login a:hover {
-	text-decoration: none;
-}
-.modal-login a {
-	color: #19aa8d;
-	text-decoration: none;
-}
-.modal-login a:hover {
-	text-decoration: underline;
-}
-.modal-login .fa {
-	font-size: 21px;
-}
-i {
-	margin-top: 10px;
-}
-</style>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
+
 <%@page import = "utils.Utils" %>
 
 <% session.setAttribute("curPage", request.getRequestURI() + ((request.getQueryString() != null) ? "?" + request.getQueryString() : "")); %>
@@ -168,7 +46,7 @@ i {
 	    				<a class="dropdown-item" href="">Change Permissions</a>
 	    			<% } %>
 	    			<div class="dropdown-divider"></div>
-	    			<form class="dropdown-item" action = "accountServlet" method = "post">
+	    			<form class="dropdown-item" action = "<%= request.getContextPath() %>/accountServlet" method = "post">
 						<!-- <a class="trigger-btn logInOutBtn" name="logout">Logout</a> -->
 						<button id="logoutBtn" class="btn btn-link my-2 my-sm-0" name="logout">Logout</button>
 					</form>
@@ -214,7 +92,7 @@ i {
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form action="accountServlet" method = "post">
+				<form action="<%= request.getContextPath() %>/accountServlet" method = "post">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -247,7 +125,7 @@ i {
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form class="needs-validation" action="accountServlet" method = "post">
+				<form class="needs-validation" action="<%= request.getContextPath() %>/accountServlet" method = "post">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
