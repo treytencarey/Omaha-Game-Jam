@@ -74,12 +74,18 @@ public class Account extends HttpServlet {
 		}
 
 		List<?> result = Database.executeQuery("SELECT PKey FROM Accounts WHERE lower(Email)=lower('" + email + "') AND Password='" + password + "'");
+		
 		if (result.size() > 0)
 		{
 			Map<?, ?> map = (Map<?, ?>) result.get(0);
 
 			String accountPKey = map.get("PKey").toString();
 
+			List<?> result2 = Database.executeQuery("SELECT Permissions FROM AccountPermissions WHERE PKey = "+accountPKey);
+			Map<?, ?> map2 = (Map<?, ?>) result2.get(0);
+			int accountPermissions = Integer.parseInt(map2.get("Permissions").toString());
+			
+			session.setAttribute("accountPermissions", accountPermissions);
 			session.setAttribute("accountPKey",accountPKey);
 			session.setAttribute("accountEmail",email);
 			
@@ -97,7 +103,7 @@ public class Account extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		Database.executeUpdate("INSERT INTO AccountPermissions (Permissions) VALUES (" + 1 + ")");
 		return Database.executeUpdate("INSERT INTO Accounts (Email, Password) VALUES ('" + email + "', '" + password + "')");
 	}
 

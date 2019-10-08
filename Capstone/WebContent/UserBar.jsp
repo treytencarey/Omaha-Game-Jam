@@ -1,4 +1,5 @@
 <%@ page import="project.User"%>
+<%@ page import="project.Admin"%>
 
 <style>
 body {margin: 0;}
@@ -34,7 +35,11 @@ ul.userbar li a:hover {text-decoration: underline;}
   <li>You are not logged in. | <a>Log in</a> or <li><a>Register</a></li>
 </ul>
   <% } else { 
-	  session.setAttribute("userClass", new User((String)session.getAttribute("accountEmail")));
+	  if((int)session.getAttribute("accountPermissions") == 2){
+	  	session.setAttribute("userClass", new User((String)session.getAttribute("accountEmail")));
+	  } else {
+		session.setAttribute("userClass", new Admin((String)session.getAttribute("accountEmail")));
+	  }
   %>
 <ul class="userbar">
   <li>Logged in as <%= session.getAttribute("accountEmail") %> | <form style="display:inline-block" action = "accountServlet" method = "post"><button name="logout"><a>Logout</a></button></form></li>

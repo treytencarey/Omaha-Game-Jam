@@ -24,15 +24,5 @@
 				<h2>You are logged in</h2>
 		<%	} %>
 	</div>
-	<div style="text-align: center;">
-		<%-- This is a div to test out user classes --%>
-		<%	if (session.getAttribute("userClass") == null) { %>
-				<h2>You are not a user</h2>
-		<%	} else { %>
-					<% User user = (User)session.getAttribute("userClass"); %>
-				<h2><%= session.getAttribute("userClass").toString() %></h2>
-				<h2><%= user.getPermission() %></h2>
-		<%	} %>
-	</div>
 </body>
 </html>
