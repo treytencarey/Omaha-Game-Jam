@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="Styles/style.css">
 <style>
 #loginBtn {
   display: block;
