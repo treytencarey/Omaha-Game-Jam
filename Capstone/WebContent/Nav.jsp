@@ -89,7 +89,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form action="accountServlet" method = "post">
+				<form action="<%= request.getContextPath() %>/accountServlet" method = "post">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -122,7 +122,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form class="needs-validation" action="accountServlet" method = "post">
+				<form class="needs-validation" action="<%= request.getContextPath() %>/accountServlet" method = "post">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
