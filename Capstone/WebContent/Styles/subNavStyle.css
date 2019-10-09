@@ -1,0 +1,24 @@
+.indvTabs {
+	border: solid 1px black;
+    border-radius: 0px 0px 10px 10px;
+    margin: 0px;
+    background-color: #F2F3F4;
+    width: 120px;
+    text-align: center;
+}
+.indvTabs a {
+	color: black !important;
+}
+.indvTabs form input {
+	margin: auto;
+	width: 118px;
+	color: black !important;
+}
+
+#subNavBar {
+	float: right;
+	width: auto;
+	padding: 0px;
+	margin-right: 1rem;
+	background-color: transparent !important;
+}
