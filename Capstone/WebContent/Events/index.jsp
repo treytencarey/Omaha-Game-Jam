@@ -19,7 +19,7 @@
 	
 </head>
 <body>
-	<%@include  file="..\navbar.jsp" %>
+	<%@include  file="../navbar.jsp" %>
 	<div style="text-align: center;">
 		Events
 	</div>

@@ -2,6 +2,11 @@
 	<nav id="subNavBar" class="navbar navbar-expand navbar-light bg-light">
 	  <div class=" navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav ml-auto">
+	    	<%  if ((int) session.getAttribute("accountPermissions") == 1) { %>
+				<li class="nav-item indvTabs">
+			  		<a class="nav-link" href="#">Admin Menu</a>
+				</li>
+	    	<% } %>
     		<% if (request.getRequestURI().equals("/Capstone/profile/view") && request.getParameter("id").equals(session.getAttribute("accountPKey")))  { %>
 		      <li class="nav-item indvTabs">
 		      	

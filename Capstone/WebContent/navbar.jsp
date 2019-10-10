@@ -23,11 +23,8 @@
 	        <a class="nav-link" href="#">Gallery</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Awards</a>
+	        <a class="nav-link" href="#">Blog</a>
 	      </li>
-	      <%	if (session.getAttribute("accountPKey") == null) { %>
-	
-	      <%	} %>
 	    </ul>
 	    <ul class="navbar-nav navbar-right">
 		    <%	if (session.getAttribute("accountPKey") == null) { %>
@@ -41,7 +38,7 @@
 		    			<a class="dropdown-item" href="#">Submit Game</a>
 		    			<a class="dropdown-item" href="/Capstone/profile/view?id=<%= session.getAttribute("accountPKey").toString() %>">My Profile</a>
 		    			<div class="dropdown-divider"></div>
-		    			<form class="dropdown-item" action = "<%= request.getContextPath() %>/accountServlet" method = "post">
+		    			<form style="padding: .25rem 0;"class="dropdown-item" action = "<%= request.getContextPath() %>/accountServlet" method = "post">
 							<!-- <a class="trigger-btn logInOutBtn" name="logout">Logout</a> -->
 							<button id="logoutBtn" class="btn btn-link my-2 my-sm-0" name="logout">Logout</button>
 						</form>
