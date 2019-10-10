@@ -7,7 +7,7 @@
 			  		<a class="nav-link" href="#">Admin Menu</a>
 				</li>
 	    	<% } %>
-    		<% if (request.getRequestURI().equals("/Capstone/profile/view") && request.getParameter("id").equals(session.getAttribute("accountPKey")))  { %>
+    		<% if (request.getRequestURI().equals(request.getContextPath()+"/profile/view") && request.getParameter("id").equals(session.getAttribute("accountPKey")))  { %>
 		      <li class="nav-item indvTabs">
 		      	
            		<form action="edit">
@@ -15,7 +15,7 @@
 		      	</form>
 		      </li>
 	      	<%}%>
-	      	<% if (request.getRequestURI().equals("/Capstone/profile/edit"))  { %>
+	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/profile/edit"))  { %>
 		      <li class="nav-item indvTabs">
 		      	
 		      	<form action="view">
@@ -24,7 +24,7 @@
                 </form>
 		      </li>
 	      	<%}%>
-	      	<% if (request.getRequestURI().equals("/Capstone/Games/"))  { %>
+	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/Games/"))  { %>
 		      <li class="nav-item indvTabs">
 		        <a class="nav-link" href="#">Submit Game</a>
 		      </li>
@@ -32,7 +32,7 @@
 		        <a class="nav-link" href="#">Edit Game</a>
 		      </li>
 	      	<%}%>
-	      	<% if (request.getRequestURI().equals("/Capstone/Events/"))  { %>
+	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/Events/"))  { %>
 		      <li class="nav-item indvTabs">
 		        <a class="nav-link" href="#">Add Event</a>
 		      </li>
