@@ -3,22 +3,34 @@
     border-radius: 0px 0px 10px 10px;
     margin: 0px;
     background-color: #F2F3F4;
-    width: 120px;
+    width: 178px;
     text-align: center;
+    vertical-align: middle;
 }
 .indvTabs a {
 	color: black !important;
+	font-size: 20px;
+	padding: 12px;
 }
 .indvTabs form input {
 	margin: auto;
-	width: 118px;
+	width: 176px;
 	color: black !important;
+	height: 100%;
+	font-size: 20px;
+	padding: 12px;
 }
-
+.indvTabs form {
+	height: 100%;
+}
 #subNavBar {
 	float: right;
 	width: auto;
 	padding: 0px;
 	margin-right: 1rem;
 	background-color: transparent !important;
+	height: 56px;
+}
+#subNavBar div, #subNavBar div ul {
+	height: 100%;
 }
