@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import project.User;
 import project.Admin;
 
 import java.util.Base64;
@@ -80,12 +79,15 @@ public class Account extends HttpServlet {
 			Map<?, ?> map = (Map<?, ?>) result.get(0);
 
 			String accountPKey = map.get("PKey").toString();
-
-			List<?> result2 = Database.executeQuery("SELECT Permissions FROM AccountPermissions WHERE PKey = "+accountPKey);
-			Map<?, ?> map2 = (Map<?, ?>) result2.get(0);
-			int accountPermissions = Integer.parseInt(map2.get("Permissions").toString());
 			
-			session.setAttribute("accountPermissions", accountPermissions);
+			List<?> isAdmin = Database.executeQuery("SELECT PKey FROM Admins WHERE PKey = " + accountPKey);
+			if(isAdmin.isEmpty()) {
+				session.setAttribute("userClass", "user");
+			}
+			else {
+				session.setAttribute("userClass", "admin");
+			}
+				
 			session.setAttribute("accountPKey",accountPKey);
 			session.setAttribute("accountEmail",email);
 			
