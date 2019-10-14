@@ -3,9 +3,9 @@ package project;
 public class User {
 
 	String id;
+	protected int permissionNumber;
 	
 	public User(String x) {
-		
 		id = x;
 	}
 	
@@ -13,4 +13,5 @@ public class User {
 	public String toString() {
 		return "User Information:\n\nUser ID:  "+id;
 	}
+	
 }

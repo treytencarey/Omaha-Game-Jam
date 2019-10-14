@@ -29,7 +29,7 @@ public class Profile extends HttpServlet {
 		{
 			new Profile(request.getParameter("name").toString(), request.getParameter("bio").toString(), request.getParameter("site").toString(), request.getParameter("skills").toString()).updateProfile(Integer.parseInt(session.getAttribute("accountPKey").toString()));
 			
-			session.setAttribute("message", "Update successful!");
+			session.setAttribute("updateProfileMessage", "Update successful!");
 			response.sendRedirect(session.getAttribute("curPage").toString());
 			return;
 		}

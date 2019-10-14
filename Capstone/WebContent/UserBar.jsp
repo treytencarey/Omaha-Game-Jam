@@ -1,3 +1,6 @@
+<%@ page import="project.User"%>
+<%@ page import="project.Admin"%>
+
 <style>
 body {margin: 0;}
 
@@ -31,7 +34,13 @@ ul.userbar li a:hover {text-decoration: underline;}
 <ul class="userbar">
   <li>Log in to create a profile and submit games.</li>
 </ul>
-  <% } else { %>
+  <% } else { 
+	  if((int)session.getAttribute("accountPermissions") == 2){
+	  	session.setAttribute("userClass", new User((String)session.getAttribute("accountEmail")));
+	  } else {
+		session.setAttribute("userClass", new Admin((String)session.getAttribute("accountEmail")));
+	  }
+  %>
 <ul class="userbar">
   <li>Logged in as <%= session.getAttribute("accountEmail") %> | <form style="display:inline-block" action = "accountServlet" method = "post"><button name="logout"><a>Logout</a></button></form></li>
   <li class="right"><a>Submit a Game</a> | <a>My Profile</a></li>
