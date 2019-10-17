@@ -138,7 +138,7 @@ i {
         <a class="nav-link" href="/Capstone/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/Capstone/Events">Events</a>
+        <a class="nav-link" href="/Capstone/Events.jsp">Events</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Games</a>
