@@ -16,7 +16,7 @@
         <a class="nav-link" href="/Capstone/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/Capstone/Events">Events</a>
+        <a class="nav-link" href="/Capstone/Events.jsp">Events</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Games</a>
@@ -42,9 +42,6 @@
 	    		<div id="profileDropdown" class="dropdown-menu dropdown-menu-right">
 	    			<a class="dropdown-item" href="#">Submit Game</a>
 	    			<a class="dropdown-item" href="/Capstone/profile/view?id=<%= session.getAttribute("accountPKey").toString() %>">My Profile</a>
-	    			<% if(session.getAttribute("userClass") instanceof Admin) { %>
-	    				<a class="dropdown-item" href="">Change Permissions</a>
-	    			<% } %>
 	    			<div class="dropdown-divider"></div>
 	    			<form class="dropdown-item" action = "<%= request.getContextPath() %>/accountServlet" method = "post">
 						<!-- <a class="trigger-btn logInOutBtn" name="logout">Logout</a> -->
