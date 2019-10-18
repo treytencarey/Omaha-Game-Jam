@@ -4,18 +4,18 @@
 		width: 90%;
 		height: auto;
 		margin: 0 auto;
-		padding: 5%;
+		padding-top: 5%;
+		padding-bottom: 5%;
 	}
-	.contain-carousel {
-		margin: 20% auto;
+	#carouselExampleIndicators {
+		margin: auto;
 		width: 600px;
-		height: auto;
+		height: 400px;
+		border: 2px solid black;
+		border-radius: 10px;
+		background-color: black;
 	}
-	.carousel-item {
-		object-fit: fill;
-		width: 50%;
-		height: 50%;
-	}
+	
 </style>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -48,13 +48,13 @@
 			  </ol>
 			  <div class="carousel-inner">
 			    <div class="carousel-item active">
-			      <img class="d-block w-100" src="./images/its_spherical.jpg" alt="First slide">
+			      <img class="d-block w-100" src="./images/eventImages/gameProgramming.jpg" alt="First slide">
 			    </div>
 			    <div class="carousel-item">
-			      <img class="d-block w-100" src="./images/gamejam.png" alt="Second slide">
+			      <img class="d-block w-100" src="./images/eventImages/codeVortex.jpg" alt="Second slide">
 			    </div>
 			    <div class="carousel-item">
-			      <img class="d-block w-100" src="./images/cancer.jpeg" alt="Third slide">
+			      <img class="d-block w-100" src="./images/eventImages/gamerLogo.jpg" alt="Third slide">
 			    </div>
 			  </div>
 			  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
