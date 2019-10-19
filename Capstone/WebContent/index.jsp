@@ -16,14 +16,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/indexStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 </head>
 <!-- A lot of this page is hard-coded at the moment as a sort of proof of concept -->
 <!-- Admins will be able to update the homepage in the future -->
 
 <body>
-	<%@include  file="Nav.jsp" %>
-	<div style="text-align: center;">
-	</div>
+	<%@include  file="navbar.jsp" %>
 	
 	<div class="mainEventParent">
 		<img class="mainEventImg rounded" src="./images/gamejam.png"/>
