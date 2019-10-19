@@ -37,7 +37,7 @@
 	<title>Event Page</title>
 </head>
 <body style="background-color: gray">
-	<%@include  file="Nav.jsp" %>
+	<%@include  file="navbar.jsp" %>
 	<div id="eventHeader">
 		<div class="contain-carousel">
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
