@@ -36,12 +36,12 @@
 	    	<li><button id="loginBtn" class="btn btn-link my-2 my-sm-0" name="login"><a id="loginBtn" href="#loginModal" class="trigger-btn" data-toggle="modal">Login</a></button></li>
 	    <%	} else { %>
 	    	<li>
-	    		<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    		<button type="button" id="accountDropdown" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	    			<%= session.getAttribute("accountEmail") %>
 	    		</button>
 	    		<div id="profileDropdown" class="dropdown-menu dropdown-menu-right">
-	    			<a class="dropdown-item" href="#">Submit Game</a>
-	    			<a class="dropdown-item" href="/Capstone/profile/view?id=<%= session.getAttribute("accountPKey").toString() %>">My Profile</a>
+	    			<a class="dropdown-item" id="submitGameDropdown" href="#">Submit Game</a>
+	    			<a class="dropdown-item" id="myProfileDropdown" href="/Capstone/profile/view?id=<%= session.getAttribute("accountPKey").toString() %>">My Profile</a>
 	    			<% if(session.getAttribute("userClass") instanceof Admin) { %>
 	    				<a class="dropdown-item" href="">Change Permissions</a>
 	    			<% } %>
@@ -111,7 +111,7 @@
 					<p class="hint-text"><a href="#">Forgot Password?</a></p>
 				</form>
 			</div>
-			<div class="modal-footer"><a href="#registerModal" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Create account</a></div>
+			<div class="modal-footer"><a id="createAccountButton" href="#registerModal" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Create account</a></div>
 		</div>
 	</div>
 </div>
