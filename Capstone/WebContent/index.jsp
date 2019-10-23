@@ -13,118 +13,13 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	
-	<link type="text/css" rel="stylesheet" href="style.css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/indexStyle.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
 </head>
 <!-- A lot of this page is hard-coded at the moment as a sort of proof of concept -->
 <!-- Admins will be able to update the homepage in the future -->
-<style>
-	.pagePadding {
-		padding: 15px;
-	}
-	
-	.aboutSection {
-		background-color: #242424;
-		color: #e6e6e6;
-		margin-left: auto;
-	  	margin-right: auto;
-		width: 75%;
-		display: block;
-		text-align: center;
-	}
-	
-	.imgOverlay {
-	  	position: absolute; 
-	  	transition: .3s ease;
-		bottom: 0; 
-	  	background: #000;
-	  	background: rgba(0, 0, 0, 0.5);
-	  	color: #e6e6e6; 
-	  	width: 100%;
-	  	transition: .3s ease;
-	  	padding: 30px;
-	  	color: white;
-	  	text-align: center;
-	  	font-size: 20px;
-	  	opacity:0;
-	}
-	
-	.overlayTitle {
-		color: white;
-	  	font-size: 20px;
-	  	font-weight: bold;
-	  	position: absolute;
-	  	top: 30%;
-	  	left: 30%;
-	  	-webkit-transform: translate(-50%, -50%);
-	  	-ms-transform: translate(-50%, -50%);
-	  	transform: translate(-50%, -50%);
-	  	white-space: nowrap;
-	}
-	
-	.overlaySubtitle {
-		color: white;
-	  	font-size: 15px;
-	  	position: absolute;
-	  	top: 70%;
-	  	left: 30%;
-	  	-webkit-transform: translate(-50%, -50%);
-	  	-ms-transform: translate(-50%, -50%);
-	  	transform: translate(-50%, -50%);
-	  	white-space: nowrap;
-	  	width: 100%;
-	  	word-wrap: break-word;
-	}
-	
-	.overlayBtn {
-		display: inline-block;
-		position: absolute;
-		-webkit-transform: translate(-50%, -50%);
-	  	-ms-transform: translate(-50%, -50%);
-	  	transform: translate(-50%, -50%);
-	  	right: 10%;
-	  	width: 15%;
-	}
-	
-	.mainEventParent {
-		display: block;
-		margin-left: auto;
-	  	margin-right: auto;
-	  	max-width: 50em;
-	  	max-height: 50em;
-	  	position: relative;
-	}
-	
-	.mainEventParent:hover .imgOverlay {
-		opacity: 1;
-	}
-	
-	.mainEventImg {
-	  	object-fit: contain;
-	  	max-width: 100%;
-   		max-height: 100%;
-   		width: auto;
-   		height: auto;
-	}
-	
-	.card-img-top {
-    	width: 100%;
-    	height: 12vw;
-    	object-fit: cover;
-	}
-	
-	@media only screen and (max-width: 600px) {
-  		.imgOverlay {
-    		opacity: 1;
-  		}
-  		.overlayTitle {
-  			font-size: 15px;
-  		}
-  		.overlaySubtitle {
-  			font-size: 12px;
-  		}
-	}
-</style>
+
 <body>
 	<%@include  file="Nav.jsp" %>
 	<div style="text-align: center;">
