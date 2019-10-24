@@ -19,6 +19,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import database.Database;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RunTests {
 	String testingUrl = "http://localhost:8080/Capstone/";
@@ -32,7 +34,7 @@ public class RunTests {
 		driver = new ChromeDriver();
 		generateRandomLogin();
 		//let webpage load in
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 	}
 	
@@ -62,6 +64,7 @@ public class RunTests {
 		
 		driver.findElement(By.id("loginBtn")).click();
 		driver.findElement(By.id("createAccountButton")).click();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElement(By.id("validationEmail")).sendKeys(noAtEmail);
 		driver.findElement(By.id("validationPass1")).sendKeys(junitPass);
 		driver.findElement(By.id("validationPass2")).sendKeys(junitPass);
@@ -99,6 +102,7 @@ public class RunTests {
 		assertEquals(true, profileText.contains("No profile has been created for this account yet."));
 	}
 	
+	//test if profile is successfully created with correct info
 	@Test
 	public void test6_checkIfProfileCreates() {
 		String profileHead, profileText, profileWork;
@@ -124,6 +128,46 @@ public class RunTests {
 		//check if all info is as entered
 		assertEquals(true, profileHead.contains(testName) && profileHead.contains(testBio) && profileText.contains(testName) && profileText.contains(junitEmail) && profileWork.contains(testSkills));
 		takeScreenshot("test6.png");
+	}
+	
+	/*
+	 * debugging this one, database query not working properly
+	@Test
+	public void test7_checkIfProfileIdCorrect() {
+		System.out.println(Database.executeQuery("SELECT COUNT(*) FROM Accounts"));
+		//assertEquals(true, driver.getCurrentUrl().contains("profile/view?id=" + profId + "?"));
+		//System.out.println(profId);
+	} */
+	
+	//fill the profile fields with a bunch of junk data and save to see how it affects the page
+	@Test
+	public void test7_overflowProfileFields() {
+		String junkText = "";
+		int maxCharacters = 100;
+		Random rnd = new Random();
+		
+		//click edit profile button
+		driver.findElement(By.name("btnAddMore")).click();
+		
+		//clear all fields
+		driver.findElement(By.name("name")).clear();
+		driver.findElement(By.name("bio")).clear();
+		driver.findElement(By.name("site")).clear();
+		driver.findElement(By.name("skills")).clear();
+		
+		//fill text fields with a bunch of junk characters
+		for(int i = 0; i < maxCharacters; i++) {
+			char rndChar = (char)(rnd.nextInt(26) + 'a');
+			junkText = junkText + rndChar;
+		}
+		driver.findElement(By.name("name")).sendKeys(junkText);
+		driver.findElement(By.name("bio")).sendKeys(junkText);
+		driver.findElement(By.name("site")).sendKeys(junkText);
+		driver.findElement(By.name("skills")).sendKeys(junkText);
+		driver.findElement(By.name("update")).click();
+		driver.findElement(By.name("btnAddMore")).click();
+		
+		takeScreenshot("test7.png");
 	}
 	
 	private static void generateRandomLogin() {
