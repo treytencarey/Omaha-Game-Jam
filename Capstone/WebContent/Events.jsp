@@ -21,7 +21,6 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@ page import="utils.FolderReader" %>
-<%@ page import="java.io.File" %>
 
 <!DOCTYPE html>
 <html>
@@ -57,6 +56,10 @@
 </head>
 <body style="background-color: gray">
 
+<% 
+	FolderReader fr = new FolderReader("/images/eventImages");
+%>
+
 	<%@include file="Nav.jsp"%>
 	<div id="eventHeader">
 		<div class="contain-carousel">
@@ -71,15 +74,15 @@
 				<div class="carousel-inner">
 					<div class="carousel-item active">
 						<img class="d-block w-100"
-							src="./images/eventImages/gameProgramming.jpg" alt="First slide">
+							src="./images/eventImages/1.jpg" alt="First slide">
 					</div>
 					<div class="carousel-item">
 						<img class="d-block w-100"
-							src="./images/eventImages/codeVortex.jpg" alt="Second slide">
+							src="./images/eventImages/2.jpg" alt="Second slide">
 					</div>
 					<div class="carousel-item">
 						<img class="d-block w-100"
-							src="./images/eventImages/gamerLogo.jpg" alt="Third slide">
+							src="./images/eventImages/3.jpg" alt="Third slide">
 					</div>
 				</div>
 				<a class="carousel-control-prev" href="#carouselExampleIndicators"
@@ -93,11 +96,7 @@
 				</a>
 			</div>
 		</div>
-	</div>
-	<% 
-		FolderReader fr = new FolderReader("/images/eventImages");
-		fr.output();
 		
-		%>
+	</div>
 </body>
 </html>

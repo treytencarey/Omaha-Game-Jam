@@ -4,26 +4,26 @@ import java.io.File;
 import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
 
+import project.Main;
+
 public class FolderReader extends HttpServlet {
 	
-	ServletContext servletContext = getServletContext();
-	String path;
 	File folder;
 	
 	public FolderReader(String name) {
-		folder = new File(name);
-		path = servletContext.getRealPath(name);
-	}
-	
-	public void output() {
-		System.out.println(path);
-	}
-	
-	public void listAllFiles() {
-		for(final File current : folder.listFiles()) {
-			if(current != null) {
-				System.out.println(current.getName());
+		folder = new File(Main.context.getRealPath(name));
+		System.out.println(folder);
+		if(folder.exists()) {
+			System.out.println("Folder Exists");
+			if(folder.list().length > 0) {
+				System.out.println("Not Empty");
 			}
 		}
+		else
+			System.out.println("Folder Does not exist");
+	}
+	
+	public String[] getFileList() {
+			return folder.list();
 	}
 }
