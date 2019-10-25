@@ -23,5 +23,40 @@
 	<div style="text-align: center;">
 		Games
 	</div>
+	<% if (request.getRequestURI().equals(request.getContextPath()+"/Games/"))  { %>
+    <div id="createGameModal" class="modal fade">
+		<div class="modal-dialog modal-login">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Create Game</h4>
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<form class="needs-validation" action="<%= request.getContextPath() %>/accountServlet" method = "post">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-user"></i></span>
+								<input id="validationEmail" type="email" class="form-control" name="email" placeholder="Email" required="required">
+							</div>
+							<label>You can use letters, numbers & periods</label>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+								<input id="validationPass1" type="password" class="form-control" name="password" placeholder="Password" required="required" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$">
+								<input id="validationPass2" type="password" class="form-control" name="password2" placeholder="Confirm" required="required" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$">
+							</div>
+							<label>Use 8 or more characters with a mix of letters, numbers & symbols</label>
+						</div>
+						<div class="form-group">
+							<button type="submit" name="registerButton" class="btn btn-primary btn-block btn-lg">Register</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer"><a href="#loginModal" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Sign in instead</a></div>
+			</div>
+		</div>
+	</div>
+	<%}%>
 </body>
 </html>

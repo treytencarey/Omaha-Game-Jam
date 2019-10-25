@@ -31,10 +31,6 @@
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src="https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
