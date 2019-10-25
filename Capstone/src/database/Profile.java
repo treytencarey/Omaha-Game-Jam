@@ -37,7 +37,6 @@ public class Profile extends HttpServlet {
 	
 	public Profile(int PKey)
 	{
-		System.out.println(PKey);
 		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Profiles WHERE AccountPKey=" + String.valueOf(PKey));
 		if (query.size() == 0)
 			throw new NullPointerException();

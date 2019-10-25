@@ -14,15 +14,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/profileStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 </head>
 <body>
-	<%@include  file="Nav.jsp" %>
+	<%@include  file="navbar.jsp" %>
 	
 	<%@page import="database.Profile" %>
+	<%@page import="project.Main" %>
 	<%	Profile p;
 		
 		try {
-			p = new Profile(Integer.parseInt(session.getAttribute("accountPKey").toString()));
+			p = new Profile(Integer.parseInt(session.getAttribute("id").toString()));
 		} catch (Exception e) {
 			p = new Profile();
 		}
@@ -33,10 +36,21 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
+                        	<%@page import="java.io.File" %>
+                        	<% 	String profileImgPath = "/Uploads/Profiles/Pics/" + session.getAttribute("accountPKey");
+                            	if (!new File(Main.context.getRealPath(profileImgPath)).exists())
+                        			profileImgPath = "https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg";
+                            	else
+                            		profileImgPath = request.getContextPath() + profileImgPath;
+                        	%>
+                            <img src="<%= profileImgPath %>" alt=""/>
+                            <div style="width: 100%" class="btn btn-lg btn-primary">
+                            	<% session.setAttribute("uploadFilePath", "/Uploads/Profiles/Pics/" + session.getAttribute("accountPKey")); %>
+                            	<form action="/Capstone/filesServlet" method="post" enctype="multipart/form-data">
+                                	Change Photo
+                                	<input class="file" type="file" name="file" style="width: 100%"/>
+                                	<input class="btn btn-lg btn-primary" type="submit" value="Update"/>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -58,12 +72,6 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                    	<form action="view">
-                    		<input type="hidden" name="id" value="<%= session.getAttribute("accountPKey").toString() %>">
-                    		<input type="submit" class="profile-edit-btn" name="btnAddMore" value="View as Guest"/>
-                   		</form>
                     </div>
                 </div>
                 <form action="/Capstone/profileServlet" method="post">
