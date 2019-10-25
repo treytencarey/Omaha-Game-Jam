@@ -1,14 +1,15 @@
 package project;
 
-import database.Database;
+public class Admin {
 
-public class Admin extends User {
-
+	String id;
+	
 	public Admin(String x) {
-		super(x);
+		id = x;
 	}
 	
-	public void setUserPermissions(String id, int pernum) {
-		Database.executeUpdate("UPDATE AccountPermissions SET Permissions = " + pernum + " WHERE PKey = " + id);
+	@Override
+	public String toString() {
+		return "User Information:\n\nUser ID:  "+id;
 	}
 }

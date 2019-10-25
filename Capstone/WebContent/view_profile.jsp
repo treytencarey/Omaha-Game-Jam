@@ -14,9 +14,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/profileStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 </head>
 <body>
-	<%@include  file="Nav.jsp" %>
+	<%@include  file="navbar.jsp" %>
 	
 	<%@page import="database.Profile" %>
 	<%@page import="project.Main" %>
@@ -57,11 +59,6 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                    	<% if (request.getParameter("id").equals(session.getAttribute("accountPKey"))) { %>
-					        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-						<% } %>
                     </div>
                 </div>
                 <div class="row">
@@ -147,14 +144,9 @@
 	<% } catch (Exception e) { %>
 		<% if (request.getParameter("id").equals(session.getAttribute("accountPKey"))) { %>
 			<div class="container emp-profile">
-           		<form action="edit">
-		    		<div class="row">
-		    			<h3 style="color: black;">No profile has been created for this account yet.</h3>
-	    			</div>
-	    			<div class="row">
-		    			<input type="submit" class="btn btn-success" name="btnAddMore" value="Edit Profile"/>
-		            </div>
-	        	</form>
+	    		<div class="row">
+	    			<h3 style="color: black; width: 100%; text-align: center;">No profile has been created for this account yet.</h3>
+    			</div>
             </div>
 	<% }
 	} %>
