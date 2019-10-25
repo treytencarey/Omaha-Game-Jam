@@ -29,7 +29,10 @@ public class Files extends HttpServlet {
 		File file ;
 		int maxFileSize = 5000 * 1024;
 		int maxMemSize = 5000 * 1024;
-		String filePath = Main.context.getRealPath(session.getAttribute("uploadFilePath").toString());
+		String fullPath = session.getAttribute("uploadFilePath").toString();
+		String[] splits = fullPath.replaceAll("\\\\", "/").split("/");
+		String fileName = splits[splits.length-1];
+		String filePath = Main.context.getRealPath(fullPath.substring(0,fullPath.length()-fileName.length()));
 		   
 		String contentType = request.getContentType();
 		if ((contentType.indexOf("multipart/form-data") >= 0)) {
@@ -47,7 +50,6 @@ public class Files extends HttpServlet {
 					if ( !fi.isFormField () )  {
 						// Below: fileName of uploaded file without file path
 						// String fileName = fi.getName().replace("\\","/"); fileName = fileName.substring(fileName.lastIndexOf("/")+1);
-						String fileName = session.getAttribute("accountPKey").toString();
 						// System.out.println("Uploading: " + filePath + fileName);
 						file = new File( filePath + fileName) ;
 						fi.write( file ) ;

@@ -43,7 +43,7 @@
                         	%>
                             <img src="<%= profileImgPath %>" alt=""/>
                             <div style="width: 100%" class="btn btn-lg btn-primary">
-                            	<% session.setAttribute("uploadFilePath", "/Uploads/Profiles/Pics/"); %>
+                            	<% session.setAttribute("uploadFilePath", "/Uploads/Profiles/Pics/" + session.getAttribute("accountPKey")); %>
                             	<form action="/Capstone/filesServlet" method="post" enctype="multipart/form-data">
                                 	Change Photo
                                 	<input class="file" type="file" name="file" style="width: 100%"/>
