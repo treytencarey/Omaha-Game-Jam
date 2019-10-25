@@ -10,7 +10,7 @@
 .indvTabs a {
 	color: black !important;
 	font-size: 20px;
-	padding: 12px;
+	padding: 6px;
 }
 .indvTabs form input {
 	margin: auto;
@@ -18,7 +18,7 @@
 	color: black !important;
 	height: 100%;
 	font-size: 20px;
-	padding: 12px;
+	padding: 0px;
 }
 .indvTabs form {
 	height: 100%;
@@ -29,7 +29,7 @@
 	padding: 0px;
 	margin-right: 1rem;
 	background-color: transparent !important;
-	height: 56px;
+	height: 44px;
 }
 #subNavBar div, #subNavBar div ul {
 	height: 100%;
