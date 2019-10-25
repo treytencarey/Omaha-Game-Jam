@@ -36,6 +36,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
+                        	
                         	<%@page import="java.io.File" %>
                         	<% 	String profileImgPath = "/Uploads/Profiles/Pics/" + session.getAttribute("accountPKey");
                             	if (!new File(Main.context.getRealPath(profileImgPath)).exists())
@@ -43,13 +44,15 @@
                             	else
                             		profileImgPath = request.getContextPath() + profileImgPath;
                         	%>
-                            <img src="<%= profileImgPath %>" alt=""/>
-                            <div style="width: 100%" class="btn btn-lg btn-primary">
-                            	<% session.setAttribute("uploadFilePath", "/Uploads/Profiles/Pics/"); %>
-                            	<form action="/Capstone/filesServlet" method="post" enctype="multipart/form-data">
-                                	Change Photo
-                                	<input class="file" type="file" name="file" style="width: 100%"/>
-                                	<input class="btn btn-lg btn-primary" type="submit" value="Update"/>
+                            <img style="width: 100%;" src="<%= profileImgPath %>" alt=""/>
+                            <div>
+                                 <form action="/Capstone/filesServlet" method="post" enctype="multipart/form-data">
+                                 	<label style="width: 100%; color: black;" for="file" class="custom-file-upload">
+									    <i class="fa fa-cloud-upload"></i> Custom Upload
+									</label>
+									<input id="file" style="display: none;" class="file btn btn-lg btn-primary" name="file" type="file" onchange="this.form.submit()"/>
+                                	<!-- <input id="image_uploads" class="file btn btn-lg btn-primary" type="file" name="image_uploads" onchange="this.form.submit()"/> -->
+                                	<!-- <input class="btn btn-lg btn-primary" type="submit" value="Update"/> -->
                                 </form>
                             </div>
                         </div>
@@ -74,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-                <form action="/Capstone/profileServlet" method="post">
+                <form style="margin-top: 20px;" action="/Capstone/profileServlet" method="post">
 	                <div class="row">
 	                    <div class="col-md-4">
 	                        <div class="profile-work">
