@@ -23,7 +23,7 @@
 	        <a class="nav-link" href="<%= request.getContextPath() %>/Gallery">Gallery</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="<%= request.getContextPath() %>/Blog">Blog</a>
+	        <a class="nav-link" href="<%= request.getContextPath() %>/News">News</a>
 	      </li>
 	    </ul>
 	    <ul class="navbar-nav navbar-right">
