@@ -51,7 +51,7 @@
 	FolderReader fr = new FolderReader("/images/eventImages");
 %>
 
-	<%@include file="Nav.jsp"%>
+	<%@include file="navbar.jsp"%>
 	<div id="event-header">
 			<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
