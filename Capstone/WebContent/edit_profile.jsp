@@ -14,9 +14,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/profileStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 </head>
 <body>
-	<%@include  file="Nav.jsp" %>
+	<%@include  file="navbar.jsp" %>
 	
 	<%@page import="database.Profile" %>
 	<%@page import="project.Main" %>
@@ -43,7 +45,7 @@
                         	%>
                             <img src="<%= profileImgPath %>" alt=""/>
                             <div style="width: 100%" class="btn btn-lg btn-primary">
-                            	<% session.setAttribute("uploadFilePath", "/Uploads/Profiles/Pics/"); %>
+                            	<% session.setAttribute("uploadFilePath", "/Uploads/Profiles/Pics/" + session.getAttribute("accountPKey")); %>
                             	<form action="/Capstone/filesServlet" method="post" enctype="multipart/form-data">
                                 	Change Photo
                                 	<input class="file" type="file" name="file" style="width: 100%"/>
@@ -70,12 +72,6 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                    	<form action="view">
-                    		<input type="hidden" name="id" value="<%= session.getAttribute("accountPKey").toString() %>">
-                    		<input type="submit" class="profile-edit-btn" name="btnAddMore" value="View as Guest"/>
-                   		</form>
                     </div>
                 </div>
                 <form action="/Capstone/profileServlet" method="post">

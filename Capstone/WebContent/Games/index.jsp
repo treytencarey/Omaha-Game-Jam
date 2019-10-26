@@ -21,7 +21,7 @@
 <body>
 	<%@include  file="../navbar.jsp" %>
 	<div style="text-align: center;">
-		Events
+		Games
 	</div>
 </body>
 </html>

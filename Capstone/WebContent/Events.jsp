@@ -47,7 +47,7 @@
 </head>
 <body>
 
-<% 
+<%
 	FolderReader fr = new FolderReader("/images/eventImages");
 %>
 
@@ -56,30 +56,30 @@
 			<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
 					<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-					<% 
-					for(int i = 1; i < fr.getFileList().length; i++) { 
+					<%
+					for(int i = 1; i < fr.getFileList().length; i++) {
 					%>
 						<li data-target="#carouselExampleIndicators" data-slide-to=<%= i %>></li>
 					<%
-					} 
+					}
 					%>
 				</ol>
 				<div class="carousel-inner">
-					<% 
+					<%
 					String[] carouselItems = fr.getFileList();
 					%>
 					<div class="carousel-item active">
 					<img class="d-block w-100 img-fluid" src="./images/eventImages/<%= carouselItems[0] %>" alt="Slide 1">
 					</div>
 					<%
-					for(int i = 1; i < carouselItems.length; i++) { 
+					for(int i = 1; i < carouselItems.length; i++) {
 					%>
 					<div class="carousel-item">
 						<img class="d-block w-100 img-fluid" src="./images/eventImages/<%= carouselItems[i] %>" alt="Slide <%= i + 1 %>">
 					</div>
 					<%
-					} 
-					%>	
+					}
+					%>
 				</div>
 				<a class="carousel-control-prev" href="#carouselExampleIndicators"
 					role="button" data-slide="prev"> <span
