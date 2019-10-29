@@ -18,10 +18,37 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 	
 </head>
+<style>
+ 	.news-container {
+ 		width:75%; 
+ 		margin:0 auto;
+ 	}
+ 	
+ 	.list-group .list-group-item-action {
+ 		background-color: #222;
+		color: #e6e6e6;
+		border-color: #e6e6e6;
+ 	}
+ 	
+ 	
+ 	.list-group-item-action:hover {
+ 		background-color: #3b3b3b;
+ 	}
+</style>
 <body>
 	<%@include  file="../navbar.jsp" %>
 	<div style="text-align: center;">
-		News
+		<h4>News</h4>
+		<br>
+	</div>
+	<div class="list-group news-container">
+		<a href="#" class="list-group-item list-group-item-action">
+			<div class="d-flex mb-3 justify-content-between">
+				<h4>TEST HEADING</h4>
+				<small>6 days ago</small>
+			</div>
+			<p>test text test text test text test text test text test text test text test text</p>
+		</a>
 	</div>
 </body>
 </html>
