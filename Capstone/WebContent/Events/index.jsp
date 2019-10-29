@@ -8,6 +8,9 @@
 #event-info button {
 	background-color: red;
 }
+#carouselExampleIndicators {
+	height: auto;
+}
 </style>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -38,7 +41,7 @@
 	FolderReader fr = new FolderReader("/images/eventImages");
 %>
 	<div id="event-header">
-			<div id="carouselExampleIndicators" class="carousel slide mw-50" data-ride="carousel">
+			<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
 					<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 					<%

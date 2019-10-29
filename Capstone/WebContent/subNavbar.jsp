@@ -3,7 +3,7 @@
 	  <div class=" navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav ml-auto">
 				<li class="nav-item indvTabs">
-			  		<a class="nav-link" href="#">Admin Menu</a>
+			  		<a class="nav-link" href="./AdminPanel/index.jsp">Admin Menu</a>
 				</li>
     		<% if (request.getRequestURI().equals(request.getContextPath()+"/profile/view") && request.getParameter("id").equals(session.getAttribute("accountPKey")))  { %>
 		      <li class="nav-item indvTabs">
