@@ -19,6 +19,10 @@
 	
 </head>
 <style>
+
+	img {
+		width: inherit;
+	}
  	.news-container {
  		width:75%; 
  		margin:0 auto;
@@ -34,6 +38,37 @@
  	.list-group-item-action:hover {
  		background-color: #3b3b3b;
  	}
+ 	
+ 	.img-container {
+ 		object-fit: cover;
+ 		max-width: 20%;
+ 		min-width: 20%;
+ 		overflow: hidden;
+ 		display: flex;
+ 		float:left;
+ 	}
+ 	
+ 	.news-text {
+ 		padding-left: 27%;
+ 	}
+ 	
+ 	.date-text {
+ 		position:absolute;
+ 		bottom: 0;
+ 		right: 5px;
+ 		font-style: italic;
+ 	}
+ 	
+ 	@media only screen and (max-width: 800px) {
+ 		.img-container {
+ 			max-width: 40%;
+ 			min-width: 40%;
+ 		}
+ 		
+ 		.news-text {
+ 			display: inline-block;
+ 		}
+}
 </style>
 <body>
 	<%@include  file="../navbar.jsp" %>
@@ -43,11 +78,28 @@
 	</div>
 	<div class="list-group news-container">
 		<a href="#" class="list-group-item list-group-item-action">
-			<div class="d-flex mb-3 justify-content-between">
-				<h4>TEST HEADING</h4>
-				<small>6 days ago</small>
+			<div class="img-container">
+				<img class="img-fluid rounded" src="<%= request.getContextPath() %>/images/smallimgtest.png"/>
 			</div>
-			<p>test text test text test text test text test text test text test text test text</p>
+			<div class="news-text">
+				<div class="d-flex mb-3 justify-content-between">
+					<h4>TEST HEADING TEST HEADING TEST HEADING TEST HEADING</h4>
+				</div>
+				<p>test text test text test text test text test text test text test text test text</p>
+				<small class="date-text">October 20th, 2019</small>
+			</div>
+		</a>
+		<a href="#" class="list-group-item list-group-item-action">
+			<div class="img-container">
+				<img class="img-fluid rounded" src="<%= request.getContextPath() %>/images/cancer.jpeg"/>
+			</div>
+			<div class="news-text">
+				<div class="d-flex mb-3 justify-content-between">
+					<h4>TEST HEADING TEST HEADING TEST HEADING TEST HEADING</h4>
+				</div>
+				<p>test text test text test text test text test text test text test text test text</p>
+				<small class="date-text">October 20th, 2019</small>
+			</div>
 		</a>
 	</div>
 </body>
