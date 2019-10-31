@@ -19,88 +19,116 @@
 	
 </head>
 <style>
-
-	img {
-		width: inherit;
+	.card {
+		border: none;
+		max-width: 50%;
+		margin: 0 auto;
+        float: none;
+        margin-bottom: 10px;
 	}
- 	.news-container {
- 		width:75%; 
- 		margin:0 auto;
- 	}
- 	
- 	.list-group .list-group-item-action {
- 		background-color: #222;
-		color: #e6e6e6;
-		border-color: #e6e6e6;
- 	}
- 	
- 	
- 	.list-group-item-action:hover {
- 		background-color: #3b3b3b;
- 	}
- 	
- 	.img-container {
- 		object-fit: cover;
- 		max-width: 20%;
- 		min-width: 20%;
- 		overflow: hidden;
- 		display: flex;
- 		float:left;
- 	}
- 	
- 	.news-text {
- 		padding-left: 27%;
- 	}
- 	
- 	.date-text {
- 		position:absolute;
- 		bottom: 0;
- 		right: 5px;
- 		font-style: italic;
- 	}
- 	
- 	@media only screen and (max-width: 800px) {
- 		.img-container {
- 			max-width: 40%;
- 			min-width: 40%;
+	
+	.page-text {
+		margin: 0 auto;
+		text-align: center;
+	}
+	
+	.card-text {
+		text-overflow: ellipsis;
+		user-select: none;
+	}
+	
+	a {
+		outline: none;
+		color: inherit;
+		text-decoration: none;
+	}
+	
+	a:hover {
+		outline: none;
+		color: inherit;
+	}
+	
+	.card-deck {
+		margin: 0 auto;
+        float: none;
+        margin-bottom: 10px;
+	}
+	
+	.card-img-top {
+   		width: 100%;
+   		height: 12vw;
+   		max-height: 50%;
+   		object-fit: cover;
+	}
+	
+	.zoom {
+  		transition: transform .2s; /* Animation */
+  		margin: 0 auto;
+	}
+
+	.zoom:hover {
+	  transform: scale(1.1);
+	}
+	
+	.btn-group {
+  		margin: auto;
+  		display: flex;
+  		flex-direction: row;
+  		justify-content: center;
+  		max-width:30%;
+	}
+	
+	@media only screen and (max-width: 600px) {
+ 		.card {
+ 			max-width: 100%;
  		}
  		
- 		.news-text {
- 			display: inline-block;
- 		}
-}
+ 		.card-img-top {
+ 			height: 20vw;
+	   		max-height: 70%;
+		}
+ 	}
 </style>
 <body>
 	<%@include  file="../navbar.jsp" %>
-	<div style="text-align: center;">
-		<h4>News</h4>
-		<br>
+	<h4 class="page-text">News</h4>
+	<br>
+	<div class="btn-group" role="group" style="align: center;">
+		<button type="button" class="btn btn-secondary" id="show-news-btn">News</button>
+		<button type="button" class="btn btn-secondary">All Posts</button>
+		<button type="button" class="btn btn-secondary">Events</button>
 	</div>
-	<div class="list-group news-container">
-		<a href="#" class="list-group-item list-group-item-action">
-			<div class="img-container">
-				<img class="img-fluid rounded" src="<%= request.getContextPath() %>/images/smallimgtest.png"/>
-			</div>
-			<div class="news-text">
-				<div class="d-flex mb-3 justify-content-between">
-					<h4>TEST HEADING TEST HEADING TEST HEADING TEST HEADING</h4>
-				</div>
-				<p>test text test text test text test text test text test text test text test text</p>
-				<small class="date-text">October 20th, 2019</small>
-			</div>
-		</a>
-		<a href="#" class="list-group-item list-group-item-action">
-			<div class="img-container">
-				<img class="img-fluid rounded" src="<%= request.getContextPath() %>/images/cancer.jpeg"/>
-			</div>
-			<div class="news-text">
-				<div class="d-flex mb-3 justify-content-between">
-					<h4>TEST HEADING TEST HEADING TEST HEADING TEST HEADING</h4>
-				</div>
-				<p>test text test text test text test text test text test text test text test text</p>
-				<small class="date-text">October 20th, 2019</small>
-			</div>
-		</a>
+	<div class="container h-100" style="text-align: center;">
+		<div class="card-deck col-sm-12">
+			<div class="card">
+				<a href="#"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
+			  	<div class="card-body dark">
+			  		<a href="#"><h5 class="card-title">TEST HEADING</h5></a>
+			  		<p class="card-text">test text</p>
+			  	</div>
+		  	</div>
+		  	<div class="card">
+				<a href="#"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
+			  	<div class="card-body dark">
+			  		<a href="#"><h5 class="card-title">TEST HEADING</h5></a>
+			  		<p class="card-text">test text</p>
+			  	</div>
+		  	</div>
+		  	<div class="card">
+				<a href="#"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
+			  	<div class="card-body dark">
+			  		<a href="#"><h5 class="card-title">TEST HEADING</h5></a>
+			  		<p class="card-text">test text</p>
+			  	</div>
+		  	</div>
+	  	</div>
 	</div>
+	
+	<a href="#"><h6 style="text-align:center;">Older Posts</h6></a>
 </body>
+<script>
+	$('#show-news-btn').click(function (e) {
+		console.log("CLICKED");
+	})
+</script>
 </html>
