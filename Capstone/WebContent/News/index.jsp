@@ -91,6 +91,15 @@
 </style>
 <body>
 	<%@include  file="../navbar.jsp" %>
+	<%@page import="database.News" %>
+	<%@page import="project.Main" %>
+	<% int[] postKeys = News.getMostRecentNewsPostsKeys();
+	   News[] recentNews = new News[postKeys.length];
+	   for(int i = 0; i < recentNews.length; i++) {
+		   recentNews[i] = new News(postKeys[i]);
+	   }
+	%>
+	
 	<h4 class="page-text">News</h4>
 	<br>
 	<div class="btn-group" role="group" style="align: center;">
@@ -100,30 +109,18 @@
 	</div>
 	<div class="container h-100" style="text-align: center;">
 		<div class="card-deck col-sm-12">
-			<div class="card">
-				<a href="#"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
-			  	<div class="card-body dark">
-			  		<a href="#"><h5 class="card-title">TEST HEADING</h5></a>
-			  		<p class="card-text">test text</p>
-			  	</div>
-		  	</div>
-		  	<div class="card">
-				<a href="#"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
-			  	<div class="card-body dark">
-			  		<a href="#"><h5 class="card-title">TEST HEADING</h5></a>
-			  		<p class="card-text">test text</p>
-			  	</div>
-		  	</div>
-		  	<div class="card">
-				<a href="#"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
-			  	<div class="card-body dark">
-			  		<a href="#"><h5 class="card-title">TEST HEADING</h5></a>
-			  		<p class="card-text">test text</p>
-			  	</div>
-		  	</div>
+		<% for(int i = 0; i < recentNews.length; i++) { %>
+				<div class="card">
+					<a href="#"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
+			  		<div class="card-body dark">
+			  			<a href="#"><h5 class="card-title"><%= recentNews[i].getTitle() %></h5></a>
+			  			<p class="card-text">test text</p>
+			  			<small><%= recentNews[i].getDate() %></small>
+			  		</div>
+		  		</div>
+		<% } %>
 	  	</div>
 	</div>
-	
 	<a href="#"><h6 style="text-align:center;">Older Posts</h6></a>
 </body>
 <script>
