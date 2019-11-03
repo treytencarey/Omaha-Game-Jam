@@ -45,14 +45,21 @@ In "Project Facets", select the "Runtimes" tab (on the right-hand side) and make
 ## Starting the Server
 In Eclipse, under the Project Explorer, right-click "Capstone", select "Run As" > "Run on Server". Then, select "Finish"
 
-# **Server changes since 10/05/2019**
+# **Generating Documentation with Doxygen**
 
-Before your next pull from Dev, there were changes made to the server. The server will be edited often so that we can move away from displaying the ".jsp" file extension in our web addresses.
-Hence why we need to recreate the server.
+## Installing Doxygen
 
-## Recreate your server
+http://www.doxygen.nl/download.html
 
-In Eclipse, in the Package Explorer (left), right-click "Servers" and press "Delete". When the modal pops up, check "Delete project contents on disk (cannot be undone)", then press OK.
-Now, go up to the "Setup Tomcat" section above, and redo it (NOTE: one thing that changed is that you need to change the Server Name to "Tomcat" -- this is important).
+Scroll down to "Sources and Binaries" to install Doxygen.
+Since it's open-source, you may also build it yourself using their github. However, this isn't necessary and I just installed using the binaries.
 
-Finally, you can do a pull from Dev and this will update your web.xml file as necessary.
+## Generating doxygen
+
+Start the Doxygen GUI after the installation.
+You may press File > Open..., then select the "Documentation/Capstone.doxy" file to use my values. However, these values likely contain my folder structure and will need to be changed.
+
+In the "Wizard" tab in Doxygen under "Project" of the "Topics" treeview (left), set the "Project name" to "Capstone". Set the "Source code ddirectory" to the "Capstone/src/" folder. Set the "Destination directory" to the "Documentation/" folder.
+Select "Mode" on the "Topics" treeview (left). Select the "Optimize for Java or C# output" radio.
+
+Click "Next" until the tab switches to "Run" (or simply select the "Run" tab yourself). Press the "Run doxygen" button. Finally, press the "Show HTML output" button to see the doxygen output.
