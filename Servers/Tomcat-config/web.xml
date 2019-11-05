@@ -4752,5 +4752,14 @@
 		<servlet-name>profileEdit</servlet-name>
 		<url-pattern>/profile/edit</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>   
+		<servlet-name>submitGame</servlet-name>
+		<jsp-file>/submit_game.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>submitGame</servlet-name>
+		<url-pattern>/game/submit</url-pattern>
+	</servlet-mapping>
 
 </web-app>
