@@ -16,6 +16,6 @@
 !Capstone/WebContent/images/*.*
 !Capstone/TestingUtils/*.*
 !Servers/Tomcat-config/web.xml
-!Documentation/**/*.*
+!docs/**/*.*
 /bin/
 /.metadata/
