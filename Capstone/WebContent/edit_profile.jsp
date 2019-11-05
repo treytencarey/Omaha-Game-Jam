@@ -1,3 +1,4 @@
+<%@page import="java.io.Console"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -25,7 +26,7 @@
 	<%	Profile p;
 
 		try {
-			p = new Profile(Integer.parseInt(session.getAttribute("id").toString()));
+			p = new Profile(Integer.parseInt(session.getAttribute("accountPKey").toString()));
 		} catch (Exception e) {
 			p = new Profile();
 		}

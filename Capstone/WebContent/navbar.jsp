@@ -35,7 +35,7 @@
 		    			<%= session.getAttribute("accountEmail") %>
 		    		</button>
 		    		<div id="profileDropdown" class="dropdown-menu dropdown-menu-right">
-		    			<a class="dropdown-item" href="#">Submit Game</a>
+		    			<a id="addGameBtn" href="#newGameModal" class="dropdown-item" data-toggle="modal">Submit Game</a>
 		    			<a class="dropdown-item" href="<%= request.getContextPath() %>/profile/view?id=<%= session.getAttribute("accountPKey").toString() %>">My Profile</a>
 		    			<div class="dropdown-divider"></div>
 		    			<form style="padding: .25rem 0;"class="dropdown-item" action = "<%= request.getContextPath() %>/accountServlet" method = "post">
@@ -132,6 +132,39 @@
 				</form>
 			</div>
 			<div class="modal-footer"><a href="#loginModal" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Sign in instead</a></div>
+		</div>
+	</div>
+</div>
+
+<!-- New Game Modal HTML -->
+<div id="newGameModal" class="modal fade">
+	<div class="modal-dialog modal-login">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Add New Game</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<form action="<%= request.getContextPath() %>/accountServlet" method = "post">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-user"></i></span>
+							<input type="text" class="form-control addGameField" name="name" placeholder="Name" required="required">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-lock"></i></span>
+							<textarea class="addGameField" name="description" form="usrform"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<button type="submit" name="loginButton" class="btn btn-primary btn-block btn-lg">Sign In</button>
+					</div>
+					<p class="hint-text"><a href="#">Forgot Password?</a></p>
+				</form>
+			</div>
+			<div class="modal-footer"><a href="#registerModal" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Create account</a></div>
 		</div>
 	</div>
 </div>

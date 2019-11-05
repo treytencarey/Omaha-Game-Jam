@@ -123,3 +123,12 @@
 i {
 	margin-top: 10px;
 }
+
+.addGameField {
+	border: solid 1px lightgrey !important;
+	margin-left: 10px;
+}
+
+.icons {
+	width: 20px;
+}
