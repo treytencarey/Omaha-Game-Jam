@@ -35,12 +35,25 @@ import javax.servlet.http.HttpSession;
 import project.Main;
 import utils.Utils;
 
+/**
+ * 
+ * Handles all interactions between the site and the database.
+ *
+ */
 @WebServlet("/databaseServlet")
 public class Database extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * The database location.
+	 */
 	public static final String AUTH_DB = Main.context.getRealPath("/Databases/db.db");
 	
+	/**
+	 * Gets URL parameters as a map.
+	 * @param query a string of the URL parameters query.
+	 * @return A map of URL parameters.
+	 */
 	public static Map<String, String> getQueryMap(String query)  
 	{  
 	    String[] params = query.split("&");  
@@ -54,21 +67,30 @@ public class Database extends HttpServlet {
 	    return map;  
 	}
 	
-	protected void doPost(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		
-		// This is where forms will be submitted by using databaseServlet
-	}
-	
+	/**
+	 * Formats a string to an SQL-safe string.
+	 * @param str a string of the value being used in a query.
+	 * @return An SQL-safe value of the string.
+	 */
 	public static String formatString(String str)
 	{
 		return str.replace("'", "''");
 	}
 	
+	/**
+	 * Executes a write-only SQL statement in the default database.
+	 * @param sql a write string to be executed.
+	 * @return An error as a string, if any. Otherwise, an empty string if successful.
+	 */
 	public static String executeUpdate(String sql) {
 		return Database.executeUpdate(sql, Database.AUTH_DB);
 	}
+	/**
+	 * Executes a write-only SQL statement in the given database.
+	 * @param sql a write string to be executed.
+	 * @param dbName a string of the database location.
+	 * @return An error as a string, if any. Otherwise, an empty string if successful.
+	 */
 	public static String executeUpdate(String sql, String dbName)
 	{
 		// load the sqlite-JDBC driver using the current class loader
@@ -95,6 +117,7 @@ public class Database extends HttpServlet {
 	    catch (SQLException e)
 	    {
 	    	System.err.println(e.getMessage());
+	    	err = e.getMessage();
 	    }       
 	    finally
 	    {         
@@ -104,16 +127,28 @@ public class Database extends HttpServlet {
 			}
 			catch(SQLException e)
 			{  // Use SQLException class instead.          
-				System.err.println(e); 
+				System.err.println(e);
+				err = e.getMessage();
 			}
 	    }
 	    return err;
 	}
 	
+	/**
+	 * Executes a read-only SQL statement in the default database and returns of list of maps of the results.
+	 * @param sql a read string to be executed.
+	 * @return A list, where each item is a row of the results, of maps, where each key in the map is a column and the value is the cell value.
+	 */
 	public static List<Map<String, Object>> executeQuery(String sql)
 	{
 		return Database.executeQuery(sql, Database.AUTH_DB);
 	}
+	/**
+	 * Executes a read-only SQL statement in the diven database and returns of list of maps of the results.
+	 * @param sql a read string to be executed.
+	 * @param dbName a string of the database location.
+	 * @return A list, where each item is a row of the results, of maps, where each key in the map is a column and the value is the cell value.
+	 */
 	public static List<Map<String, Object>> executeQuery(String sql, String dbName)
 	{
 		List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
@@ -166,21 +201,5 @@ public class Database extends HttpServlet {
 			}
 	    }
 	    return resultList;
-	}
-	
-	// With a map of results from the DB, get the passed parameter. If null, return "" instead.
-	public static String tryGetValue(Map<?, ?> map, String name)
-	{
-		String res; 
-		try
-		{
-			res = map.get(name).toString();
-		}
-		catch(NullPointerException npe)
-		{
-			res = "";
-		}
-		
-		return res;
 	}
 }
