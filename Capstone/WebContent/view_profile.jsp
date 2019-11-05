@@ -21,6 +21,7 @@
 	<%@include  file="navbar.jsp" %>
 	
 	<%@page import="database.Profile" %>
+	<%@page import="project.Main" %>
 	
 	<% try { %>
 		<% Profile p = new Profile(Integer.parseInt(request.getParameter("id"))); %>
@@ -30,11 +31,14 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div>
+                        	<%@page import="java.io.File" %>
+                        	<% 	String profileImgPath = "/Uploads/Profiles/Pics/" + request.getParameter("id");
+                            	if (!new File(Main.context.getRealPath(profileImgPath)).exists())
+                        			profileImgPath = "https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg";
+                            	else
+                            		profileImgPath = request.getContextPath() + profileImgPath;
+                        	%>
+                            <img src="<%= profileImgPath %>" alt=""/>
                         </div>
                     </div>
                     <div class="col-md-6">

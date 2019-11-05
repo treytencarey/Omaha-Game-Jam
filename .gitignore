@@ -9,6 +9,9 @@
 !Capstone/**/*.jsp
 !Capstone/**/*.css
 !Capstone/**/*.db
+!Capstone/**/*.png
+!Capstone/**/*/*.jpg
+!Capstone/**/*/*.jpeg
 !Capstone/WebContent/WEB-INF/lib/*.jar
 !Capstone/WebContent/images/*.*
 !Capstone/TestingUtils/*.*
