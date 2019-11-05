@@ -57,9 +57,9 @@ Since it's open-source, you may also build it yourself using their github. Howev
 ## Generating doxygen
 
 Start the Doxygen GUI after the installation.
-You may press File > Open..., then select the "Documentation/Capstone.doxy" file to use my values. However, these values likely contain my folder structure and will need to be changed.
+You may press File > Open..., then select the "docs/Capstone.doxy" file to use my values. However, these values likely contain my folder structure and will need to be changed.
 
-In the "Wizard" tab in Doxygen under "Project" of the "Topics" treeview (left), set the "Project name" to "Capstone". Set the "Source code ddirectory" to the "Capstone/src/" folder. Set the "Destination directory" to the "Documentation/" folder.
+In the "Wizard" tab in Doxygen under "Project" of the "Topics" treeview (left), set the "Project name" to "Capstone". Set the "Source code ddirectory" to the "Capstone/src/" folder. Set the "Destination directory" to the "docs/" folder.
 Select "Mode" on the "Topics" treeview (left). Select the "Optimize for Java or C# output" radio.
 
 Click "Next" until the tab switches to "Run" (or simply select the "Run" tab yourself). Press the "Run doxygen" button. Finally, press the "Show HTML output" button to see the doxygen output.
