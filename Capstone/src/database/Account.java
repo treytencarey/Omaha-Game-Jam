@@ -18,10 +18,20 @@ import project.Admin;
 
 import java.util.Base64;
 
+/**
+ * 
+ * Handles all interactions between the site and an account.
+ *
+ */
 @WebServlet("/accountServlet")
 public class Account extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Handles form submissions for the accountServlet.
+	 * @param request the servlet request.
+	 * @param response the servlet for response.
+	 */
 	protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
@@ -64,6 +74,15 @@ public class Account extends HttpServlet {
 		}
 	}
 
+	/**
+	 * Logs into the account for a user's session. Returns true if successful, false otherwise.
+	 * Also sets session attributes based on the the user's successful login (such as the accountPKey and accountEmail attribute).
+	 * 
+	 * @param email a string of the email address (AKA username).
+	 * @param password a string of the password (unencrypted).
+	 * @param session the user's HttpSession.
+	 * @return True if the login was successful, otherwise false.
+	 */
 	protected boolean login(String email, String password, HttpSession session)
 	{
 		try {
@@ -96,6 +115,13 @@ public class Account extends HttpServlet {
 	    return false;
 	}
 
+	/**
+	 * Registers an account. Returns true if successful, false otherwise.
+	 * Note that the database contains triggers that can cause a fail if the email already exists, case-insensitive.
+	 * @param email a string of the email address (AKA username).
+	 * @param password a string of the password (unencrypted).
+	 * @return True if the registration was successful, otherwise false.
+	 */
 	protected String register(String email, String password)
 	{
 		if (password.length() == 0)
@@ -109,10 +135,22 @@ public class Account extends HttpServlet {
 		return Database.executeUpdate("INSERT INTO Accounts (Email, Password) VALUES ('" + email + "', '" + password + "')");
 	}
 
+	/**
+	 * The encryption algorithm to be used.
+	 */
 	private static final String ALGORITHM = "AES";
+	/**
+	 * The encryption key value.
+	 */
 	private static final byte[] keyValue =
 	    new byte[] { 'T', 'h', 'i', 's', 'I', 's', 'A', 'S', 'e', 'c', 'r', 'e', 't', 'K', 'e', 'y' };
 
+	 /**
+	  * Encrypts a string value using the encryption algorithm and key.
+	  * @param valueToEnc a string of the value to be encrypted.
+	  * @return A string of the valueToEnc string encrypted.
+	  * @throws Exception
+	  */
 	 public static String encrypt(String valueToEnc) throws Exception {
 	    Key key = generateKey();
 	    Cipher c = Cipher.getInstance(ALGORITHM);
@@ -122,6 +160,11 @@ public class Account extends HttpServlet {
 	    return encryptedValue;
 	}
 
+	/**
+	 * Generates a key for the encryption algorithm.
+	 * @return A new key.
+	 * @throws Exception
+	 */
 	private static Key generateKey() throws Exception {
 	    Key key = new SecretKeySpec(keyValue, ALGORITHM);
 	    return key;

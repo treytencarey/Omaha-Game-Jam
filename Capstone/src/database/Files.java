@@ -13,15 +13,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.RequestContext;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 import project.Main;
 
+/**
+ * 
+ * Handles uploaded files by users.
+ *
+ */
 @WebServlet("/filesServlet")
 public class Files extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Handles form submissions for the filesServlet.
+	 * @param request the servlet request.
+	 * @param response the servlet for response.
+	 */
 	protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
@@ -29,7 +40,10 @@ public class Files extends HttpServlet {
 		File file ;
 		int maxFileSize = 5000 * 1024;
 		int maxMemSize = 5000 * 1024;
-		String filePath = Main.context.getRealPath(session.getAttribute("uploadFilePath").toString());
+		String fullPath = session.getAttribute("uploadFilePath").toString();
+		String[] splits = fullPath.replaceAll("\\\\", "/").split("/");
+		String fileName = splits[splits.length-1];
+		String filePath = Main.context.getRealPath(fullPath.substring(0,fullPath.length()-fileName.length()));
 		   
 		String contentType = request.getContentType();
 		if ((contentType.indexOf("multipart/form-data") >= 0)) {
@@ -47,7 +61,6 @@ public class Files extends HttpServlet {
 					if ( !fi.isFormField () )  {
 						// Below: fileName of uploaded file without file path
 						// String fileName = fi.getName().replace("\\","/"); fileName = fileName.substring(fileName.lastIndexOf("/")+1);
-						String fileName = session.getAttribute("accountPKey").toString();
 						// System.out.println("Uploading: " + filePath + fileName);
 						file = new File( filePath + fileName) ;
 						fi.write( file ) ;

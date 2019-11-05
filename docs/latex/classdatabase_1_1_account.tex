@@ -1,0 +1,101 @@
+\hypertarget{classdatabase_1_1_account}{}\doxysection{database.\+Account Class Reference}
+\label{classdatabase_1_1_account}\index{database.Account@{database.Account}}
+Inheritance diagram for database.\+Account\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdatabase_1_1_account}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static String \mbox{\hyperlink{classdatabase_1_1_account_abe01ff2c5d53ad6fda9b98b41bfbf082}{encrypt}} (String value\+To\+Enc)  throws Exception 
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classdatabase_1_1_account_a7d5102fd96340fd598c5295e2ab9c44a}{do\+Post}} (Http\+Servlet\+Request request, Http\+Servlet\+Response response)  throws Servlet\+Exception, I\+O\+Exception 
+\item 
+boolean \mbox{\hyperlink{classdatabase_1_1_account_a9d30fe45121d2fe7ec1549629f5e2753}{login}} (String email, String password, Http\+Session session)
+\item 
+String \mbox{\hyperlink{classdatabase_1_1_account_afb7be0d771f509d02d6a0df9585d8221}{register}} (String email, String password)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles all interactions between the site and an account. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdatabase_1_1_account_a7d5102fd96340fd598c5295e2ab9c44a}\label{classdatabase_1_1_account_a7d5102fd96340fd598c5295e2ab9c44a}} 
+\index{database.Account@{database.Account}!doPost@{doPost}}
+\index{doPost@{doPost}!database.Account@{database.Account}}
+\doxysubsubsection{\texorpdfstring{doPost()}{doPost()}}
+{\footnotesize\ttfamily void database.\+Account.\+do\+Post (\begin{DoxyParamCaption}\item[{Http\+Servlet\+Request}]{request,  }\item[{Http\+Servlet\+Response}]{response }\end{DoxyParamCaption}) throws Servlet\+Exception, I\+O\+Exception\hspace{0.3cm}{\ttfamily [protected]}}
+
+Handles form submissions for the account\+Servlet. 
+\begin{DoxyParams}{Parameters}
+{\em request} & the servlet request. \\
+\hline
+{\em response} & the servlet for response. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdatabase_1_1_account_abe01ff2c5d53ad6fda9b98b41bfbf082}\label{classdatabase_1_1_account_abe01ff2c5d53ad6fda9b98b41bfbf082}} 
+\index{database.Account@{database.Account}!encrypt@{encrypt}}
+\index{encrypt@{encrypt}!database.Account@{database.Account}}
+\doxysubsubsection{\texorpdfstring{encrypt()}{encrypt()}}
+{\footnotesize\ttfamily static String database.\+Account.\+encrypt (\begin{DoxyParamCaption}\item[{String}]{value\+To\+Enc }\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+Encrypts a string value using the encryption algorithm and key. 
+\begin{DoxyParams}{Parameters}
+{\em value\+To\+Enc} & a string of the value to be encrypted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A string of the value\+To\+Enc string encrypted. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classdatabase_1_1_account_a9d30fe45121d2fe7ec1549629f5e2753}\label{classdatabase_1_1_account_a9d30fe45121d2fe7ec1549629f5e2753}} 
+\index{database.Account@{database.Account}!login@{login}}
+\index{login@{login}!database.Account@{database.Account}}
+\doxysubsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily boolean database.\+Account.\+login (\begin{DoxyParamCaption}\item[{String}]{email,  }\item[{String}]{password,  }\item[{Http\+Session}]{session }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Logs into the account for a user\textquotesingle{}s session. Returns true if successful, false otherwise. Also sets session attributes based on the the user\textquotesingle{}s successful login (such as the account\+P\+Key and account\+Email attribute).
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & a string of the email address (A\+KA username). \\
+\hline
+{\em password} & a string of the password (unencrypted). \\
+\hline
+{\em session} & the user\textquotesingle{}s Http\+Session. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the login was successful, otherwise false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdatabase_1_1_account_afb7be0d771f509d02d6a0df9585d8221}\label{classdatabase_1_1_account_afb7be0d771f509d02d6a0df9585d8221}} 
+\index{database.Account@{database.Account}!register@{register}}
+\index{register@{register}!database.Account@{database.Account}}
+\doxysubsubsection{\texorpdfstring{register()}{register()}}
+{\footnotesize\ttfamily String database.\+Account.\+register (\begin{DoxyParamCaption}\item[{String}]{email,  }\item[{String}]{password }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Registers an account. Returns true if successful, false otherwise. Note that the database contains triggers that can cause a fail if the email already exists, case-\/insensitive. 
+\begin{DoxyParams}{Parameters}
+{\em email} & a string of the email address (A\+KA username). \\
+\hline
+{\em password} & a string of the password (unencrypted). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the registration was successful, otherwise false. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/bryce/eclipse-\/workspace/\+Capstone/\+Capstone/src/database/Account.\+java\end{DoxyCompactItemize}
