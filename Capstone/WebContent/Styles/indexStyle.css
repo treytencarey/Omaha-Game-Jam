@@ -92,6 +92,12 @@
    	object-fit: cover;
 }
 
+.card-deck {
+	margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}
+
 @media only screen and (max-width: 600px) {
  		.imgOverlay {
    		opacity: 1;
