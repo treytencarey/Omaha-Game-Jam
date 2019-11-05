@@ -1,0 +1,136 @@
+\hypertarget{classdatabase_1_1_database}{}\doxysection{database.\+Database Class Reference}
+\label{classdatabase_1_1_database}\index{database.Database@{database.Database}}
+Inheritance diagram for database.\+Database\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdatabase_1_1_database}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Map$<$ String, String $>$ \mbox{\hyperlink{classdatabase_1_1_database_ac0e1f75057d7df7b2e70a1eaa0c0b725}{get\+Query\+Map}} (String query)
+\item 
+static String \mbox{\hyperlink{classdatabase_1_1_database_a25c3988d350b90c93efdfcbb5a954021}{format\+String}} (String str)
+\item 
+static String \mbox{\hyperlink{classdatabase_1_1_database_a90ee4f6eeb3394a7df7aff684e3b82ca}{execute\+Update}} (String sql)
+\item 
+static String \mbox{\hyperlink{classdatabase_1_1_database_ae34fe222190e9b8927c950ff417643d2}{execute\+Update}} (String sql, String db\+Name)
+\item 
+static List$<$ Map$<$ String, Object $>$ $>$ \mbox{\hyperlink{classdatabase_1_1_database_a49565e5f572c13b161800e3b373c2ab5}{execute\+Query}} (String sql)
+\item 
+static List$<$ Map$<$ String, Object $>$ $>$ \mbox{\hyperlink{classdatabase_1_1_database_a00a93cefba1b533d02203db2e4fc6255}{execute\+Query}} (String sql, String db\+Name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final String \mbox{\hyperlink{classdatabase_1_1_database_aa5e0f823f2a1dd5152170f7d90b4f7f7}{A\+U\+T\+H\+\_\+\+DB}} = Main.\+context.\+get\+Real\+Path(\char`\"{}/Databases/db.\+db\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles all interactions between the site and the database. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdatabase_1_1_database_a49565e5f572c13b161800e3b373c2ab5}\label{classdatabase_1_1_database_a49565e5f572c13b161800e3b373c2ab5}} 
+\index{database.Database@{database.Database}!executeQuery@{executeQuery}}
+\index{executeQuery@{executeQuery}!database.Database@{database.Database}}
+\doxysubsubsection{\texorpdfstring{executeQuery()}{executeQuery()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static List$<$Map$<$String, Object$>$ $>$ database.\+Database.\+execute\+Query (\begin{DoxyParamCaption}\item[{String}]{sql }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Executes a read-\/only S\+QL statement in the default database and returns of list of maps of the results. 
+\begin{DoxyParams}{Parameters}
+{\em sql} & a read string to be executed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list, where each item is a row of the results, of maps, where each key in the map is a column and the value is the cell value. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdatabase_1_1_database_a00a93cefba1b533d02203db2e4fc6255}\label{classdatabase_1_1_database_a00a93cefba1b533d02203db2e4fc6255}} 
+\index{database.Database@{database.Database}!executeQuery@{executeQuery}}
+\index{executeQuery@{executeQuery}!database.Database@{database.Database}}
+\doxysubsubsection{\texorpdfstring{executeQuery()}{executeQuery()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static List$<$Map$<$String, Object$>$ $>$ database.\+Database.\+execute\+Query (\begin{DoxyParamCaption}\item[{String}]{sql,  }\item[{String}]{db\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Executes a read-\/only S\+QL statement in the diven database and returns of list of maps of the results. 
+\begin{DoxyParams}{Parameters}
+{\em sql} & a read string to be executed. \\
+\hline
+{\em db\+Name} & a string of the database location. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list, where each item is a row of the results, of maps, where each key in the map is a column and the value is the cell value. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdatabase_1_1_database_a90ee4f6eeb3394a7df7aff684e3b82ca}\label{classdatabase_1_1_database_a90ee4f6eeb3394a7df7aff684e3b82ca}} 
+\index{database.Database@{database.Database}!executeUpdate@{executeUpdate}}
+\index{executeUpdate@{executeUpdate}!database.Database@{database.Database}}
+\doxysubsubsection{\texorpdfstring{executeUpdate()}{executeUpdate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static String database.\+Database.\+execute\+Update (\begin{DoxyParamCaption}\item[{String}]{sql }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Executes a write-\/only S\+QL statement in the default database. 
+\begin{DoxyParams}{Parameters}
+{\em sql} & a write string to be executed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An error as a string, if any. Otherwise, an empty string if successful. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdatabase_1_1_database_ae34fe222190e9b8927c950ff417643d2}\label{classdatabase_1_1_database_ae34fe222190e9b8927c950ff417643d2}} 
+\index{database.Database@{database.Database}!executeUpdate@{executeUpdate}}
+\index{executeUpdate@{executeUpdate}!database.Database@{database.Database}}
+\doxysubsubsection{\texorpdfstring{executeUpdate()}{executeUpdate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static String database.\+Database.\+execute\+Update (\begin{DoxyParamCaption}\item[{String}]{sql,  }\item[{String}]{db\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Executes a write-\/only S\+QL statement in the given database. 
+\begin{DoxyParams}{Parameters}
+{\em sql} & a write string to be executed. \\
+\hline
+{\em db\+Name} & a string of the database location. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An error as a string, if any. Otherwise, an empty string if successful. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdatabase_1_1_database_a25c3988d350b90c93efdfcbb5a954021}\label{classdatabase_1_1_database_a25c3988d350b90c93efdfcbb5a954021}} 
+\index{database.Database@{database.Database}!formatString@{formatString}}
+\index{formatString@{formatString}!database.Database@{database.Database}}
+\doxysubsubsection{\texorpdfstring{formatString()}{formatString()}}
+{\footnotesize\ttfamily static String database.\+Database.\+format\+String (\begin{DoxyParamCaption}\item[{String}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Formats a string to an S\+Q\+L-\/safe string. 
+\begin{DoxyParams}{Parameters}
+{\em str} & a string of the value being used in a query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An S\+Q\+L-\/safe value of the string. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdatabase_1_1_database_ac0e1f75057d7df7b2e70a1eaa0c0b725}\label{classdatabase_1_1_database_ac0e1f75057d7df7b2e70a1eaa0c0b725}} 
+\index{database.Database@{database.Database}!getQueryMap@{getQueryMap}}
+\index{getQueryMap@{getQueryMap}!database.Database@{database.Database}}
+\doxysubsubsection{\texorpdfstring{getQueryMap()}{getQueryMap()}}
+{\footnotesize\ttfamily static Map$<$String, String$>$ database.\+Database.\+get\+Query\+Map (\begin{DoxyParamCaption}\item[{String}]{query }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gets U\+RL parameters as a map. 
+\begin{DoxyParams}{Parameters}
+{\em query} & a string of the U\+RL parameters query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A map of U\+RL parameters. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classdatabase_1_1_database_aa5e0f823f2a1dd5152170f7d90b4f7f7}\label{classdatabase_1_1_database_aa5e0f823f2a1dd5152170f7d90b4f7f7}} 
+\index{database.Database@{database.Database}!AUTH\_DB@{AUTH\_DB}}
+\index{AUTH\_DB@{AUTH\_DB}!database.Database@{database.Database}}
+\doxysubsubsection{\texorpdfstring{AUTH\_DB}{AUTH\_DB}}
+{\footnotesize\ttfamily final String database.\+Database.\+A\+U\+T\+H\+\_\+\+DB = Main.\+context.\+get\+Real\+Path(\char`\"{}/Databases/db.\+db\char`\"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+The database location. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/treyt/\+Desktop/\+Capstone/\+Capstone/src/database/Database.\+java\end{DoxyCompactItemize}
