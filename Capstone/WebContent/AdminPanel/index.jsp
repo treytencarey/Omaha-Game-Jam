@@ -35,9 +35,13 @@
 			    	  </div>
 			    	  <div class="modal-body">
 			    	  	<form>
-			    	  		<b>Please select one or more files to display for this event:</b>
-			    	  		<input type="file"/><br>
-			    	  		<button type="button">Add Another Image</button><br>
+			    	  		<b>Event Image:</b>
+			    	  		<input type="file"/><br><br>
+			    	  		<b>Event Description:</b><br>
+			    	  		<textarea rows="9" cols="50" style="border:1px solid black"></textarea><br>
+			    	  		<b>Mutators:</b><br>
+			    	  		<b>Event Theme</b><br>
+			    	  		
 			    	  	</form>
 			    	  </div>
 			      	<div class="modal-footer">
