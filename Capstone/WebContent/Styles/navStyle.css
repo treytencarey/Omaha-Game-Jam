@@ -130,5 +130,33 @@ i {
 }
 
 .icons {
-	width: 20px;
+	width: 30px;
+}
+
+.newGameMod {
+	width: auto;
+}
+
+.invalid-feedback {
+	margin-left: 40px;
+}
+
+.custom-file-label {
+	border-radius: .25rem !important;
+	min-height: unset !important;
+	cursor: pointer
+}
+
+.checkForms {
+	margin-left: 15px;
+}
+
+.checkLabel {
+	margin-left: 10px;
+	padding: 8px 0px !important;
+	height: fit-content;
+}
+
+.creditField {
+	padding: 0px;
 }
