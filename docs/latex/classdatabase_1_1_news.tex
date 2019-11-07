@@ -1,0 +1,85 @@
+\hypertarget{classdatabase_1_1_news}{}\doxysection{database.\+News Class Reference}
+\label{classdatabase_1_1_news}\index{database.News@{database.News}}
+Inheritance diagram for database.\+News\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdatabase_1_1_news}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdatabase_1_1_news_a9a961b42fd7b9f3bfedfe19a791a662a}{News}} (int P\+Key)
+\item 
+String \mbox{\hyperlink{classdatabase_1_1_news_aa37666c9e984db2ff4ec40f603f78a3b}{get\+Title}} ()
+\item 
+String \mbox{\hyperlink{classdatabase_1_1_news_adb4e3008ca3362b745b5aeb8de9cbe77}{get\+Date}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{classdatabase_1_1_news_a0b246e60c82b54b374fa3a725e1242cb}{get\+Num\+Of\+News\+Posts}} ()
+\item 
+static int\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classdatabase_1_1_news_a309dd88fee1ec0ead362df47db32ce5c}{get\+Most\+Recent\+News\+Posts\+Keys}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles interactions between the news page on the site and news articles in database. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdatabase_1_1_news_a9a961b42fd7b9f3bfedfe19a791a662a}\label{classdatabase_1_1_news_a9a961b42fd7b9f3bfedfe19a791a662a}} 
+\index{database.News@{database.News}!News@{News}}
+\index{News@{News}!database.News@{database.News}}
+\doxysubsubsection{\texorpdfstring{News()}{News()}}
+{\footnotesize\ttfamily database.\+News.\+News (\begin{DoxyParamCaption}\item[{int}]{P\+Key }\end{DoxyParamCaption})}
+
+Gets a \mbox{\hyperlink{classdatabase_1_1_news}{News}} article from the database. 
+\begin{DoxyParams}{Parameters}
+{\em P\+Key} & an integer value of the \mbox{\hyperlink{classdatabase_1_1_news}{News}} article\textquotesingle{}s primary key. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdatabase_1_1_news_adb4e3008ca3362b745b5aeb8de9cbe77}\label{classdatabase_1_1_news_adb4e3008ca3362b745b5aeb8de9cbe77}} 
+\index{database.News@{database.News}!getDate@{getDate}}
+\index{getDate@{getDate}!database.News@{database.News}}
+\doxysubsubsection{\texorpdfstring{getDate()}{getDate()}}
+{\footnotesize\ttfamily String database.\+News.\+get\+Date (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the date of the \mbox{\hyperlink{classdatabase_1_1_news}{News}} article. \begin{DoxyReturn}{Returns}
+The date of the \mbox{\hyperlink{classdatabase_1_1_news}{News}} article. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdatabase_1_1_news_a309dd88fee1ec0ead362df47db32ce5c}\label{classdatabase_1_1_news_a309dd88fee1ec0ead362df47db32ce5c}} 
+\index{database.News@{database.News}!getMostRecentNewsPostsKeys@{getMostRecentNewsPostsKeys}}
+\index{getMostRecentNewsPostsKeys@{getMostRecentNewsPostsKeys}!database.News@{database.News}}
+\doxysubsubsection{\texorpdfstring{getMostRecentNewsPostsKeys()}{getMostRecentNewsPostsKeys()}}
+{\footnotesize\ttfamily static int \mbox{[}$\,$\mbox{]} database.\+News.\+get\+Most\+Recent\+News\+Posts\+Keys (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gets P\+Keys for the six (or less) most recent public \mbox{\hyperlink{classdatabase_1_1_news}{News}} articles in the database. \begin{DoxyReturn}{Returns}
+The array of P\+Keys for the six (or less) most public \mbox{\hyperlink{classdatabase_1_1_news}{News}} articles. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdatabase_1_1_news_a0b246e60c82b54b374fa3a725e1242cb}\label{classdatabase_1_1_news_a0b246e60c82b54b374fa3a725e1242cb}} 
+\index{database.News@{database.News}!getNumOfNewsPosts@{getNumOfNewsPosts}}
+\index{getNumOfNewsPosts@{getNumOfNewsPosts}!database.News@{database.News}}
+\doxysubsubsection{\texorpdfstring{getNumOfNewsPosts()}{getNumOfNewsPosts()}}
+{\footnotesize\ttfamily static int database.\+News.\+get\+Num\+Of\+News\+Posts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gets the total number of \mbox{\hyperlink{classdatabase_1_1_news}{News}} articles in the database. \begin{DoxyReturn}{Returns}
+The number of \mbox{\hyperlink{classdatabase_1_1_news}{News}} articles in the database. 
+\end{DoxyReturn}
+Above query prints one row, get the C\+O\+U\+N\+T($\ast$) value from that row and parse it to an integer to be returned\mbox{\Hypertarget{classdatabase_1_1_news_aa37666c9e984db2ff4ec40f603f78a3b}\label{classdatabase_1_1_news_aa37666c9e984db2ff4ec40f603f78a3b}} 
+\index{database.News@{database.News}!getTitle@{getTitle}}
+\index{getTitle@{getTitle}!database.News@{database.News}}
+\doxysubsubsection{\texorpdfstring{getTitle()}{getTitle()}}
+{\footnotesize\ttfamily String database.\+News.\+get\+Title (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the title of the \mbox{\hyperlink{classdatabase_1_1_news}{News}} article. \begin{DoxyReturn}{Returns}
+The title of the \mbox{\hyperlink{classdatabase_1_1_news}{News}} article. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/bryce/eclipse-\/workspace/\+Capstone/\+Capstone/src/database/News.\+java\end{DoxyCompactItemize}

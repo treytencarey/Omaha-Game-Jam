@@ -16,12 +16,47 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
-	
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/newsStyle.css">
 </head>
+
 <body>
 	<%@include  file="../navbar.jsp" %>
-	<div style="text-align: center;">
-		News
+	<%@page import="database.News" %>
+	<%@page import="project.Main" %>
+	<% int[] postKeys = News.getMostRecentNewsPostsKeys();
+	   News[] recentNews = new News[postKeys.length];
+	   for(int i = 0; i < recentNews.length; i++) {
+		   recentNews[i] = new News(postKeys[i]);
+	   }
+	%>
+	
+	<h4 class="page-text">News</h4>
+	<br>
+	<div class="btn-group" role="group" style="align: center;">
+		<button type="button" class="btn btn-secondary" id="show-news-btn">News</button>
+		<button type="button" class="btn btn-secondary">All Posts</button>
+		<button type="button" class="btn btn-secondary">Events</button>
 	</div>
+	<div class="container h-100" style="text-align: center;">
+		<div class="row mt-2 justify-content-center">
+		<% for(int i = 0; i < recentNews.length; i++) { %>
+				<div class="card">
+					<a href="#"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
+			  		<div class="card-body dark">
+			  			<small><%= recentNews[i].getDate() %></small>
+			  			<a href="#"><h5 class="card-title"><%= recentNews[i].getTitle() %></h5></a>
+			  			<p class="card-text">test text</p>
+			  		</div>
+		  		</div>
+		<% } %>
+	  	</div>
+	</div>
+	<hr class="my-2" style="background-color: #3b3b3b">
+	<a href="#"><h6 style="text-align:center;">Older Posts</h6></a>
 </body>
+<script>
+	$('#show-news-btn').click(function (e) {
+		console.log("CLICKED");
+	})
+</script>
 </html>

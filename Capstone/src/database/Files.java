@@ -13,15 +13,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.RequestContext;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 import project.Main;
 
+/**
+ * 
+ * Handles uploaded files by users.
+ *
+ */
 @WebServlet("/filesServlet")
 public class Files extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Handles form submissions for the filesServlet.
+	 * @param request the servlet request.
+	 * @param response the servlet for response.
+	 */
 	protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);

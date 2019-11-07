@@ -1,3 +1,4 @@
+<%@page import="java.io.Console"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -10,7 +11,7 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	
+
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/profileStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
@@ -19,23 +20,24 @@
 </head>
 <body>
 	<%@include  file="navbar.jsp" %>
-	
+
 	<%@page import="database.Profile" %>
 	<%@page import="project.Main" %>
 	<%	Profile p;
-		
+
 		try {
-			p = new Profile(Integer.parseInt(session.getAttribute("id").toString()));
+			p = new Profile(Integer.parseInt(session.getAttribute("accountPKey").toString()));
 		} catch (Exception e) {
 			p = new Profile();
 		}
 	%>
-	
+
 	<div class="container emp-profile">
-            
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
+
                         	<%@page import="java.io.File" %>
                         	<% 	String profileImgPath = "/Uploads/Profiles/Pics/" + session.getAttribute("accountPKey");
                             	if (!new File(Main.context.getRealPath(profileImgPath)).exists())
@@ -43,13 +45,15 @@
                             	else
                             		profileImgPath = request.getContextPath() + profileImgPath;
                         	%>
-                            <img src="<%= profileImgPath %>" alt=""/>
-                            <div style="width: 100%" class="btn btn-lg btn-primary">
-                            	<% session.setAttribute("uploadFilePath", "/Uploads/Profiles/Pics/" + session.getAttribute("accountPKey")); %>
-                            	<form action="/Capstone/filesServlet" method="post" enctype="multipart/form-data">
-                                	Change Photo
-                                	<input class="file" type="file" name="file" style="width: 100%"/>
-                                	<input class="btn btn-lg btn-primary" type="submit" value="Update"/>
+                            <img style="width: 100%;" src="<%= profileImgPath %>" alt=""/>
+                            <div>
+                                 <form action="/Capstone/filesServlet" method="post" enctype="multipart/form-data">
+                                 	<label style="width: 100%; color: black;" for="file" class="custom-file-upload">
+									    <i class="fa fa-cloud-upload"></i> Custom Upload
+									</label>
+									<input id="file" style="display: none;" class="file btn btn-lg btn-primary" name="file" type="file" onchange="this.form.submit()"/>
+                                	<!-- <input id="image_uploads" class="file btn btn-lg btn-primary" type="file" name="image_uploads" onchange="this.form.submit()"/> -->
+                                	<!-- <input class="btn btn-lg btn-primary" type="submit" value="Update"/> -->
                                 </form>
                             </div>
                         </div>
@@ -74,15 +78,15 @@
                         </div>
                     </div>
                 </div>
-                <form action="/Capstone/profileServlet" method="post">
+                <form style="margin-top: 20px;" action="/Capstone/profileServlet" method="post">
 	                <div class="row">
 	                    <div class="col-md-4">
 	                        <div class="profile-work">
 	                            <p>WORK LINK</p>
-	                            <a href="<%= p.getWebsite() %>">Website Link</a><br/>                       
+	                            <a href="<%= p.getWebsite() %>">Website Link</a><br/>
 	                            <p>SKILLS</p>
 	                            <%
-	                            	String[] skills = p.getSkills().split("\n"); 
+	                            	String[] skills = p.getSkills().split("\n");
 		                            for(String s : skills) {
 	                           	%>
 		                            	<a href=""><%= s %></a><br/>
@@ -167,9 +171,9 @@
 								 </div>
 	                        </div>
 	                    </div>
-	                    
+
 	                </div>
-	                
+
                 </form>
         </div>
 
