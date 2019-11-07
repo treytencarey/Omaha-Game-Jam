@@ -138,7 +138,7 @@
 
 <!-- New Game Modal HTML -->
 <div id="newGameModal" class="modal fade">
-	<div class="newGameMod modal-dialog modal-login">
+	<div class="modal-dialog modal-login newGameMod">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title">Add New Game</h4>
@@ -233,25 +233,23 @@
 				  	
 				  	<div class="form-group">
 				  		<div class="input-group">
-							<span class="input-group-addon icons"><i class="fa fa-wrench"></i></span>
+						    <span class="input-group-addon icons"><i class="fa fa-wrench"></i></span>
 					      	<legend class="col-form-label col-sm-2 pt-0 checkLabel">Tools</legend>
-					  		<div class="col-sm-8">
-						      	<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" required aria-required="true">
-							        <option></option>
-						        	<option value="1">One</option>
-						        	<option value="2">Two</option>
-						        	<option value="3">Three</option>
-						      	</select>
-					    	</div>
-			    		</div>
+						    <select multiple class="form-control addGameField" id="inlineFormCustomSelect" required>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							  	<option value="5">5</option>
+					    	</select>
+				    	</div>
 				  	</div>
-				  	
 				  	<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-wrench"></i></span>
 					      	<legend class="col-form-label col-sm-2 pt-0 checkLabel">Credits</legend>
 					      	<div class="col-sm-8">
-								<input type="text" class="form-control creditField" name="credit" placeholder="Name">
+								<!-- <input type="text" class="form-control creditField" name="credit" placeholder="Name"> -->
 							</div>
 						</div>
 					</div>
