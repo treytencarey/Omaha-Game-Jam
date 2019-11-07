@@ -251,7 +251,7 @@
 							<span class="input-group-addon icons"><i class="fa fa-wrench"></i></span>
 					      	<legend class="col-form-label col-sm-2 pt-0 checkLabel">Credits</legend>
 					      	<div class="col-sm-8">
-								<input type="text" class="form-control creditField" name="credit" placeholder="Name" required="false">
+								<input type="text" class="form-control creditField" name="credit" placeholder="Name">
 							</div>
 						</div>
 					</div>
