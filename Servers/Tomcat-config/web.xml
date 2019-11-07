@@ -4752,5 +4752,14 @@
 		<servlet-name>profileEdit</servlet-name>
 		<url-pattern>/profile/edit</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>   
+		<servlet-name>newsServlet</servlet-name>
+		<jsp-file>/News/index.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>newsServlet</servlet-name>
+		<url-pattern>/news/edit</url-pattern>
+	</servlet-mapping>
 
 </web-app>

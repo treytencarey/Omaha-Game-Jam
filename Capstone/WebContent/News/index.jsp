@@ -45,18 +45,52 @@
 			  		<div class="card-body dark">
 			  			<small><%= recentNews[i].getDate() %></small>
 			  			<a href="#"><h5 class="card-title"><%= recentNews[i].getTitle() %></h5></a>
-			  			<p class="card-text">test text</p>
+			  			<p class="card-text"><%= recentNews[i].getBody(request.getContextPath(), i) %></p>
 			  		</div>
 		  		</div>
 		<% } %>
 	  	</div>
 	</div>
+	
+	<div id="add-article-modal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" style="color: black;">Add News Article</h4>
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<form action="<%= request.getContextPath() %>/newsServlet" method = "post">
+						<div class="form-group">
+							<h5 style="color: black;">Title:</h5>
+							<div class="input-group">
+								<input class="form-control" name="article-title-input" required="required" placeholder="Article Title">
+							</div>
+							<br>
+							<h5 style="color: black;">Body:</h5>
+							<div class="input-group">
+								<textarea class="form-control" name="article-title-input" required="required" placeholder="Article Body" style="height: 300px;"></textarea>
+							</div>
+							<div class="custom-checkbox">
+  								<input type="checkbox" class="custom-control-input" id="is-public-checkbox" checked>
+  								<label class="custom-control-label" for="is-public-checkbox">Make Public</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<button type="submit" name="post-article-button" class="btn btn-primary btn-block btn-lg">Post Article</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<hr class="my-2" style="background-color: #3b3b3b">
 	<a href="#"><h6 style="text-align:center;">Older Posts</h6></a>
 </body>
 <script>
-	$('#show-news-btn').click(function (e) {
-		console.log("CLICKED");
+	$("#add-article-btn").click(function (e) {
+		$("#add-article-modal").modal("show");
 	})
 </script>
 </html>
