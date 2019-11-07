@@ -124,7 +124,7 @@ i {
 	margin-top: 10px;
 }
 
-.addGameField {
+.modalFields {
 	border: solid 1px lightgrey !important;
 	margin-left: 10px;
 }
@@ -133,7 +133,7 @@ i {
 	width: 30px;
 }
 
-.newGameMod {
+.newMods {
 	width: auto;
 }
 

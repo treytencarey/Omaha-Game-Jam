@@ -40,7 +40,7 @@
 		Admin Panel<br><br>
 		
 		<h3><b>Event Options:   </b></h3>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createEventModal">Create Event</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEventModal">Create Event</button>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Edit Event</button>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Display Mutators</button>
 		<div class="modal fade text-dark modal-lg" id="createEventModal" tabindex="-1" role="dialog" aria-labelledby="createEventModalLabel" aria-hidden="true">
