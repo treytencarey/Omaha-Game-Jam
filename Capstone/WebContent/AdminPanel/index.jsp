@@ -30,6 +30,12 @@
 			});
 		});
 		
+		$(document).ready(function(){
+			$(".datepicker").click(function(){
+				$(".datepicker").pickadate();
+			});
+		});
+		
 		
 	</script>
 	
@@ -68,8 +74,14 @@
 			    	  		<div class="event-mutators">
 			    	  			<input type='text' style='border: 1px solid black' /><br>
 			    	  		</div>
-			    	  		<input type="button" value="Add another mutator" id="add-mutator" /><br>
+			    	  		<input type="button" value="Add another mutator" id="add-mutator" /><br><br>
 			    	  		
+			    	  		<b>Start Date</b>
+			    	  		
+			    	  		<div class="md-form">
+  <input placeholder="Selected date" type="text" id="date-picker-example" class="form-control datepicker">
+  <label for="date-picker-example">Try me...</label>
+</div>
 			    	  	</form>
 			    	  </div>
 			      	<div class="modal-footer">
