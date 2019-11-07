@@ -1,13 +1,13 @@
 <div id="allNavBar">
 	<%@page import = "utils.Utils" %>
-	
+
 	<% session.setAttribute("curPage", request.getRequestURI() + ((request.getQueryString() != null) ? "?" + request.getQueryString() : "")); %>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	  <a class="navbar-brand" href="<%= request.getContextPath() %>/">Omaha Game Jam</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
-	
+
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav mr-auto">
 	      <li class="nav-item active">
@@ -56,8 +56,8 @@
 	    </form> -->
 	  </div>
 	</nav>
-	
-	
+
+
 	<%@include file="subNavbar.jsp" %>
 </div>
 <% if (session.getAttribute("message") != null && session.getAttribute("message").toString().length() > 0) { %>

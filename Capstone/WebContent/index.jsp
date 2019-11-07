@@ -32,7 +32,7 @@
 		<div class="imgOverlay">
     		<div class="overlayTitle">Upcoming Event</div>
     		<div class="overlaySubtitle">November 6th 2019 - November 9th 2019</div>
-    		<a class="btn btn-primary btn-med overlayBtn" href="#" role="button">Details</a>
+    		<a class="btn btn-primary btn-med overlayBtn" href="./Events" role="button">Details</a>
     	</div>
   	</div>
   	
