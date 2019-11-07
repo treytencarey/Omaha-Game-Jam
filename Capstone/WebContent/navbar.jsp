@@ -163,8 +163,8 @@
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-						    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile">Choose Icon...</label>
+						    <input type="file" class="custom-file-input" id="validatedCustomFile1" required>
+						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile1">Choose Icon...</label>
 						    <div class="invalid-feedback">Please upload a valid icon</div>
 					    </div>
 				  	</div>
