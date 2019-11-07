@@ -17,14 +17,33 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 	
+	<script>
+		$(document).ready(function(){
+			$("#add-image").click(function(){
+				$(".event-images").append("<input type='file' /><br>");
+			});	
+		});
+		
+		$(document).ready(function(){
+			$("#add-mutator").click(function(){
+				$(".event-mutators").append("<input type='text' style='border: 1px solid black' /><br>");
+			});
+		});
+		
+		
+	</script>
+	
 </head>
 <body>
 	<%@include  file="../navbar.jsp" %>
 	<div style="text-align: center;">
 		Admin Panel<br><br>
 		
+		<h3><b>Event Options:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createEventModal">Create Event</button>
-		<div class="modal fade text-dark" id="createEventModal" tabindex="-1" role="dialog" aria-labelledby="createEventModalLabel" aria-hidden="true">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Edit Event</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Display Mutators</button>
+		<div class="modal fade text-dark modal-lg" id="createEventModal" tabindex="-1" role="dialog" aria-labelledby="createEventModalLabel" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 			    	<div class="modal-content">
 			     	 <div class="modal-header">
@@ -35,12 +54,21 @@
 			    	  </div>
 			    	  <div class="modal-body">
 			    	  	<form>
-			    	  		<b>Event Image:</b>
-			    	  		<input type="file"/><br><br>
+			    	  		<b>Event Theme</b><br>
+			    	  		<input type="text" style='border: 1px solid black'/><br><br>
+			    	  		<b>Event Image(s):</b>
+			    	  		<div class="event-images">
+			    	  			<input type="file" /><br>
+			    	  		</div>
+			    	  		<input type="button" value="Add another image" id="add-image" />
+			    	  		<br><br>
 			    	  		<b>Event Description:</b><br>
 			    	  		<textarea rows="9" cols="50" style="border:1px solid black"></textarea><br>
 			    	  		<b>Mutators:</b><br>
-			    	  		<b>Event Theme</b><br>
+			    	  		<div class="event-mutators">
+			    	  			<input type='text' style='border: 1px solid black' /><br>
+			    	  		</div>
+			    	  		<input type="button" value="Add another mutator" id="add-mutator" /><br>
 			    	  		
 			    	  	</form>
 			    	  </div>
