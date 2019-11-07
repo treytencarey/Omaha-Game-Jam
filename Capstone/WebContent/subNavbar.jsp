@@ -5,7 +5,7 @@
 				<li class="nav-item indvTabs">
 			  		<a class="nav-link" href="<%= request.getContextPath() %>/AdminPanel/index.jsp">Admin Menu</a>
 				</li>
-    		<% if (request.getRequestURI().equals(request.getContextPath()+"/profile/view") && request.getParameter("id").equals(session.getAttribute("accountPKey")))  { %>
+    		<% if (request.getRequestURI().equals(request.getContextPath()+"/profile") && request.getParameter("id").equals(session.getAttribute("accountPKey")))  { %>
 		      <li class="nav-item indvTabs">
 		      	
            		<form action="edit">

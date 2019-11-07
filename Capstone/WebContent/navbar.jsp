@@ -36,7 +36,7 @@
 		    		</button>
 		    		<div id="profileDropdown" class="dropdown-menu dropdown-menu-right">
 		    			<a id="addGameBtn" href="#newGameModal" class="dropdown-item" data-toggle="modal">Submit Game</a>
-		    			<a class="dropdown-item" href="<%= request.getContextPath() %>/profile/view?id=<%= session.getAttribute("accountPKey").toString() %>">My Profile</a>
+		    			<a class="dropdown-item" href="<%= request.getContextPath() %>/profile?id=<%= session.getAttribute("accountPKey").toString() %>">My Profile</a>
 		    			<div class="dropdown-divider"></div>
 		    			<form style="padding: .25rem 0;"class="dropdown-item" action = "<%= request.getContextPath() %>/accountServlet" method = "post">
 							<!-- <a class="trigger-btn logInOutBtn" name="logout">Logout</a> -->
