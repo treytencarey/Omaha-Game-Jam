@@ -17,8 +17,9 @@ public class Game implements Serializable{
 	
 	public Game(int PKey)
 	{
-		System.out.println(PKey);
-		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Games WHERE PKey=" + String.valueOf(PKey));
+		//System.out.println(PKey);
+		this.setId(PKey + "");
+		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Games WHERE PKey=" + this.getId());
 		if (query.size() == 0)
 			throw new NullPointerException();
 		Map<String, Object> game = query.get(0);
