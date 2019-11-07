@@ -21,13 +21,33 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import database.Database;
 
+/**
+ * 
+ * Handles instructions for site testing.
+ *
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RunTests {
+	/**
+	 * The URL of the site to test.
+	 */
 	String testingUrl = "http://localhost:8080/Capstone/";
+	/**
+	 * The email (username) of the account to test.
+	 */
 	static String junitEmail;
+	/**
+	 * The password of the account to test.
+	 */
 	String junitPass = "test";
+	/**
+	 * The WebDriver used for testing.
+	 */
 	static WebDriver driver;
 	
+	/**
+	 * Opens the WebDriver browser.
+	 */
 	@BeforeClass
 	public static void openBrowser() {
 		System.setProperty("webdriver.chrome.driver", "./TestingUtils/chromedriver.exe");
@@ -38,14 +58,18 @@ public class RunTests {
 		driver.manage().window().maximize();
 	}
 	
-	//test that we are at the correct URL
+	/**
+	 * Tests that the URL is correct.
+	 */
 	@Test
 	public void test1_testUrl() {
 		goToHomepage();
 		assertEquals(driver.getCurrentUrl(), "http://localhost:8080/Capstone/");
 	}
 	
-	//test to see if login fails due to no @ in email
+	/**
+	 * Tests to see if the login fails due to invalid email.
+	 */
 	@Test
 	public void test2_noAtSignInEmail() {
 		String noAtEmail = junitEmail.replace("@", "");
@@ -56,7 +80,9 @@ public class RunTests {
 		assertEquals(true, checkIfElementExists("loginButton")); //login button element should still be on page since invalid info was entered
 	}
 	
-	//test to see if registration fails with no @ in email
+	/**
+	 * Tests to see if the registration fails due to invalid email.
+	 */
 	@Test
 	public void test3_noAtSignInRegister() {
 		goToHomepage();
@@ -72,7 +98,9 @@ public class RunTests {
 		assertEquals(true, checkIfElementExists("registerButton")); //register button element should still be on page since invalid email was entered
 	}
 	
-	//test if registration works with proper input
+	/**
+	 * Tests if registration succeeds or fails.
+	 */
 	@Test
 	public void test4_registerTest() {
 		String userbarText;
@@ -90,7 +118,9 @@ public class RunTests {
 		assertEquals(true, userbarText.contains("Logged in as " + junitEmail));
 	}
 	
-	//test if profile is correctly showing that it has not been created yet
+	/**
+	 * Tests if profile successfully sees that no profile has yet been created.
+	 */
 	@Test
 	public void test5_checkForNoProfile() {
 		String profileText;
@@ -102,7 +132,9 @@ public class RunTests {
 		assertEquals(true, profileText.contains("No profile has been created for this account yet."));
 	}
 	
-	//test if profile is successfully created with correct info
+	/**
+	 * Tests if profile was successfully created with the correct information.
+	 */
 	@Test
 	public void test6_checkIfProfileCreates() {
 		String profileHead, profileText, profileWork;
@@ -139,7 +171,9 @@ public class RunTests {
 		//System.out.println(profId);
 	} */
 	
-	//fill the profile fields with a bunch of junk data and save to see how it affects the page
+	/**
+	 * Fills the profile fields with a bunch of junk data and save to see how it affects the page.
+	 */
 	@Test
 	public void test7_overflowProfileFields() {
 		String junkText = "";
@@ -170,16 +204,29 @@ public class RunTests {
 		takeScreenshot("test7.png");
 	}
 	
+	/**
+	 * Generates a random email for logging in testing.
+	 */
 	private static void generateRandomLogin() {
 		Random random = new Random();
 		junitEmail = random.nextInt(9999999) + "@test.com";
 	}
 	
+	/**
+	 * Enters the given login information to the site form.
+	 * @param n a string value of the email (username).
+	 * @param p a string of the password.
+	 */
 	private void enterLogin(String n, String p) {
 		driver.findElement(By.name("email")).sendKeys(n);
 		driver.findElement(By.name("password")).sendKeys(p);
 	}
 	
+	/**
+	 * Checks if the given element exists.
+	 * @param n the string of the element's name.
+	 * @return True if the element exists, otherwise false.
+	 */
 	private boolean checkIfElementExists(String n) {
 		try {
 			return driver.findElement(By.name(n)).isDisplayed();
@@ -188,10 +235,17 @@ public class RunTests {
 		}
 	}
 	
+	/**
+	 * Sends a redirect to the homepage URL.
+	 */
 	private void goToHomepage() {
 		driver.get(testingUrl);
 	}
 	
+	/**
+	 * Takes a screenshot of the page and saves it.
+	 * @param filename a string of the file location to save to.
+	 */
 	private void takeScreenshot(String filename) {
 		String loc = "./TestingUtils/TestingScreenshots/" + filename;
 		File f = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);

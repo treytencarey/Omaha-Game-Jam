@@ -23,7 +23,9 @@
 <!-- Admins will be able to update the homepage in the future -->
 
 <body>
-	<%@include  file="navbar.jsp" %>
+	<%@include file="navbar.jsp" %>
+	<%@page import="java.util.List" %>
+	<%@page import="java.util.Map" %>
 	
 	<div class="mainEventParent">
 		<img class="mainEventImg rounded" src="./images/gamejam.png"/>
@@ -63,15 +65,17 @@
   	</div>
   	
 	<div class="jumbotron aboutSection">
+	<% List<Map<String, Object>> query = Database.executeQuery("SELECT COUNT(*) FROM Accounts");
+	   int numOfUsers = Integer.parseInt(query.get(0).get("COUNT(*)").toString()); %>
   		<h1 class="display-5">About Omaha Game Jam</h1>
   		<hr class="my-2" style="background-color: #3b3b3b">
   		<div style="font-size: 18px">
   			<p>Omaha Game Jam is a free 2 day game development event where participants build games from scratch around a secret theme. At the end of dev time, everyone presents, plays, and votes on superlative awards. Individuals 18+ and teams are welcome!</p>
-  			<p style="font-size: 15px">There are currently <%=Database.executeQuery("SELECT COUNT(*) FROM Accounts").size() %> registered Game Jammers.</p>
+  			<p style="font-size: 15px">There are currently <%=numOfUsers %> registered Game Jammers.</p>
   		</div>
   		<%	if (session.getAttribute("accountPKey") == null) { %>
   			<p class="lead">
-    			<a class="btn btn-primary btn-med" href="#" role="button">Register Now!</a>
+    			<a class="btn btn-primary btn-med" style="cursor: pointer;" onclick="showRegisterModal()" role="button">Register Now!</a>
   			</p>
   		<% } %>
 	</div>
@@ -89,4 +93,9 @@
 		</div>
 	</div>
 </footer>
+<script>
+	function showRegisterModal() {
+		$("#registerModal").modal("show");
+	}
+</script>
 </html>
