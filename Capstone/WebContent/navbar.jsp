@@ -26,7 +26,7 @@
 	        <a class="nav-link" href="<%= request.getContextPath() %>/News">News</a>
 	      </li>
 	    </ul>
-	    <ul class="navbar-nav navbar-right">
+	    <ul class="navbar-nav navbar-right" id="loginUL">
 		    <%	if (session.getAttribute("accountPKey") == null) { %>
 		    	<li><button id="loginBtn" class="btn btn-link my-2 my-sm-0" name="login"><a id="loginBtn" href="#loginModal" class="trigger-btn" data-toggle="modal">Login</a></button></li>
 		    <%	} else { %>
@@ -76,8 +76,13 @@
 				<h4 class="modal-title">Sign In</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
+			<div id="loginModalError" style="display: none;">
+				<div style="text-align: center;">
+					<a id="loginModalErrorMessage" style="color: red;">Error</a>
+				</div>
+			</div>
 			<div class="modal-body">
-				<form action="<%= request.getContextPath() %>/accountServlet" method = "post">
+				<form id="loginForm">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -91,7 +96,8 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<button type="submit" name="loginButton" class="btn btn-primary btn-block btn-lg">Sign In</button>
+						<input name="loginButton" style="display: none;">
+						<button type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
 					</div>
 					<p class="hint-text"><a href="#">Forgot Password?</a></p>
 				</form>
@@ -100,6 +106,13 @@
 		</div>
 	</div>
 </div>
+<% session.setAttribute("servlet", "accountServlet"); %>
+<% session.setAttribute("form", "#loginForm"); %>
+<%@page import="java.util.Arrays" %>
+<% session.setAttribute("updates", Arrays.asList("#loginUL", "#subNavBar")); %>
+<% session.setAttribute("successJS", "$('#loginModal').modal('hide');"); %>
+<% session.setAttribute("errorJS", "document.getElementById('loginModalError').style.display='block'; document.getElementById('loginModalErrorMessage').innerText=request.responseText;"); %>
+<%@include file="components/ajax.jsp" %>
 
 <!-- Register Modal HTML -->
 <div id="registerModal" class="modal fade">
@@ -109,8 +122,13 @@
 				<h4 class="modal-title">Register</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
+			<div id="registerModalError" style="display: none;">
+				<div style="text-align: center;">
+					<a id="registerModalErrorMessage" style="color: red;">Error</a>
+				</div>
+			</div>
 			<div class="modal-body">
-				<form class="needs-validation" action="<%= request.getContextPath() %>/accountServlet" method = "post">
+				<form id="registerForm" class="needs-validation">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -127,7 +145,8 @@
 						<label>Use 8 or more characters with a mix of letters, numbers & symbols</label>
 					</div>
 					<div class="form-group">
-						<button type="submit" name="registerButton" class="btn btn-primary btn-block btn-lg">Register</button>
+						<input name="registerButton" style="display: none;">
+						<button type="submit" class="btn btn-primary btn-block btn-lg">Register</button>
 					</div>
 				</form>
 			</div>
@@ -135,6 +154,12 @@
 		</div>
 	</div>
 </div>
+<% session.setAttribute("servlet", "accountServlet"); %>
+<% session.setAttribute("form", "#registerForm"); %>
+<% session.setAttribute("updates", Arrays.asList("#loginUL", "#subNavBar")); %>
+<% session.setAttribute("successJS", "$('#registerModal').modal('hide');"); %>
+<% session.setAttribute("errorJS", "document.getElementById('registerModalError').style.display='block'; document.getElementById('registerModalErrorMessage').innerText=request.responseText;"); %>
+<%@include file="components/ajax.jsp" %>
 
 <!-- New Game Modal HTML -->
 <div id="newGameModal" class="modal fade">

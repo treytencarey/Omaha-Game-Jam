@@ -1,5 +1,5 @@
+<nav id="subNavBar" class="navbar navbar-expand navbar-light bg-light">
 <%	if (session.getAttribute("accountPKey") != null) { %>
-	<nav id="subNavBar" class="navbar navbar-expand navbar-light bg-light">
 	  <div class=" navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav ml-auto">
 				<li class="nav-item indvTabs">
@@ -40,5 +40,5 @@
 	      	<%}%>
 	    </ul>
 	  </div>
-	</nav>
 <%	} %>
+</nav>
