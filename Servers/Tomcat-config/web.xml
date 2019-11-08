@@ -4741,7 +4741,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>profile</servlet-name>
-		<url-pattern>/profile/view</url-pattern>
+		<url-pattern>/profile</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>   
@@ -4751,6 +4751,24 @@
 	<servlet-mapping>
 		<servlet-name>profileEdit</servlet-name>
 		<url-pattern>/profile/edit</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>   
+		<servlet-name>submitGame</servlet-name>
+		<jsp-file>/submit_game.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>submitGame</servlet-name>
+		<url-pattern>/game/submit</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>   
+		<servlet-name>viewGame</servlet-name>
+		<jsp-file>/view_game.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>viewGame</servlet-name>
+		<url-pattern>/game</url-pattern>
 	</servlet-mapping>
 
 </web-app>

@@ -30,6 +30,12 @@
 			});
 		});
 		
+		$(document).ready(function(){
+			$(".datepicker").click(function(){
+				$(".datepicker").pickadate();
+			});
+		});
+		
 		
 	</script>
 	
@@ -40,7 +46,7 @@
 		Admin Panel<br><br>
 		
 		<h3><b>Event Options:   </b></h3>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createEventModal">Create Event</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEventModal">Create Event</button>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Edit Event</button>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Display Mutators</button>
 		<div class="modal fade text-dark modal-lg" id="createEventModal" tabindex="-1" role="dialog" aria-labelledby="createEventModalLabel" aria-hidden="true">
@@ -68,8 +74,14 @@
 			    	  		<div class="event-mutators">
 			    	  			<input type='text' style='border: 1px solid black' /><br>
 			    	  		</div>
-			    	  		<input type="button" value="Add another mutator" id="add-mutator" /><br>
+			    	  		<input type="button" value="Add another mutator" id="add-mutator" /><br><br>
 			    	  		
+			    	  		<b>Start Date</b>
+			    	  		
+			    	  		<div class="md-form">
+  <input placeholder="Selected date" type="text" id="date-picker-example" class="form-control datepicker">
+  <label for="date-picker-example">Try me...</label>
+</div>
 			    	  	</form>
 			    	  </div>
 			      	<div class="modal-footer">

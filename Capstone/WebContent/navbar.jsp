@@ -36,7 +36,7 @@
 		    		</button>
 		    		<div id="profileDropdown" class="dropdown-menu dropdown-menu-right">
 		    			<a id="addGameBtn" href="#newGameModal" class="dropdown-item" data-toggle="modal">Submit Game</a>
-		    			<a class="dropdown-item" href="<%= request.getContextPath() %>/profile/view?id=<%= session.getAttribute("accountPKey").toString() %>">My Profile</a>
+		    			<a class="dropdown-item" href="<%= request.getContextPath() %>/profile?id=<%= session.getAttribute("accountPKey").toString() %>">My Profile</a>
 		    			<div class="dropdown-divider"></div>
 		    			<form style="padding: .25rem 0;"class="dropdown-item" action = "<%= request.getContextPath() %>/accountServlet" method = "post">
 							<!-- <a class="trigger-btn logInOutBtn" name="logout">Logout</a> -->
@@ -163,7 +163,7 @@
 
 <!-- New Game Modal HTML -->
 <div id="newGameModal" class="modal fade">
-	<div class="newGameMod modal-dialog modal-login">
+	<div class="modal-dialog modal-login newMods">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title">Add New Game</h4>
@@ -174,22 +174,22 @@
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
-							<input type="text" class="form-control addGameField" name="title" placeholder="Title" required>
+							<input type="text" class="form-control modalFields" name="title" placeholder="Title" required>
 							<div class="invalid-feedback">Please enter a valid game title</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
-							<textarea class="form-control addGameField" name="description" placeholder="Description" required></textarea>
+							<textarea class="form-control modalFields" name="description" placeholder="Description" required></textarea>
 							<div class="invalid-feedback">Please enter a valid description</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-						    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-						    <label class="form-control addGameField custom-file-label" for="validatedCustomFile">Choose Icon...</label>
+						    <input type="file" class="custom-file-input" id="validatedCustomFile1" required>
+						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile1">Choose Icon...</label>
 						    <div class="invalid-feedback">Please upload a valid icon</div>
 					    </div>
 				  	</div>
@@ -230,7 +230,7 @@
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
 						    <input type="file" class="custom-file-input" id="validatedCustomFile2" required>
-						    <label class="form-control addGameField custom-file-label" for="validatedCustomFile2">Choose Screenshot(s)...</label>
+						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile2">Choose Screenshot(s)...</label>
 						    <div class="invalid-feedback">Please upload a valid screenshot(s)</div>
 					    </div>
 				  	</div>
@@ -258,31 +258,78 @@
 				  	
 				  	<div class="form-group">
 				  		<div class="input-group">
-							<span class="input-group-addon icons"><i class="fa fa-wrench"></i></span>
+						    <span class="input-group-addon icons"><i class="fa fa-wrench"></i></span>
 					      	<legend class="col-form-label col-sm-2 pt-0 checkLabel">Tools</legend>
-					  		<div class="col-sm-8">
-						      	<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" required aria-required="true">
-							        <option></option>
-						        	<option value="1">One</option>
-						        	<option value="2">Two</option>
-						        	<option value="3">Three</option>
-						      	</select>
-					    	</div>
-			    		</div>
+						    <select multiple class="form-control modalFields" id="inlineFormCustomSelect" required>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							  	<option value="5">5</option>
+					    	</select>
+				    	</div>
 				  	</div>
-				  	
 				  	<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-wrench"></i></span>
 					      	<legend class="col-form-label col-sm-2 pt-0 checkLabel">Credits</legend>
 					      	<div class="col-sm-8">
-								<input type="text" class="form-control creditField" name="credit" placeholder="Name">
+								<!-- <input type="text" class="form-control creditField" name="credit" placeholder="Name"> -->
 							</div>
 						</div>
 					</div>
 				  	
 					<div class="form-group">
-						<button type="submit" name="loginButton" class="btn btn-primary btn-block btn-lg">Submit</button>
+						<button type="submit" name="newGameButton" class="btn btn-primary btn-block btn-lg">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- New Event Modal HTML -->
+<div id="newEventModal" class="modal fade">
+	<div class="modal-dialog modal-login newMods">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Create New Event</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<form class="was-validated" action="<%= request.getContextPath() %>/accountServlet" method = "post">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
+							<input type="text" class="form-control modalFields" name="theme" placeholder="Theme" required>
+							<div class="invalid-feedback">Please enter a valid event theme</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
+							<textarea class="form-control modalFields" name="description" placeholder="Description" required></textarea>
+							<div class="invalid-feedback">Please enter a valid description</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
+						    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile">Choose Image(s)...</label>
+						    <div class="invalid-feedback">Please upload a valid image(s)</div>
+					    </div>
+				  	</div>
+				  	<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-exclamation"></i></span>
+							<textarea class="form-control modalFields" name="mutator" placeholder="Mutator(s)" required></textarea>
+							<div class="invalid-feedback">Please enter a valid mutator(s)</div>
+						</div>
+					</div>
+				  	
+					<div class="form-group">
+						<button type="submit" name="newEventButton" class="btn btn-primary btn-block btn-lg">Submit</button>
 					</div>
 				</form>
 			</div>
