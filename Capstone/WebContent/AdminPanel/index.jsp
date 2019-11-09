@@ -30,7 +30,7 @@
 		
 		$(document).ready(function(){
 			$("#add-mutator").click(function(){
-				$(".event-mutators").append("<input type='text' style='border: 1px solid black' /><br>");
+				$(".event-mutators").append("<input type='text' class='mutator' style='border: 1px solid black; width: 75px;' /><input type='text' class='mutator-description' style='border: 1px solid black; width: 200px;' /><br>");
 			});
 		});
 		
@@ -74,7 +74,8 @@
 			    	  		<textarea rows="9" cols="50" style="border:1px solid black"></textarea><br>
 			    	  		<b>Mutators:</b><br>
 			    	  		<div class="event-mutators">
-			    	  			<input type='text' style='border: 1px solid black' /><br>
+			    	  			<input type='text' class="mutator" style='border: 1px solid black; width: 75px;' />
+			    	  			<input type='text' class="mutator-description" style='border: 1px solid black; width: 200px;' /><br>
 			    	  		</div>
 			    	  		<input type="button" value="Add another mutator" id="add-mutator" /><br><br>
 			    	  		
