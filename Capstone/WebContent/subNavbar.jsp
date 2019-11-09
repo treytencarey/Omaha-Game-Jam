@@ -40,7 +40,7 @@
 	      	<%}%>
 	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/News/"))  { %>
 		      <li class="nav-item indvTabs">
-		        <a class="nav-link" id="add-article-btn" href="#">Add Article</a>
+		        <a id="add-article-btn" href="#newNewsArticleModal" class="nav-link" data-toggle="modal">Add Article</a>
 		      </li>
 	      	<%}%>
 	    </ul>

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/newsServlet")
 public class News extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 256L;
 	
 	/**
 	 * The key of the news article.
@@ -46,7 +46,9 @@ public class News extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		//HttpSession session = request.getSession(false);
-		//System.out.println(request.getParameter("article-title-input"));
+		String reqTitle = request.getParameter("newsTitle");
+		String reqHeader = request.getParameter("newsHeader");
+		String reqBody = request.getParameter("newsBody");
 	}
 	
 	/**
@@ -63,6 +65,14 @@ public class News extends HttpServlet {
 		key = PKey;
 		title = newsPost.get("Title").toString();
 		date = newsPost.get("Date").toString();
+	}
+	
+	/**
+	 * Creates blank News article.
+	 * This is required for newsServlet to work.
+	 */
+	public News() {
+		
 	}
 	
 	
