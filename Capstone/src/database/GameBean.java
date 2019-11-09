@@ -4,25 +4,30 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class Game implements Serializable{
+public class GameBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private String id, event, submitter, title, desc, link, isPublic;
 	//private boolean isPublic;
 	
-	public Game()
+	public GameBean()
 	{
 		id = event = submitter = title = desc = link = isPublic = "";
 	}
 	
-	public Game(int PKey)
+	public GameBean(String PKey)
 	{
-		//System.out.println(PKey);
+		System.out.println(PKey);
 		this.setId(PKey + "");
 		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Games WHERE PKey=" + this.getId());
+		//System.out.println("this game's id: " + this.getId());
+		System.out.println(query);
+		System.out.println("size: " + query.size());
 		if (query.size() == 0)
 			throw new NullPointerException();
+		System.out.println(2);
 		Map<String, Object> game = query.get(0);
+		System.out.println(3);
 		
 		this.setEvent(game.get("EventPKey").toString());
 		this.setSubmitter(game.get("SubmitterPKey").toString());

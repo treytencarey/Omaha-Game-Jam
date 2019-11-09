@@ -14,8 +14,8 @@ public class ContributorTableInterface implements Serializable{
 	public ContributorTableInterface(int GamePKey)
 	{
 		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Contributors WHERE GamePKey=" + String.valueOf(GamePKey));
-		if (query.size() == 0)
-			throw new NullPointerException();
+//		if (query.size() == 0)
+//			throw new NullPointerException();
 		//query looks like: [{AccountPKey=4, GamePKey=1, RolePKey=1}, {AccountPKey=3, GamePKey=1, RolePKey=5}]
         java.util.ListIterator<Map<String, Object>> litr = query.listIterator();
         while(litr.hasNext())

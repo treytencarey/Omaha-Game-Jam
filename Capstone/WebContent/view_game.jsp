@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="database.Game, database.Profile, database.ContributorTableInterface, database.Contributor, database.RoleTableInterface, database.Role" %>
+	import="database.GameBean, database.Profile, database.ContributorTableInterface, database.Contributor, database.RoleTableInterface, database.Role" %>
 
 <%
-Game g = new Game(1);
+GameBean g = new GameBean(request.getParameter("id"));
 ContributorTableInterface cti = new ContributorTableInterface(1);
 %>
 
