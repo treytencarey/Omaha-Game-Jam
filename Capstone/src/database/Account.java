@@ -48,16 +48,18 @@ public class Account extends HttpServlet {
 				String registerErr = register(email, password);
 				if (registerErr.length() > 0)
 				{
-					session.setAttribute("message", "<a style='color: red'>Failed to create an account: " + registerErr + "</a>");
-					response.sendRedirect(session.getAttribute("curPage").toString());
+					response.setStatus(400);
+					response.getWriter().print("Failed to create an account: " + registerErr);
+					response.getWriter().flush();
 					return;
 				}
 			}
 
 			if (!login(email, password, session))
 			{
-				session.setAttribute("message", "<a style='color: red'>Email or password does not exist.</a>");
-				response.sendRedirect(session.getAttribute("curPage").toString());
+				response.setStatus(400);
+				response.getWriter().print("Email or password does not exist.");
+				response.getWriter().flush();
 				return;
 			}
 
@@ -131,7 +133,7 @@ public class Account extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Database.executeUpdate("INSERT INTO AccountPermissions (Permissions) VALUES (" + 1 + ")");
+		//Database.executeUpdate("INSERT INTO AccountPermissions (Permissions) VALUES (" + 1 + ")");
 		return Database.executeUpdate("INSERT INTO Accounts (Email, Password) VALUES ('" + email + "', '" + password + "')");
 	}
 

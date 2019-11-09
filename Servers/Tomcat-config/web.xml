@@ -4728,23 +4728,23 @@
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    
+
     <listener>
        <listener-class>
         project.Main
        </listener-class>
      </listener>
-     
-	<servlet>   
+
+	<servlet>
 		<servlet-name>profile</servlet-name>
 		<jsp-file>/view_profile.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>profile</servlet-name>
-		<url-pattern>/profile/view</url-pattern>
+		<url-pattern>/profile</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>   
+
+	<servlet>
 		<servlet-name>profileEdit</servlet-name>
 		<jsp-file>/edit_profile.jsp</jsp-file>
 	</servlet>
@@ -4752,14 +4752,23 @@
 		<servlet-name>profileEdit</servlet-name>
 		<url-pattern>/profile/edit</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>   
-		<servlet-name>newsServlet</servlet-name>
-		<jsp-file>/News/index.jsp</jsp-file>
+
+	<servlet>
+		<servlet-name>submitGame</servlet-name>
+		<jsp-file>/submit_game.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>newsServlet</servlet-name>
-		<url-pattern>/news/edit</url-pattern>
+		<servlet-name>submitGame</servlet-name>
+		<url-pattern>/game/submit</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>viewGame</servlet-name>
+		<jsp-file>/view_game.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>viewGame</servlet-name>
+		<url-pattern>/game</url-pattern>
 	</servlet-mapping>
 
 </web-app>

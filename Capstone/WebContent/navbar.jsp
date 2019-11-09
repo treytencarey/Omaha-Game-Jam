@@ -1,13 +1,13 @@
 <div id="allNavBar">
 	<%@page import = "utils.Utils" %>
-	
+
 	<% session.setAttribute("curPage", request.getRequestURI() + ((request.getQueryString() != null) ? "?" + request.getQueryString() : "")); %>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	  <a class="navbar-brand" href="<%= request.getContextPath() %>/">Omaha Game Jam</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
-	
+
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav mr-auto">
 	      <li class="nav-item active">
@@ -26,7 +26,7 @@
 	        <a class="nav-link" href="<%= request.getContextPath() %>/News">News</a>
 	      </li>
 	    </ul>
-	    <ul class="navbar-nav navbar-right">
+	    <ul class="navbar-nav navbar-right" id="loginUL">
 		    <%	if (session.getAttribute("accountPKey") == null) { %>
 		    	<li><button id="loginBtn" class="btn btn-link my-2 my-sm-0" name="login"><a id="loginBtn" href="#loginModal" class="trigger-btn" data-toggle="modal">Login</a></button></li>
 		    <%	} else { %>
@@ -35,8 +35,8 @@
 		    			<%= session.getAttribute("accountEmail") %>
 		    		</button>
 		    		<div id="profileDropdown" class="dropdown-menu dropdown-menu-right">
-		    			<a class="dropdown-item" href="#">Submit Game</a>
-		    			<a class="dropdown-item" href="<%= request.getContextPath() %>/profile/view?id=<%= session.getAttribute("accountPKey").toString() %>">My Profile</a>
+		    			<a id="addGameBtn" href="#newGameModal" class="dropdown-item" data-toggle="modal">Submit Game</a>
+		    			<a class="dropdown-item" href="<%= request.getContextPath() %>/profile?id=<%= session.getAttribute("accountPKey").toString() %>">My Profile</a>
 		    			<div class="dropdown-divider"></div>
 		    			<form style="padding: .25rem 0;"class="dropdown-item" action = "<%= request.getContextPath() %>/accountServlet" method = "post">
 							<!-- <a class="trigger-btn logInOutBtn" name="logout">Logout</a> -->
@@ -56,8 +56,8 @@
 	    </form> -->
 	  </div>
 	</nav>
-	
-	
+
+
 	<%@include file="subNavbar.jsp" %>
 </div>
 <% if (session.getAttribute("message") != null && session.getAttribute("message").toString().length() > 0) { %>
@@ -76,8 +76,13 @@
 				<h4 class="modal-title">Sign In</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
+			<div id="loginModalError" style="display: none;">
+				<div style="text-align: center;">
+					<a id="loginModalErrorMessage" style="color: red;">Error</a>
+				</div>
+			</div>
 			<div class="modal-body">
-				<form action="<%= request.getContextPath() %>/accountServlet" method = "post">
+				<form id="loginForm">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -91,7 +96,8 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<button type="submit" name="loginButton" class="btn btn-primary btn-block btn-lg">Sign In</button>
+						<input name="loginButton" style="display: none;">
+						<button type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
 					</div>
 					<p class="hint-text"><a href="#">Forgot Password?</a></p>
 				</form>
@@ -100,6 +106,13 @@
 		</div>
 	</div>
 </div>
+<% session.setAttribute("servlet", "accountServlet"); %>
+<% session.setAttribute("form", "#loginForm"); %>
+<%@page import="java.util.Arrays" %>
+<% session.setAttribute("updates", Arrays.asList("#loginUL", "#subNavBar")); %>
+<% session.setAttribute("successJS", "$('#loginModal').modal('hide');"); %>
+<% session.setAttribute("errorJS", "document.getElementById('loginModalError').style.display='block'; document.getElementById('loginModalErrorMessage').innerText=request.responseText;"); %>
+<%@include file="components/ajax.jsp" %>
 
 <!-- Register Modal HTML -->
 <div id="registerModal" class="modal fade">
@@ -109,8 +122,13 @@
 				<h4 class="modal-title">Register</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
+			<div id="registerModalError" style="display: none;">
+				<div style="text-align: center;">
+					<a id="registerModalErrorMessage" style="color: red;">Error</a>
+				</div>
+			</div>
 			<div class="modal-body">
-				<form class="needs-validation" action="<%= request.getContextPath() %>/accountServlet" method = "post">
+				<form id="registerForm" class="needs-validation">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -127,11 +145,194 @@
 						<label>Use 8 or more characters with a mix of letters, numbers & symbols</label>
 					</div>
 					<div class="form-group">
-						<button type="submit" name="registerButton" class="btn btn-primary btn-block btn-lg">Register</button>
+						<input name="registerButton" style="display: none;">
+						<button type="submit" class="btn btn-primary btn-block btn-lg">Register</button>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer"><a href="#loginModal" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Sign in instead</a></div>
+		</div>
+	</div>
+</div>
+<% session.setAttribute("servlet", "accountServlet"); %>
+<% session.setAttribute("form", "#registerForm"); %>
+<% session.setAttribute("updates", Arrays.asList("#loginUL", "#subNavBar")); %>
+<% session.setAttribute("successJS", "$('#registerModal').modal('hide');"); %>
+<% session.setAttribute("errorJS", "document.getElementById('registerModalError').style.display='block'; document.getElementById('registerModalErrorMessage').innerText=request.responseText;"); %>
+<%@include file="components/ajax.jsp" %>
+
+<!-- New Game Modal HTML -->
+<div id="newGameModal" class="modal fade">
+	<div class="modal-dialog modal-login newMods">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Add New Game</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<form class="was-validated" action="<%= request.getContextPath() %>/accountServlet" method = "post">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
+							<input type="text" class="form-control modalFields" name="title" placeholder="Title" required>
+							<div class="invalid-feedback">Please enter a valid game title</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
+							<textarea class="form-control modalFields" name="description" placeholder="Description" required></textarea>
+							<div class="invalid-feedback">Please enter a valid description</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
+						    <input type="file" class="custom-file-input" id="validatedCustomFile1" required>
+						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile1">Choose Icon...</label>
+						    <div class="invalid-feedback">Please upload a valid icon</div>
+					    </div>
+				  	</div>
+					
+					
+					<!--
+					Need to add a for loop here to loop through all the available mutators for the current event!
+					Waiting on backend to complete that before adding to frontend! 
+					 -->
+					<fieldset class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-exclamation"></i></span>
+					      	<legend class="col-form-label col-sm-2 pt-0 checkLabel">Mutators</legend>
+					      	<div class="col-sm-8 checkForms">
+						        <div class="form-check">
+					          		<input class="form-check-input" type="checkbox" id="mutatorCheck1">
+					        		<label class="form-check-label" for="gridCheck1">
+						          		Save ocean
+					        		</label>
+					        	</div>
+					        	<div class="form-check">
+						          	<input class="form-check-input" type="checkbox" id="mutatorCheck1">
+					        		<label class="form-check-label" for="gridCheck1">
+						          		No violence
+					        		</label>
+					        	</div>
+					        	<div class="form-check">
+					          		<input class="form-check-input" type="checkbox" id="mutatorCheck1">
+					        		<label class="form-check-label" for="gridCheck1">
+					          			3 color palette
+					        		</label>
+					        	</div>
+					      	</div>
+					    </div>
+				    </fieldset>
+				    
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
+						    <input type="file" class="custom-file-input" id="validatedCustomFile2" required>
+						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile2">Choose Screenshot(s)...</label>
+						    <div class="invalid-feedback">Please upload a valid screenshot(s)</div>
+					    </div>
+				  	</div>
+				  	
+				  	<fieldset class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-apple"></i></span>
+					      	<legend class="col-form-label col-sm-2 pt-0 checkLabel">System(s)</legend>
+						    <div class="col-sm-8 checkForms">
+							    <div class="form-check form-check-inline">
+								  	<input class="form-check-input" type="checkbox" id="windowsOSCheckbox1" value="windowsOption">
+								  	<label class="form-check-label" for="windowsOSCheckbox1">Windows</label>
+								</div>
+								<div class="form-check form-check-inline">
+								  	<input class="form-check-input" type="checkbox" id="macOSCheckbox2" value="macOption">
+								  	<label class="form-check-label" for="macOSCheckbox2">Mac</label>
+								</div>
+								<div class="form-check form-check-inline">
+								  	<input class="form-check-input" type="checkbox" id="linuxOSCheckbox" value="linuxOption">
+								  	<label class="form-check-label" for="linuxOSCheckbox">Linux</label>
+								</div>
+							</div>
+			  			</div>
+		  			</fieldset>
+				  	
+				  	<div class="form-group">
+				  		<div class="input-group">
+						    <span class="input-group-addon icons"><i class="fa fa-wrench"></i></span>
+					      	<legend class="col-form-label col-sm-2 pt-0 checkLabel">Tools</legend>
+						    <select multiple class="form-control modalFields" id="inlineFormCustomSelect" required>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							  	<option value="5">5</option>
+					    	</select>
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-wrench"></i></span>
+					      	<legend class="col-form-label col-sm-2 pt-0 checkLabel">Credits</legend>
+					      	<div class="col-sm-8">
+								<!-- <input type="text" class="form-control creditField" name="credit" placeholder="Name"> -->
+							</div>
+						</div>
+					</div>
+				  	
+					<div class="form-group">
+						<button type="submit" name="newGameButton" class="btn btn-primary btn-block btn-lg">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- New Event Modal HTML -->
+<div id="newEventModal" class="modal fade">
+	<div class="modal-dialog modal-login newMods">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Create New Event</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<form class="was-validated" action="<%= request.getContextPath() %>/accountServlet" method = "post">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
+							<input type="text" class="form-control modalFields" name="theme" placeholder="Theme" required>
+							<div class="invalid-feedback">Please enter a valid event theme</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
+							<textarea class="form-control modalFields" name="description" placeholder="Description" required></textarea>
+							<div class="invalid-feedback">Please enter a valid description</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
+						    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile">Choose Image(s)...</label>
+						    <div class="invalid-feedback">Please upload a valid image(s)</div>
+					    </div>
+				  	</div>
+				  	<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-exclamation"></i></span>
+							<textarea class="form-control modalFields" name="mutator" placeholder="Mutator(s)" required></textarea>
+							<div class="invalid-feedback">Please enter a valid mutator(s)</div>
+						</div>
+					</div>
+				  	
+					<div class="form-group">
+						<button type="submit" name="newEventButton" class="btn btn-primary btn-block btn-lg">Submit</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>

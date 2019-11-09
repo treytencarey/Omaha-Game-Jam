@@ -1,11 +1,11 @@
+<nav id="subNavBar" class="navbar navbar-expand navbar-light bg-light">
 <%	if (session.getAttribute("accountPKey") != null) { %>
-	<nav id="subNavBar" class="navbar navbar-expand navbar-light bg-light">
 	  <div class=" navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav ml-auto">
 				<li class="nav-item indvTabs">
-			  		<a class="nav-link" href="#">Admin Menu</a>
+			  		<a class="nav-link" href="<%= request.getContextPath() %>/AdminPanel/index.jsp">Admin Menu</a>
 				</li>
-    		<% if (request.getRequestURI().equals(request.getContextPath()+"/profile/view") && request.getParameter("id").equals(session.getAttribute("accountPKey")))  { %>
+    		<% if (request.getRequestURI().equals(request.getContextPath()+"/profile") && request.getParameter("id").equals(session.getAttribute("accountPKey")))  { %>
 		      <li class="nav-item indvTabs">
 		      	
            		<form action="edit">
@@ -24,7 +24,7 @@
 	      	<%}%>
 	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/Games/"))  { %>
 		      <li class="nav-item indvTabs">
-		        <a class="nav-link" href="#">Submit Game</a>
+		        <a id="addGameBtn" href="#newGameModal" class="nav-link" data-toggle="modal">Submit Game</a>
 		      </li>
 		      <li class="nav-item indvTabs">
 		        <a class="nav-link" href="#">Edit Game</a>
@@ -32,7 +32,7 @@
 	      	<%}%>
 	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/Events/"))  { %>
 		      <li class="nav-item indvTabs">
-		        <a class="nav-link" href="#">Add Event</a>
+		        <a id="addEventBtn" href="#newEventModal" class="nav-link" data-toggle="modal">Add Event</a>
 		      </li>
 		      <li class="nav-item indvTabs">
 		        <a class="nav-link" href="#">Edit Event</a>
@@ -45,5 +45,5 @@
 	      	<%}%>
 	    </ul>
 	  </div>
-	</nav>
 <%	} %>
+</nav>

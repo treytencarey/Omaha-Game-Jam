@@ -123,3 +123,40 @@
 i {
 	margin-top: 10px;
 }
+
+.modalFields {
+	border: solid 1px lightgrey !important;
+	margin-left: 10px;
+}
+
+.icons {
+	width: 30px;
+}
+
+.newMods {
+	width: auto;
+}
+
+.invalid-feedback {
+	margin-left: 40px;
+}
+
+.custom-file-label {
+	border-radius: .25rem !important;
+	min-height: unset !important;
+	cursor: pointer
+}
+
+.checkForms {
+	margin-left: 15px;
+}
+
+.checkLabel {
+	margin-left: 10px;
+	padding: 8px 0px !important;
+	height: fit-content;
+}
+
+.creditField {
+	padding: 0px;
+}
