@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
+<style>
+.modal-dialog {
+	padding: auto;
+	margins: auto;
+	min-width: 90%;
+}
+#event-description {
+	width: 90%;
+	height: 700px;
+}
+</style>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +28,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  	<script src="https://kit.fontawesome.com/62f9f1cacb.js" crossorigin="anonymous"></script>
   	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 	
@@ -71,18 +86,19 @@
 			    	  		<input type="button" value="Add another image" id="add-image" />
 			    	  		<br><br>
 			    	  		<b>Event Description:</b><br>
-			    	  		<textarea rows="9" cols="50" style="border:1px solid black"></textarea><br>
+			    	  		<textarea id="event-description" rows="9" cols="50" style="border:1px solid black"></textarea><br>
 			    	  		<b>Mutators:</b><br>
 			    	  		<div class="event-mutators">
 			    	  			<input type='text' class="mutator" style='border: 1px solid black; width: 75px;' />
 			    	  			<input type='text' class="mutator-description" style='border: 1px solid black; width: 200px;' /><br>
 			    	  		</div>
 			    	  		<input type="button" value="Add another mutator" id="add-mutator" /><br><br>
-			    	  		
-			    	  		<b>Start Date</b>
-			    	  		<input type="text" class="datepicker" style="border: 1px solid black"/><br>
-			    	  		<b>End Date</b>
-			    	  		<input type="text" class="datepicker" style="border: 1px solid black"/><br>
+			    	  		<div id="event-dates">
+				    	  		<b>Start Date</b>
+				    	  		<input type="text" class="datepicker" style="border: 1px solid black"/><br>
+				    	  		<b>End Date</b>
+				    	  		<input type="text" class="datepicker" style="border: 1px solid black"/><br>
+			    	  		</div>
 			    	  	</form>
 			    	  </div>
 			      	<div class="modal-footer">
