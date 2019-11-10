@@ -3,25 +3,18 @@ package database;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * 
  * Handles interactions between the news page on the site and news articles in database.
  *
  */
-@WebServlet("/newsServlet")
-public class News extends HttpServlet {
+public class News {
 	private static final long serialVersionUID = 256L;
 	
 	/**
@@ -33,23 +26,16 @@ public class News extends HttpServlet {
 	 * The title of the news article.
 	 */
 	private String title = "";
+	
+	/**
+	 * The header of the news article.
+	 */
+	private String header = "";
+	
 	/**
 	 * The date of the news article.
 	 */
 	private String date = "";
-	
-	/**
-	 * Handles form submissions for the newsServlet.
-	 * @param request the servlet request.
-	 * @param response the servlet for response.
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		//HttpSession session = request.getSession(false);
-		String reqTitle = request.getParameter("newsTitle");
-		String reqHeader = request.getParameter("newsHeader");
-		String reqBody = request.getParameter("newsBody");
-	}
 	
 	/**
 	 * Gets a News article from the database.
@@ -64,6 +50,7 @@ public class News extends HttpServlet {
 		
 		key = PKey;
 		title = newsPost.get("Title").toString();
+		header = newsPost.get("Header").toString();
 		date = newsPost.get("Date").toString();
 	}
 	
@@ -130,6 +117,14 @@ public class News extends HttpServlet {
 	 */
 	public String getTitle() {
 		return this.title;
+	}
+	
+	/**
+	 * Gets the header of the News article.
+	 * @return The header of the News article.
+	 */
+	public String getHeader() {
+		return this.header;
 	}
 	
 	/**

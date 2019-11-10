@@ -346,7 +346,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form class="was-validated" action="<%= request.getContextPath() %>/newsServlet" method = "post">
+				<form class="was-validated" action="<%= request.getContextPath() %>/NewsServlet" method = "post">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fas fa-newspaper"></i></span>
@@ -373,6 +373,14 @@
 						    <div class="invalid-feedback">Please upload a valid image.</div>
 					    </div>
 				  	</div>
+				  	<div class="form-group">
+					  	<div class="form-check">
+	  						<input class="form-check-input" type="checkbox" value="isPublicCheckbox" name="isPublicCheckbox" checked>
+	  						<label class="form-check-label">
+	    						Make Public
+	  						</label>
+						</div>
+					</div>
 				  	
 					<div class="form-group">
 						<button type="submit" id="newNewsArticleButton" name="newNewsArticleButton" class="btn btn-primary btn-block btn-lg">Submit</button>

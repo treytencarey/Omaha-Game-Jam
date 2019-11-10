@@ -4770,5 +4770,14 @@
 		<servlet-name>viewGame</servlet-name>
 		<url-pattern>/game</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>NewsServlet</servlet-name>
+		<servlet-class>database.NewsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewsServlet</servlet-name>
+		<url-pattern>/News/view</url-pattern>
+	</servlet-mapping>
 
 </web-app>
