@@ -1,5 +1,7 @@
 package database;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import project.Main;
 
 /**
  * Servlet implementation class NewsServlet
@@ -33,17 +38,25 @@ public class NewsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
-		if(id != null)
-			request.getRequestDispatcher(SUCCESS_JSP).forward(request, response);
-		else {
-			request.getRequestDispatcher(DEFAULT_JSP).forward(request, response);
+		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Blogs WHERE PKey=" + id + " AND IsPublic = 1");
+		News news;
+		
+		if (id == null || query.size() == 0) {
+			response.getWriter().append("No public news article found for " + id);
+			return;
 		}
+		
+		news = new News(Integer.parseInt(id));
+		
+		request.setAttribute("News", news);
+		request.getRequestDispatcher(SUCCESS_JSP).forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
 		/**
 		 * Get title, header, and body from input on "Create/Edit News Article" modal
 		 */
@@ -66,14 +79,16 @@ public class NewsServlet extends HttpServlet {
 		
 		Database.executeUpdate("INSERT OR REPLACE INTO Blogs(Date, Title, IsPublic, Header) VALUES (\'" + currentDate + "\', \'" + reqTitle + "\', \'" + isPublicDb + "\', \'" + reqHeader +"\')");
 		List<Map<String, Object>> query = Database.executeQuery("SELECT PKey FROM Blogs WHERE Date=\'" + currentDate + "\' AND Title=\'" + reqTitle + "\'");
-		String path = request.getContextPath() + "/Uploads/News/Body/" + query.get(0).get("PKey").toString() + "_body.txt";
-		//File file = new File(path);
-		//file.createNewFile();
-		//System.out.println(file.exists());
-		/*
+		String origPath = "/Uploads/News/Body/Body";
+		String[] splits = origPath.replaceAll("\\\\", "/").split("/");
+		String fileName = splits[splits.length-1];
+		String path = Main.context.getRealPath(origPath.substring(0,origPath.length()-fileName.length()));
+		File file = new File(path + "/" + query.get(0).get("PKey").toString() + "_body.txt");
+		file.createNewFile();
+		System.out.println(path + "/" + query.get(0).get("PKey").toString() + "_body.txt");
 		FileOutputStream outFile = new FileOutputStream(file);
 		outFile.write(reqBody.getBytes());
-		outFile.close(); */
+		outFile.close();
 	}
 
 }

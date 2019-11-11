@@ -363,7 +363,7 @@
 					</div>
 					<div class="form-group">
 							<span class="input-group-addon icons"><i class="fas fa-heading"></i></span>
-							<textarea id="newsBody" name="newsBody" required></textarea>
+							<textarea id="newsBody" name="newsBody"></textarea>
 					</div>
 					<div class="form-group">
 						<div class="input-group">

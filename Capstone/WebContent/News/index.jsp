@@ -37,7 +37,7 @@
 		<div class="row mt-2 justify-content-center">
 		<% for(int i = 0; i < recentNews.length; i++) { %>
 				<div class="card">
-					<a href="#"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
+					<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
 			  		<div class="card-body dark">
 			  			<small><%= recentNews[i].getDate() %></small>
 			  			<a href="#"><h5 class="card-title"><%= recentNews[i].getTitle() %></h5></a>
@@ -53,10 +53,6 @@
 </body>
 <script>
 	var bodyField;
-	$("#newNewsArticleButton").click(function (e) {
-		nicEditors.findEditor("newsBody").saveContent();
-	})
-	
 	loadEditor();
 	
 	function loadEditor() { 
