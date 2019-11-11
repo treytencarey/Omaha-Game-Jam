@@ -30,7 +30,13 @@ public class GameServlet extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Handle the business logic for viewing games.
+	 * <ul>
+	 * <li>Validate game exists</li>
+	 * <li>Retrieve and store the requested game and contributors in Beans ("Game" and "ContributorTable" respectively)</li>
+	 * <li>Determine if the logged in user can edit, and store as "CanEdit" attribute</li>
+	 * </ul>
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

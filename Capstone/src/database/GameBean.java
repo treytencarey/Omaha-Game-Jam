@@ -4,17 +4,27 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Model for the DB's Games table, used to retrieve a single row when given a Game's ID.
+ */
 public class GameBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private String id, event, submitter, title, desc, link, isPublic;
-	//private boolean isPublic;
 	
+	/**
+	 * Instantiate a new GameBean with blank fields.
+	 * This does not interact with the DB in any way.
+	 */
 	public GameBean()
 	{
 		id = event = submitter = title = desc = link = isPublic = "";
 	}
 	
+	/**
+	 * Fetch the specified game from the DB and instantiate a GameBean with its data.
+	 * @param PKey the id of the game to fetch from Games table.
+	 */
 	public GameBean(String PKey)
 	{
 		this.setId(PKey + "");

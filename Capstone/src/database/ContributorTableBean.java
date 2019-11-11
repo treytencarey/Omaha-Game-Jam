@@ -5,13 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-// Used as an interface to query and interact with the Contributor table
+/**
+ * Model for the DB's Contributors table, used to retrieve 0..n rows of contributors for a single Game.
+ */
 public class ContributorTableBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Contributor> contributors = new ArrayList<Contributor>();
 	
-	// Fetch and fill contributors with results from the DB.
+	/**
+	 * Fetch the contributors for the specified game from the DB and instantiate a ContributorTableBean with them.
+	 * @param GamePKey the id of the game to get contributors for from Contributors table.
+	 */
 	public ContributorTableBean(String GamePKey)
 	{
 		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Contributors WHERE GamePKey=" + GamePKey);
