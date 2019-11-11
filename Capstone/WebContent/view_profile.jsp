@@ -24,7 +24,7 @@
 	<%@page import="project.Main" %>
 
 	<% try { %>
-		<% Profile p = new Profile(Integer.parseInt(request.getParameter("id"))); %>
+		<% Profile pView = new Profile(Integer.parseInt(request.getParameter("id"))); %>
 
 		<div class="container emp-profile">
             <form action="edit">
@@ -44,10 +44,10 @@
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        <%= p.getName() %>
+                                        <%= pView.getName() %>
                                     </h5>
                                     <h6>
-                                        <%= p.getBio() %>
+                                        <%= pView.getBio() %>
                                     </h6>
                                     <p class="proile-rating">Attending Game Jam 2019 : <span>Yes</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -65,10 +65,10 @@
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>WORK LINK</p>
-                            <a href="<%= p.getWebsite() %>">Website Link</a><br/>
+                            <a href="<%= pView.getWebsite() %>">Website Link</a><br/>
                             <p>SKILLS</p>
                             <%
-                            	String[] skills = p.getSkills().split("\n");
+                            	String[] skills = pView.getSkills().split("\n");
 	                            for(String s : skills) {
                            	%>
 	                            	<a href=""><%= s %></a><br/>
@@ -85,7 +85,7 @@
                                                 <label>Name</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><%= p.getName() %></p>
+                                                <p><%= pView.getName() %></p>
                                             </div>
                                         </div>
                                         <div class="row">
