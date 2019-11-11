@@ -1,25 +1,37 @@
 package database;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 
 /**
  * 
  * Handles interactions between the news page on the site and news articles in database.
  *
  */
-@WebServlet("/newsServlet")
-public class News extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class News {
+	private static final long serialVersionUID = 256L;
+	
+	/**
+	 * The key of the news article.
+	 */
+	private int key;
 	
 	/**
 	 * The title of the news article.
 	 */
 	private String title = "";
+	
+	/**
+	 * The header of the news article.
+	 */
+	private String header = "";
+	
 	/**
 	 * The date of the news article.
 	 */
@@ -36,9 +48,20 @@ public class News extends HttpServlet {
 			throw new NullPointerException();
 		Map<String, Object> newsPost = query.get(0);
 		
-		this.title = newsPost.get("Title").toString();
-		this.date = newsPost.get("Date").toString();
+		key = PKey;
+		title = newsPost.get("Title").toString();
+		header = newsPost.get("Header").toString();
+		date = newsPost.get("Date").toString();
 	}
+	
+	/**
+	 * Creates blank News article.
+	 * This is required for newsServlet to work.
+	 */
+	public News() {
+		
+	}
+	
 	
 	/**
 	 * Gets the total number of News articles in the database.
@@ -81,6 +104,14 @@ public class News extends HttpServlet {
 	}
 	
 	/**
+	 * Gets the key of the News article.
+	 * @return The key of the News article.
+	 */
+	public int getKey() {
+		return this.key;
+	}
+	
+	/**
 	 * Gets the title of the News article.
 	 * @return The title of the News article.
 	 */
@@ -89,10 +120,38 @@ public class News extends HttpServlet {
 	}
 	
 	/**
+	 * Gets the header of the News article.
+	 * @return The header of the News article.
+	 */
+	public String getHeader() {
+		return this.header;
+	}
+	
+	/**
 	 * Gets the date of the News article.
 	 * @return The date of the News article.
 	 */
 	public String getDate() {
 		return this.date;
+	}
+	
+	public String getBody(String startPath, int key) {
+		try {
+			String body = "";
+			String read = "";
+			
+			File f = new File(startPath + "/Uploads/News/Body/" + key + ".txt");
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+			while((read = bufferedReader.readLine()) != null) {
+				body = body + read + "\n";
+			}
+			bufferedReader.close();
+			System.out.println(body);
+			return body;
+		} catch(Exception e) {
+			System.err.println(e);
+			return "Body not found";
+		}
+		
 	}
 }

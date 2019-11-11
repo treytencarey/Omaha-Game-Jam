@@ -38,6 +38,11 @@
 		        <a class="nav-link" href="#">Edit Event</a>
 		      </li>
 	      	<%}%>
+	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/News/"))  { %>
+		      <li class="nav-item indvTabs">
+		        <a id="add-article-btn" href="#newNewsArticleModal" class="nav-link" data-toggle="modal">Add Article</a>
+		      </li>
+	      	<%} System.out.println(request.getRequestURI());%>
 	    </ul>
 	  </div>
 <%	} %>
