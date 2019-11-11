@@ -5,17 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-// Used to interface with the Contributor table
-public class ContributorTableInterface implements Serializable{
+// Used as an interface to query and interact with the Contributor table
+public class ContributorTableBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Contributor> contributors = new ArrayList<Contributor>();
 	
-	public ContributorTableInterface(int GamePKey)
+	// Fetch and fill contributors with results from the DB.
+	public ContributorTableBean(String GamePKey)
 	{
-		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Contributors WHERE GamePKey=" + String.valueOf(GamePKey));
-//		if (query.size() == 0)
-//			throw new NullPointerException();
+		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Contributors WHERE GamePKey=" + GamePKey);
 		//query looks like: [{AccountPKey=4, GamePKey=1, RolePKey=1}, {AccountPKey=3, GamePKey=1, RolePKey=5}]
         java.util.ListIterator<Map<String, Object>> litr = query.listIterator();
         while(litr.hasNext())
@@ -28,6 +27,7 @@ public class ContributorTableInterface implements Serializable{
         }
 	}
 	
+	// Bean getter / setter
 	public ArrayList<Contributor> getContributors(){
 		return contributors;
 	}

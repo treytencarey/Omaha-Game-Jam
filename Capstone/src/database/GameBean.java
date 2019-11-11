@@ -17,17 +17,11 @@ public class GameBean implements Serializable{
 	
 	public GameBean(String PKey)
 	{
-		System.out.println(PKey);
 		this.setId(PKey + "");
 		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Games WHERE PKey=" + this.getId());
-		//System.out.println("this game's id: " + this.getId());
-		System.out.println(query);
-		System.out.println("size: " + query.size());
 		if (query.size() == 0)
 			throw new NullPointerException();
-		System.out.println(2);
 		Map<String, Object> game = query.get(0);
-		System.out.println(3);
 		
 		this.setEvent(game.get("EventPKey").toString());
 		this.setSubmitter(game.get("SubmitterPKey").toString());

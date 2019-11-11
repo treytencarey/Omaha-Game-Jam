@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="database.GameBean, database.Profile, database.ContributorTableInterface, database.Contributor, database.RoleTableInterface, database.Role" %>
+	import="database.GameBean, database.Profile, database.ContributorTableBean, database.Contributor, database.RoleTableInterface, database.Role" %>
 
 <%
-GameBean g = new GameBean(request.getParameter("id"));
-ContributorTableInterface cti = new ContributorTableInterface(1);
+GameBean g = ((GameBean)request.getAttribute("Game"));
+ContributorTableBean ct = ((ContributorTableBean)request.getAttribute("ContributorTable")); //new ContributorTableBean(g.getId());
+boolean canEdit = ((Boolean)request.getAttribute("CanEdit")).booleanValue();
 %>
 
 <!DOCTYPE html>
@@ -14,6 +15,15 @@ ContributorTableInterface cti = new ContributorTableInterface(1);
 <title><%= g.getTitle() %></title>
 </head>
 <body>
+
+<%
+if (canEdit)
+{
+%>
+	<button>Edit</button>
+<%
+}
+%>
 
 	<img src="<%= request.getContextPath() %>/Uploads/Games/Thumbnails/<%= g.getId() %>"><br>
 	<h1><%= g.getTitle() %></h1><br>
@@ -32,7 +42,7 @@ ContributorTableInterface cti = new ContributorTableInterface(1);
 <h2>Contributors</h2>
 <table>
 <%
-for(Contributor c : cti.getContributors())
+for(Contributor c : ct.getContributors())
 {
 	Profile p = new Profile(Integer.parseInt(c.getAccountPKey()));
 	RoleTableInterface rti = new RoleTableInterface(c.getRolePKey());

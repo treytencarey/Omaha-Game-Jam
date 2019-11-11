@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import database.GameBean;
 
 /**
@@ -33,45 +35,53 @@ public class GameServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String id = request.getParameter("id");
-		List<Map<String, Object>> query; // Map of all games returned from DB, should only have 1
-		Map<String, Object> game; // Single game Map from col name to value
 		GameBean g; // Bean to store all game info in; to be passed to the JSP
+		ContributorTableBean ct;
+		HttpSession session; // User's session, used to retrieve AccountPKey
+		Object apk; // The user's AccountPKey
+		Boolean canEdit; // Attribute send to JSP that determines if logged in user can edit the current Game (logged in? registered for current event? submittor? contributor?)
 		
 		/**
 		 * ID-related error checking
 		 */
-		if (id == null) // ID supplied?
-		{
-			response.getWriter().append("No ID suppled.");
-			return;
-		}
-		query = Database.executeQuery("SELECT * FROM Games WHERE PKey=" + id);
-		if (query.size() == 0) // ID exists?
+		try { g = new GameBean(id); }
+			catch (NullPointerException npe)
 		{
 			response.getWriter().append("Game page doesn't exist for ID " + id);
 			return;
 		}
-		game = query.get(0);
-		if (game.get("IsPublic").toString() == "0") // Game page public?
+		if (g.getIsPublic().equals("0"))
 		{
 			response.getWriter().append("Game page not public.");
 			return;
 		}
+		request.setAttribute("Game", g); // Store GameBean in request for JSP to retrieve it from
+		ct = new ContributorTableBean(id);
+		request.setAttribute("ContributorTable", ct);
 		
 		/**
-		 * Create a GameBean to stash DB data in
+		 * Determine if logged in user can edit
 		 */
-		g = new GameBean();
-		g.setId(id);
+		canEdit = new Boolean(false);
+		session = request.getSession();  
 		
-		g.setEvent(game.get("EventPKey").toString());
-		g.setSubmitter(game.get("SubmitterPKey").toString());
-		g.setTitle(game.get("Title").toString());
-		g.setDesc(game.get("Description").toString());
-		g.setLink(game.get("PlayLink").toString());
-		g.setIsPublic(game.get("IsPublic").toString());
-		
-		request.setAttribute("Game", g); // Store GameBean in request for JSP to retrieve it from
+		apk = session.getAttribute("accountPKey");
+		if (apk != null)
+		{
+			String s = apk.toString();
+			if (s.equals(g.getSubmitter())) // Is user the submittor?
+				canEdit = new Boolean(true);
+			for(Contributor c : ct.getContributors()) // Is the user a contributor?
+			{
+				//System.out.println();
+				if (apk.toString().equals(c.getAccountPKey()))
+				{
+					canEdit = new Boolean(true);
+					break;
+				}
+			}
+		}
+		request.setAttribute("CanEdit", canEdit);
         request.getRequestDispatcher(SUCCESS_JSP).forward(request, response); // If all successful, forward to view_game.jsp
 	}
 
