@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="database.GameBean, database.Profile, database.ContributorTableBean, database.Contributor, database.RoleTableInterface, database.Role" %>
+	import="database.GameBean, database.Profile, database.ContributorTableBean, database.Contributor, database.RoleTableBean, database.Role" %>
 
 <%
 GameBean g = ((GameBean)request.getAttribute("Game"));
@@ -45,7 +45,7 @@ if (canEdit)
 for(Contributor c : ct.getContributors())
 {
 	Profile p = new Profile(Integer.parseInt(c.getAccountPKey()));
-	RoleTableInterface rti = new RoleTableInterface(c.getRolePKey());
+	RoleTableBean rti = new RoleTableBean(c.getRolePKey());
 %>
 	<tr>
 		<td><img height="32" width="32" src="<%= request.getContextPath() + "/Uploads/Profiles/Pics/" + c.getAccountPKey() %>"></td>
