@@ -173,7 +173,7 @@
 	<%@include file="components/ajax.jsp" %>
 <%}%>
 
-<% if (request.getRequestURI().equals(request.getContextPath()+"/Games/"))  { %>
+<% if (session.getAttribute("accountPKey") != null) { %>
 	<!-- New Game Modal HTML -->
 	<div id="newGameModal" class="modal fade">
 		<div class="modal-dialog modal-login newMods">
