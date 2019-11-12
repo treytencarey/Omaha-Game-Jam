@@ -1,6 +1,8 @@
 package database;
 
-// Represents a row in the Role table
+/**
+ * Represents a single row from the Rows table. This does not interact with the DB in any way.
+ */
 public class Role {
 	public String PKey, Title;
 	public Role(String PKey, String Title)

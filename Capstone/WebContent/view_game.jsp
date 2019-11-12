@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="database.Game, database.Profile, database.ContributorTableInterface, database.Contributor, database.RoleTableInterface, database.Role" %>
+	import="database.GameBean, database.Profile, database.ContributorTableBean, database.Contributor, database.RoleTableBean, database.Role, database.Mutator, database.MutatorTableBean" %>
 
 <%
-Game g = new Game(1);
-ContributorTableInterface cti = new ContributorTableInterface(1);
+GameBean g = ((GameBean)request.getAttribute("Game"));
+MutatorTableBean mt = ((MutatorTableBean)request.getAttribute("MutatorTable"));
+ContributorTableBean ct = ((ContributorTableBean)request.getAttribute("ContributorTable"));
+boolean canEdit = ((Boolean)request.getAttribute("CanEdit")).booleanValue();
 %>
 
 <!DOCTYPE html>
@@ -15,27 +17,48 @@ ContributorTableInterface cti = new ContributorTableInterface(1);
 </head>
 <body>
 
+<%
+if (canEdit)
+{
+%>
+	<button>Edit</button>
+<%
+}
+%>
+
 	<img src="<%= request.getContextPath() %>/Uploads/Games/Thumbnails/<%= g.getId() %>"><br>
 	<h1><%= g.getTitle() %></h1><br>
 	<p><%= g.getDesc() %></p>
 	<h2>Mutators</h2>
-	<ul>
-		<li>These are placeholder</li>
-		<li>These should query the Mutators table for all mutators with an EventPKey of <%= g.getEvent() %></li>
-		<li>DYLAN!!!!!!!!!!</li> 
-	</ul>
+	<table>
+	<%
+	for(Mutator m : mt.getMutators())
+	{
+	%>
+		<tr>
+			<td><%= m.getTitle() %></td>
+			<td><%= m.getDesc() %></td>
+		</tr>
+	<%
+	}
+	%>
+	</table>
+	
+	<!--
 	<i>For event with a key of <%= g.getEvent() %></i><br>
 	<i>Submitted by account with key of <%= g.getSubmitter() %></i><br>
+	  -->
+	  
 	<h2>Play now!</h2>
 	<a href="<%= g.getLink() %>"><%= g.getLink() %></a>
 	
 <h2>Contributors</h2>
 <table>
 <%
-for(Contributor c : cti.getContributors())
+for(Contributor c : ct.getContributors())
 {
 	Profile p = new Profile(Integer.parseInt(c.getAccountPKey()));
-	RoleTableInterface rti = new RoleTableInterface(c.getRolePKey());
+	RoleTableBean rti = new RoleTableBean(c.getRolePKey());
 %>
 	<tr>
 		<td><img height="32" width="32" src="<%= request.getContextPath() + "/Uploads/Profiles/Pics/" + c.getAccountPKey() %>"></td>

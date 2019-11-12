@@ -49,6 +49,7 @@ public class Profile extends HttpServlet {
 		boolean updatingProfile = request.getParameter("update") != null;
 		if (updatingProfile)
 		{
+			System.out.println("HIIIII");
 			new Profile(request.getParameter("name").toString(), request.getParameter("bio").toString(), request.getParameter("site").toString(), request.getParameter("skills").toString()).updateProfile(Integer.parseInt(session.getAttribute("accountPKey").toString()));
 			
 			session.setAttribute("updateProfileMessage", "Update successful!");
