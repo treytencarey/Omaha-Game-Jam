@@ -288,6 +288,7 @@
 	</div>
 </div>
 
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
 <script>
 		$(document).ready(function(){
 			$("#add-image").click(function(){
@@ -303,13 +304,13 @@
 		
 		$(document).ready(function(){
 			$(".datepicker").datepicker();
-		});
-		
+		});	
 		
 </script>
 	
 <!-- New Event Modal HTML -->
 <div id="newEventModal" class="modal fade">
+	
 	<div class="modal-dialog modal-login newMods">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -328,10 +329,16 @@
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
-							<textarea class="form-control modalFields" name="description" placeholder="Description" required></textarea>
+							<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" placeholder="Description" required></textarea>
 							<div class="invalid-feedback">Please enter a valid description</div>
 						</div>
 					</div>
+					
+					<div class="form-group">
+							<span class="input-group-addon icons"><i class="fas fa-heading"></i></span>
+							<textarea id="eventBody" name="eventBody"></textarea>
+					</div>
+					
 					<div class="form-group">
 						<div class="input-group newEventImages">
 							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
