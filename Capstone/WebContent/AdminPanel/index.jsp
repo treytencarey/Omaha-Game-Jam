@@ -1,19 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-<style>
-.modal-dialog {
-	padding: auto;
-	margins: auto;
-	min-width: 90%;
-}
-#event-description {
-	width: 90%;
-	height: 700px;
-}
-</style>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +50,7 @@
 		Admin Panel<br><br>
 		
 		<h3><b>Event Options:   </b></h3>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createEventModal">Create Event</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEventModal">Create Event</button>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Edit Event</button>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Display Mutators</button>
 		<div class="modal fade text-dark modal-lg" id="createEventModal" tabindex="-1" role="dialog" aria-labelledby="createEventModalLabel" aria-hidden="true">
@@ -79,20 +66,25 @@
 			    	  	<form>
 			    	  		<b>Event Theme</b><br>
 			    	  		<input type="text" style='border: 1px solid black'/><br><br>
-			    	  		<b>Event Image(s):</b>
-			    	  		<div class="event-images">
-			    	  			<input type="file" name="event-header-image" style="border: 1px solid black"/><br>
+			    	  		
+			    	  		<b>Event Image(s):</b><br><br>
+			    	  		<input type="file" style="border: 1px solid black;"/>
+			    	  		<div>
+			    	  			<input type="file" style="border: 1px solid black;"/>
 			    	  		</div>
 			    	  		<input type="button" value="Add another image" id="add-image" />
 			    	  		<br><br>
+			    	  		
 			    	  		<b>Event Description:</b><br>
 			    	  		<textarea id="event-description" rows="9" cols="50" style="border:1px solid black"></textarea><br>
+			    	  		
 			    	  		<b>Mutators:</b><br>
 			    	  		<div class="event-mutators">
 			    	  			<input type='text' class="mutator" style='border: 1px solid black; width: 75px;' />
 			    	  			<input type='text' class="mutator-description" style='border: 1px solid black; width: 200px;' /><br>
 			    	  		</div>
 			    	  		<input type="button" value="Add another mutator" id="add-mutator" /><br><br>
+			    	  		
 			    	  		<div id="event-dates">
 				    	  		<b>Start Date</b>
 				    	  		<input type="text" class="datepicker" style="border: 1px solid black"/><br>
