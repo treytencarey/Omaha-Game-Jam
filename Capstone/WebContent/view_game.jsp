@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="database.GameBean, database.Profile, database.ContributorTableBean, database.Contributor, database.RoleTableBean, database.Role" %>
+	import="database.GameBean, database.Profile, database.ContributorTableBean, database.Contributor, database.RoleTableBean, database.Role, database.Mutator, database.MutatorTableBean" %>
 
 <%
 GameBean g = ((GameBean)request.getAttribute("Game"));
-ContributorTableBean ct = ((ContributorTableBean)request.getAttribute("ContributorTable")); //new ContributorTableBean(g.getId());
+MutatorTableBean mt = ((MutatorTableBean)request.getAttribute("MutatorTable"));
+ContributorTableBean ct = ((ContributorTableBean)request.getAttribute("ContributorTable"));
 boolean canEdit = ((Boolean)request.getAttribute("CanEdit")).booleanValue();
 %>
 
@@ -29,13 +30,25 @@ if (canEdit)
 	<h1><%= g.getTitle() %></h1><br>
 	<p><%= g.getDesc() %></p>
 	<h2>Mutators</h2>
-	<ul>
-		<li>These are placeholder</li>
-		<li>These should query the Mutators table for all mutators with an EventPKey of <%= g.getEvent() %></li>
-		<li>DYLAN!!!!!!!!!!</li> 
-	</ul>
+	<table>
+	<%
+	for(Mutator m : mt.getMutators())
+	{
+	%>
+		<tr>
+			<td><%= m.getTitle() %></td>
+			<td><%= m.getDesc() %></td>
+		</tr>
+	<%
+	}
+	%>
+	</table>
+	
+	<!--
 	<i>For event with a key of <%= g.getEvent() %></i><br>
 	<i>Submitted by account with key of <%= g.getSubmitter() %></i><br>
+	  -->
+	  
 	<h2>Play now!</h2>
 	<a href="<%= g.getLink() %>"><%= g.getLink() %></a>
 	

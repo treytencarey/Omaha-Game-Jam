@@ -42,6 +42,7 @@ public class GameServlet extends HttpServlet {
 
 		String id = request.getParameter("id");
 		GameBean g; // Bean to store all game info in; to be passed to the JSP
+		MutatorTableBean mt;
 		ContributorTableBean ct;
 		HttpSession session; // User's session, used to retrieve AccountPKey
 		Object apk; // The user's AccountPKey
@@ -50,7 +51,10 @@ public class GameServlet extends HttpServlet {
 		/**
 		 * ID-related error checking
 		 */
-		try { g = new GameBean(id); }
+		try
+		{
+			g = new GameBean(id);
+		}
 			catch (NullPointerException npe)
 		{
 			response.getWriter().append("Game page doesn't exist for ID " + id);
@@ -62,7 +66,9 @@ public class GameServlet extends HttpServlet {
 			return;
 		}
 		request.setAttribute("Game", g); // Store GameBean in request for JSP to retrieve it from
+		mt = new MutatorTableBean(id);
 		ct = new ContributorTableBean(id);
+		request.setAttribute("MutatorTable", mt);
 		request.setAttribute("ContributorTable", ct);
 		
 		/**
