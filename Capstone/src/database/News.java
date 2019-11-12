@@ -38,6 +38,11 @@ public class News {
 	private String date = "";
 	
 	/**
+	 * The date of the news article.
+	 */
+	private int isPublic = 0;
+	
+	/**
 	 * Gets a News article from the database.
 	 * @param PKey an integer value of the News article's primary key.
 	 */
@@ -52,11 +57,11 @@ public class News {
 		title = newsPost.get("Title").toString();
 		header = newsPost.get("Header").toString();
 		date = newsPost.get("Date").toString();
+		isPublic = Integer.parseInt(newsPost.get("IsPublic").toString());
 	}
 	
 	/**
 	 * Creates blank News article.
-	 * This is required for newsServlet to work.
 	 */
 	public News() {
 		
@@ -133,6 +138,14 @@ public class News {
 	 */
 	public String getDate() {
 		return this.date;
+	}
+	
+	/**
+	 * Gets the public status of the News article.
+	 * @return The public status of the News article.
+	 */
+	public int getIsPublic() {
+		return this.isPublic;
 	}
 	
 	public String getBody(String startPath, int key) {

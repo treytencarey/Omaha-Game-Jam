@@ -4779,5 +4779,14 @@
 		<servlet-name>NewsServlet</servlet-name>
 		<url-pattern>/News/view</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EventServlet</servlet-name>
+		<servlet-class>database.EventServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EventServlet</servlet-name>
+		<url-pattern>/Event/view</url-pattern>
+	</servlet-mapping>
 
 </web-app>
