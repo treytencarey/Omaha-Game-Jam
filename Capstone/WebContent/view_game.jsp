@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="database.GameBean, database.Profile, database.ContributorTableBean, database.Contributor, database.RoleTableBean, database.Role, database.Mutator, database.MutatorTableBean" %>
+	import="utils.FolderReader, database.GameBean, database.Profile, database.ContributorTableBean, database.Contributor, database.RoleTableBean, database.Role, database.Mutator, database.MutatorTableBean" %>
 
 <%
 GameBean g = ((GameBean)request.getAttribute("Game"));
 MutatorTableBean mt = ((MutatorTableBean)request.getAttribute("MutatorTable"));
 ContributorTableBean ct = ((ContributorTableBean)request.getAttribute("ContributorTable"));
 boolean canEdit = ((Boolean)request.getAttribute("CanEdit")).booleanValue();
+final String MEDIA_PATH = "/Uploads/Games";
+final String MEDIA_PATH_FULL = request.getContextPath() + MEDIA_PATH;
+
 %>
 
 <!DOCTYPE html>
@@ -26,8 +29,12 @@ if (canEdit)
 }
 %>
 
-	<img src="<%= request.getContextPath() %>/Uploads/Games/Thumbnails/<%= g.getId() %>"><br>
+	<img src="<%= MEDIA_PATH_FULL %>/Thumbnails/<%= g.getId() %>"><br>
 	<h1><%= g.getTitle() %></h1><br>
+	<i>Submitted for the <%= g.getEvent() %> jam.</i><br>
+	<!--
+	<i>Submitted by account with key of <%= g.getSubmitter() %></i><br>
+	  -->
 	<p><%= g.getDesc() %></p>
 	<h2>Mutators</h2>
 	<table>
@@ -44,10 +51,21 @@ if (canEdit)
 	%>
 	</table>
 	
-	<!--
-	<i>For event with a key of <%= g.getEvent() %></i><br>
-	<i>Submitted by account with key of <%= g.getSubmitter() %></i><br>
-	  -->
+	<h2>Screenshots</h2>
+	<%
+	FolderReader fr = new FolderReader(MEDIA_PATH + "/Screenshots/" + g.getId());
+	String[] carouselItems = fr.getFileList();
+	if (carouselItems != null)
+	{
+		for(int i = 0; i < carouselItems.length; i++) {
+	%>
+			<img width=256 height=128 src="<%= MEDIA_PATH_FULL %>/Screenshots/<%= g.getId() %>/<%= carouselItems[i] %>">
+	<%
+		}
+	}
+	%>
+	
+	  
 	  
 	<h2>Play now!</h2>
 	<a href="<%= g.getLink() %>"><%= g.getLink() %></a>
