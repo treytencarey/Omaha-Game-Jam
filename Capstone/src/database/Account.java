@@ -133,7 +133,7 @@ public class Account extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//Database.executeUpdate("INSERT INTO AccountPermissions (Permissions) VALUES (" + 1 + ")");
+		Database.executeUpdate("INSERT INTO AccountPermissions (Permissions) VALUES (" + 1 + ")");
 		return Database.executeUpdate("INSERT INTO Accounts (Email, Password) VALUES ('" + email + "', '" + password + "')");
 	}
 
