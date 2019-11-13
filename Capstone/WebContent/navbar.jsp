@@ -440,7 +440,9 @@
 		</div>
 	</div>
 </div>
+<% } %>
 
+<% if (request.getRequestURI().equals(request.getContextPath()+"/News/"))  { %>
 <!-- New News Article Modal HTML -->
 <div id="newNewsArticleModal" class="modal fade">
 	<div class="modal-dialog modal-login newMods">
@@ -494,3 +496,4 @@
 		</div>
 	</div>
 </div>
+<% } %>
