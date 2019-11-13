@@ -166,7 +166,7 @@ public class News {
 			String fileName = splits[splits.length-1];
 			String path = Main.context.getRealPath(origPath.substring(0,origPath.length()-fileName.length()));
 			
-			File file = new File(path + "/" + key + "_body.txt");
+			File file = new File(path + key + "_body.txt");
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 			while((read = bufferedReader.readLine()) != null) {
 				body = body + read;
