@@ -20,6 +20,8 @@
 </head>
 <body>
 	<%@include  file="../navbar.jsp" %>
+	<%@include file="../components/newGameModal.jsp" %>
+	
 	<div style="text-align: center;">
 		Games
 	</div>

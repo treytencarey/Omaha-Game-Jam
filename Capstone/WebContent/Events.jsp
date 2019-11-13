@@ -92,7 +92,7 @@
 				</a>
 			</div>
 		<div id="event-info">
-			<h1 id="event-name"><b>Event Name Goes here</b></h1><br>
+			<h1 id="event-name"><b>Event Name Goes heree</b></h1><br>
 			<h2 id="event-subheadinfo">The following is filler text for visual appeal</h2><br>
 			<p class="event-text">Buck did not read the newspapers, or he would have known that
 trouble was brewing, not alone for himself, but for every tide-
