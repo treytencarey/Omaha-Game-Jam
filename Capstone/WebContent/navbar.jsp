@@ -3,7 +3,7 @@
 	<%@page import="database.Profile" %>
 	<%@page import="project.Main" %>
 	<%	Profile p;
-
+	
 		try {
 			p = new Profile(Integer.parseInt(session.getAttribute("accountPKey").toString()));
 		} catch (Exception e) {
@@ -124,7 +124,7 @@
 	<% session.setAttribute("successJS", "$('#loginModal').modal('hide');"); %>
 	<% session.setAttribute("errorJS", "document.getElementById('loginModalError').style.display='block'; document.getElementById('loginModalErrorMessage').innerText=request.responseText;"); %>
 	<%@include file="components/ajax.jsp" %>
-
+	
 	<!-- Register Modal HTML -->
 	<div id="registerModal" class="modal fade">
 		<div class="modal-dialog modal-login">
@@ -173,7 +173,7 @@
 	<%@include file="components/ajax.jsp" %>
 <%}%>
 
-<% if (session.getAttribute("accountPKey") != null) { %>
+<% if (request.getRequestURI().equals(request.getContextPath()+"/Games/"))  { %>
 	<!-- New Game Modal HTML -->
 	<div id="newGameModal" class="modal fade">
 		<div class="modal-dialog modal-login newMods">
@@ -206,11 +206,11 @@
 							    <div class="invalid-feedback">Please upload a valid icon</div>
 						    </div>
 					  	</div>
-
-
+						
+						
 						<!--
 						Need to add a for loop here to loop through all the available mutators for the current event!
-						Waiting on backend to complete that before adding to frontend!
+						Waiting on backend to complete that before adding to frontend! 
 						 -->
 						<fieldset class="form-group">
 							<div class="input-group">
@@ -238,7 +238,7 @@
 						      	</div>
 						    </div>
 					    </fieldset>
-
+					    
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
@@ -247,7 +247,7 @@
 							    <div class="invalid-feedback">Please upload a valid screenshot(s)</div>
 						    </div>
 					  	</div>
-
+					  	
 					  	<fieldset class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon icons"><i class="fa fa-apple"></i></span>
@@ -268,7 +268,7 @@
 								</div>
 				  			</div>
 			  			</fieldset>
-
+					  	
 					  	<div class="form-group">
 					  		<div class="input-group">
 							    <span class="input-group-addon icons"><i class="fa fa-wrench"></i></span>
@@ -291,7 +291,7 @@
 								</div>
 							</div>
 						</div>
-
+					  	
 						<div class="form-group">
 							<button type="submit" name="newGameButton" class="btn btn-primary btn-block btn-lg">Submit</button>
 						</div>
@@ -302,34 +302,52 @@
 	</div>
 <%}%>
 
-<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-<script>
-		$(document).ready(function(){
-			$("#add-image").click(function(){
-				$(".newEventImages").append("<br><span class='input-group-addon icons'><i class='fa fa-upload'></i></span><input type='file' class='custom-file-input' id='validatedCustomFile' required/><label class='form-control modalFields custom-file-label' for='validatedCustomFile'>Choose Image(s)...</label>");
-			});
-		});
-
-		$(document).ready(function(){
-			$("#add-mutator").click(function(){
-				$(".newEventMutators").append("<br><span class='input-group-addon icons'><i class='fa fa-exclamation'></i></span><input type='text' class='mutator' placeholder='Mutator' /><input type='text' class='mutator-description' placeholder='Description' />");
-			});
-		});
-
-		$(document).ready(function(){
-			$(".datepicker").datepicker();
-		});
-
-</script>
-
-<!-- New Event Modal HTML -->
-<div id="newEventModal" class="modal fade">
-
-	<div class="modal-dialog modal-login newMods">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Create New Event</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<% if (request.getRequestURI().equals(request.getContextPath()+"/Events/") || request.getRequestURI().equals(request.getContextPath()+"/AdminPanel/"))  { %>
+	<!-- New Event Modal HTML -->
+	<div id="newEventModal" class="modal fade">
+		<div class="modal-dialog modal-login newMods">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Create New Event</h4>
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<form class="was-validated" action="<%= request.getContextPath() %>/accountServlet" method = "post">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
+								<input type="text" class="form-control modalFields" name="theme" placeholder="Theme" required>
+								<div class="invalid-feedback">Please enter a valid event theme</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
+								<textarea class="form-control modalFields" name="description" placeholder="Description" required></textarea>
+								<div class="invalid-feedback">Please enter a valid description</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
+							    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+							    <label class="form-control modalFields custom-file-label" for="validatedCustomFile">Choose Image(s)...</label>
+							    <div class="invalid-feedback">Please upload a valid image(s)</div>
+						    </div>
+					  	</div>
+					  	<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon icons"><i class="fa fa-exclamation"></i></span>
+								<textarea class="form-control modalFields" name="mutator" placeholder="Mutator(s)" required></textarea>
+								<div class="invalid-feedback">Please enter a valid mutator(s)</div>
+							</div>
+						</div>
+					  	
+						<div class="form-group">
+							<button type="submit" name="newEventButton" class="btn btn-primary btn-block btn-lg">Submit</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -374,105 +392,51 @@
 								<div class="invalid-feedback">Please enter a valid name</div>
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<div class="input-group">
-							<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
-							<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" placeholder="Description" required></textarea>
-							<div class="invalid-feedback">Please enter a valid description</div>
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon icons"><i class="fa fa-envelope"></i></span>
+								<input type="email" class="form-control modalFields" name="email" placeholder="Email" value="<%= session.getAttribute("accountEmail") %>" required>
+								<div class="invalid-feedback">Please enter a valid email</div>
+							</div>
 						</div>
-					</div>
-
-					<div class="form-group">
-							<span class="input-group-addon icons"><i class="fas fa-heading"></i></span>
-							<textarea id="eventBody" name="eventBody"></textarea>
-					</div>
-
-					<div class="form-group">
-						<div class="input-group newEventImages">
-							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-							<input type="file" class="custom-file-input" id="validatedCustomFile" required/>
-						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile">Choose Image(s)...</label>
-						    <div class="invalid-feedback">Please upload a valid image(s)</div>
-					    </div>
-					    <input type="button" value="Add another image" id="add-image" />
-				  	</div>
-				  	<div class="form-group">
-						<div class="input-group newEventMutators">
-							<span class='input-group-addon icons'><i class='fa fa-exclamation'></i></span>
-							<input type='text' class='mutator' placeholder='Mutator' />
-							<input type='text' class='mutator-description' placeholder='Description' />
-
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon icons"><i class="fa fa-phone"></i></span>
+								<input type="text" class="form-control modalFields" name="phoneNumber" placeholder="Phone Number" value="(402) 867-5309" required disabled>
+								<div class="invalid-feedback">Please enter a valid phone number</div>
+							</div>
 						</div>
-						<input type="button" value="Add another mutator" id="add-mutator" /><br><br>
-					</div>
-
-				  	<div class="form-group">
-				  		<div class="input-group eventDates">
-				    	  		<input type="text" class="datepicker" placeholder="Start Date" /><br>
-				    	  		<input type="text" class="datepicker" placeholder="End Date" /><br>
-				  		</div>
-				  	</div>
-
-					<div class="form-group">
-						<button type="submit" name="newEventButton" class="btn btn-primary btn-block btn-lg">Submit</button>
-					</div>
-				</form>
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon icons"><i class="fa fa-info"></i></span>
+								<input type="text" class="form-control modalFields" name="bio" placeholder="Bio" value="<%= p.getBio() %>">
+								<div class="invalid-feedback">Please enter a bio</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon icons"><i class="fa fa-link"></i></span>
+								<input type="text" class="form-control modalFields" name="site" placeholder="Website" value="<%= p.getWebsite() %>">
+								<div class="invalid-feedback">Please enter a website</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon icons"><i class="fa fa-code"></i></span>
+								<textarea class="form-control modalFields" name="skills" placeholder="Skills"><%
+	                            	String[] skills = p.getSkills().split("\n");
+		                            for(String s : skills) {
+	                           	%><%= s %><%}%></textarea>
+								<div class="invalid-feedback">Please enter a skill(s)</div>
+							</div>
+						</div>
+					  	
+						<div class="form-group">
+							<button type="submit" name="update" class="btn btn-primary btn-block btn-lg">Save</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
-<!-- New News Article Modal HTML -->
-<div id="newNewsArticleModal" class="modal fade">
-	<div class="modal-dialog modal-login newMods">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Add News Article</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			<div class="modal-body">
-				<form class="was-validated" action="<%= request.getContextPath() %>/NewsServlet" method = "post">
-					<div class="form-group">
-						<div class="input-group">
-							<span class="input-group-addon icons"><i class="fas fa-newspaper"></i></span>
-							<input type="text" class="form-control modalFields" name="newsTitle" placeholder="Title" required>
-							<div class="invalid-feedback">Please enter a valid title.</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="input-group">
-							<span class="input-group-addon icons"><i class="fas fa-heading"></i></span>
-							<input type="text" class="form-control modalFields" name="newsHeader" placeholder="Header" required>
-							<div class="invalid-feedback">Please enter a valid header.</div>
-						</div>
-					</div>
-					<div class="form-group">
-							<span class="input-group-addon icons"><i class="fas fa-heading"></i></span>
-							<textarea id="newsBody" name="newsBody"></textarea>
-					</div>
-					<div class="form-group">
-						<div class="input-group">
-							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-						    <input type="file" class="custom-file-input" id="newsFile" required>
-						    <label class="form-control modalFields custom-file-label" for="newsFile">Choose Image(s)...</label>
-						    <div class="invalid-feedback">Please upload a valid image.</div>
-					    </div>
-				  	</div>
-				  	<div class="form-group">
-					  	<div class="form-check">
-	  						<input class="form-check-input" type="checkbox" value="isPublicCheckbox" name="isPublicCheckbox" checked>
-	  						<label class="form-check-label">
-	    						Make Public
-	  						</label>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<button type="submit" id="newNewsArticleButton" name="newNewsArticleButton" class="btn btn-primary btn-block btn-lg">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
+<%}%>
