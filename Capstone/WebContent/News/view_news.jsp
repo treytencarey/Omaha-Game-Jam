@@ -17,57 +17,23 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/viewNewsStyle.css">
 </head>
-<style>
-.news-container {
-	border-radius: 20px;
-	padding: 10px;
-	background-color: #4C4C4C;
-	width: 60%;
-	margin: 0 auto;
-	align: center;
-	display: block;
-}
-
-.mainImg {
-  	object-fit: contain;
-  	max-width: 100%;
-  	max-height: 100%;
-  	width: auto;
-  	height: auto;
-  	margin: 0 auto;
-  	align: center;
-  	display: block;
-  	padding: 2px;
-}
-
-.admin-controls {
-	align: center;
-	margin: 0 auto;
-	display: block;
-	text-align: center;
-	padding: 15px;
-}
-
-.news-body {
-	padding:15px;
-}
-
-@media only screen and (max-width: 600px) {
-	.news-container {
-		width: 80%;
-	}
-}
-</style>
 <body>
 	<%@include  file="../navbar.jsp" %>
 
 	<%@page import="database.News" %>
 	<%@page import="project.Main" %>
 
-	<% try { %>
-		<% News n = new News(Integer.parseInt(request.getParameter("id"))); 
-		   request.setAttribute("newsTitle", n.getTitle()); %>
+	<% try {
+		   int newsId = Integer.parseInt(request.getParameter("id"));
+		   News n = new News(newsId);
+		   request.setAttribute("newsTitle", n.getTitle());
+		   int[] postKeys = News.getMostRecentNewsPostsKeys(3, newsId); 
+		   News[] recentNews = new News[postKeys.length];
+	   	   	for(int i = 0; i < recentNews.length; i++) {
+		   		recentNews[i] = new News(postKeys[i]);
+	        }%>
 		<div class="admin-controls">
 			<h5>Admin Controls:</h5>
 			<a id="editArticleBtn" href="#editNewsArticleModal" class="btn btn-primary btn-med" style="cursor: pointer;" role="button" data-toggle="modal">Edit Article</a>
@@ -83,6 +49,22 @@
 				<div id="news-body" class="news-body"><%= n.getBody() %></div>
 			</div>
 		</div>
+		<br>
+		<h5 class="page-text">Recent News</h4>
+		<!-- Container for other recent news articles -->
+		<div class="container h-100" style="text-align: center;">
+	  		<div class="row mt-2 justify-content-center">
+	  			<% for(int i = 0; i < recentNews.length; i++) { %>
+					<div class="card">
+						<a href="<%=request.getContextPath()%>/News/view?id=<%=recentNews[i].getKey()%>"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
+					  		<div class="card-body dark">
+					  			<h5 class="card-title"><%=recentNews[i].getTitle() %></h5>
+					  			<p class="card-text"><%=recentNews[i].getHeader() %></p>
+					  		</div>
+				  	</div>
+			  	<% } %>
+		  	</div>
+  		</div>
 		
 		<!-- Edit News Article Modal HTML -->
 		<div id="editNewsArticleModal" class="modal fade">
