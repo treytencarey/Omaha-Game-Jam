@@ -4763,11 +4763,11 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>viewGame</servlet-name>
-		<jsp-file>/view_game.jsp</jsp-file>
+		<servlet-name>GameServlet</servlet-name>
+		<servlet-class>database.GameServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>viewGame</servlet-name>
+		<servlet-name>GameServlet</servlet-name>
 		<url-pattern>/game</url-pattern>
 	</servlet-mapping>
 	
