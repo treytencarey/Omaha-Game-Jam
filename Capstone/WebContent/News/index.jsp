@@ -40,7 +40,7 @@
 					<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
 			  		<div class="card-body dark">
 			  			<small><%= recentNews[i].getDate() %></small>
-			  			<a href="#"><h5 class="card-title"><%= recentNews[i].getTitle() %></h5></a>
+			  			<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><h5 class="card-title"><%= recentNews[i].getTitle() %></h5></a>
 			  			<p class="card-text"><%= recentNews[i].getHeader() %></p>
 			  		</div>
 		  		</div>

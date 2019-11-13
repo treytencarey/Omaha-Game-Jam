@@ -23,7 +23,7 @@
 	border-radius: 20px;
 	padding: 10px;
 	background-color: #4C4C4C;
-	width: 70%;
+	width: 60%;
 	margin: 0 auto;
 	align: center;
 	display: block;
@@ -38,7 +38,7 @@
   	margin: 0 auto;
   	align: center;
   	display: block;
-  	padding: 5px;
+  	padding: 2px;
 }
 
 .admin-controls {
@@ -47,6 +47,16 @@
 	display: block;
 	text-align: center;
 	padding: 15px;
+}
+
+.news-body {
+	padding:15px;
+}
+
+@media only screen and (max-width: 600px) {
+	.news-container {
+		width: 80%;
+	}
 }
 </style>
 <body>
@@ -70,6 +80,7 @@
 				<br>
 				<h4 style="text-align: center;"><%= n.getHeader() %></h4>
 				<br>
+				<div id="news-body" class="news-body"><%= n.getBody() %></div>
 			</div>
 		</div>
 		
@@ -99,7 +110,7 @@
 							</div>
 							<div class="form-group">
 									<span class="input-group-addon icons"><i class="fas fa-heading"></i></span>
-									<textarea id="editNewsBody" name="editNewsBody"></textarea>
+									<textarea id="editNewsBody" name="newsBody"><%= n.getBody() %></textarea>
 							</div>
 							<div class="form-group">
 								<div class="input-group">
@@ -116,6 +127,7 @@
 			    						Make Public
 			  						</label>
 								</div>
+								<input type="hidden" name="newsId" value="<%= n.getKey() %>" />
 							</div>
 						  	
 							<div class="form-group">
@@ -136,7 +148,7 @@
 var bodyField;
 loadEditor();
 
-function loadEditor() { 
+function loadEditor() {
 	bodyField = new nicEditor({fullPanel: true}).panelInstance("editNewsBody");
 	$("editNewsBody").width("100%");
 	$('.nicEdit-panelContain').parent().css({width:'100%', padding:"0"});

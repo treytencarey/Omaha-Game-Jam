@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 
+import project.Main;
+
 /**
  * 
  * Handles interactions between the news page on the site and news articles in database.
@@ -148,18 +150,26 @@ public class News {
 		return this.isPublic;
 	}
 	
-	public String getBody(String startPath, int key) {
+	/**
+	 * Gets the body of the article from a txt file corresponding to PKey
+	 * @return the body of the article as a String
+	 */
+	public String getBody() {
 		try {
 			String body = "";
 			String read = "";
 			
-			File f = new File(startPath + "/Uploads/News/Body/" + key + ".txt");
-			BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+			String origPath = "/Uploads/News/Body/Body";
+			String[] splits = origPath.replaceAll("\\\\", "/").split("/");
+			String fileName = splits[splits.length-1];
+			String path = Main.context.getRealPath(origPath.substring(0,origPath.length()-fileName.length()));
+			
+			File file = new File(path + "/" + key + "_body.txt");
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 			while((read = bufferedReader.readLine()) != null) {
-				body = body + read + "\n";
+				body = body + read;
 			}
 			bufferedReader.close();
-			System.out.println(body);
 			return body;
 		} catch(Exception e) {
 			System.err.println(e);
