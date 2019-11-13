@@ -1,4 +1,3 @@
-<%@page import="project.Main" %>
 <div id="editProfileModal" class="modal fade">
 	<div class="modal-dialog modal-login newMods">
 		<div class="modal-content">
@@ -11,7 +10,7 @@
 
                     	<%@page import="java.io.File" %>
                     	<% 	String profileImgPath = "/Uploads/Profiles/Pics/" + session.getAttribute("accountPKey");
-                        	if (!new File(Main.context.getRealPath(profileImgPath)).exists())
+                    		if (!new File(Main.context.getRealPath(profileImgPath)).exists())
                     			profileImgPath = "https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg";
                         	else
                         		profileImgPath = request.getContextPath() + profileImgPath;

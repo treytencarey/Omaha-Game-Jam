@@ -20,11 +20,9 @@
 <body>
 	<%@include  file="navbar.jsp" %>
 
-	<%@page import="database.Profile" %>
-	<%@include file="../components/editProfileModal.jsp" %>
-
 	<% try { %>
-		<% Profile pView = new Profile(Integer.parseInt(request.getParameter("id"))); %>
+		<% Profile p = new Profile(Integer.parseInt(request.getParameter("id"))); %>
+		<%@include file="components/editProfileModal.jsp" %>
 
 		<div class="container emp-profile">
             <form action="edit">
@@ -44,10 +42,10 @@
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        <%= pView.getName() %>
+                                        <%= p.getName() %>
                                     </h5>
                                     <h6>
-                                        <%= pView.getBio() %>
+                                        <%= p.getBio() %>
                                     </h6>
                                     <p class="proile-rating">Attending Game Jam 2019 : <span>Yes</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -65,10 +63,10 @@
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>WORK LINK</p>
-                            <a href="<%= pView.getWebsite() %>">Website Link</a><br/>
+                            <a href="<%= p.getWebsite() %>">Website Link</a><br/>
                             <p>SKILLS</p>
                             <%
-                            	skills = pView.getSkills().split("\n");
+                            	skills = p.getSkills().split("\n");
 	                            for(String s : skills) {
                            	%>
 	                            	<a href=""><%= s %></a><br/>
@@ -85,7 +83,7 @@
                                                 <label>Name</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><%= pView.getName() %></p>
+                                                <p><%= p.getName() %></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -142,6 +140,8 @@
 
 
 	<% } catch (Exception e) { %>
+		<% Profile p = new Profile(); %>
+		<%@include file="components/editProfileModal.jsp" %>
 		<% if (request.getParameter("id").equals(session.getAttribute("accountPKey"))) { %>
 			<div class="container emp-profile">
 	    		<div class="row">
