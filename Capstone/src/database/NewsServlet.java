@@ -111,9 +111,9 @@ public class NewsServlet extends HttpServlet {
 		 * Create the file in the form of PKey_body.txt and write/overwrite to the file
 		 */
 		String pKey = query.get(0).get("PKey").toString();
-		File file = new File(path + "/" + pKey + "_body.txt");
+		File file = new File(path +  pKey + "_body.txt");
 		file.createNewFile();
-		System.out.println(path + "/" + pKey + "_body.txt");
+		System.out.println(path + pKey + "_body.txt");
 		FileOutputStream outFile = new FileOutputStream(file);
 		outFile.write(reqBody.getBytes());
 		outFile.close();
