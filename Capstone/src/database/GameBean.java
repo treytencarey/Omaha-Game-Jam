@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+<<<<<<< HEAD:Capstone/src/database/Game.java
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -107,17 +108,42 @@ public class Game extends HttpServlet implements Serializable{
 	 * Gets a blank game.
 	 */
 	public Game()
+=======
+/**
+ * Model for the DB's Games table, used to retrieve a single row when given a Game's ID.
+ */
+public class GameBean implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	private String id, event, submitter, title, desc, link, isPublic;
+	
+	/**
+	 * Instantiate a new GameBean with blank fields.
+	 * This does not interact with the DB in any way.
+	 */
+	public GameBean()
+>>>>>>> 1885a384342e03e43eec99afd8d8ee32738680a4:Capstone/src/database/GameBean.java
 	{
 		
 	}
 	
 	/**
+<<<<<<< HEAD:Capstone/src/database/Game.java
 	 * Gets a game from the database.
 	 * @param PKey an integer value of the game's primary key.
 	 */
 	public Game(int PKey)
 	{
 		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Games WHERE PKey=" + String.valueOf(PKey));
+=======
+	 * Fetch the specified game from the DB and instantiate a GameBean with its data.
+	 * @param PKey the id of the game to fetch from Games table.
+	 */
+	public GameBean(String PKey)
+	{
+		this.setId(PKey + "");
+		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Games WHERE PKey=" + this.getId());
+>>>>>>> 1885a384342e03e43eec99afd8d8ee32738680a4:Capstone/src/database/GameBean.java
 		if (query.size() == 0)
 			throw new NullPointerException();
 		Map<String, Object> game = query.get(0);

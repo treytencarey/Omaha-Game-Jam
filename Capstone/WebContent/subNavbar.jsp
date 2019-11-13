@@ -3,14 +3,11 @@
 	  <div class=" navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav ml-auto">
 				<li class="nav-item indvTabs">
-			  		<a class="nav-link" href="<%= request.getContextPath() %>/AdminPanel/index.jsp">Admin Menu</a>
+			  		<a class="nav-link" href="<%= request.getContextPath() %>/AdminPanel">Admin Menu</a>
 				</li>
     		<% if (request.getRequestURI().equals(request.getContextPath()+"/profile") && request.getParameter("id").equals(session.getAttribute("accountPKey")))  { %>
 		      <li class="nav-item indvTabs">
-		      	
-           		<form action="edit">
-		      		<input type="submit" class="nav-link" name="btnAddMore" value="Edit Profile"/>
-		      	</form>
+		      	<a id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Edit Profile</a>
 		      </li>
 	      	<%}%>
 	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/profile/edit"))  { %>
@@ -36,6 +33,11 @@
 		      </li>
 		      <li class="nav-item indvTabs">
 		        <a class="nav-link" href="#">Edit Event</a>
+		      </li>
+	      	<%}%>
+	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/News/"))  { %>
+		      <li class="nav-item indvTabs">
+		        <a id="add-article-btn" href="#newNewsArticleModal" class="nav-link" data-toggle="modal">Add Article</a>
 		      </li>
 	      	<%}%>
 	    </ul>

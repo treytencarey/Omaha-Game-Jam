@@ -1,8 +1,14 @@
 package database;
 
-// Represents a row in the Contributor table
+/**
+ * Represents a single row from the Contributors table. This does not interact with the DB in any way.
+ */
 public class Contributor {
 	private String AccountPKey, GamePKey, RolePKey;
+	
+	/**
+	 * Instantiate a Contributor with the passed arguments.
+	 */
 	public Contributor(String AccountPKey, String GamePKey, String RolePKey)
 	{
 		setAccountPKey(AccountPKey);

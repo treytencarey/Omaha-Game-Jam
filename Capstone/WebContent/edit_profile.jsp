@@ -23,14 +23,6 @@
 
 	<%@page import="database.Profile" %>
 	<%@page import="project.Main" %>
-	<%	Profile p;
-
-		try {
-			p = new Profile(Integer.parseInt(session.getAttribute("accountPKey").toString()));
-		} catch (Exception e) {
-			p = new Profile();
-		}
-	%>
 
 	<div class="container emp-profile">
 

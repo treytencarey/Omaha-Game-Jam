@@ -47,8 +47,12 @@ public class Database extends HttpServlet {
 	/**
 	 * The database location.
 	 */
+<<<<<<< HEAD
 	public static final String AUTH_DB = "C:\\Users\\treyt\\Desktop\\Capstone\\Capstone\\WebContent\\Databases\\db.db"; // Main.context.getRealPath("/Databases/db.db");
 	
+=======
+	public static final String AUTH_DB = Main.context.getRealPath("/Databases/db.db");
+>>>>>>> 1885a384342e03e43eec99afd8d8ee32738680a4
 	/**
 	 * Gets URL parameters as a map.
 	 * @param query a string of the URL parameters query.
