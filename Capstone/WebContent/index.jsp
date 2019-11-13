@@ -74,7 +74,7 @@
   		</div>
   		<%	if (session.getAttribute("accountPKey") == null) { %>
   			<p class="lead">
-    			<a class="btn btn-primary btn-med" style="cursor: pointer;" onclick="showRegisterModal()" role="button">Register Now!</a>
+    			<a class="btn btn-primary btn-med" style="cursor: pointer;" onclick="showRegisterModal()" role="button">Register for an Account Now!</a>
   			</p>
   		<% } %>
 	</div>

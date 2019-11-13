@@ -3,26 +3,21 @@ package database;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import project.Main;
 
 /**
  * 
  * Handles interactions between the news page on the site and news articles in database.
  *
  */
-@WebServlet("/newsServlet")
-public class News extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class News {
+	private static final long serialVersionUID = 256L;
 	
 	/**
 	 * The key of the news article.
@@ -33,21 +28,21 @@ public class News extends HttpServlet {
 	 * The title of the news article.
 	 */
 	private String title = "";
+	
+	/**
+	 * The header of the news article.
+	 */
+	private String header = "";
+	
 	/**
 	 * The date of the news article.
 	 */
 	private String date = "";
 	
 	/**
-	 * Handles form submissions for the newsServlet.
-	 * @param request the servlet request.
-	 * @param response the servlet for response.
+	 * The date of the news article.
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		//HttpSession session = request.getSession(false);
-		//System.out.println(request.getParameter("article-title-input"));
-	}
+	private int isPublic = 0;
 	
 	/**
 	 * Gets a News article from the database.
@@ -62,7 +57,16 @@ public class News extends HttpServlet {
 		
 		key = PKey;
 		title = newsPost.get("Title").toString();
+		header = newsPost.get("Header").toString();
 		date = newsPost.get("Date").toString();
+		isPublic = Integer.parseInt(newsPost.get("IsPublic").toString());
+	}
+	
+	/**
+	 * Creates blank News article.
+	 */
+	public News() {
+		
 	}
 	
 	
@@ -80,18 +84,20 @@ public class News extends HttpServlet {
 	}
 	
 	/**
-	 * Gets PKeys for the six (or less) most recent public News articles in the database.
+	 * Gets PKeys for the most recent public News articles in the database.
+	 * @param a - Number of PKeys to get
+	 * @param p - PKey to exclude from array
 	 * @return The array of PKeys for the six (or less) most public News articles.
 	 */
-	public static int[] getMostRecentNewsPostsKeys() {
+	public static int[] getMostRecentNewsPostsKeys(int a, int p) {
 		int[] keys;
 		ArrayList<Integer> keyList = new ArrayList<Integer>();
-		List<Map<String, Object>> pKeyQuery = Database.executeQuery("SELECT PKey FROM Blogs WHERE IsPublic=1");
-		List<Map<String, Object>> sizeQuery = Database.executeQuery("SELECT COUNT(*) FROM Blogs WHERE IsPublic=1");
+		List<Map<String, Object>> pKeyQuery = Database.executeQuery("SELECT PKey FROM Blogs WHERE IsPublic=1 AND NOT PKey=\'" + Integer.toString(p) + "\'");
+		List<Map<String, Object>> sizeQuery = Database.executeQuery("SELECT COUNT(*) FROM Blogs WHERE IsPublic=1 AND NOT PKey=\'" + Integer.toString(p) + "\'");
 		
 		String size = sizeQuery.get(0).get("COUNT(*)").toString();
 		int qSize = Integer.parseInt(size);
-		int qSizeFloor = qSize - 6;
+		int qSizeFloor = qSize - a;
 		if(qSizeFloor < 0) qSizeFloor = 0;
 		
 		for(int i = qSize; i > qSizeFloor; i--) {
@@ -123,6 +129,14 @@ public class News extends HttpServlet {
 	}
 	
 	/**
+	 * Gets the header of the News article.
+	 * @return The header of the News article.
+	 */
+	public String getHeader() {
+		return this.header;
+	}
+	
+	/**
 	 * Gets the date of the News article.
 	 * @return The date of the News article.
 	 */
@@ -130,18 +144,34 @@ public class News extends HttpServlet {
 		return this.date;
 	}
 	
-	public String getBody(String startPath, int key) {
+	/**
+	 * Gets the public status of the News article.
+	 * @return The public status of the News article.
+	 */
+	public int getIsPublic() {
+		return this.isPublic;
+	}
+	
+	/**
+	 * Gets the body of the article from a txt file corresponding to PKey
+	 * @return the body of the article as a String
+	 */
+	public String getBody() {
 		try {
 			String body = "";
 			String read = "";
 			
-			File f = new File(startPath + "/Uploads/News/Body/" + key + ".txt");
-			BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+			String origPath = "/Uploads/News/Body/Body";
+			String[] splits = origPath.replaceAll("\\\\", "/").split("/");
+			String fileName = splits[splits.length-1];
+			String path = Main.context.getRealPath(origPath.substring(0,origPath.length()-fileName.length()));
+			
+			File file = new File(path + "/" + key + "_body.txt");
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 			while((read = bufferedReader.readLine()) != null) {
-				body = body + read + "\n";
+				body = body + read;
 			}
 			bufferedReader.close();
-			System.out.println(body);
 			return body;
 		} catch(Exception e) {
 			System.err.println(e);

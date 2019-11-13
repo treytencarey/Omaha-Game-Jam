@@ -2,13 +2,13 @@
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
-    
+
 <div id="allNavBar">
 	<%@page import = "utils.Utils" %>
 	<%@page import="database.Profile" %>
 	<%@page import="project.Main" %>
 	<%	Profile p;
-	
+
 		try {
 			p = new Profile(Integer.parseInt(session.getAttribute("accountPKey").toString()));
 		} catch (Exception e) {
@@ -129,7 +129,7 @@
 	<% session.setAttribute("successJS", "$('#loginModal').modal('hide');"); %>
 	<% session.setAttribute("errorJS", "document.getElementById('loginModalError').style.display='block'; document.getElementById('loginModalErrorMessage').innerText=request.responseText;"); %>
 	<%@include file="components/ajax.jsp" %>
-	
+
 	<!-- Register Modal HTML -->
 	<div id="registerModal" class="modal fade">
 		<div class="modal-dialog modal-login">
@@ -211,11 +211,11 @@
 							    <div class="invalid-feedback">Please upload a valid icon</div>
 						    </div>
 					  	</div>
-						
-						
+
+
 						<!--
 						Need to add a for loop here to loop through all the available mutators for the current event!
-						Waiting on backend to complete that before adding to frontend! 
+						Waiting on backend to complete that before adding to frontend!
 						 -->
 						<fieldset class="form-group">
 							<div class="input-group">
@@ -243,7 +243,7 @@
 						      	</div>
 						    </div>
 					    </fieldset>
-					    
+
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
@@ -252,7 +252,7 @@
 							    <div class="invalid-feedback">Please upload a valid screenshot(s)</div>
 						    </div>
 					  	</div>
-					  	
+
 					  	<fieldset class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon icons"><i class="fa fa-apple"></i></span>
@@ -273,7 +273,7 @@
 								</div>
 				  			</div>
 			  			</fieldset>
-					  	
+
 					  	<div class="form-group">
 					  		<div class="input-group">
 							    <span class="input-group-addon icons"><i class="fa fa-wrench"></i></span>
@@ -296,7 +296,7 @@
 								</div>
 							</div>
 						</div>
-					  	
+
 						<div class="form-group">
 							<button type="submit" name="newGameButton" class="btn btn-primary btn-block btn-lg">Submit</button>
 						</div>
@@ -332,12 +332,12 @@
 								<div class="invalid-feedback">Please enter a valid description</div>
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 								<span class="input-group-addon icons"><i class="fas fa-heading"></i></span>
 								<textarea id="eventBody" name="eventBody"></textarea>
 						</div>
-						
+
 						<div class="form-group">
 							<div class="input-group newEventImages">
 								<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
@@ -352,11 +352,11 @@
 								<span class='input-group-addon icons'><i class='fa fa-exclamation'></i></span>
 								<input type='text' class='mutator' placeholder='Mutator' />
 								<input type='text' class='mutator-description' placeholder='Description' />
-	
+
 							</div>
 							<input type="button" value="Add another mutator" id="add-mutator" /><br><br>
 						</div>
-					  	
+
 					  	<div class="form-group">
 					  		<div class="input-group eventDates">
 				    	  		<input id="datepicker" width="270" />
@@ -367,7 +367,7 @@
 							    </script>
 					  		</div>
 					  	</div>
-					  	
+
 						<div class="form-group">
 							<button type="submit" name="newEventButton" class="btn btn-primary btn-block btn-lg">Submit</button>
 						</div>
@@ -455,7 +455,7 @@
 								<div class="invalid-feedback">Please enter a skill(s)</div>
 							</div>
 						</div>
-					  	
+
 						<div class="form-group">
 							<button type="submit" name="update" class="btn btn-primary btn-block btn-lg">Save</button>
 						</div>
@@ -464,4 +464,61 @@
 			</div>
 		</div>
 	</div>
-<%}%>
+</div>
+<% } %>
+
+<% if (request.getRequestURI().equals(request.getContextPath()+"/News/"))  { %>
+<!-- New News Article Modal HTML -->
+<div id="newNewsArticleModal" class="modal fade">
+	<div class="modal-dialog modal-login newMods">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Add News Article</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<form class="was-validated" action="<%= request.getContextPath() %>/NewsServlet" method = "post">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fas fa-newspaper"></i></span>
+							<input type="text" class="form-control modalFields" name="newsTitle" placeholder="Title" required>
+							<div class="invalid-feedback">Please enter a valid title.</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fas fa-heading"></i></span>
+							<input type="text" class="form-control modalFields" name="newsHeader" placeholder="Header" required>
+							<div class="invalid-feedback">Please enter a valid header.</div>
+						</div>
+					</div>
+					<div class="form-group">
+							<span class="input-group-addon icons"><i class="fas fa-heading"></i></span>
+							<textarea id="newsBody" name="newsBody"></textarea>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
+						    <input type="file" class="custom-file-input" id="newsFile" required>
+						    <label class="form-control modalFields custom-file-label" for="newsFile">Choose Image(s)...</label>
+						    <div class="invalid-feedback">Please upload a valid image.</div>
+					    </div>
+				  	</div>
+				  	<div class="form-group">
+					  	<div class="form-check">
+	  						<input class="form-check-input" type="checkbox" value="isPublicCheckbox" name="isPublicCheckbox" checked>
+	  						<label class="form-check-label">
+	    						Make Public
+	  						</label>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<button type="submit" id="newNewsArticleButton" name="newNewsArticleButton" class="btn btn-primary btn-block btn-lg">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<% } %>
