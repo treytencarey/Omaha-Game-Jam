@@ -21,7 +21,7 @@
 	<%@include  file="navbar.jsp" %>
 
 	<%@page import="database.Profile" %>
-	<%@page import="project.Main" %>
+	<%@include file="../components/editProfileModal.jsp" %>
 
 	<% try { %>
 		<% Profile pView = new Profile(Integer.parseInt(request.getParameter("id"))); %>
@@ -32,7 +32,7 @@
                     <div class="col-md-4">
                         <div class="profile-img">
                         	<%@page import="java.io.File" %>
-                        	<% 	String profileImgPath = "/Uploads/Profiles/Pics/" + request.getParameter("id");
+                        	<% 	profileImgPath = "/Uploads/Profiles/Pics/" + request.getParameter("id");
                             	if (!new File(Main.context.getRealPath(profileImgPath)).exists())
                         			profileImgPath = "https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg";
                             	else
@@ -68,7 +68,7 @@
                             <a href="<%= pView.getWebsite() %>">Website Link</a><br/>
                             <p>SKILLS</p>
                             <%
-                            	String[] skills = pView.getSkills().split("\n");
+                            	skills = pView.getSkills().split("\n");
 	                            for(String s : skills) {
                            	%>
 	                            	<a href=""><%= s %></a><br/>

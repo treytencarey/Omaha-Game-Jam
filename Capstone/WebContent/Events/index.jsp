@@ -38,6 +38,7 @@
 </head>
 <body>
 	<%@include  file="../navbar.jsp" %>
+	<%@include file="../components/newEventModal.jsp" %>
 	<div style="text-align: center;">
 		<%
 	FolderReader fr = new FolderReader("/images/eventImages");

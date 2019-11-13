@@ -24,6 +24,7 @@
 	<%@include  file="../navbar.jsp" %>
 	<%@page import="database.News" %>
 	<%@page import="project.Main" %>
+	<%@include file="../components/newEventModal.jsp" %>
 	<% int[] postKeys = News.getMostRecentNewsPostsKeys(6, 0);
 	   News[] recentNews = new News[postKeys.length];
 	   for(int i = 0; i < recentNews.length; i++) {
