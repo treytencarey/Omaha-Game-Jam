@@ -113,6 +113,8 @@
 	<h1>Past Events</h1>
 	</div>
 
+	<div class="container">
+		<div class="row mt-5 justify-content-center">
 	<%
 	List<Map<String, Object>> events = Database.executeQuery("SELECT * FROM Events WHERE PKey != (SELECT MAX(PKey) FROM Events)");
 	if(!events.isEmpty()){
@@ -120,16 +122,14 @@
 			
 			Event eventCard = new Event(Integer.parseInt(pastEvent.get("PKey").toString()));
 	%>
-	<div class="card-deck-wrapper">
-		<div class="card-deck">
-				<div class="card" style="max-width:300px;">
-					<img src="../images/its_spherical.jpg" class="card-image-top" alt="Card image">
-					<div class="card-body dark">
-			  			<h5 class="card-title"><%= eventCard.getTitle() %></h5>
-			  			<h6 class="card-subtitle mb-2 text-muted"><%= eventCard.getTheme() %></h6>
-			  			<p class="card-text"><%= eventCard.getDescription() %></p>
-			  		</div>
-				</div>
+			<div class="card card-custom mx-2 mb-3" style="max-width:350px;">
+				<img src="../images/its_spherical.jpg" class="card-image-top" alt="Card image">
+				<div class="card-body dark">
+		  			<h5 class="card-title"><%= eventCard.getTitle() %></h5>
+		  			<h6 class="card-subtitle mb-2 text-muted"><%= eventCard.getTheme() %></h6>
+		  			<p class="card-text"><%= eventCard.getDescription() %></p>
+		  		</div>
+		    </div>
 				
 		<%	
 		}
