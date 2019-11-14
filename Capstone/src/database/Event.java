@@ -75,6 +75,14 @@ public class Event {
 		endDate = "No Date";
 	}
 	
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
+	}
+
 	/**
 	 * returns event title
 	 */
