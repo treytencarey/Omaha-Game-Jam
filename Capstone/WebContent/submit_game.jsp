@@ -23,7 +23,7 @@ if (g == null)
 </head>
 <body>
 <form action="submit" method="POST">
-	Game Icon: <input type="image" src="/game/<%= g.getId() %>/profile.png"><br>
+	Game Icon: <input type="image" src="/game/<%= 1 %>/profile.png"><br>
 	Title: <input name="title" value="<%= g.getTitle() %>" ><br>
 	Description: <textarea rows="3" name="desc"><%= g.getDesc() %></textarea><br>
 	Mutators: <br>

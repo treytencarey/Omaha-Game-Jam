@@ -5,15 +5,25 @@
 			var $form = $("<%= session.getAttribute("form") %>");
 			$form.submit(function(e) {
 				e.preventDefault();
-				$.ajax({
+				var params = {
 					type: "POST",
 					url: "${pageContext.request.contextPath}/<%= session.getAttribute("servlet") %>",
-			        data: $(this).serialize(), 
+					<% if (session.getAttribute("multipart") != null) { %>
+				        data: new FormData(this),
+				        processData: false,
+				        contentType: false,
+				   	<% } else { %>
+				   		data: $(this).serialize(),
+				   	<% } %>
 			        cache: false,
 			        success: function (data){
 			           <% if (session.getAttribute("updates") != null) {
 			           	  	for (String update : (List<String>)session.getAttribute("updates")) { %>
-		        	   			$('<%= update %>').replaceWith($('<%= update %>',data));
+		        	   			if ($('<%= update %>')[0].tagName == 'IMG') {
+		        	   				$('<%= update %>')[0].src += '?_=' + new Date().getTime(); 
+		        	   			} else {
+		        	   				$('<%= update %>').replaceWith($('<%= update %>',data));
+		        	   			}
 		        	   <% 	}
 			           	  } %>
 			           	<% if (session.getAttribute("successJS") != null) { %>
@@ -25,7 +35,8 @@
 							<%= session.getAttribute("errorJS") %>
 						<% } %>
 					}
-				});
+				}
+				$.ajax(params);
 			});
 		</script>
 <% 	}
@@ -34,4 +45,5 @@
 	session.setAttribute("updates", null);
 	session.setAttribute("successJS", null);
 	session.setAttribute("errorJS", null);
+	session.setAttribute("multipart",null);
 %>
