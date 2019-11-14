@@ -48,6 +48,7 @@ public class Database extends HttpServlet {
 	 * The database location.
 	 */
 	public static final String AUTH_DB = Main.context.getRealPath("/Databases/db.db");
+
 	/**
 	 * Gets URL parameters as a map.
 	 * @param query a string of the URL parameters query.
@@ -140,6 +141,7 @@ public class Database extends HttpServlet {
 	 */
 	public static List<Map<String, Object>> executeQuery(String sql)
 	{
+		System.out.println(AUTH_DB);
 		return Database.executeQuery(sql, Database.AUTH_DB);
 	}
 	/**
