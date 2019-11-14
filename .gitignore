@@ -12,6 +12,7 @@
 !Capstone/**/*.png
 !Capstone/**/*.jpg
 !Capstone/**/*.jpeg
+!Capstone/**/*.txt
 !Capstone/WebContent/WEB-INF/lib/*.jar
 !Capstone/WebContent/images/*.*
 !Capstone/TestingUtils/*.*
