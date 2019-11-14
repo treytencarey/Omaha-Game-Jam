@@ -181,3 +181,7 @@ i {
 .datePicker {
 	background-image: none !important;
 }
+#carouselExampleIndicators {
+	width: 45%;
+	margin: auto;
+}
