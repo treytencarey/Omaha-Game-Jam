@@ -6,6 +6,7 @@
 // This should be moved into a servlet, but this'll have to do for now
 int epk = 1;
 Event event = new Event(epk);
+session.setAttribute("ActiveEvent", event);
 List<Map<String, Object>> query = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE EventPKey=" + epk);
 int numOfUsers = Integer.parseInt(query.get(0).get("COUNT(*)").toString());
 %>
@@ -46,6 +47,9 @@ int numOfUsers = Integer.parseInt(query.get(0).get("COUNT(*)").toString());
     	</div>
   	</div>
   	<p style="font-size: 15px"><%=numOfUsers %> other Jammers have RSVP'd for this Jam.</p>
+  	<form action="rsvp_placeholder.jsp">
+  	  	<input type="submit" class="btn btn-primary" value="RSVP">
+  	</form>
   	
   	<div class="pagePadding"></div>
   	
