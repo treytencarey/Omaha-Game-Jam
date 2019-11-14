@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="database.Database" %>
+<%@ page import="database.Database, database.Event" %>
+
+<%
+// This should be moved into a servlet, but this'll have to do for now		
+List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM ActiveEvent");
+if (query.size() == 0)
+	throw new NullPointerException();
+Map<String, Object> ae = query.get(0);
+int epk = Integer.parseInt(ae.get("EventPKey").toString());
+		
+Event event = new Event(epk);
+session.setAttribute("ActiveEvent", event);
+query = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE EventPKey=" + epk);
+int numOfUsers = Integer.parseInt(query.get(0).get("COUNT(*)").toString());
+%>
 
 <!DOCTYPE html>
 <html>
@@ -29,12 +43,29 @@
 	
 	<div class="mainEventParent">
 		<img class="mainEventImg rounded" src="./images/gamejam.png"/>
-		<div class="imgOverlay">
-    		<div class="overlayTitle">Upcoming Event</div>
-    		<div class="overlaySubtitle">November 6th 2019 - November 9th 2019</div>
-    		<a class="btn btn-primary btn-med overlayBtn" href="./Events" role="button">Details</a>
-    	</div>
   	</div>
+  	
+  	<div class="jumbotron aboutSection" style="margin-top: 50px;">
+  		<h1 class="display-5">UPCOMING EVENT: <%= event.getTitle() %></h1>
+  		<hr class="my-2" style="background-color: #3b3b3b">
+  		<div style="font-size: 18px">
+  			<p><%= event.getStartDate() %> - <%= event.getEndDate() %></p>
+  			<p style="font-size: 15px"><%=numOfUsers %> other Jammers have RSVP'd for this Jam.</p>
+  			<div class="row">
+	  			<form action="./Events" style="margin-left: auto; margin-right: 10px;">
+	  				<input type="submit" class="btn btn-primary" href="./Events" value="Details">
+				</form>
+	  			<form action="rsvp_placeholder.jsp" style="margin-right: auto; margin-left: 10px;">
+			  	  	<input type="submit" class="btn btn-primary" value="RSVP">
+			  	</form>
+		  	</div>
+  		</div>
+  		<%	if (session.getAttribute("accountPKey") == null) { %>
+  			<p class="lead">
+    			<a class="btn btn-primary btn-med" style="cursor: pointer;" onclick="showRegisterModal()" role="button">Register Now!</a>
+  			</p>
+  		<% } %>
+	</div>
   	
   	<div class="pagePadding"></div>
   	
@@ -59,13 +90,10 @@
   		</div>
   	
 	<div class="jumbotron aboutSection">
-	<% List<Map<String, Object>> query = Database.executeQuery("SELECT COUNT(*) FROM Accounts");
-	   int numOfUsers = Integer.parseInt(query.get(0).get("COUNT(*)").toString()); %>
   		<h1 class="display-5">About Omaha Game Jam</h1>
   		<hr class="my-2" style="background-color: #3b3b3b">
   		<div style="font-size: 18px">
   			<p>Omaha Game Jam is a free 2 day game development event where participants build games from scratch around a secret theme. At the end of dev time, everyone presents, plays, and votes on superlative awards. Individuals 18+ and teams are welcome!</p>
-  			<p style="font-size: 15px">There are currently <%=numOfUsers %> registered Game Jammers.</p>
   		</div>
   		<%	if (session.getAttribute("accountPKey") == null) { %>
   			<p class="lead">

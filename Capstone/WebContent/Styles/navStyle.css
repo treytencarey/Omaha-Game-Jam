@@ -160,3 +160,28 @@ i {
 .creditField {
 	padding: 0px;
 }
+
+.multiplValueFields {
+	text-align: center;
+	height: 75px;
+}
+
+.input-group {
+	text-align: left;
+}
+
+.valid-feedback {
+	margin-left: 40px;
+}
+
+.eventDates {
+	margin: auto;
+}
+
+.datePicker {
+	background-image: none !important;
+}
+#carouselExampleIndicators {
+	width: 45%;
+	margin: auto;
+}
