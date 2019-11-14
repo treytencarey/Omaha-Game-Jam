@@ -29,48 +29,7 @@
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEventModal">Create Event</button>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Edit Event</button>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Display Mutators</button>
-		<div class="modal fade text-dark modal-lg" id="createEventModal" tabindex="-1" role="dialog" aria-labelledby="createEventModalLabel" aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-			    	<div class="modal-content">
-			     	 <div class="modal-header">
-			      	  <h5 class="modal-title" id="createEventModalLabel">Create Event</h5>
-			      	  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			       	   <span aria-hidden="true">&times;</span>
-			       	 </button>
-			    	  </div>
-			    	  <div class="modal-body">
-			    	  	<form>
-			    	  		<b>Event Theme</b><br>
-			    	  		<input type="text" style='border: 1px solid black'/><br><br>
-			    	  		<b>Event Image(s):</b>
-			    	  		<div class="event-images">
-			    	  			<input type="file" /><br>
-			    	  		</div>
-			    	  		<input type="button" value="Add another image" id="add-image" />
-			    	  		<br><br>
-			    	  		<b>Event Description:</b><br>
-			    	  		<textarea rows="9" cols="50" style="border:1px solid black"></textarea><br>
-			    	  		<b>Mutators:</b><br>
-			    	  		<div class="event-mutators">
-			    	  			<input type='text' style='border: 1px solid black' /><br>
-			    	  		</div>
-			    	  		<input type="button" value="Add another mutator" id="add-mutator" /><br><br>
-			    	  		
-			    	  		<b>Start Date</b>
-			    	  		
-			    	  		<div class="md-form">
-  <input placeholder="Selected date" type="text" id="date-picker-example" class="form-control datepicker">
-  <label for="date-picker-example">Try me...</label>
-</div>
-			    	  	</form>
-			    	  </div>
-			      	<div class="modal-footer">
-			        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			        	<button type="button" class="btn btn-primary">Create</button>
-			      	</div>
-			    </div>
-			  </div>
-			</div>
+		
 	</div>
 </body>
 </html>
