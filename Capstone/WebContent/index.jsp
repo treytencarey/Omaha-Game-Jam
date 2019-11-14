@@ -3,11 +3,16 @@
 <%@ page import="database.Database, database.Event" %>
 
 <%
-// This should be moved into a servlet, but this'll have to do for now
-int epk = 1;
+// This should be moved into a servlet, but this'll have to do for now		
+List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM ActiveEvent");
+if (query.size() == 0)
+	throw new NullPointerException();
+Map<String, Object> ae = query.get(0);
+int epk = Integer.parseInt(ae.get("EventPKey").toString());
+		
 Event event = new Event(epk);
 session.setAttribute("ActiveEvent", event);
-List<Map<String, Object>> query = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE EventPKey=" + epk);
+query = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE EventPKey=" + epk);
 int numOfUsers = Integer.parseInt(query.get(0).get("COUNT(*)").toString());
 %>
 
