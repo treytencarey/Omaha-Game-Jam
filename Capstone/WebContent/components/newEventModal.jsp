@@ -6,7 +6,14 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form class="was-validated" action="<%= request.getContextPath() %>/accountServlet" method = "post">
+				<form class="was-validated" action="<%= request.getContextPath() %>/EventServlet" method = "post">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
+							<input type="text" class="form-control modalFields" name="title" placeholder="Title" required>
+							<div class="invalid-feedback">Please enter a valid event theme</div>
+						</div>
+					</div>
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
@@ -23,14 +30,9 @@
 					</div>
 
 					<div class="form-group">
-							<span class="input-group-addon icons"><i class="fas fa-heading"></i></span>
-							<textarea id="eventBody" name="eventBody"></textarea>
-					</div>
-
-					<div class="form-group">
 						<div class="input-group newEventImages">
 							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-							<input type="file" class="custom-file-input" id="validatedCustomFile" required/>
+							<input type="file" class="custom-file-input" name="eventImage" id="validatedCustomFile" required/>
 						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile">Choose Image(s)...</label>
 						    <div class="invalid-feedback">Please upload a valid image(s)</div>
 					    </div>
@@ -39,8 +41,8 @@
 				  	<div class="form-group">
 						<div class="input-group newEventMutators">
 							<span class='input-group-addon icons'><i class='fa fa-exclamation'></i></span>
-							<input type='text' class='mutator' placeholder='Mutator' />
-							<input type='text' class='mutator-description' placeholder='Description' />
+							<input type='text' class='mutator' name='mutator' placeholder='Mutator' />
+							<input type='text' class='mutatorDescription' placeholder='Description' />
 
 						</div>
 						<input type="button" value="Add another mutator" id="add-mutator" /><br><br>
