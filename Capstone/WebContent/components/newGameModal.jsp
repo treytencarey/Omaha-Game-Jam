@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form class="was-validated" action="<%= request.getContextPath() %>/accountServlet" method = "post">
+				<form class="was-validated" id="gameUpload">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
@@ -24,8 +24,12 @@
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-						    <input type="file" class="custom-file-input" id="validatedCustomFile1" required>
-						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile1">Choose Icon...</label>
+						    <% session.setAttribute("uploadFilePath", "Uploads/Games/Screenshots/0/1"); %>
+                          	<% session.setAttribute("uploadInputOnly", true); %>
+                          	<% session.setAttribute("uploadInputID", "validatedCustomFile1"); %>
+                          	<% session.setAttribute("uploadInputAttributes", "class='custom-file-input' required"); %>
+                            <%@include file="../components/upload.jsp" %>
+							<label class="form-control modalFields custom-file-label" for="validatedCustomFile1">Choose Icon...</label>
 						    <div class="invalid-feedback">Please upload a valid icon</div>
 					    </div>
 				  	</div>
@@ -65,7 +69,11 @@
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-						    <input type="file" class="custom-file-input" id="validatedCustomFile2" required>
+						    <% session.setAttribute("uploadFilePath", "Uploads/Games/Thumbnails/0/1"); %>
+                          	<% session.setAttribute("uploadInputOnly", true); %>
+                          	<% session.setAttribute("uploadInputID", "validatedCustomFile2"); %>
+                          	<% session.setAttribute("uploadInputAttributes", "class='custom-file-input' required multiple"); %>
+                            <%@include file="../components/upload.jsp" %>
 						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile2">Choose Screenshot(s)...</label>
 						    <div class="invalid-feedback">Please upload a valid screenshot(s)</div>
 					    </div>
@@ -123,3 +131,13 @@
 		</div>
 	</div>
 </div>
+<form id="gameSubmit" style="display: none;"><input name="gameSubmitAfterFiles"/><button id="gameSubmitButton"></button></form>
+<% session.setAttribute("servlet", "gameServlet"); %>
+<% session.setAttribute("form", "#gameSubmit"); %>
+<% session.setAttribute("successJS", "$('#newGameModal').modal('hide');"); %>
+<%@include file="../components/ajax.jsp" %>
+<% session.setAttribute("servlet", "filesServlet"); %>
+<% session.setAttribute("form", "#gameUpload"); %>
+<% session.setAttribute("successJS", "$('#gameSubmitButton').click();"); %>
+<% session.setAttribute("multipart", true); %>
+<%@include file="../components/ajax.jsp" %>
