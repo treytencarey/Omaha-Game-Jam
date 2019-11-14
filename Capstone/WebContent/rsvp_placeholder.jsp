@@ -12,7 +12,8 @@
 try
 {
 	String apk = session.getAttribute("accountPKey").toString();
-	List<Map<String, Object>> query = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE AccountPKey=" + apk);
+	Event e = (Event)session.getAttribute("ActiveEvent");
+	List<Map<String, Object>> query = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE AccountPKey=" + apk + " AND EventPKey=" + e.getKey());
 	if (query.size() == 0) // Error contacting DB?
 		throw new NullPointerException();
 	
@@ -20,7 +21,6 @@ try
 	if (count.equals("0"))
 	{
 		//INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (1, 1);
-		Event e = (Event)session.getAttribute("ActiveEvent");
 		String q = String.format("INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (%s, %s);", apk, e.getKey());
 		System.out.println(q);
 		if (Database.executeUpdate(q).length() == 0)
