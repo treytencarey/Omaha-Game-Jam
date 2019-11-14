@@ -84,18 +84,20 @@ public class News {
 	}
 	
 	/**
-	 * Gets PKeys for the six (or less) most recent public News articles in the database.
+	 * Gets PKeys for the most recent public News articles in the database.
+	 * @param a - Number of PKeys to get
+	 * @param p - PKey to exclude from array
 	 * @return The array of PKeys for the six (or less) most public News articles.
 	 */
-	public static int[] getMostRecentNewsPostsKeys() {
+	public static int[] getMostRecentNewsPostsKeys(int a, int p) {
 		int[] keys;
 		ArrayList<Integer> keyList = new ArrayList<Integer>();
-		List<Map<String, Object>> pKeyQuery = Database.executeQuery("SELECT PKey FROM Blogs WHERE IsPublic=1");
-		List<Map<String, Object>> sizeQuery = Database.executeQuery("SELECT COUNT(*) FROM Blogs WHERE IsPublic=1");
+		List<Map<String, Object>> pKeyQuery = Database.executeQuery("SELECT PKey FROM Blogs WHERE IsPublic=1 AND NOT PKey=\'" + Integer.toString(p) + "\'");
+		List<Map<String, Object>> sizeQuery = Database.executeQuery("SELECT COUNT(*) FROM Blogs WHERE IsPublic=1 AND NOT PKey=\'" + Integer.toString(p) + "\'");
 		
 		String size = sizeQuery.get(0).get("COUNT(*)").toString();
 		int qSize = Integer.parseInt(size);
-		int qSizeFloor = qSize - 6;
+		int qSizeFloor = qSize - a;
 		if(qSizeFloor < 0) qSizeFloor = 0;
 		
 		for(int i = qSize; i > qSizeFloor; i--) {
@@ -164,7 +166,7 @@ public class News {
 			String fileName = splits[splits.length-1];
 			String path = Main.context.getRealPath(origPath.substring(0,origPath.length()-fileName.length()));
 			
-			File file = new File(path + "/" + key + "_body.txt");
+			File file = new File(path + key + "_body.txt");
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 			while((read = bufferedReader.readLine()) != null) {
 				body = body + read;

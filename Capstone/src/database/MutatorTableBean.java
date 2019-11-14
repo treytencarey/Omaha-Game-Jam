@@ -21,6 +21,7 @@ public class MutatorTableBean implements Serializable {
 	public MutatorTableBean(String GamePKey)
 	{
 		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM AppliedMutators WHERE GamePKey=" + GamePKey);
+		//System.out.println(query);
 		ListIterator<Map<String, Object>> litr;
 		//appliedQuery looks like: [{GamePKey=1, MutatorPKey=1}, {GamePKey=1, MutatorPKey=5}]
 		
@@ -30,9 +31,15 @@ public class MutatorTableBean implements Serializable {
 			ArrayList<String> mpks = new ArrayList<String>(); // for holding all MutatorPKeys that we get from the 1st query
 	        litr = query.listIterator();
 	        while(litr.hasNext())
-	        	mpks.add(litr.next().get("MutatorPKey").toString());
+	        {
+	        	String next = litr.next().get("MutatorPKey").toString();
+	        	//System.out.println(next);
+	        	mpks.add(next);
+	        }
 	        
-			query = Database.executeQuery("SELECT * FROM Mutators WHERE PKey=" + String.join(" OR ", mpks));
+	        String str = "SELECT * FROM Mutators WHERE PKey=" + String.join(" OR PKey=", mpks);
+	        //System.out.println(str);
+			query = Database.executeQuery(str);
 			if(query.size() > 0) // if there was at least 1 valid mutator...
 			{
 				litr = query.listIterator();
