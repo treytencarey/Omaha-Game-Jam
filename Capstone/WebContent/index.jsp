@@ -14,9 +14,9 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/indexStyle.css">
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
 </head>
 <!-- A lot of this page is hard-coded at the moment as a sort of proof of concept -->
 <!-- Admins will be able to update the homepage in the future -->
@@ -25,6 +25,7 @@
 	<%@include file="navbar.jsp" %>
 	<%@page import="java.util.List" %>
 	<%@page import="java.util.Map" %>
+	<%@page import="database.News" %>
 	
 	<div class="mainEventParent">
 		<img class="mainEventImg rounded" src="./images/gamejam.png"/>
@@ -37,31 +38,25 @@
   	
   	<div class="pagePadding"></div>
   	
-  	<div class="container h-100" style="text-align: center;">
-  		<div class="card-deck col-md-12">
-			<div class="card">
-				<a href="#"><img class="card-img-top" src="./images/cancer.jpeg"/></a>
-			  		<div class="card-body dark">
-			  			<h5 class="card-title">Game Jammer Creates Game That Cures Cancer</h5>
-			  			<p class="card-text">"It's a miracle, the game is so good that the consequences of smoking cigarettes for decades just disappeared from my lungs." - Local Gamer</p>
-			  		</div>
+  	<!-- Container for other recent news articles -->
+  	<%     int[] postKeys = News.getMostRecentNewsPostsKeys(3, 0); 
+		   News[] recentNews = new News[postKeys.length];
+	   	   for(int i = 0; i < recentNews.length; i++) {
+		   		recentNews[i] = new News(postKeys[i]);
+	       } %>
+		<div class="container h-100" style="text-align: center;">
+	  		<div class="row mt-2 justify-content-center">
+	  			<% for(int i = 0; i < recentNews.length; i++) { %>
+					<div class="card">
+						<a href="<%=request.getContextPath()%>/News/view?id=<%=recentNews[i].getKey()%>"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
+					  		<div class="card-body dark">
+					  			<h5 class="card-title"><%=recentNews[i].getTitle() %></h5>
+					  			<p class="card-text"><%=recentNews[i].getHeader() %></p>
+					  		</div>
+				  	</div>
+			  	<% } %>
 		  	</div>
-		  	<div class="card">
-			 	<a href="#"><img class="card-img-top" src="./images/squidward.jpg"/></a>
-				<div class="card-body dark">
-			  		<h5 class="card-title">2019 Game Awards</h5>
-			  		<p class="card-text">See what awaits you if you're a good programmer.</p>
-			  	</div>
-		  	</div>
-		  	<div class="card">
-			 	<a href="#"><img class="card-img-top" src="./images/its_spherical.jpg"/></a>
-				<div class="card-body dark">
-			  		<h5 class="card-title">GameSphere Challenge</h5>
-			  		<p class="card-text">In an upcoming event, Game Jammers will create a game for the GameSphere.</p>
-			  	</div>
-		  	</div>
-	  	</div>
-  	</div>
+  		</div>
   	
 	<div class="jumbotron aboutSection">
 	<% List<Map<String, Object>> query = Database.executeQuery("SELECT COUNT(*) FROM Accounts");
