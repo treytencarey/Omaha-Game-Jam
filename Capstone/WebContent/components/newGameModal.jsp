@@ -132,12 +132,12 @@
 	</div>
 </div>
 <form id="gameSubmit" style="display: none;"><input name="gameSubmitAfterFiles"/><button id="gameSubmitButton"></button></form>
-<% session.setAttribute("servlet", "gameServlet"); %>
-<% session.setAttribute("form", "#gameSubmit"); %>
-<% session.setAttribute("successJS", "$('#newGameModal').modal('hide');"); %>
-<%@include file="../components/ajax.jsp" %>
 <% session.setAttribute("servlet", "filesServlet"); %>
 <% session.setAttribute("form", "#gameUpload"); %>
 <% session.setAttribute("successJS", "$('#gameSubmitButton').click();"); %>
 <% session.setAttribute("multipart", true); %>
+<%@include file="../components/ajax.jsp" %>
+<% session.setAttribute("servlet", "gameServlet"); %>
+<% session.setAttribute("form", "#gameSubmit"); %>
+<% session.setAttribute("successJS", "$('#newGameModal').modal('hide');"); %>
 <%@include file="../components/ajax.jsp" %>
