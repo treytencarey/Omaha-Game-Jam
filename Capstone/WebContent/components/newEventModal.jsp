@@ -74,7 +74,7 @@
 					
 			  		<div class="row">
 				  		<div class="form-group eventDates col-sm-6">
-			    	  		<input class="input-group form-control datePicker" id="date1" name="date1" placeholder="MM/DD/YYY" type="text" required/>
+			    	  		<input class="input-group form-control datePicker" id="startDate" name="startDate" placeholder="MM/DD/YYY" type="text" required/>
 						    <script>
 							    $(document).ready(function(){
 							      var date_input=$('input[name="date1"]'); //our date input has the name "date"
@@ -90,7 +90,7 @@
 							</script>
 				  		</div>
 				  		<div class="form-group eventDates col-sm-6">
-			    	  		<input class="input-group form-control datePicker" id="date2" name="date2" placeholder="MM/DD/YYY" type="text" required/>
+			    	  		<input class="input-group form-control datePicker" id="endDate" name="endDate" placeholder="MM/DD/YYY" type="text" required/>
 						    <script>
 							    $(document).ready(function(){
 							      var date_input=$('input[name="date2"]'); //our date input has the name "date"
