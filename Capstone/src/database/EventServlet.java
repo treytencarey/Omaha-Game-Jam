@@ -88,6 +88,7 @@ public class EventServlet extends HttpServlet {
 		
 		Database.executeUpdate("INSERT OR REPLACE INTO Events (Title, Theme, Description, StartDate, EndDate) VALUES ('" + title + "', '" + theme + "', '" + eventDescription + "', '" + startDate + "', '" + endDate + "')");
 		List<Map<String, Object>> query = Database.executeQuery("SELECT PKey FROM Events WHERE Title=\'" + title + "\'");
+		Database.executeUpdate("DELETE FROM ActiveEvent");
 		Database.executeUpdate("INSERT OR REPLACE INTO ActiveEvent (EventPKey, IsPublic) VALUES ('" + query.get(0).get("PKey").toString() + "', '" + 0 + "')");
 		response.sendRedirect(request.getContextPath() + "/Events/index.jsp");
 		

@@ -113,22 +113,28 @@
 	<h1>Past Events</h1>
 	</div>
 
+	<%
+	List<Map<String, Object>> events = Database.executeQuery("SELECT * FROM Events WHERE PKey != (SELECT MAX(PKey) FROM Events)");
+	if(!events.isEmpty()){
+		for(Map<String, Object> pastEvent : events){
+			
+			Event eventCard = new Event(Integer.parseInt(pastEvent.get("PKey").toString()));
+	%>
 	<div class="card-deck-wrapper">
 		<div class="card-deck">
-			<% 
-			for(int i = 0; i < 3; i++){
-			%>
 				<div class="card" style="max-width:300px;">
 					<img src="../images/its_spherical.jpg" class="card-image-top" alt="Card image">
 					<div class="card-body dark">
-			  			<h5 class="card-title">GameSphere Challenge</h5>
-			  			<p class="card-text">In an upcoming event, Game Jammers will create a game for the GameSphere.</p>
+			  			<h5 class="card-title"><%= eventCard.getTitle() %></h5>
+			  			<h6 class="card-subtitle mb-2 text-muted"><%= eventCard.getTheme() %></h6>
+			  			<p class="card-text"><%= eventCard.getDescription() %></p>
 			  		</div>
 				</div>
 				
-			<%	
-			} 
-			%>
+		<%	
+		}
+	}
+	%>
 		</div>
 	</div>
 </body>
