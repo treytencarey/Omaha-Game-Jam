@@ -38,18 +38,29 @@ int numOfUsers = Integer.parseInt(query.get(0).get("COUNT(*)").toString());
 	
 	<div class="mainEventParent">
 		<img class="mainEventImg rounded" src="./images/gamejam.png"/>
-		<div class="imgOverlay">
-    		<div class="overlayTitle">UPCOMING EVENT: <%= event.getTitle() %></div>
-    		<div class="overlaySubtitle">
-    		<%= event.getStartDate() %> - <%= event.getEndDate() %></br>
-    		</div>
-    		<a class="btn btn-primary btn-med overlayBtn" href="./Events" role="button">Details</a>
-    	</div>
   	</div>
-  	<p style="font-size: 15px"><%=numOfUsers %> other Jammers have RSVP'd for this Jam.</p>
-  	<form action="rsvp_placeholder.jsp">
-  	  	<input type="submit" class="btn btn-primary" value="RSVP">
-  	</form>
+  	
+  	<div class="jumbotron aboutSection" style="margin-top: 50px;">
+  		<h1 class="display-5">UPCOMING EVENT: <%= event.getTitle() %></h1>
+  		<hr class="my-2" style="background-color: #3b3b3b">
+  		<div style="font-size: 18px">
+  			<p><%= event.getStartDate() %> - <%= event.getEndDate() %></p>
+  			<p style="font-size: 15px"><%=numOfUsers %> other Jammers have RSVP'd for this Jam.</p>
+  			<div class="row">
+	  			<form action="./Events" style="margin-left: auto; margin-right: 10px;">
+	  				<input type="submit" class="btn btn-primary" href="./Events" value="Details">
+				</form>
+	  			<form action="rsvp_placeholder.jsp" style="margin-right: auto; margin-left: 10px;">
+			  	  	<input type="submit" class="btn btn-primary" value="RSVP">
+			  	</form>
+		  	</div>
+  		</div>
+  		<%	if (session.getAttribute("accountPKey") == null) { %>
+  			<p class="lead">
+    			<a class="btn btn-primary btn-med" style="cursor: pointer;" onclick="showRegisterModal()" role="button">Register Now!</a>
+  			</p>
+  		<% } %>
+	</div>
   	
   	<div class="pagePadding"></div>
   	
