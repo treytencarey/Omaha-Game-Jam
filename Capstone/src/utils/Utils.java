@@ -1,6 +1,8 @@
 package utils;
 
 import java.time.Year;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -20,5 +22,15 @@ public class Utils {
 	public static int getCurrentYear()
 	{
 		return Year.now().getValue();
+	}
+	
+	public static List<String> getFilesInDir(String path)
+	{
+		List<String> files = new ArrayList<String>();
+		
+		for (String file : new FolderReader(path).getFileList())
+			files.add(file);
+		
+		return files;
 	}
 }

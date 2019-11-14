@@ -16,7 +16,7 @@ import database.GameBean;
 /**
  * Controller that verifies input for viewing game pages
  */
-@WebServlet("/GameServlet")
+
 public class GameServlet extends HttpServlet {
 	
 	private static final String SUCCESS_JSP = "view_game.jsp";

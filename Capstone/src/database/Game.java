@@ -1,7 +1,10 @@
 package database;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,10 +16,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import project.Main;
+import utils.Utils;
+
+@WebServlet("/gameServlet")
 public class Game extends HttpServlet implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * The primary key of the game.
+	 */
+	private Integer id=-1;
 	/**
 	 * The title of the game.
 	 */
@@ -36,15 +47,19 @@ public class Game extends HttpServlet implements Serializable{
 	/**
 	 * Whether or not the game is public.
 	 */
-	private Boolean isPublic;
+	private Boolean isPublic=true;
 	/**
 	 * A reference to the submitter account primary key.
 	 */
-	private Integer submitter;
+	private Integer submitter=-1;
 	/**
 	 * A reference to the event primary key.
 	 */
-	private Integer event;
+	private Integer event=-1;
+	/**
+	 * The link to play the game.
+	 */
+	private String link="";
 
 	/**
 	 * Handles form submissions for the gameServlet.
@@ -55,19 +70,7 @@ public class Game extends HttpServlet implements Serializable{
             HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 
-		boolean updatingGame = request.getParameter("updateGameButton") != null;
-		if (updatingGame)
-		{
-			// parse mutators
-			List<Integer> mutators=new ArrayList<Integer>();
-			// parse systems
-			List<Integer> systems=new ArrayList<Integer>();
-			new Game(Integer.parseInt(session.getAttribute("accountPKey").toString()), 1, request.getParameter("title").toString(), request.getParameter("description").toString(), mutators, systems, true).updateGame(request.getParameter("PKey") != null ? Integer.parseInt(request.getParameter("PKey").toString()) : -1);
-
-			response.sendRedirect(session.getAttribute("curPage").toString());
-			return;
-		}
-		updatingGame = request.getParameter("gameSubmitAfterFiles") != null;
+		boolean updatingGame = request.getParameter("gameSubmitAfterFiles") != null;
 		if (updatingGame)
 		{
 			Map<String, String> params = Files.getLastPostParams(session);
@@ -76,9 +79,24 @@ public class Game extends HttpServlet implements Serializable{
 			List<Integer> mutators=new ArrayList<Integer>();
 			// parse systems
 			List<Integer> systems=new ArrayList<Integer>();
-			new Game(Integer.parseInt(session.getAttribute("accountPKey").toString()), 1, params.get("title"), params.get("description"), mutators, systems, true).updateGame(params.get("PKey") != null ? Integer.parseInt(params.get("PKey").toString()) : -1);
-
-			response.sendRedirect(session.getAttribute("curPage").toString());
+			Game g = new Game(Integer.parseInt(session.getAttribute("accountPKey").toString()), 1, params.get("title"), params.get("description"), mutators, systems, true);
+			g.updateGame(params.get("PKey") != null ? Integer.parseInt(params.get("PKey").toString()) : -1);
+			
+			String tempPath = "/Uploads/temp/";
+			for (String file : Utils.getFilesInDir(tempPath))
+			{
+				if (file.indexOf("gamesub_") == 0) {
+					if (file.indexOf(session.getAttribute("accountPKey").toString()) == 9) {
+						String newPath = file.charAt(8) == '0' ? Main.context.getRealPath("/Uploads/Games/Thumbnails/") + String.valueOf(g.getId()) : Main.context.getRealPath("/Uploads/Games/Screenshots/" + String.valueOf(g.getId()) + "/") + file.substring(9);
+						new File(newPath).delete();
+						if (file.charAt(8) != '0')
+							java.nio.file.Files.createDirectories(Paths.get(newPath.substring(0,newPath.replace("\\","/").lastIndexOf("/"))));
+						Path temp = java.nio.file.Files.move(Paths.get(Main.context.getRealPath(tempPath) + file),Paths.get(newPath));
+					}
+				}
+			}
+			
+			response.sendRedirect(request.getContextPath() + "/game?id=" + String.valueOf(g.getId()));
 			return;
 		}
 	}
@@ -121,6 +139,8 @@ public class Game extends HttpServlet implements Serializable{
 			throw new NullPointerException();
 		Map<String, Object> game = query.get(0);
 
+		this.setId(PKey);
+		this.setSubmitter(Integer.parseInt(game.get("SubmitterPKey").toString()));
 		this.setTitle(game.get("Title").toString());
 		this.setDesc(game.get("Description").toString());
 		this.setIsPublic(game.get("IsPublic").toString().equals("1"));
@@ -132,7 +152,14 @@ public class Game extends HttpServlet implements Serializable{
 	 */
 	private void updateGame(int PKey)
 	{
-		Database.executeUpdate("INSERT OR REPLACE INTO Games (" + ((PKey >= 1) ? "PKey, " : "") + "EventPKey, SubmitterPKey, Title, Description, IsPublic) VALUES (" + ((PKey >= 1) ? String.valueOf(PKey) + ", " : "") + this.toString() + ")");
+		Database.executeUpdate("INSERT OR REPLACE INTO Games (" + ((PKey >= 1) ? "PKey, " : "") + "EventPKey, SubmitterPKey, Title, Description, IsPublic, PlayLink) VALUES (" + ((PKey >= 1) ? String.valueOf(PKey) + ", " : "") + this.toString() + ", '')");
+		System.out.println("EXEC: " + "INSERT OR REPLACE INTO Games (" + ((PKey >= 1) ? "PKey, " : "") + "EventPKey, SubmitterPKey, Title, Description, IsPublic, PlayLink) VALUES (" + ((PKey >= 1) ? String.valueOf(PKey) + ", " : "") + this.toString() + ", '')");
+		if (PKey <= 0)
+		{
+			List<Map<String, Object>> m = Database.executeQuery("SELECT MAX(PKey) AS PKey FROM Games");
+			if (m.size() > 0)
+				this.setId(Integer.parseInt(m.get(0).get("PKey").toString()));
+		}
 	}
 
 	/**
@@ -151,6 +178,14 @@ public class Game extends HttpServlet implements Serializable{
 	public String toString()
 	{
 		return String.valueOf(event) + ", " + String.valueOf(submitter) + ", '" + Database.formatString(title) + "', '" + Database.formatString(desc) + "', " + ((isPublic) ? "1" : "0");
+	}
+	
+	/**
+	 * Gets the primary key of the game.
+	 * @return The primary key of the game.
+	 */
+	public Integer getId() {
+		return id;
 	}
 
 	/**
@@ -208,6 +243,22 @@ public class Game extends HttpServlet implements Serializable{
 	public Integer getEvent() {
 		return event;
 	}
+	
+	/**
+	 * Gets the play link of the game.
+	 * @return The play link of the game.
+	 */
+	public String getLink() {
+		return link;
+	}
+	
+	/**
+	 * Sets the primary key of the game.
+	 * @param The primary key of the game.
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	/**
 	 * Sets the title of the game.
@@ -263,5 +314,13 @@ public class Game extends HttpServlet implements Serializable{
 	 */
 	public void setEvent(Integer event) {
 		this.event = event;
+	}
+	
+	/**
+	 * Sets the play link of the game.
+	 * @param The play link of the game.
+	 */
+	public void setLink(String link) {
+		this.link = link;
 	}
 }

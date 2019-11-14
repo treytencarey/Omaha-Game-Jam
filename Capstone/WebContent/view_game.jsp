@@ -3,7 +3,7 @@
 	import="utils.FolderReader, database.Game, database.Profile, database.ContributorTableBean, database.Contributor, database.RoleTableBean, database.Role, database.Mutator, database.MutatorTableBean" %>
 
 <%
-Game g = new Game();
+Game g = new Game(Integer.parseInt(request.getParameter("id")));
 MutatorTableBean mt = ((MutatorTableBean)request.getAttribute("MutatorTable"));
 ContributorTableBean ct = ((ContributorTableBean)request.getAttribute("ContributorTable"));
 boolean canEdit = ((Boolean)request.getAttribute("CanEdit")).booleanValue();
