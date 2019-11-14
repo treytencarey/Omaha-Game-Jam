@@ -9,22 +9,25 @@
 				<div class="profile-img">
 
                     	<%@page import="java.io.File" %>
-                    	<% 	String profileImgPath = "/Uploads/Profiles/Pics/" + session.getAttribute("accountPKey");
-                    		if (!new File(Main.context.getRealPath(profileImgPath)).exists())
-                    			profileImgPath = "https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg";
-                        	else
-                        		profileImgPath = request.getContextPath() + profileImgPath;
-                    	%>
-                        <img style="width: 100%;" src="<%= profileImgPath %>" alt=""/>
+                       	<% 	String absProfileImgPath = "/Uploads/Profiles/Pics/" + session.getAttribute("accountPKey");
+                       		String profileImgPath = absProfileImgPath;
+                           	if (!new File(Main.context.getRealPath(profileImgPath)).exists())
+                       			profileImgPath = "https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg";
+                           	else
+                           		profileImgPath = request.getContextPath() + profileImgPath;
+                       	%>
+                        <img id="profile-img" style="width: 100%;" src="<%= profileImgPath %>" onError="this.src='https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg'"/>
                         <div>
-                             <form action="/Capstone/filesServlet" method="post" enctype="multipart/form-data">
-                             	<label style="width: 100%; color: black;" for="file" class="custom-file-upload">
-					    		<i class="fa fa-cloud-upload"></i> Custom Upload
-							</label>
-							<input id="file" style="display: none;" class="file btn btn-lg btn-primary" name="file" type="file" onchange="this.form.submit()"/>
-                            	<!-- <input id="image_uploads" class="file btn btn-lg btn-primary" type="file" name="image_uploads" onchange="this.form.submit()"/> -->
-                            	<!-- <input class="btn btn-lg btn-primary" type="submit" value="Update"/> -->
-                            </form>
+							<% session.setAttribute("uploadFilePath", absProfileImgPath); %>
+							<% session.setAttribute("uploadIncludeForm", true); %>
+							<% session.setAttribute("uploadID", "profileUpload"); %>
+							<%@include file="../components/upload.jsp" %>
+							<% session.setAttribute("servlet", "filesServlet"); %>
+							<% session.setAttribute("form", "#profileUpload"); %>
+							<%@page import="java.util.Arrays" %>
+							<% session.setAttribute("updates", Arrays.asList("#profile-img")); %>
+							<% session.setAttribute("multipart", true); %>
+							<%@include file="../components/ajax.jsp" %>
                         </div>
                     </div>
 				<form class="was-validated" action="<%= request.getContextPath() %>/profileServlet" method = "post">
