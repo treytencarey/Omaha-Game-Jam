@@ -77,7 +77,7 @@
 			    	  		<input class="input-group form-control datePicker" id="startDate" name="startDate" placeholder="MM/DD/YYY" type="text" required/>
 						    <script>
 							    $(document).ready(function(){
-							      var date_input=$('input[name="date1"]'); //our date input has the name "date"
+							      var date_input=$('input[name="startDate"]'); //our date input has the name "date"
 							      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 							      var options={
 							        format: 'mm/dd/yyyy',
@@ -93,7 +93,7 @@
 			    	  		<input class="input-group form-control datePicker" id="endDate" name="endDate" placeholder="MM/DD/YYY" type="text" required/>
 						    <script>
 							    $(document).ready(function(){
-							      var date_input=$('input[name="date2"]'); //our date input has the name "date"
+							      var date_input=$('input[name="endDate"]'); //our date input has the name "date"
 							      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 							      var options={
 							        format: 'mm/dd/yyyy',
