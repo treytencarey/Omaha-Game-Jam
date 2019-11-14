@@ -29,7 +29,7 @@ public class EventServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Made it to GET");
+		System.out.println("Got Here");
 		response.sendRedirect(request.getContextPath() + "/Events/index.jsp");
 	}
 
@@ -90,6 +90,8 @@ public class EventServlet extends HttpServlet {
 		List<Map<String, Object>> query = Database.executeQuery("SELECT PKey FROM Events WHERE Title=\'" + title + "\'");
 		Database.executeUpdate("INSERT OR REPLACE INTO ActiveEvent (EventPKey, IsPublic) VALUES ('" + query.get(0).get("PKey").toString() + "', '" + 0 + "')");
 		response.sendRedirect(request.getContextPath() + "/Events/index.jsp");
+		
+		
 	}
 
 }

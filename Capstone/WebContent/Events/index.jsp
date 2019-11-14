@@ -55,7 +55,6 @@
 	List<Map<String, Object>> query = Database.executeQuery("SELECT EventPKey FROM ActiveEvent WHERE IsPublic=\'" + 0 + "\'");
 	if(!query.isEmpty()){
 		pkey = Integer.parseInt(query.get(0).get("EventPKey").toString());
-		System.out.println(pkey);
 	}
 	if(pkey != -1)
 		current = new Event(pkey);
@@ -106,7 +105,6 @@
 			<div id="event-description"><%= current.getDescription() %></div><br>
 			<h3>From <%= current.getStartDate() %> to <%= current.getEndDate() %></h3>
 			<button type="button" id="rsvp-button">RSVP</button>
-			<button type="button" id="event-theme-button">Event Theme</button>
 			<button type="button" id="event-schedule-button">Event Schedule</button>
 			<button type="button" id="discord-button">Developer Discord</button>
 		</div>
