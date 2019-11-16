@@ -1,8 +1,10 @@
-package database;
+package beans;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
+import database.Database;
 
 /**
  * Model for the DB's Games table, used to retrieve a single row when given a Game's ID.

@@ -1,9 +1,12 @@
-package database;
+package beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import database.Contributor;
+import database.Database;
 
 /**
  * Model for the DB's Contributors table, used to retrieve 0..n rows of contributors for a single Game.

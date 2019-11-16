@@ -1,4 +1,4 @@
-package database;
+package servlets;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.News;
+import database.Database;
 import project.Main;
 
 /**

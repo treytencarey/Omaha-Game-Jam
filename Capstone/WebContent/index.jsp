@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="database.Database, database.Event" %>
+<%@ page import="database.Database,beans.Event" %>
 
 <%
 // This should be moved into a servlet, but this'll have to do for now		
@@ -36,10 +36,10 @@ int numOfUsers = Integer.parseInt(query.get(0).get("COUNT(*)").toString());
 <!-- Admins will be able to update the homepage in the future -->
 
 <body>
-	<%@include file="navbar.jsp" %>
+	<%@include file="Common/navbar.jsp" %>
 	<%@page import="java.util.List" %>
 	<%@page import="java.util.Map" %>
-	<%@page import="database.News" %>
+	<%@page import="beans.News" %>
 	
 	<div class="mainEventParent">
 		<img class="mainEventImg rounded" src="./images/gamejam.png"/>
@@ -55,7 +55,7 @@ int numOfUsers = Integer.parseInt(query.get(0).get("COUNT(*)").toString());
 	  			<form action="./Events" style="margin-left: auto; margin-right: 10px;">
 	  				<input type="submit" class="btn btn-primary" href="./Events" value="Details">
 				</form>
-	  			<form action="rsvp_placeholder.jsp" style="margin-right: auto; margin-left: 10px;">
+	  			<form action="Events/rsvp_placeholder.jsp" style="margin-right: auto; margin-left: 10px;">
 			  	  	<input type="submit" class="btn btn-primary" value="RSVP">
 			  	</form>
 		  	</div>

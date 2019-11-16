@@ -20,8 +20,8 @@
 	
 </head>
 <body>
-	<%@include  file="../navbar.jsp" %>
-	<%@include file="../components/newEventModal.jsp" %>
+	<%@include  file="/Common/navbar.jsp" %>
+	<%@include file="/Events/newEventModal.jsp" %>
 	<div style="text-align: center;">
 		Admin Panel<br><br>
 		

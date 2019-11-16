@@ -20,9 +20,9 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/viewNewsStyle.css">
 </head>
 <body>
-	<%@include  file="../navbar.jsp" %>
+	<%@include  file="/Common/navbar.jsp" %>
 
-	<%@page import="database.News" %>
+	<%@page import="beans.News" %>
 	<%@page import="project.Main" %>
 
 	<% try {

@@ -65,6 +65,6 @@
  } %>
 
 <%	if (session.getAttribute("accountPKey") == null) { %>
-	<%@include file="components/loginRegisterModal.jsp" %>
-	<%@include file="components/newGameModal.jsp" %>
+	<%@include file="/Common/loginRegisterModal.jsp" %>
+	<%@include file="/Games/newGameModal.jsp" %>
 <%}%>

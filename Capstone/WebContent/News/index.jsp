@@ -21,10 +21,10 @@
 </head>
 
 <body>
-	<%@include  file="../navbar.jsp" %>
-	<%@page import="database.News" %>
+	<%@include  file="/Common/navbar.jsp" %>
+	<%@page import="beans.News" %>
 	<%@page import="project.Main" %>
-	<%@include file="../components/newArticleModal.jsp" %>
+	<%@include file="/News/newArticleModal.jsp" %>
 	<% int[] postKeys = News.getMostRecentNewsPostsKeys(6, 0);
 	   News[] recentNews = new News[postKeys.length];
 	   for(int i = 0; i < recentNews.length; i++) {

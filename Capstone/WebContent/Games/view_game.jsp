@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="utils.FolderReader, database.Game, database.Profile, database.ContributorTableBean, database.Contributor, database.RoleTableBean, database.Role, database.Mutator, database.MutatorTableBean" %>
+	import="utils.FolderReader, database.Game, database.Profile, beans.ContributorTableBean, database.Contributor, beans.RoleTableBean, database.Role, database.Mutator, beans.MutatorTableBean" %>
 
 <%
 Game g = new Game(Integer.parseInt(request.getParameter("id")));

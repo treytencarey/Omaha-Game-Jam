@@ -1,4 +1,4 @@
-package database;
+package beans;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 
+import database.Database;
 import project.Main;
 
 /**
