@@ -29,18 +29,22 @@ public class GameBean implements Serializable{
 	 */
 	public GameBean(String PKey)
 	{
-		this.setId(PKey + "");
-		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Games WHERE PKey=" + this.getId());
-		if (query.size() == 0)
-			throw new NullPointerException();
-		Map<String, Object> game = query.get(0);
-		
-		this.setEvent(game.get("EventPKey").toString());
-		this.setSubmitter(game.get("SubmitterPKey").toString());
-		this.setTitle(game.get("Title").toString());
-		this.setDesc(game.get("Description").toString());
-		this.setLink(game.get("PlayLink").toString());
-		this.setIsPublic(game.get("IsPublic").toString());
+		//this.setId(PKey);
+//		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Games WHERE PKey=" + PKey);
+//		if (query.size() == 0)
+//			throw new NullPointerException();
+		this(Database.executeQuery("SELECT * FROM Games WHERE PKey=" + PKey).get(0));
+	}
+	
+	public GameBean(Map<String, Object> queryRow)
+	{	
+		this.setId(queryRow.get("PKey").toString());
+		this.setEvent(queryRow.get("EventPKey").toString());
+		this.setSubmitter(queryRow.get("SubmitterPKey").toString());
+		this.setTitle(queryRow.get("Title").toString());
+		this.setDesc(queryRow.get("Description").toString());
+		this.setLink(queryRow.get("PlayLink").toString());
+		this.setIsPublic(queryRow.get("IsPublic").toString());
 	}
 	
 	public String getIsPublic() {
