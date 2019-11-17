@@ -14,7 +14,7 @@ import beans.MutatorTableBean;
 import database.Contributor;
 
 /**
- * Controller that verifies input for viewing game pages
+ * Controller that verifies game exists, stores necessary DB data in the session, and determines whether the logged in user can edit the game.
  */
 
 public class GameViewServlet extends HttpServlet {

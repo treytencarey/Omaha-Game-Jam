@@ -73,6 +73,10 @@ public class Event {
 		this(Integer.parseInt(PKey));
 	}
 	
+	/**
+	 * Constructs an Event from a row queried from the Events table. Use this if you've already queried the Events table.
+	 * @param queryRow A row from the Events table, something contained inside the Object you get after a Database.executeQuery() call.
+	 */
 	public Event(Map<String, Object> queryRow)
 	{	
 		this.setKey(Integer.parseInt(queryRow.get("PKey").toString()));

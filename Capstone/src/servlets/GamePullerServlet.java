@@ -14,7 +14,7 @@ import beans.GameTableBean;
 
 
 /**
- * This serves AJAX calls from the Game Portal.
+ * Controller that serves AJAX requests from the Game Portal to display games.
  */
 @WebServlet("/gamepull")
 public class GamePullerServlet extends HttpServlet {
@@ -25,15 +25,12 @@ public class GamePullerServlet extends HttpServlet {
      */
     public GamePullerServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Returns all games submitted for a certain event as (crappy) HTML. "event", the event primary key, should be passed as a parameter.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		GameTableBean gt = new GameTableBean(request.getParameter("event"));
 		Iterator<GameBean> i = gt.getGames().iterator();
 		while (i.hasNext())
@@ -48,14 +45,12 @@ public class GamePullerServlet extends HttpServlet {
 					);
 			response.getWriter().append(s);
 		}
-		//response.getWriter().append("You asked to pull games for event " + request.getParameter("event"));
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

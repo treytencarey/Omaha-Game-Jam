@@ -29,13 +29,13 @@ public class GameBean implements Serializable{
 	 */
 	public GameBean(String PKey)
 	{
-		//this.setId(PKey);
-//		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Games WHERE PKey=" + PKey);
-//		if (query.size() == 0)
-//			throw new NullPointerException();
 		this(Database.executeQuery("SELECT * FROM Games WHERE PKey=" + PKey).get(0));
 	}
 	
+	/**
+	 * Constructs a GameBean from a row queried from the Games table. Use this if you've already queried the Games table.
+	 * @param queryRow A row from the Games table, something contained inside the Object you get after a Database.executeQuery() call.
+	 */
 	public GameBean(Map<String, Object> queryRow)
 	{	
 		this.setId(queryRow.get("PKey").toString());

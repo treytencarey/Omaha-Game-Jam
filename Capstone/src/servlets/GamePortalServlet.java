@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class GamePortalServlet
+ * Currently just redirects users to the Game Portal JSP. Nothing to see here.
  */
 @WebServlet("/games")
 public class GamePortalServlet extends HttpServlet {
@@ -26,8 +26,6 @@ public class GamePortalServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
         request.getRequestDispatcher("/Games/game_portal.jsp").forward(request, response); // If all successful, forward to view_game.jsp
 	}
 
@@ -35,7 +33,6 @@ public class GamePortalServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
