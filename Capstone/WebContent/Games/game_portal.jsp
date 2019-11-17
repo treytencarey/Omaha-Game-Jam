@@ -15,8 +15,10 @@ Iterator<Event> i = et.getEvents().iterator();
 function displayEventGames(eventId) {
 	let xhttp;
  	let message; // The HTML to put inside the event div.
+ 	let divId = "event".concat(eventId);
+ 	
 	if (eventId == "") {
-		document.getElementById("txtHint").innerHTML = "";
+		document.getElementById(divId).innerHTML = "";
 		return;
 	}
 	xhttp = new XMLHttpRequest();
@@ -29,7 +31,7 @@ function displayEventGames(eventId) {
 		} else { // AJAX unsuccessful
 			message = "Error retrieving games.";
 		}
-		document.getElementById("event".concat(eventId)).innerHTML = message;
+		document.getElementById(divId).innerHTML = message;
 	};
 
 	xhttp.open("GET", "<%= request.getContextPath() %>/gamepull?event="+eventId, true);
@@ -43,7 +45,7 @@ while (i.hasNext())
 {
 	Event e = i.next();
 %>
-<h1><%= e.getTitle() %>: <%= e.getDescription() %></h1>
+<h1><%= e.getTitle() %>: <%= e.getTheme() %></h1>
 <div id="event<%= e.getKey() %>">
 	<p>Loading games...</p>
 	<script type="text/javascript"> displayEventGames(<%= e.getKey() %>); </script>
