@@ -70,7 +70,7 @@ int numOfUsers = Integer.parseInt(query.get(0).get("COUNT(*)").toString());
   	<div class="pagePadding"></div>
   	
   	<!-- Container for other recent news articles -->
-  	<%     int[] postKeys = News.getMostRecentNewsPostsKeys(3, 0); 
+  	<%     int[] postKeys = News.getMostRecentNewsPostsKeys(3, 0, 1); 
 		   News[] recentNews = new News[postKeys.length];
 	   	   for(int i = 0; i < recentNews.length; i++) {
 		   		recentNews[i] = new News(postKeys[i]);

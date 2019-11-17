@@ -25,7 +25,7 @@
 	<%@page import="beans.News" %>
 	<%@page import="project.Main" %>
 	<%@include file="/News/newArticleModal.jsp" %>
-	<% int[] postKeys = News.getMostRecentNewsPostsKeys(6, 0);
+	<% int[] postKeys = News.getMostRecentNewsPostsKeys(6, 0, 1);
 	   News[] recentNews = new News[postKeys.length];
 	   for(int i = 0; i < recentNews.length; i++) {
 		   recentNews[i] = new News(postKeys[i]);
