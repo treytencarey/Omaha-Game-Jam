@@ -4779,5 +4779,22 @@
 		<servlet-name>NewsServlet</servlet-name>
 		<url-pattern>/News/view</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GamePortalServlet</servlet-name>
+		<servlet-class>servlets.GamePortalServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GamePortalServlet</servlet-name>
+		<url-pattern>/games</url-pattern>
+	</servlet-mapping>
+		<servlet>
+		<servlet-name>GamePullerServlet</servlet-name>
+		<servlet-class>servlets.GamePullerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GamePullerServlet</servlet-name>
+		<url-pattern>/gamepull</url-pattern>
+	</servlet-mapping>
 
 </web-app>

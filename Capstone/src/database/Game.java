@@ -99,6 +99,18 @@ public class Game extends HttpServlet implements Serializable{
 			response.sendRedirect(request.getContextPath() + "/game?id=" + String.valueOf(g.getId()));
 			return;
 		}
+		
+		boolean changingPublic = request.getParameter("publicChecked") != null;
+		if (changingPublic)
+		{
+			String PKey = request.getParameter("publicPKey");
+			String checked = (request.getParameter("publicChecked").equals("1")) ? "1" : "";
+			
+			Database.executeUpdate("UPDATE Games SET IsPublic='" + checked + "' WHERE PKey=" + PKey);
+			
+			response.sendRedirect(session.getAttribute("curPage").toString());
+			return;
+		}
 	}
 
 	/**
