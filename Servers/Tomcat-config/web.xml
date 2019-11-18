@@ -4796,5 +4796,14 @@
 		<servlet-name>GamePullerServlet</servlet-name>
 		<url-pattern>/gamepull</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>NewsArchivePortalServlet</servlet-name>
+		<servlet-class>servlets.NewsArchivePortalServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewsArchivePortalServlet</servlet-name>
+		<url-pattern>/News/Archive</url-pattern>
+	</servlet-mapping>
 
 </web-app>

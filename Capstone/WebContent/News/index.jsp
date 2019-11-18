@@ -24,21 +24,27 @@
 	<%@include  file="/Common/navbar.jsp" %>
 	<%@page import="beans.News" %>
 	<%@page import="project.Main" %>
+	<%@page import="java.util.Random" %>
+	<%@page import="java.time.LocalDateTime" %>
+	<%@page import="java.time.format.DateTimeFormatter" %>
 	<%@include file="/News/newArticleModal.jsp" %>
 	<% int[] postKeys = News.getMostRecentNewsPostsKeys(6, 0, 1);
 	   News[] recentNews = new News[postKeys.length];
 	   for(int i = 0; i < recentNews.length; i++) {
 		   recentNews[i] = new News(postKeys[i]);
 	   }
+	   DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy");
+	   String currentYear = dtf.format(LocalDateTime.now());
+	   String[] testImgs = {request.getContextPath() + "/images/squidward.jpg", request.getContextPath() + "/images/its_spherical.jpg", request.getContextPath() + "/images/cancer.jpeg" };
 	%>
 	
-	<h4 class="page-text">News</h4>
+	<h4 class="page-text">Recent News</h4>
 	<br>
 	<div class="container h-100" style="text-align: center;">
-		<div class="row mt-2 justify-content-center">
+		<div class="row mt-300 justify-content-center">
 		<% for(int i = 0; i < recentNews.length; i++) { %>
 				<div class="card">
-					<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
+					<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><img class="card-img-top zoom" src="<%=testImgs[new Random().nextInt(3)] %>"/></a>
 			  		<div class="card-body dark">
 			  			<small><%= recentNews[i].getDate() %></small>
 			  			<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><h5 class="card-title"><%= recentNews[i].getTitle() %></h5></a>
@@ -50,7 +56,7 @@
 	</div>
 
 	<hr class="my-2" style="background-color: #3b3b3b">
-	<a href="#"><h6 style="text-align:center;">Older Posts</h6></a>
+	<a href="<%= request.getContextPath() %>/News/Archive?year=<%= currentYear %>"><h6 style="text-align:center;">View Older Posts</h6></a>
 </body>
 <script>
 	var bodyField;

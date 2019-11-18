@@ -1,11 +1,26 @@
 .card {
 	border: none;
-	max-width: 40%;
+	max-width: 50%;
 	margin: 0 auto;
     float: none;
-    margin-bottom: 20px;
     display: inline-block;
     background-color: #222;
+    padding: 10px;
+}
+
+.card-img-top {
+	width: 100%;
+	height: 12vw;
+	max-height: 50%;
+	object-fit: cover;
+}
+
+.container {
+	min-width:40%;
+	max-width:40%;
+}
+
+.card-body {
 }
 
 .page-text {
@@ -29,12 +44,6 @@ a:hover {
 	color: inherit;
 }
 
-.card-img-top {
-	width: 100%;
-	height: 12vw;
-	max-height: 50%;
-	object-fit: cover;
-}
 
 .zoom {
 	transition: transform .2s; /* Animation */
