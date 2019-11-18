@@ -23,6 +23,15 @@
 	<%@page import="database.Database" %>
 	<%@include  file="/Common/navbar.jsp" %>
 	
+	<% 	int TableLen = 20;
+	 	int TablePage = 0;
+		try {
+			TablePage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page"))-1 : 0;
+		} catch (Exception e) { }
+		if (TablePage < 0)
+			TablePage = 0;
+	%>
+	
 	<!-- For changing public status -->
 	<form style="display: none;" id="publicForm">
 		<input name="publicPKey">
@@ -41,7 +50,7 @@
 		}
 	</script>
 	
-	<table class="table table-dark">
+	<table class="table table-dark" id="submissionTable">
 		<thead>
 			<tr>
 				<th scope="col">#</th>
@@ -54,9 +63,9 @@
 		</thead>
 		<tbody>
 			<% 	int row = 0;
-				for (Map<String, Object> submission : Database.executeQuery("SELECT g.*, (SELECT Email FROM Accounts WHERE PKey=g.SubmitterPKey) AS Email, (SELECT Title FROM Events WHERE PKey=g.EventPKey) AS EventTitle FROM Games g ORDER BY PKey DESC")) { %>
+				for (Map<String, Object> submission : Database.executeQuery("SELECT g.*, (SELECT Email FROM Accounts WHERE PKey=g.SubmitterPKey) AS Email, (SELECT Title FROM Events WHERE PKey=g.EventPKey) AS EventTitle FROM Games g ORDER BY PKey DESC LIMIT " + String.valueOf(TablePage*TableLen) + "," + String.valueOf(TableLen))) { %>
 					<tr>
-						<th scope="row"><%= ++row %></th>
+						<th scope="row"><%= TableLen*TablePage+(++row) %></th>
 						<td><%= submission.get("EventTitle") %></td>
 						<td><a href="<%= request.getContextPath() %>/profile?id=<%= submission.get("SubmitterPKey") %>"><%= submission.get("Email") %></a></td>
 						<td><a href="<%= request.getContextPath() %>/game?id=<%= submission.get("PKey") %>"><%= submission.get("Title") %></a></td>
@@ -72,4 +81,26 @@
 			<% 	} %>
 		</tbody>
 	</table>
+	<% int MaxCount = Integer.parseInt(Database.executeQuery("SELECT COUNT(*) AS Count FROM Games").get(0).get("Count").toString()); %>
+	<a style="text-color: white;">Showing <%= TablePage*TableLen+1 %> to <%= (TablePage*TableLen+TableLen < MaxCount) ? TablePage*TableLen+TableLen : MaxCount %> of <%= MaxCount %> entries</a>
+	<div style="content-align: center;">
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination justify-content-center">
+		    <li class="page-item <%= (TablePage == 0) ? "disabled" : "" %>">
+		      <a class="page-link" href="<%= request.getContextPath() %>/AdminPanel/submissions.jsp?page=<%= TablePage %>" tabindex="-1">Previous</a>
+		    </li>
+		    <li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/AdminPanel/submissions.jsp?page=<%= (TablePage == 0 || TablePage == 1) ? 1 : TablePage %>"><%= (TablePage == 0) ? "<b>1</b>" : (TablePage == 1) ? 1 : TablePage %></a></li>
+		    <% if (TablePage > 0 || MaxCount > TableLen*(TablePage+1)) { %>
+		    		<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/AdminPanel/submissions.jsp?page=<%= (TablePage == 0) ? 2 : TablePage+1 %>"><%= (TablePage == 0) ? 2 : "<b>" + String.valueOf(TablePage+1) + "</b>" %></a></li>
+		    <% 	}
+		    	if (MaxCount >= TableLen*(TablePage+2)) {
+		    %>
+		    		<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/AdminPanel/submissions.jsp?page=<%= (TablePage == 0) ? 3 : TablePage+2 %>"><%= (TablePage == 0) ? 3 : TablePage+2 %></a></li>
+		    <% 	} %>
+		    <li class="page-item <%= (MaxCount < TableLen*(TablePage+(TablePage == 0 ? 1 : 2))) ? "disabled" : "" %>">
+		      <a class="page-link" href="<%= request.getContextPath() %>/AdminPanel/submissions.jsp?page=<%= TablePage+2 %>">Next</a>
+		    </li>
+		  </ul>
+		</nav>
+	</div>
 </body>
