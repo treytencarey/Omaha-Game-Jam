@@ -1,7 +1,10 @@
 package beans;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -36,4 +39,30 @@ public class EventTableBean implements Serializable {
 		this.events = events;
 	}
 
+	/**
+	 * Returns the most current event in the Events table
+	 */
+	public Event getCurrentEvent() throws ParseException {
+		Event soonestEvent = null;
+		Date lowEDate = new SimpleDateFormat("dd/MM/yyyy").parse("31/12/3000");
+		
+		for(Event event : events) {
+			Date date = new SimpleDateFormat("dd/MM/yyyy").parse(event.getStartDate());
+			if(date.compareTo(lowEDate) < 0) {
+				lowEDate = date;
+				soonestEvent = event;
+			}
+		}
+		return soonestEvent;
+	}
+	
+	public Event getUpcomingEvent() {
+		int upcEPkey;
+		return null;
+	}
+	
+	public Event[] getPastEvents() {
+		
+		return null;
+	}
 }
