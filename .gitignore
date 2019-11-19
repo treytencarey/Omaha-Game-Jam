@@ -13,6 +13,8 @@
 !Capstone/**/*.jpg
 !Capstone/**/*.jpeg
 !Capstone/**/*.txt
+!Capstone/WebContent/Uploads/Games/Screenshots/*
+!Capstone/WebContent/Uploads/Games/Thumbnails/*
 !Capstone/WebContent/WEB-INF/lib/*.jar
 !Capstone/WebContent/images/*.*
 !Capstone/TestingUtils/*.*
