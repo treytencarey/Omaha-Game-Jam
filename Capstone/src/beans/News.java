@@ -1,4 +1,4 @@
-package database;
+package beans;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 
+import database.Database;
 import project.Main;
 
 /**
@@ -87,17 +88,41 @@ public class News {
 	 * Gets PKeys for the most recent public News articles in the database.
 	 * @param a - Number of PKeys to get
 	 * @param p - PKey to exclude from array
-	 * @return The array of PKeys for the six (or less) most public News articles.
+	 * @param pub - If the news articles include public articles (0 to include them, else do not)
+	 * @return The array of PKeys for the News articles
 	 */
-	public static int[] getMostRecentNewsPostsKeys(int a, int p) {
+	public static int[] getMostRecentNewsPostsKeys(int a, int p , int pub) {
+		String kQueryString, sQueryString;
+		
+		if(pub == 0) {
+			kQueryString = "SELECT PKey FROM Blogs WHERE NOT PKey=\'" + Integer.toString(p) + "\'";
+			sQueryString = "SELECT COUNT(*) FROM Blogs WHERE NOT PKey=\'" + Integer.toString(p) + "\'";
+		}
+		else {
+			kQueryString = "SELECT PKey FROM Blogs WHERE IsPublic=1 AND NOT PKey=\'" + Integer.toString(p) + "\'";
+			sQueryString = "SELECT COUNT(*) FROM Blogs WHERE IsPublic=1 AND NOT PKey=\'" + Integer.toString(p) + "\'";
+		}
+		
+		return queryNewsDatabase(a, kQueryString, sQueryString);
+	}
+	
+	/**
+	 * Queries the news table in the table and returns PKeys of articles depending on entered queries
+	 * @param pKeyNum - Number of PKeys to get
+	 * @param kQuery - Query of what PKeys to get from database
+	 * @param sQuery - Query of COUNT of PKeys in database
+	 * @return The array of PKeys from the database
+	 */
+	static int[] queryNewsDatabase(int pKeyNum, String kQuery, String sQuery) {
 		int[] keys;
 		ArrayList<Integer> keyList = new ArrayList<Integer>();
-		List<Map<String, Object>> pKeyQuery = Database.executeQuery("SELECT PKey FROM Blogs WHERE IsPublic=1 AND NOT PKey=\'" + Integer.toString(p) + "\'");
-		List<Map<String, Object>> sizeQuery = Database.executeQuery("SELECT COUNT(*) FROM Blogs WHERE IsPublic=1 AND NOT PKey=\'" + Integer.toString(p) + "\'");
+		
+		List<Map<String, Object>> pKeyQuery = Database.executeQuery(kQuery);
+		List<Map<String, Object>> sizeQuery = Database.executeQuery(sQuery);
 		
 		String size = sizeQuery.get(0).get("COUNT(*)").toString();
 		int qSize = Integer.parseInt(size);
-		int qSizeFloor = qSize - a;
+		int qSizeFloor = qSize - pKeyNum;
 		if(qSizeFloor < 0) qSizeFloor = 0;
 		
 		for(int i = qSize; i > qSizeFloor; i--) {

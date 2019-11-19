@@ -20,16 +20,16 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/viewNewsStyle.css">
 </head>
 <body>
-	<%@include  file="../navbar.jsp" %>
+	<%@include  file="/Common/navbar.jsp" %>
 
-	<%@page import="database.News" %>
+	<%@page import="beans.News" %>
 	<%@page import="project.Main" %>
 
 	<% try {
 		   int newsId = Integer.parseInt(request.getParameter("id"));
 		   News n = new News(newsId);
 		   request.setAttribute("newsTitle", n.getTitle());
-		   int[] postKeys = News.getMostRecentNewsPostsKeys(3, newsId); 
+		   int[] postKeys = News.getMostRecentNewsPostsKeys(3, newsId, 1); 
 		   News[] recentNews = new News[postKeys.length];
 	   	   	for(int i = 0; i < recentNews.length; i++) {
 		   		recentNews[i] = new News(postKeys[i]);

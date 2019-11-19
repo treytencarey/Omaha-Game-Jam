@@ -1,8 +1,10 @@
-package database;
+package beans;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
+import database.Database;
 
 /**
  * Model for the DB's Roles table, used to retrieve a single row when given a Role's ID.

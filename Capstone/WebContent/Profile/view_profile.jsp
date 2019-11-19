@@ -18,11 +18,11 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 </head>
 <body>
-	<%@include  file="navbar.jsp" %>
+	<%@include  file="/Common/navbar.jsp" %>
 
 	<% try { %>
 		<% Profile p = new Profile(Integer.parseInt(request.getParameter("id"))); %>
-		<%@include file="components/editProfileModal.jsp" %>
+		<%@include file="/Profile/editProfileModal.jsp" %>
 
 		<div class="container emp-profile">
             <form action="edit">
@@ -141,7 +141,7 @@
 
 	<% } catch (Exception e) { %>
 		<% Profile p = new Profile(); %>
-		<%@include file="components/editProfileModal.jsp" %>
+		<%@include file="/Profile/editProfileModal.jsp" %>
 		<% if (request.getParameter("id").equals(session.getAttribute("accountPKey"))) { %>
 			<div class="container emp-profile">
 	    		<div class="row">

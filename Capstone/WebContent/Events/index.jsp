@@ -37,9 +37,9 @@
 	
 </head>
 <body>
-	<%@include  file="../navbar.jsp" %>
-	<%@include file="../components/newEventModal.jsp" %>
-	<%@page import="database.Event" %>
+	<%@include  file="/Common/navbar.jsp" %>
+	<%@include file="/Events/newEventModal.jsp" %>
+	<%@page import="beans.Event" %>
 	<%@page import="database.Database" %>
 	<%@page import="project.Main" %>
 	<%@page import="java.util.ArrayList" %>

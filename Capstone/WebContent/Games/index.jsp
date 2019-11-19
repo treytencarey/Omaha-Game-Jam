@@ -19,8 +19,8 @@
 	
 </head>
 <body>
-	<%@include  file="../navbar.jsp" %>
-	<%@include file="../components/newGameModal.jsp" %>
+	<%@include  file="/Common/navbar.jsp" %>
+	<%@include file="/Games/newGameModal.jsp" %>
 	
 	<div style="text-align: center;">
 		Games

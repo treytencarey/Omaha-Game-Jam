@@ -1,10 +1,13 @@
-package database;
+package beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+
+import database.Database;
+import database.Mutator;
 
 /**
  * Model for the DB's AppliedMutators table, used to retrieve 0..n rows of applied mutators for a single Game.

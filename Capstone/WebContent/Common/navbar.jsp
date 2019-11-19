@@ -22,7 +22,7 @@
 	        <a class="nav-link" href="<%= request.getContextPath() %>/Events">Events</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="<%= request.getContextPath() %>/Games">Games</a>
+	        <a class="nav-link" href="<%= request.getContextPath() %>/games">Games</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="<%= request.getContextPath() %>/Gallery">Gallery</a>
@@ -65,6 +65,6 @@
  } %>
 
 <%	if (session.getAttribute("accountPKey") == null) { %>
-	<%@include file="components/loginRegisterModal.jsp" %>
-	<%@include file="components/newGameModal.jsp" %>
+	<%@include file="/Common/loginRegisterModal.jsp" %>
+	<%@include file="/Games/newGameModal.jsp" %>
 <%}%>

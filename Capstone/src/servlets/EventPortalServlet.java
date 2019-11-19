@@ -1,4 +1,4 @@
-package database;
+package servlets;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,17 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import database.Database;
+
 /**
  * Servlet implementation class EventServlet
  */
 @WebServlet("/EventServlet")
-public class EventServlet extends HttpServlet {
+public class EventPortalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EventServlet() {
+    public EventPortalServlet() {
         super();
         
     }

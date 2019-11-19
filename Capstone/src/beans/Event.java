@@ -1,4 +1,4 @@
-package database;
+package beans;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import database.Database;
 
 /**
  * 
@@ -64,6 +66,28 @@ public class Event {
 	}
 	
 	/**
+	 * Gets an event from the database.
+	 * @param PKey a string value of the event's primary key.
+	 */
+	public Event(String PKey) {
+		this(Integer.parseInt(PKey));
+	}
+	
+	/**
+	 * Constructs an Event from a row queried from the Events table. Use this if you've already queried the Events table.
+	 * @param queryRow A row from the Events table, something contained inside the Object you get after a Database.executeQuery() call.
+	 */
+	public Event(Map<String, Object> queryRow)
+	{	
+		this.setKey(Integer.parseInt(queryRow.get("PKey").toString()));
+		this.setTitle(queryRow.get("Title").toString());
+		this.setTheme(queryRow.get("Theme").toString());
+		this.setDescription(queryRow.get("Description").toString());
+		this.setStartDate(queryRow.get("StartDate").toString());
+		this.setEndDate(queryRow.get("EndDate").toString());
+	}
+	
+	/**
 	 * Event constructor with no parameters.
 	 */
 	public Event() {
@@ -75,6 +99,26 @@ public class Event {
 		endDate = "No Date";
 	}
 	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
 	public int getKey() {
 		return key;
 	}

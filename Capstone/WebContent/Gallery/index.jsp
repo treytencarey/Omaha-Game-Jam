@@ -19,7 +19,7 @@
 	
 </head>
 <body>
-	<%@include  file="../navbar.jsp" %>
+	<%@include  file="/Common/navbar.jsp" %>
 	<div style="text-align: center;">
 		Gallery
 	</div>

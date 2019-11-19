@@ -1,8 +1,10 @@
-package database;
+package beans;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
+import database.Database;
 
 /**
  * Model for the DB's Games table, used to retrieve a single row when given a Game's ID.
@@ -27,18 +29,22 @@ public class GameBean implements Serializable{
 	 */
 	public GameBean(String PKey)
 	{
-		this.setId(PKey + "");
-		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Games WHERE PKey=" + this.getId());
-		if (query.size() == 0)
-			throw new NullPointerException();
-		Map<String, Object> game = query.get(0);
-		
-		this.setEvent(game.get("EventPKey").toString());
-		this.setSubmitter(game.get("SubmitterPKey").toString());
-		this.setTitle(game.get("Title").toString());
-		this.setDesc(game.get("Description").toString());
-		this.setLink(game.get("PlayLink").toString());
-		this.setIsPublic(game.get("IsPublic").toString());
+		this(Database.executeQuery("SELECT * FROM Games WHERE PKey=" + PKey).get(0));
+	}
+	
+	/**
+	 * Constructs a GameBean from a row queried from the Games table. Use this if you've already queried the Games table.
+	 * @param queryRow A row from the Games table, something contained inside the Object you get after a Database.executeQuery() call.
+	 */
+	public GameBean(Map<String, Object> queryRow)
+	{	
+		this.setId(queryRow.get("PKey").toString());
+		this.setEvent(queryRow.get("EventPKey").toString());
+		this.setSubmitter(queryRow.get("SubmitterPKey").toString());
+		this.setTitle(queryRow.get("Title").toString());
+		this.setDesc(queryRow.get("Description").toString());
+		this.setLink(queryRow.get("PlayLink").toString());
+		this.setIsPublic(queryRow.get("IsPublic").toString());
 	}
 	
 	public String getIsPublic() {

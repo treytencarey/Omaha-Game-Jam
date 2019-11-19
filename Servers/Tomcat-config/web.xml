@@ -4737,7 +4737,7 @@
 
 	<servlet>
 		<servlet-name>profile</servlet-name>
-		<jsp-file>/view_profile.jsp</jsp-file>
+		<jsp-file>/Profile/view_profile.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>profile</servlet-name>
@@ -4763,21 +4763,47 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>GameServlet</servlet-name>
-		<servlet-class>database.GameServlet</servlet-class>
+		<servlet-name>GameViewServlet</servlet-name>
+		<servlet-class>servlets.GameViewServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>GameServlet</servlet-name>
+		<servlet-name>GameViewServlet</servlet-name>
 		<url-pattern>/game</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>NewsServlet</servlet-name>
-		<servlet-class>database.NewsServlet</servlet-class>
+		<servlet-class>servlets.NewsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>NewsServlet</servlet-name>
 		<url-pattern>/News/view</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GamePortalServlet</servlet-name>
+		<servlet-class>servlets.GamePortalServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GamePortalServlet</servlet-name>
+		<url-pattern>/games</url-pattern>
+	</servlet-mapping>
+		<servlet>
+		<servlet-name>GamePullerServlet</servlet-name>
+		<servlet-class>servlets.GamePullerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GamePullerServlet</servlet-name>
+		<url-pattern>/gamepull</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>NewsArchivePortalServlet</servlet-name>
+		<servlet-class>servlets.NewsArchivePortalServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewsArchivePortalServlet</servlet-name>
+		<url-pattern>/News/Archive</url-pattern>
 	</servlet-mapping>
 
 </web-app>
