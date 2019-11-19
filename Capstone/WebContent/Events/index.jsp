@@ -49,11 +49,11 @@
 	
 	<%
 	FolderReader fr = new FolderReader("/images/eventImages");
-	EventTableBean evntTable = new EventTableBean();
+	EventTableBean eventTable = new EventTableBean();
 	
-	Event current = evntTable.getCurrentEvent();
-	Event upcoming = evntTable.getUpcomingEvent();
-	Event[] past = evntTable.getPastEvents();
+	Event current = eventTable.getCurrentEvent();
+	Event future = eventTable.getFutureEvent();
+	ArrayList<Event> past = eventTable.getPastEvents();
 	
 	%>
 	
@@ -104,44 +104,36 @@
 		<h3 class="event-theme"><%= current.getTheme() %></h3><br>
 		<div id="event-description"><%= current.getDescription() %></div><br>
 		<h5>From <%= current.getStartDate() %> to <%= current.getEndDate() %></h5>
-		<button type="button" id="rsvp-button">RSVP</button>
-		<button type="button" id="event-schedule-button">Event Schedule</button>
-		<button type="button" id="discord-button">Developer Discord</button>
 	</div>
 	
-	<!-- Upcoming Event -->
+	<button type="button" id="rsvp-button">RSVP</button>
+	<button type="button" id="event-schedule-button">Event Schedule</button>
+	<button type="button" id="discord-button">Developer Discord</button>
+	
+	<!-- Future Event -->
 	<div id="upcoming-event">
 		<img src="../images/eventImages/sw.jpg">
-		<h1 class="event-title"><%= current.getTitle() %></h1>
-		<h3 class="event-theme"><%= current.getTheme() %></h3>
-		<h5>From <%= current.getStartDate() %> to <%= current.getEndDate() %></h5>
+		<h1 class="event-title"><%= future.getTitle() %></h1>
+		<h3 class="event-theme"><%= future.getTheme() %></h3>
+		<h5>From <%= future.getStartDate() %> to <%= future.getEndDate() %></h5>
 	</div>
 	
 	<!-- Past Events -->
 	<div id="past-events">
 		<h1>Past Events</h1>
 		<div class="container">
-			<div class="row mt-5 justify-content-center">
-				<%
-				List<Map<String, Object>> events = Database.executeQuery("SELECT * FROM Events WHERE PKey != (SELECT MAX(PKey) FROM Events)");
-				if(!events.isEmpty()){
-					for(Map<String, Object> pastEvent : events){
-						
-						Event eventCard = new Event(Integer.parseInt(pastEvent.get("PKey").toString()));
-				%>
-						<div class="card card-custom mx-2 mb-3" style="max-width:350px;">
-							<img src="../images/its_spherical.jpg" class="card-image-top" alt="Card image">
-							<div class="card-body dark">
-					  			<h5 class="card-title"><%= eventCard.getTitle() %></h5>
-					  			<h6 class="card-subtitle mb-2 text-muted"><%= eventCard.getTheme() %></h6>
-					  			<p class="card-text"><%= eventCard.getDescription() %></p>
-					  		</div>
-					    </div>
-							
-					<%	
-					}
-				}
-				%>
+			<div class="row mt-5 justify-content-center">	
+				<%for(Event event : past){%>
+					<div class="card card-custom mx-2 mb-3" style="max-width:350px;">
+						<img src="../images/its_spherical.jpg" class="card-image-top" alt="Card image">
+						<div class="card-body dark">
+					  		<h5 class="card-title"><%= event.getTitle() %></h5>
+					  		<h6 class="card-subtitle mb-2 text-muted"><%= event.getTheme() %></h6>
+					  		<p class="card-text"><%= event.getDescription() %></p>
+					  		<p class="card-text"><%= event.getStartDate() %></p>
+					  	</div>
+					</div>
+				<%}%>
 			</div>
 		</div>
 	</div>

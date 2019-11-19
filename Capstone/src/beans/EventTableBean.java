@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,12 +44,14 @@ public class EventTableBean implements Serializable {
 	 * Returns the most current event in the Events table
 	 */
 	public Event getCurrentEvent() throws ParseException {
-		Event soonestEvent = null;
-		Date lowEDate = new SimpleDateFormat("dd/MM/yyyy").parse("31/12/3000");
+		Event soonestEvent = new Event();
+		Date lowEDate = new SimpleDateFormat("MM/dd/yyyy").parse("12/31/3000");
 		
 		for(Event event : events) {
-			Date date = new SimpleDateFormat("dd/MM/yyyy").parse(event.getStartDate());
-			if(date.compareTo(lowEDate) < 0) {
+			Date date = new SimpleDateFormat("MM/dd/yyyy").parse(event.getStartDate());
+			Date enddate = new SimpleDateFormat("MM/dd/yyyy").parse(event.getEndDate());
+			
+			if(date.compareTo(lowEDate) < 0 && enddate.compareTo(new Date()) > 0) {
 				lowEDate = date;
 				soonestEvent = event;
 			}
@@ -56,13 +59,32 @@ public class EventTableBean implements Serializable {
 		return soonestEvent;
 	}
 	
-	public Event getUpcomingEvent() {
-		int upcEPkey;
-		return null;
+	public Event getFutureEvent() throws ParseException {
+		Event futureEvent = new Event();
+		Date curEDate = new SimpleDateFormat("MM/dd/yyyy").parse(getCurrentEvent().getStartDate());
+		Date secondLowestDate = new SimpleDateFormat("MM/dd/yyyy").parse("12/31/3000");
+		
+		for(Event event : events) {
+			Date date = new SimpleDateFormat("MM/dd/yyyy").parse(event.getStartDate());
+			
+			if(date.compareTo(curEDate) > 0 && date.compareTo(secondLowestDate) < 0) {
+				secondLowestDate = date;
+				futureEvent = event;
+			}
+		}
+		
+		return futureEvent;
 	}
 	
-	public Event[] getPastEvents() {
-		
-		return null;
+	public ArrayList<Event> getPastEvents() throws ParseException {
+		ArrayList<Event> pastEvents = new ArrayList<Event>();
+		for(Event event : events) {
+			Date eventEndDate = new SimpleDateFormat("MM/dd/yyyy").parse(event.getEndDate());
+			
+			if(eventEndDate.before(new Date())) {
+				pastEvents.add(event);
+			}
+		}
+		return pastEvents;
 	}
 }
