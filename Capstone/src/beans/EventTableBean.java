@@ -87,4 +87,25 @@ public class EventTableBean implements Serializable {
 		}
 		return pastEvents;
 	}
+	
+	public ArrayList<Event> getFutureEvents() throws ParseException {
+		ArrayList<Event> futureEvents = new ArrayList<Event>();
+		for(Event event : events) {
+			Date eventEndDate = new SimpleDateFormat("MM/dd/yyyy").parse(event.getEndDate());
+			
+			if(eventEndDate.after(new Date())) {
+				futureEvents.add(event);
+			}
+		}
+		return futureEvents;
+	}
+	
+	public void deleteEvent(Event event) {
+		List<Map<String, Object>> query = 
+				Database.executeQuery("SELECT * FROM Events WHERE PKey=\'"+event.getKey()+"\'");
+		
+		if (!query.isEmpty()) {
+			Database.executeUpdate("DELETE FROM Events WHERE PKey=\'"+event.getKey()+"\'");
+		}
+	}
 }
