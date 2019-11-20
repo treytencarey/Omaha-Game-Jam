@@ -202,6 +202,5 @@ public class News {
 			System.err.println(e);
 			return "Body not found";
 		}
-		
 	}
 }

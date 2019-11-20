@@ -13,11 +13,25 @@
 	text-align: center;
 }
 
+.card-img-top {
+	width: 100%;
+	height: 12vw;
+	max-height: 50%;
+	object-fit: cover;
+}
+
+.container {
+	width: 60%;
+	display: block;
+	margin: 0 auto;
+}
+
 .card {
-	max-width: 30%;
+	border: none;
 	margin: 0 auto;
     float: none;
-    margin-bottom: 20px;
+    background-color: #222;
+    padding: 5px;
 }
 
 .mainImg {

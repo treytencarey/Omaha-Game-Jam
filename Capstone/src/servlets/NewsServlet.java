@@ -3,17 +3,23 @@ package servlets;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import beans.News;
 import database.Database;
@@ -23,10 +29,13 @@ import project.Main;
  * Servlet implementation class NewsServlet
  */
 @WebServlet("/NewsServlet")
+@MultipartConfig
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = -3600831944723019273L;
 	private static final String SUCCESS_JSP = "view_news.jsp";
 	private static final String DEFAULT_JSP = "News/index.jsp";
+	
+	String path;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -58,8 +67,6 @@ public class NewsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		
 		/**
 		 * When the user submits an article/edits and article, this link will redirect them to the article
 		 */
@@ -103,10 +110,7 @@ public class NewsServlet extends HttpServlet {
 		/**
 		 * Find the path where the body txt file will go
 		 */
-		String origPath = "/Uploads/News/Body/Body";
-		String[] splits = origPath.replaceAll("\\\\", "/").split("/");
-		String fileName = splits[splits.length-1];
-		String path = Main.context.getRealPath(origPath.substring(0,origPath.length()-fileName.length()));
+		path = getServerPath("/Uploads/News/Body/Body");
 		
 		
 		/**
@@ -120,10 +124,28 @@ public class NewsServlet extends HttpServlet {
 		outFile.close();
 		
 		/**
+		 * Get the image from newsFile in form, and write to Upload/News/Photo
+		 */
+		Part headerImg = request.getPart("newsFile");
+		path = getServerPath("/Uploads/News/Photo/Photo");
+		Path imgPath = FileSystems.getDefault().getPath(path, pKey + "_header.png");
+		
+		try(InputStream is = headerImg.getInputStream()){
+		    Files.copy(is, imgPath);
+		}
+		
+		/**
 		 * Add the PKey to the id parameter in url so that user gets redirected to the page they just created/edited
 		 */
 		redirectLink = redirectLink + pKey;
 		response.sendRedirect(redirectLink);
+	}
+	
+	private static String getServerPath(String orig) {
+		String[] splits = orig.replaceAll("\\\\", "/").split("/");
+		String fileName = splits[splits.length-1];
+		String pth = Main.context.getRealPath(orig.substring(0,orig.length()-fileName.length()));
+		return pth;
 	}
 
 }

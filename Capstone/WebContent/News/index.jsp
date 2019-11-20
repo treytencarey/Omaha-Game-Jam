@@ -43,12 +43,14 @@
 	<div class="container" style="text-align: center;">
 		<div class="row justify-content-center">
 		<% for(int i = 0; i < recentNews.length; i++) { %>
-				<div class="card">
-					<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><img class="card-img-top zoom" src="<%=testImgs[new Random().nextInt(3)] %>"/></a>
-			  		<div class="card-body dark">
-			  			<small><%= recentNews[i].getDate() %></small>
-			  			<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><h5 class="card-title"><%= recentNews[i].getTitle() %></h5></a>
-			  			<p class="card-text"><%= recentNews[i].getHeader() %></p>
+				<div class="col-sm">
+					<div class="card">
+						<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><img class="card-img-top zoom" src="<%= request.getContextPath() + "/Uploads/News/Photo/" + recentNews[i].getKey() + "_header.png" %>"/></a>
+				  		<div class="card-body dark">
+				  			<small><%= recentNews[i].getDate() %></small>
+				  			<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><h5 class="card-title"><%= recentNews[i].getTitle() %></h5></a>
+				  			<p class="card-text"><%= recentNews[i].getHeader() %></p>
+				  		</div>
 			  		</div>
 		  		</div>
 		<% } %>
