@@ -30,7 +30,8 @@
 							<%@include file="../components/ajax.jsp" %>
                         </div>
                     </div>
-				<form class="was-validated" action="<%= request.getContextPath() %>/profileServlet" method = "post">
+				<form class="was-validated" action="<%= request.getContextPath() %>/profile_edit" method = "post">
+				<input type="hidden" name="id" value="<%= session.getAttribute("accountPKey") %>">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-user"></i></span>

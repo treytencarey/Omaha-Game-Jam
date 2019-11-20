@@ -4736,24 +4736,6 @@
      </listener>
 
 	<servlet>
-		<servlet-name>profile</servlet-name>
-		<jsp-file>/Profile/view_profile.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>profile</servlet-name>
-		<url-pattern>/profile</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>profileEdit</servlet-name>
-		<jsp-file>/edit_profile.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>profileEdit</servlet-name>
-		<url-pattern>/profile/edit</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
 		<servlet-name>submitGame</servlet-name>
 		<jsp-file>/submit_game.jsp</jsp-file>
 	</servlet>
@@ -4804,6 +4786,24 @@
 	<servlet-mapping>
 		<servlet-name>NewsArchivePortalServlet</servlet-name>
 		<url-pattern>/News/Archive</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ProfileViewServlet</servlet-name>
+		<servlet-class>servlets.ProfileViewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProfileViewServlet</servlet-name>
+		<url-pattern>/profile</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ProfileEditServlet</servlet-name>
+		<servlet-class>servlets.ProfileEditServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProfileEditServlet</servlet-name>
+		<url-pattern>/profile_edit</url-pattern>
 	</servlet-mapping>
 
 </web-app>

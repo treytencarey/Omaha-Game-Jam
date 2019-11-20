@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"
+    import="beans.ProfileBean"%>
+    
+<%
+ProfileBean p = (ProfileBean)request.getAttribute("Profile");
+Boolean canEdit = (Boolean)request.getAttribute("CanEdit");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,10 +26,16 @@
 </head>
 <body>
 	<%@include  file="/Common/navbar.jsp" %>
-
-	<% try { %>
-		<% Profile p = new Profile(Integer.parseInt(request.getParameter("id"))); %>
 		<%@include file="/Profile/editProfileModal.jsp" %>
+
+		<%
+		if (canEdit.booleanValue())
+		{
+		%>
+			<a id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Edit Profile</a>
+		<%
+		}
+		%>
 
 		<div class="container emp-profile">
             <form action="edit">
@@ -137,18 +150,5 @@
                 </div>
             </form>
         </div>
-
-
-	<% } catch (Exception e) { %>
-		<% Profile p = new Profile(); %>
-		<%@include file="/Profile/editProfileModal.jsp" %>
-		<% if (request.getParameter("id").equals(session.getAttribute("accountPKey"))) { %>
-			<div class="container emp-profile">
-	    		<div class="row">
-	    			<h3 style="color: black; width: 100%; text-align: center;">No profile has been created for this account yet.</h3>
-    			</div>
-            </div>
-	<% }
-	} %>
 </body>
 </html>
