@@ -115,7 +115,6 @@ public class NewsServlet extends HttpServlet {
 		String pKey = query.get(0).get("PKey").toString();
 		File file = new File(path +  pKey + "_body.txt");
 		file.createNewFile();
-		System.out.println(path + pKey + "_body.txt");
 		FileOutputStream outFile = new FileOutputStream(file);
 		outFile.write(reqBody.getBytes());
 		outFile.close();

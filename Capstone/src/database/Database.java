@@ -163,6 +163,7 @@ public class Database extends HttpServlet {
 	    }
 	
 	    Connection connection = null;
+	    
 	    try
 	    {
 			// create a database connection

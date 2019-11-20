@@ -4804,6 +4804,7 @@
 	<servlet-mapping>
 		<servlet-name>NewsArchivePortalServlet</servlet-name>
 		<url-pattern>/News/Archive</url-pattern>
+		<url-pattern>/News/archive</url-pattern>
 	</servlet-mapping>
 
 </web-app>

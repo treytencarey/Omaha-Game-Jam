@@ -40,8 +40,8 @@
 	
 	<h4 class="page-text">Recent News</h4>
 	<br>
-	<div class="container h-100" style="text-align: center;">
-		<div class="row mt-300 justify-content-center">
+	<div class="container" style="text-align: center;">
+		<div class="row justify-content-center">
 		<% for(int i = 0; i < recentNews.length; i++) { %>
 				<div class="card">
 					<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><img class="card-img-top zoom" src="<%=testImgs[new Random().nextInt(3)] %>"/></a>
