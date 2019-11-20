@@ -1,0 +1,58 @@
+.gameViewMainRow {
+	margin: 25px;
+}
+.gameViewMainDiv {
+	background-color: white;
+	width: 75%;
+	margin: auto;
+	border-radius: 25px;
+}
+
+.gameViewTitle {
+	color: black;
+}
+
+.gameViewIcon {
+	width: 25vw;
+	height: 20vw;
+	border: solid 1px black;
+	border-radius: 10px;
+}
+
+.gameViewDetails {
+	border-bottom: solid 1px lightgrey;
+	vertical-align: middle;
+	line-height: 40px;
+}
+
+.gameViewDescription {
+	color: black;
+	padding-bottom: 30px;
+	padding-top: 56px;
+	border-bottom: dotted 2px grey;
+}
+
+.gameViewContributorTitle {
+	padding-top: 25px;
+	color: black;
+}
+
+.gameViewLabels {
+	font-weight: 600;
+	color: black;
+	margin-right: 10px;
+	margin-bottom: 0px;
+}
+
+.gameViewValues {
+	color: black;
+	margin-bottom: 0px;
+}
+
+.gameViewDetailCols {
+	padding: 0px;
+}
+
+#screenshots {
+	padding-bottom: 15px;
+}
