@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form class="was-validated" action="<%= request.getContextPath() %>/NewsServlet" method = "post">
+				<form class="was-validated" action="<%= request.getContextPath() %>/NewsServlet" method = "post" enctype="multipart/form-data">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fas fa-newspaper"></i></span>
@@ -28,7 +28,7 @@
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-						    <input type="file" class="custom-file-input" id="newsFile" required>
+						    <input type="file" class="custom-file-input" id="newsFile" name="newsFile" required>
 						    <label class="form-control modalFields custom-file-label" for="newsFile">Choose Image(s)...</label>
 						    <div class="invalid-feedback">Please upload a valid image.</div>
 					    </div>
