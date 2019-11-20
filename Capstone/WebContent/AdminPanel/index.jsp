@@ -22,13 +22,13 @@
 <body>
 	<%@include  file="/Common/navbar.jsp" %>
 	<%@include file="/Events/newEventModal.jsp" %>
+	<%@include file="/Events/eventsDisplayModal.jsp" %>
 	<div style="text-align: center;">
 		Admin Panel<br><br>
 		
 		<h3><b>Event Options:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEventModal">Create Event</button>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Edit Event</button>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Display Mutators</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventsDisplayModal">View Events</button>
 		
 	</div>
 </body>

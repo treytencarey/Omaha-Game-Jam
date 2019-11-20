@@ -44,8 +44,7 @@
 	<%@page import="database.Database" %>
 	<%@page import="project.Main" %>
 	<%@page import="java.util.ArrayList" %>
-	<%@page import="java.util.List" %>
-	<%@page import="java.util.Map" %>
+
 	
 	<%
 	FolderReader fr = new FolderReader("/images/eventImages");
