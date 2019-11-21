@@ -42,8 +42,14 @@ public class ProfileViewServlet extends HttpServlet {
 		String toJsp;
 		String id = request.getParameter("id");
 		
-
-		canEdit = request.getSession().getAttribute("accountPKey").equals(id); // Did the profile's owner request to see this page? If so, they can edit it.
+		try // Does an accountPKey attribute exist in the session? If not, can't edit.
+		{
+			canEdit = request.getSession().getAttribute("accountPKey").equals(id); // Did the profile's owner request to see this page? If so, they can edit it.
+		}
+		catch (NullPointerException npe)
+		{
+			canEdit = false;
+		}
 		request.setAttribute("CanEdit", new Boolean(canEdit));
 		
 		try // Get the Profile from the DB
