@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="beans.ProfileBean, beans.GameTableBean, beans.GameBean, java.util.Map, java.util.ArrayList, java.util.Iterator"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="beans.ProfileBean, beans.GameTableBean, beans.GameBean, beans.Event, beans.EventTableBean, java.util.Map, java.util.ArrayList, java.util.Iterator"%>
 
 <%
 	ProfileBean p = (ProfileBean) request.getAttribute("Profile");
+	EventTableBean et = (EventTableBean) request.getAttribute("AttendedEvents");
 	GameTableBean gt = (GameTableBean) request.getAttribute("Games");
 	Map<String, ArrayList<String>> r = (Map<String, ArrayList<String>>) request.getAttribute("Roles");
 	String picPath = (String) request.getAttribute("PicPath");
@@ -56,9 +57,18 @@
 						<h6>
 							<%=p.getBio()%>
 						</h6>
-						<p class="proile-rating">
-							Attending Game Jam 2019 : <span>Yes</span>
-						</p>
+						
+						<%
+						Iterator<Event> ei = et.getEvents().iterator();
+						while (ei.hasNext())
+						{
+							Event e = ei.next();
+						%>
+						<a class="btn btn-primary" href="<%= request.getContextPath() %>/event?id=<%= e.getKey() %>"><%= e.getTitle() %></a>
+						<%
+						}
+						%>
+						
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
 							<li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a></li>
 							<li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Games</a></li>

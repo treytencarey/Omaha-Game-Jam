@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.AttendeeTableBean;
 import beans.ContributorTableBean;
+import beans.EventTableBean;
 import beans.GameTableBean;
 import beans.ProfileBean;
 import beans.RoleTableBean;
@@ -45,9 +47,9 @@ public class ProfileViewServlet extends HttpServlet {
 	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		ProfileBean p;
+		AttendeeTableBean at;
+		EventTableBean et;
 		ContributorTableBean ct;
 		RoleTableBean rt;
 		GameTableBean gt;
@@ -90,12 +92,13 @@ public class ProfileViewServlet extends HttpServlet {
 			
 		}
 		
+		at = new AttendeeTableBean();
+		at.fillByAccountIds(id);
+		et = new EventTableBean();
+		request.setAttribute("AttendedEvents", et);
+		
 		ct = new ContributorTableBean();
 		ct.fillByAccount(id);
-		
-		// gather list of all role ids we need
-		// call roletablebean.getbyids
-		// loop thru again and replace role ids with role titles
 		
 		// Creating a Map, using GamePKey as an index to retrieve a value ArrayList<String> of the roleIDs
 		Map<String, ArrayList<String>> roles = new HashMap<String, ArrayList<String>>(); // Map from 1 game to 1..n roles
@@ -126,8 +129,6 @@ public class ProfileViewServlet extends HttpServlet {
 		gt = new GameTableBean();
 		gt.fillByIds(gameIds.toArray(new String[gameIds.size()]));
 		request.setAttribute("Games", gt);
-		
-		
 		
 		request.getRequestDispatcher(toJsp).forward(request, response); // If all successful, forward to view_game.jsp
 	}
