@@ -37,7 +37,6 @@ ArrayList<Event> pastEvents = eventTable.getPastEvents();
 							<td><%= event.getStartDate() %> - <%= event.getEndDate() %></td>
 							<td>
 								<button>Edit</button>
-								<button>View</button>
 								<button>Publish</button>
 								<button>Delete</button>
 							</td>
@@ -60,10 +59,11 @@ ArrayList<Event> pastEvents = eventTable.getPastEvents();
 							<td><%= event.getTitle() %></td>
 							<td><%= event.getStartDate() %> - <%= event.getEndDate() %></td>
 							<td>
-								<button>Edit</button>
-								<button>View</button>
-								<button>Publish</button>
-								<button>Delete</button>
+									<form action="<%= request.getContextPath() %>/ViewEventServlet" method = "post">
+										<button type="submit" class="option" name="event-key" value="<%= event.getKey() %>" data-toggle="modal">Edit</button>
+									</form>
+									<button type="submit" class="option" name="event-key" value="<%= event.getKey() %>" data-toggle="modal" data-target="#newEventModal" data-dismiss="modal">Remove</button>
+									<button type="submit" class="option" name="event-key" value="<%= event.getKey() %>" data-toggle="modal" data-target="#newEventModal" data-dismiss="modal">Publish</button>
 							</td>
 						</tr>
 					<%}%>
@@ -76,3 +76,13 @@ ArrayList<Event> pastEvents = eventTable.getPastEvents();
 		</div>
 	</div>
 </div>
+
+
+
+
+
+
+
+
+
+
