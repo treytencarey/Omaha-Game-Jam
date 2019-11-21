@@ -90,10 +90,11 @@ public class EventPortalServlet extends HttpServlet {
 		
 		Database.executeUpdate("INSERT OR REPLACE INTO Events (Title, Theme, Description, StartDate, EndDate) VALUES ('" + title + "', '" + theme + "', '" + eventDescription + "', '" + startDate + "', '" + endDate + "')");
 		List<Map<String, Object>> query = Database.executeQuery("SELECT PKey FROM Events WHERE Title=\'" + title + "\'");
-		for(int i = 0; i < mutators.length; i++)
-			Database.executeUpdate("INSERT OR REPLACE INTO Mutators (EventPKey, Title, Description) VALUES ('" + query.get(0).get("PKey").toString() + "', '" + mutators[i] + "', '" + mutatorDescriptions[i] + "')");
-
-		
+		for(int i = 0; i < mutators.length; i++) {
+			if(mutators[i] != null) {
+				Database.executeUpdate("INSERT OR REPLACE INTO Mutators (EventPKey, Title, Description) VALUES ('" + query.get(0).get("PKey").toString() + "', '" + mutators[i] + "', '" + mutatorDescriptions[i] + "')");
+			}
+		}
 		response.sendRedirect(request.getContextPath() + "/Events/");
 		
 		
