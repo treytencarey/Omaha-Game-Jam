@@ -42,7 +42,7 @@ public class DatabaseTests {
 	}
 	
 	@Test
-	public void test1_checkDatabaseNotNull() {
+	public void test1_checkDatabaseNotNull() throws ClassNotFoundException, SQLException {
 		System.out.println(executeQuery("SELECT * From Blogs"));
 	}
 	
