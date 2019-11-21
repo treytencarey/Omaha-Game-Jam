@@ -4,7 +4,9 @@
     
 <%
 ProfileBean p = (ProfileBean)request.getAttribute("Profile");
+String picPath = (String)request.getAttribute("PicPath");
 Boolean canEdit = (Boolean)request.getAttribute("CanEdit");
+pageContext.setAttribute("Profile", p);
 %>
 
 <!DOCTYPE html>
@@ -42,14 +44,7 @@ Boolean canEdit = (Boolean)request.getAttribute("CanEdit");
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                        	<%@page import="java.io.File" %>
-                        	<% 	profileImgPath = "/Uploads/Profiles/Pics/" + request.getParameter("id");
-                            	if (!new File(Main.context.getRealPath(profileImgPath)).exists())
-                        			profileImgPath = "https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg";
-                            	else
-                            		profileImgPath = request.getContextPath() + profileImgPath;
-                        	%>
-                            <img src="<%= profileImgPath %>" alt=""/>
+                            <img src="<%= picPath %>" alt=""/>
                         </div>
                     </div>
                     <div class="col-md-6">
