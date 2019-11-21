@@ -5,6 +5,9 @@
 ProfileBean pp = (ProfileBean)pageContext.getAttribute("Profile");
 String ppp = (String)pageContext.getAttribute("PicPath");
 String id = (String)session.getAttribute("accountPKey");
+
+if(pp == null)
+	pp = new ProfileBean();
 %>
 
 <script src="pictureUploadPreview.js"></script> 
