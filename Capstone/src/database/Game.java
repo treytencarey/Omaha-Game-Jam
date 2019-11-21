@@ -104,7 +104,7 @@ public class Game extends HttpServlet implements Serializable{
 		if (changingPublic)
 		{
 			String PKey = request.getParameter("publicPKey");
-			String checked = (request.getParameter("publicChecked").equals("1")) ? "1" : "";
+			String checked = (request.getParameter("publicChecked").equals("1")) ? "1" : "0";
 			
 			Database.executeUpdate("UPDATE Games SET IsPublic='" + checked + "' WHERE PKey=" + PKey);
 			

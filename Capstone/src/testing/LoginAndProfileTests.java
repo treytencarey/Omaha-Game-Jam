@@ -27,7 +27,7 @@ import database.Database;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RunTests {
+public class LoginAndProfileTests {
 	/**
 	 * The URL of the site to test.
 	 */
@@ -39,7 +39,7 @@ public class RunTests {
 	/**
 	 * The password of the account to test.
 	 */
-	String junitPass = "test";
+	String junitPass = "Testtest55##";
 	/**
 	 * The WebDriver used for testing.
 	 */

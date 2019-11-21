@@ -39,37 +39,34 @@
 <body>
 	<%@include  file="/Common/navbar.jsp" %>
 	<%@include file="/Events/newEventModal.jsp" %>
+	<%@page import="beans.EventTableBean" %>
 	<%@page import="beans.Event" %>
 	<%@page import="database.Database" %>
 	<%@page import="project.Main" %>
 	<%@page import="java.util.ArrayList" %>
-	<%@page import="java.util.List" %>
-	<%@page import="java.util.Map" %>
+
 	
-	<div style="text-align: center;">
 	<%
 	FolderReader fr = new FolderReader("/images/eventImages");
-	Event current = new Event();
-	int pkey = -1;
+	EventTableBean eventTable = new EventTableBean();
 	
-	List<Map<String, Object>> query = Database.executeQuery("SELECT EventPKey FROM ActiveEvent WHERE IsPublic=\'" + 0 + "\'");
-	if(!query.isEmpty()){
-		pkey = Integer.parseInt(query.get(0).get("EventPKey").toString());
-	}
-	if(pkey != -1)
-		current = new Event(pkey);
+	Event current = eventTable.getCurrentEvent();
+	Event future = eventTable.getFutureEvent();
+	ArrayList<Event> past = eventTable.getPastEvents();
+	
 	%>
+	
 	<div id="event-header">
-			<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-				<ol class="carousel-indicators">
-					<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-					<%
-					for(int i = 1; i < fr.getFileList().length; i++) {
-					%>
-						<li data-target="#carouselExampleIndicators" data-slide-to=<%= i %>></li>
-					<%
-					}
-					%>
+		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+				<%
+				for(int i = 1; i < fr.getFileList().length; i++) {
+				%>
+				<li data-target="#carouselExampleIndicators" data-slide-to=<%= i %>></li>
+				<%
+				}
+				%>
 				</ol>
 				<div class="carousel-inner rounded" style="height: 35%;">
 					<%
@@ -98,43 +95,45 @@
 					class="sr-only">Next</span>
 				</a>
 			</div>
-			<br><br>
-		<div id="event-info">
-			<h1 id="event-name"><b><%= current.getTitle() %></b></h1><br>
-			<h2 id="event-subheadinfo"><%= current.getTheme() %></h2><br>
-			<div id="event-description"><%= current.getDescription() %></div><br>
-			<h3>From <%= current.getStartDate() %> to <%= current.getEndDate() %></h3>
-			<button type="button" id="rsvp-button">RSVP</button>
-			<button type="button" id="event-schedule-button">Event Schedule</button>
-			<button type="button" id="discord-button">Developer Discord</button>
 		</div>
+		
+	<!-- Current Event -->
+	<div id="current-event">
+		<h1 class="event-title"><b><%= current.getTitle() %></b></h1><br>
+		<h3 class="event-theme"><%= current.getTheme() %></h3><br>
+		<div id="event-description"><%= current.getDescription() %></div><br>
+		<h5>From <%= current.getStartDate() %> to <%= current.getEndDate() %></h5>
 	</div>
-	<br><br>
-	<h1>Past Events</h1>
+	
+	<button type="button" id="rsvp-button">RSVP</button>
+	<button type="button" id="event-schedule-button">Event Schedule</button>
+	<button type="button" id="discord-button">Developer Discord</button>
+	
+	<!-- Future Event -->
+	<div id="upcoming-event">
+		<img src="../images/eventImages/sw.jpg">
+		<h1 class="event-title"><%= future.getTitle() %></h1>
+		<h3 class="event-theme"><%= future.getTheme() %></h3>
+		<h5>From <%= future.getStartDate() %> to <%= future.getEndDate() %></h5>
 	</div>
-
-	<div class="container">
-		<div class="row mt-5 justify-content-center">
-	<%
-	List<Map<String, Object>> events = Database.executeQuery("SELECT * FROM Events WHERE PKey != (SELECT MAX(PKey) FROM Events)");
-	if(!events.isEmpty()){
-		for(Map<String, Object> pastEvent : events){
-			
-			Event eventCard = new Event(Integer.parseInt(pastEvent.get("PKey").toString()));
-	%>
-			<div class="card card-custom mx-2 mb-3" style="max-width:350px;">
-				<img src="../images/its_spherical.jpg" class="card-image-top" alt="Card image">
-				<div class="card-body dark">
-		  			<h5 class="card-title"><%= eventCard.getTitle() %></h5>
-		  			<h6 class="card-subtitle mb-2 text-muted"><%= eventCard.getTheme() %></h6>
-		  			<p class="card-text"><%= eventCard.getDescription() %></p>
-		  		</div>
-		    </div>
-				
-		<%	
-		}
-	}
-	%>
+	
+	<!-- Past Events -->
+	<div id="past-events">
+		<h1>Past Events</h1>
+		<div class="container">
+			<div class="row mt-5 justify-content-center">	
+				<%for(Event event : past){%>
+					<div class="card card-custom mx-2 mb-3" style="max-width:350px;">
+						<img src="../images/its_spherical.jpg" class="card-image-top" alt="Card image">
+						<div class="card-body dark">
+					  		<h5 class="card-title"><%= event.getTitle() %></h5>
+					  		<h6 class="card-subtitle mb-2 text-muted"><%= event.getTheme() %></h6>
+					  		<p class="card-text"><%= event.getDescription() %></p>
+					  		<p class="card-text"><%= event.getStartDate() %></p>
+					  	</div>
+					</div>
+				<%}%>
+			</div>
 		</div>
 	</div>
 </body>

@@ -141,7 +141,7 @@ public class Database extends HttpServlet {
 	 */
 	public static List<Map<String, Object>> executeQuery(String sql)
 	{
-		System.out.println(AUTH_DB);
+		//System.out.println(AUTH_DB);
 		return Database.executeQuery(sql, Database.AUTH_DB);
 	}
 	/**
@@ -163,6 +163,7 @@ public class Database extends HttpServlet {
 	    }
 	
 	    Connection connection = null;
+	    
 	    try
 	    {
 			// create a database connection

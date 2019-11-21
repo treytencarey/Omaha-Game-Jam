@@ -31,7 +31,6 @@ public class EventPortalServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Got Here");
 		response.sendRedirect(request.getContextPath() + "/Events/");
 	}
 

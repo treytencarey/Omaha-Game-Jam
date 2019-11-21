@@ -75,15 +75,17 @@ int numOfUsers = Integer.parseInt(query.get(0).get("COUNT(*)").toString());
 	   	   for(int i = 0; i < recentNews.length; i++) {
 		   		recentNews[i] = new News(postKeys[i]);
 	       } %>
-		<div class="container h-100" style="text-align: center;">
-	  		<div class="row mt-2 justify-content-center">
+		<div class="container" style="text-align: center;">
+	  		<div class="row justify-content-center">
 	  			<% for(int i = 0; i < recentNews.length; i++) { %>
-					<div class="card">
-						<a href="<%=request.getContextPath()%>/News/view?id=<%=recentNews[i].getKey()%>"><img class="card-img-top zoom" src="<%= request.getContextPath() %>/images/spoopy.png"/></a>
-					  		<div class="card-body dark">
-					  			<h5 class="card-title"><%=recentNews[i].getTitle() %></h5>
-					  			<p class="card-text"><%=recentNews[i].getHeader() %></p>
-					  		</div>
+	  				<div class="col-sm">
+						<div class="card">
+							<a href="<%=request.getContextPath()%>/News/view?id=<%=recentNews[i].getKey()%>"><img class="card-img-top zoom" src="<%= request.getContextPath() + "/Uploads/News/Photo/" + recentNews[i].getKey() + "_header.png" %>"/></a>
+						  		<div class="card-body dark">
+						  			<h5 class="card-title"><%=recentNews[i].getTitle() %></h5>
+						  			<p class="card-text"><%=recentNews[i].getHeader() %></p>
+						  		</div>
+					  	</div>
 				  	</div>
 			  	<% } %>
 		  	</div>
