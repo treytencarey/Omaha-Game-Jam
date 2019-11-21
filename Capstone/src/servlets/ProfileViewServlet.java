@@ -2,20 +2,21 @@ package servlets;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystems;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import beans.ContributorTableBean;
-import beans.GameBean;
 import beans.GameTableBean;
 import beans.ProfileBean;
+import database.Contributor;
 import exceptions.EmptyQueryException;
 import project.Main;
 
@@ -89,11 +90,25 @@ public class ProfileViewServlet extends HttpServlet {
 		
 		ct = new ContributorTableBean();
 		ct.fillByAccount(id);
-		ArrayList<String> gameIds = ct.getGameIds();
 		
+		// Creating a Map, using GamePKey as an index to retrieve a value ArrayList<String> of the roles
+		Map<String, ArrayList<String>> roles = new HashMap<String, ArrayList<String>>(); // Map from 1 game to 1..n roles
+		Iterator<Contributor> i = ct.getContributors().iterator();
+		while (i.hasNext()) // For each contribution
+		{
+			Contributor c = i.next();
+			if (roles.get(c.getGamePKey()) == null) // If this is the first contribution related to a certain game, create an ArrayList.
+				roles.put(c.getGamePKey(), new ArrayList<String>());
+			roles.get(c.getGamePKey()).add(c.getRolePKey());
+		}
+		request.setAttribute("Roles", roles);
+		
+		ArrayList<String> gameIds = ct.getGameIds();
 		gt = new GameTableBean();
 		gt.fillByIds(gameIds.toArray(new String[gameIds.size()]));
 		request.setAttribute("Games", gt);
+		
+		
 		
 		request.getRequestDispatcher(toJsp).forward(request, response); // If all successful, forward to view_game.jsp
 	}

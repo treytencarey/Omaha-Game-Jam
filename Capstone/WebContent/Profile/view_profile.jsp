@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="beans.ProfileBean, beans.GameTableBean, beans.GameBean"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="beans.ProfileBean, beans.GameTableBean, beans.GameBean, java.util.Map, java.util.ArrayList, java.util.Iterator"%>
 
 <%
 	ProfileBean p = (ProfileBean) request.getAttribute("Profile");
 	GameTableBean gt = (GameTableBean) request.getAttribute("Games");
+	Map<String, ArrayList<String>> r = (Map<String, ArrayList<String>>) request.getAttribute("Roles");
 	String picPath = (String) request.getAttribute("PicPath");
 	Boolean canEdit = (Boolean) request.getAttribute("CanEdit");
 	pageContext.setAttribute("Profile", p);
@@ -113,6 +114,18 @@
 										<div class="col-lg-3 col-md-4 col-xs-6 thumb">
 											<a class="thumbnail" href="<%= gameLink %>" data-image-id=""> <img class="img-thumbnail" src="<%= gamePicPath %>" alt="<%= g.getTitle() %>"></a>
 											<%= g.getTitle() %>
+											<ul>
+											<%
+												ArrayList<String> roles = r.get(g.getId());
+												Iterator<String> i = roles.iterator();
+												while (i.hasNext())
+												{
+											%>
+												<li><%= i.next() %></li>
+											<%	
+												}
+											%>
+											</ul>
 										</div>
 										<%		
 											}
