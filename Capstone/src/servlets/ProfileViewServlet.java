@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import beans.ContributorTableBean;
 import beans.GameTableBean;
 import beans.ProfileBean;
+import beans.RoleTableBean;
 import database.Contributor;
 import exceptions.EmptyQueryException;
 import project.Main;
@@ -48,6 +49,7 @@ public class ProfileViewServlet extends HttpServlet {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		ProfileBean p;
 		ContributorTableBean ct;
+		RoleTableBean rt;
 		GameTableBean gt;
 		boolean canEdit;
 		String picPath;
@@ -91,15 +93,32 @@ public class ProfileViewServlet extends HttpServlet {
 		ct = new ContributorTableBean();
 		ct.fillByAccount(id);
 		
-		// Creating a Map, using GamePKey as an index to retrieve a value ArrayList<String> of the roles
+		// gather list of all role ids we need
+		// call roletablebean.getbyids
+		// loop thru again and replace role ids with role titles
+		
+		// Creating a Map, using GamePKey as an index to retrieve a value ArrayList<String> of the roleIDs
 		Map<String, ArrayList<String>> roles = new HashMap<String, ArrayList<String>>(); // Map from 1 game to 1..n roles
-		Iterator<Contributor> i = ct.getContributors().iterator();
-		while (i.hasNext()) // For each contribution
+		ArrayList<String> rids = new ArrayList<String>();
+		Iterator<Contributor> ic = ct.getContributors().iterator();
+		while (ic.hasNext()) // For each contribution
 		{
-			Contributor c = i.next();
+			Contributor c = ic.next();
 			if (roles.get(c.getGamePKey()) == null) // If this is the first contribution related to a certain game, create an ArrayList.
 				roles.put(c.getGamePKey(), new ArrayList<String>());
 			roles.get(c.getGamePKey()).add(c.getRolePKey());
+			rids.add(c.getRolePKey());
+		}
+		rt = new RoleTableBean();
+		rt.fillByIds(rids.toArray(new String[rids.size()])); // RoleTableBean filled with all ID/Titles this user has contributed
+		// Loop over the previously created Map and replace RoleIDs with RoleTitles
+		for (Map.Entry<String, ArrayList<String>> r : roles.entrySet()) // For each game
+		{
+			for (int j = 0; j < r.getValue().size(); j++) // For each role associated to a particular game
+			{
+				ArrayList<String> ids = r.getValue(); // Get the ArrayList of Role IDs
+				ids.set(j, rt.getTitle(ids.get(j))); // Replace the ArrayList element (ID) with Title
+			}
 		}
 		request.setAttribute("Roles", roles);
 		
