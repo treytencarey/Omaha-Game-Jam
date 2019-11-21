@@ -23,13 +23,12 @@ Boolean canEdit = (Boolean)request.getAttribute("CanEdit");
 <link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 </head>
 <body>
-	<%@include  file="/Common/navbar.jsp" %>
-	<%@include file="/Profile/editProfileModal.jsp" %>
-	
+<%@include  file="/Common/navbar.jsp" %>
 <%
 if (canEdit.booleanValue())
 {
 %>
+	<%@include file="/Profile/editProfileModal.jsp" %>
 	<a id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Edit Profile</a>
 <%
 }

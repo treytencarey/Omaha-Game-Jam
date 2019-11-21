@@ -31,7 +31,8 @@ public class GamePullerServlet extends HttpServlet {
 	 * Returns all games submitted for a certain event as (crappy) HTML. "event", the event primary key, should be passed as a parameter.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GameTableBean gt = new GameTableBean(request.getParameter("event"));
+		GameTableBean gt = new GameTableBean();
+		gt.fillByEvent(request.getParameter("event"));
 		Iterator<GameBean> i = gt.getGames().iterator();
 		while (i.hasNext())
 		{

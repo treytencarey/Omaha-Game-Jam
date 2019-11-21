@@ -3,6 +3,7 @@ package servlets;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.ContributorTableBean;
 import beans.GameBean;
+import beans.GameTableBean;
 import beans.ProfileBean;
 import exceptions.EmptyQueryException;
 import project.Main;
@@ -35,6 +38,7 @@ public class ProfileViewServlet extends HttpServlet {
 	 * <ul>
 	 * <li>Sets request attribute "CanEdit" depending on the logged in user</li>
 	 * <li>Sets request attribute "Profile" if profile found</li>
+	 * <li>Sets request attribute "Games" to an ArrayList<Game>.
 	 * </ul>
 	 * 
 	 */
@@ -42,6 +46,8 @@ public class ProfileViewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		ProfileBean p;
+		ContributorTableBean ct;
+		GameTableBean gt;
 		boolean canEdit;
 		String picPath;
 		String toJsp;
@@ -65,7 +71,7 @@ public class ProfileViewServlet extends HttpServlet {
 			// Set profile pic path
 			picPath = "/Uploads/Profiles/Pics/" + id;
 			File f = new File(Main.context.getRealPath(picPath));
-			System.out.println(f.length());
+			//System.out.println(f.length());
         	if (!f.exists() || f.length() == 0) // Display default if file is empty or non-existent
         		picPath = "https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg";
         	else
@@ -80,6 +86,14 @@ public class ProfileViewServlet extends HttpServlet {
 			System.out.println("Empty profile: " + eqe.getQuery());
 			
 		}
+		
+		ct = new ContributorTableBean();
+		ct.fillByAccount(id);
+		ArrayList<String> gameIds = ct.getGameIds();
+		
+		gt = new GameTableBean();
+		gt.fillByIds(gameIds.toArray(new String[gameIds.size()]));
+		request.setAttribute("Games", gt);
 		
 		request.getRequestDispatcher(toJsp).forward(request, response); // If all successful, forward to view_game.jsp
 	}

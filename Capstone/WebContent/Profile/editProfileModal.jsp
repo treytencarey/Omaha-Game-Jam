@@ -80,17 +80,7 @@ String id = (String)session.getAttribute("accountPKey");
 						<div class="input-group">
 							<span class="input-group-addon icons"><i
 								class="fa fa-code"></i></span>
-							<textarea class="form-control modalFields" name="skills"
-								placeholder="Skills">
-								<%
-									String[] skills = pp.getSkills().split("\n");
-									for (String s : skills) {
-								%>
-								<%=s%>
-								<%
-									}
-								%>
-							</textarea>
+							<textarea class="form-control modalFields" name="skills" placeholder="Skills"><%= pp.getSkills() %></textarea>
 							<div class="invalid-feedback">Please enter a skill(s)</div>
 						</div>
 					</div>
