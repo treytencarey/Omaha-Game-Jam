@@ -6,7 +6,9 @@
 	Map<String, ArrayList<String>> r = (Map<String, ArrayList<String>>) request.getAttribute("Roles");
 	String picPath = (String) request.getAttribute("PicPath");
 	Boolean canEdit = (Boolean) request.getAttribute("CanEdit");
+	// Set the page context so editProfileModal can also access these attributes.
 	pageContext.setAttribute("Profile", p);
+	pageContext.setAttribute("PicPath", picPath);
 %>
 
 <!DOCTYPE html>

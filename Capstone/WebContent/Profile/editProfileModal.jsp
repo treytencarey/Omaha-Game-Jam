@@ -3,8 +3,11 @@
     import="beans.ProfileBean"%>
 <%
 ProfileBean pp = (ProfileBean)pageContext.getAttribute("Profile");
+String ppp = (String)pageContext.getAttribute("PicPath");
 String id = (String)session.getAttribute("accountPKey");
 %>
+
+<script src="pictureUploadPreview.js"></script> 
 
 <div id="editProfileModal" class="modal fade">
 	<div class="modal-dialog modal-login newMods">
@@ -19,11 +22,11 @@ String id = (String)session.getAttribute("accountPKey");
 					<input type="hidden" name="id" value="<%= id %>">
 
 					<!-- Simple pic upload -->
-					<img id="picPrev">
 					<div class="form-group">
 						<div class="input-group">
+							<img id="picPrev" src="<%= ppp %>">
 							<span class="input-group-addon icons"><i class="fa fa-user"></i></span>
-								Select profile pic: <input type="file" name="pic">
+								Select profile pic: <input type="file" name="pic" onchange="previewPic(this, 'picPrev');">
 							<div class="invalid-feedback">Please enter a valid name</div>
 						</div>
 					</div>
