@@ -35,7 +35,6 @@
 	   }
 	   DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy");
 	   String currentYear = dtf.format(LocalDateTime.now());
-	   String[] testImgs = {request.getContextPath() + "/images/squidward.jpg", request.getContextPath() + "/images/its_spherical.jpg", request.getContextPath() + "/images/cancer.jpeg" };
 	%>
 	
 	<h4 class="page-text">Recent News</h4>

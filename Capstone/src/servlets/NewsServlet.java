@@ -1,5 +1,7 @@
 package servlets;
 
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,6 +9,7 @@ import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -19,7 +22,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 import beans.News;
 import database.Database;
@@ -76,7 +78,7 @@ public class NewsServlet extends HttpServlet {
 		 * When the user submits an article/edits and article, this link will redirect
 		 * them to the article
 		 */
-		String redirectLink = request.getContextPath() + "/News/view?id=";
+		String redirectLink = request.getContextPath() + "/News";
 
 		/**
 		 * Get title, header, and body from input on "Create/Edit News Article" modal
@@ -102,6 +104,11 @@ public class NewsServlet extends HttpServlet {
 		String currentDate = dtf.format(LocalDateTime.now());
 
 		List<Map<String, Object>> query = null;
+		
+		/**
+		 * Find the path where the body txt file will go
+		 */
+		path = getServerPath("/Uploads/News/Body/Body");
 
 		if (request.getParameter("newNewsArticleButton") != null) {
 			Database.executeUpdate("INSERT OR REPLACE INTO Blogs(Date, Title, IsPublic, Header) VALUES (\'"
@@ -109,17 +116,23 @@ public class NewsServlet extends HttpServlet {
 			query = Database.executeQuery(
 					"SELECT PKey FROM Blogs WHERE Date=\'" + currentDate + "\' AND Title=\'" + reqTitle + "\'");
 		}
+		
 		if (request.getParameter("editNewsArticleButton") != null) {
 			String id = request.getParameter("newsId");
 			Database.executeUpdate("UPDATE Blogs SET Date=\'" + currentDate + "\', Title=\'" + reqTitle
 					+ "\', IsPublic=\'" + isPublicDb + "\', Header=\'" + reqHeader + "\' WHERE PKey=" + id);
 			query = Database.executeQuery("SELECT PKey FROM Blogs WHERE Pkey=" + id);
 		}
-
-		/**
-		 * Find the path where the body txt file will go
-		 */
-		path = getServerPath("/Uploads/News/Body/Body");
+		
+		if(request.getParameter("deleteNewsArticleButton") != null) {
+			String id = request.getParameter("newsId");
+			Database.executeUpdate("DELETE FROM Blogs WHERE PKey=" + id);
+			Files.deleteIfExists(Paths.get(path + id + "_body.txt"));
+			path = getServerPath("/Uploads/News/Photo/Photo");
+			Files.deleteIfExists(Paths.get(path + id + "_header.png"));
+			response.sendRedirect(redirectLink);
+			return;
+		}
 
 		/**
 		 * Create the file in the form of PKey_body.txt and write/overwrite to the file
@@ -148,7 +161,7 @@ public class NewsServlet extends HttpServlet {
 		 * Add the PKey to the id parameter in url so that user gets redirected to the
 		 * page they just created/edited
 		 */
-		redirectLink = redirectLink + pKey;
+		redirectLink = redirectLink + "/view?id=" + pKey;
 		response.sendRedirect(redirectLink);
 	}
 
