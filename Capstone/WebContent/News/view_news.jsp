@@ -60,9 +60,8 @@
 	%>
 	<div class="admin-controls">
 		<h5>Admin Controls:</h5>
-		<a id="editArticleBtn" href="#editNewsArticleModal"
-			class="btn btn-primary btn-med" style="cursor: pointer;"
-			role="button" data-toggle="modal">Edit Article</a>
+		<a id="editArticleBtn" href="#editNewsArticleModal" class="btn btn-primary btn-med" style="cursor: pointer;" role="button" data-toggle="modal">Edit Article</a>
+		<a id="deleteArticleBtn" href="#deleteNewsArticleModal" class="btn btn-primary btn-med" style="cursor: pointer;" role="button" data-toggle="modal">Delete Article</a>
 	</div>
 	<div class="news-container">
 		<div>
