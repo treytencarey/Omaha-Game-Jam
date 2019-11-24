@@ -50,7 +50,7 @@ public class SqlTable extends HttpServlet {
 		{
 			String PKey = request.getParameter("PKey");
 			int page = Integer.valueOf(request.getParameter("page"))-1;
-			int limit = 2;
+			int limit = 20;
 			
 			String SQL = session.getAttribute("sqlTablePKeyStatement" + PKey).toString();
 			
