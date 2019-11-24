@@ -40,10 +40,10 @@
 			});
 		</script>
 <% 	}
-	session.setAttribute("servlet", null);
-	session.setAttribute("form", null);
-	session.setAttribute("updates", null);
-	session.setAttribute("successJS", null);
-	session.setAttribute("errorJS", null);
-	session.setAttribute("multipart",null);
+	session.setAttribute("servlet", null);		// The servlet that is being triggered.
+	session.setAttribute("form", null);			// The form that is being submitted.
+	session.setAttribute("updates", null);		// (OPTIONAL) An Arrays.asList() of elements to update when the form is submitted.
+	session.setAttribute("successJS", null);	// (OPTIONAL) A String of JavaScript to run if the form submission is successful.
+	session.setAttribute("errorJS", null);		// (OPTIONAL) A String of JavaScript to run if the form submission is unsuccessful.
+	session.setAttribute("multipart",null);		// (OPTIONAL) The Ajax request should be sent as a multipart (for uploading files).
 %>

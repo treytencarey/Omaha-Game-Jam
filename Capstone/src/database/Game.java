@@ -111,6 +111,17 @@ public class Game extends HttpServlet implements Serializable{
 			response.sendRedirect(session.getAttribute("curPage").toString());
 			return;
 		}
+		
+		boolean changingGameSubmissionPage = request.getParameter("gameSubmissionPageNo") != null;
+		if (changingGameSubmissionPage)
+		{
+			Integer pageNo = Integer.valueOf(request.getParameter("gameSubmissionPageNo").toString());
+			
+			System.out.println("SETTING PAGENO: " + String.valueOf(pageNo));
+			session.setAttribute("gameSubmissionPageNo", pageNo);
+			
+			return;
+		}
 	}
 
 	/**
