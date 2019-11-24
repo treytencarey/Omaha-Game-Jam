@@ -67,7 +67,8 @@ public class GameViewServlet extends HttpServlet {
 		}
 		request.setAttribute("Game", g); // Store GameBean in request for JSP to retrieve it from
 		mt = new MutatorTableBean(id);
-		ct = new ContributorTableBean(id);
+		ct = new ContributorTableBean();
+		ct.fillByGame(id);
 		request.setAttribute("MutatorTable", mt);
 		request.setAttribute("ContributorTable", ct);
 		

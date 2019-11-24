@@ -19,15 +19,13 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import database.Database;
-
 /**
  * 
  * Handles instructions for site testing.
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RunTests {
+public class LoginAndProfileTests {
 	/**
 	 * The URL of the site to test.
 	 */
@@ -39,7 +37,7 @@ public class RunTests {
 	/**
 	 * The password of the account to test.
 	 */
-	String junitPass = "test";
+	String junitPass = "Testtest55##";
 	/**
 	 * The WebDriver used for testing.
 	 */
@@ -68,23 +66,10 @@ public class RunTests {
 	}
 	
 	/**
-	 * Tests to see if the login fails due to invalid email.
-	 */
-	@Test
-	public void test2_noAtSignInEmail() {
-		String noAtEmail = junitEmail.replace("@", "");
-		
-		driver.findElement(By.id("loginBtn")).click();
-		enterLogin(noAtEmail, junitPass);
-		driver.findElement(By.name("loginButton")).click();
-		assertEquals(true, checkIfElementExists("loginButton")); //login button element should still be on page since invalid info was entered
-	}
-	
-	/**
 	 * Tests to see if the registration fails due to invalid email.
 	 */
 	@Test
-	public void test3_noAtSignInRegister() {
+	public void test2_noAtSignInRegister() {
 		goToHomepage();
 		String noAtEmail = junitEmail.replace("@", "");
 		
