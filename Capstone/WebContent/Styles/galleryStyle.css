@@ -1,0 +1,25 @@
+.main-event-img {
+  	object-fit: contain;
+  	max-width: 40%;
+  	max-height: 40%;
+  	margin: 0 auto;
+  	align: center;
+  	display: block;
+  	padding: 2px;
+}
+
+.event-img {
+	object-fit: cover;
+  	display: block;
+  	max-width: 15em;
+  	max-height: 15em;
+  	padding: 5px;
+  	align: center;
+}
+
+.event-photos-container {
+	width: 90%;
+	display: block;
+	align: center;
+	margin: 0 auto;
+}
