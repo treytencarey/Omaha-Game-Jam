@@ -92,7 +92,7 @@ public class SqlTable extends HttpServlet {
 				table += 		"	</tbody>" +
 								"</table>";
 				
-				table +=		"<a style='text-color: white;'>Showing " + String.valueOf(page*limit+1) + " to " + String.valueOf(page*limit+limit) + " of " + String.valueOf(maxCount) + " entries</a>";
+				table +=		"<a style='text-color: white;'>Showing " + String.valueOf(page*limit+1) + " to " + String.valueOf(page*limit+limit > maxCount ? maxCount : page*limit+limit) + " of " + String.valueOf(maxCount) + " entries</a>";
 				
 				table +=		"<div style='content-align: center;'>" +
 								"	<nav aria-label='Page navigation example'>" +
