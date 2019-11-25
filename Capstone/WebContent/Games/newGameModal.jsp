@@ -1,3 +1,5 @@
+<%@page import="java.util.Map" %>
+<%@page import="database.Database" %>
 <div id="newGameModal" class="modal fade">
 	<div class="modal-dialog modal-login newMods">
 		<div class="modal-content">
@@ -44,24 +46,16 @@
 							<span class="input-group-addon icons"><i class="fa fa-exclamation"></i></span>
 					      	<legend class="col-form-label col-sm-2 pt-0 checkLabel">Mutators</legend>
 					      	<div class="col-sm-8 checkForms">
-						        <div class="form-check">
-					          		<input class="form-check-input" type="checkbox" id="mutatorCheck1">
-					        		<label class="form-check-label" for="gridCheck1">
-						          		Save ocean
-					        		</label>
-					        	</div>
-					        	<div class="form-check">
-						          	<input class="form-check-input" type="checkbox" id="mutatorCheck1">
-					        		<label class="form-check-label" for="gridCheck1">
-						          		No violence
-					        		</label>
-					        	</div>
-					        	<div class="form-check">
-					          		<input class="form-check-input" type="checkbox" id="mutatorCheck1">
-					        		<label class="form-check-label" for="gridCheck1">
-					          			3 color palette
-					        		</label>
-					        	</div>
+					      		<% 	int v = 0;
+					      			for (Map<String, Object> mutator : Database.executeQuery("SELECT Title, PKey FROM Mutators WHERE EventPKey=(SELECT EventPKey FROM ActiveEvent LIMIT 1)")) { %>
+								        <div class="form-check">
+							          		<input class="form-check-input" type="checkbox" id="mutatorCheck<%= v %>" name="mutatorCheck<%= v %>" value="<%= mutator.get("PKey") %>">
+							        		<label class="form-check-label" for="mutatorCheck<%= v %>">
+								          		<%= mutator.get("Title") %>
+							        		</label>
+							        	</div>
+							    <% 		v++;
+							    	} %>
 					      	</div>
 					    </div>
 				    </fieldset>
@@ -84,18 +78,14 @@
 							<span class="input-group-addon icons"><i class="fa fa-apple"></i></span>
 					      	<legend class="col-form-label col-sm-2 pt-0 checkLabel">System(s)</legend>
 						    <div class="col-sm-8 checkForms">
-							    <div class="form-check form-check-inline">
-								  	<input class="form-check-input" type="checkbox" id="windowsOSCheckbox1" value="windowsOption">
-								  	<label class="form-check-label" for="windowsOSCheckbox1">Windows</label>
-								</div>
-								<div class="form-check form-check-inline">
-								  	<input class="form-check-input" type="checkbox" id="macOSCheckbox2" value="macOption">
-								  	<label class="form-check-label" for="macOSCheckbox2">Mac</label>
-								</div>
-								<div class="form-check form-check-inline">
-								  	<input class="form-check-input" type="checkbox" id="linuxOSCheckbox" value="linuxOption">
-								  	<label class="form-check-label" for="linuxOSCheckbox">Linux</label>
-								</div>
+						    	<%	int n = 0;
+						    		for (Map<String, Object> platform : Database.executeQuery("SELECT Name, PKey FROM Platforms")) { %>
+									    <div class="form-check form-check-inline">
+										  	<input class="form-check-input" type="checkbox" id="platformCheck<%= n %>" name="platformCheck<%= n %>" value="<%= platform.get("PKey") %>">
+										  	<label class="form-check-label" for="platformCheck<%= n %>"><%= platform.get("Name") %></label>
+										</div>
+								<%		n++;
+									} %>
 							</div>
 			  			</div>
 		  			</fieldset>
@@ -104,12 +94,13 @@
 				  		<div class="input-group">
 						    <span class="input-group-addon icons"><i class="fa fa-wrench"></i></span>
 					      	<legend class="col-form-label col-sm-2 pt-0 checkLabel">Tools</legend>
-						    <select multiple class="form-control modalFields" id="inlineFormCustomSelect" required>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-							  	<option value="5">5</option>
+					      	<input type="text" name="tools" value="" style="display: none;">
+						    <select multiple class="form-control modalFields" id="toolsSelect" name="toolsSelect" required>
+						    	<%	int y = 0;
+									for (Map<String, Object> tool : Database.executeQuery("SELECT Name, PKey FROM Tools")) { %>
+										<option value="<%= tool.get("PKey") %>"><%= tool.get("Name") %></option>
+								<%		y++;
+									} %>
 					    	</select>
 				    	</div>
 				  	</div>
@@ -134,6 +125,12 @@
 <form id="gameSubmit" style="display: none;" action="<%= request.getContextPath() %>/gameServlet" method="post"><input name="gameSubmitAfterFiles"/><button id="gameSubmitButton"></button></form>
 <% session.setAttribute("servlet", "filesServlet"); %>
 <% session.setAttribute("form", "#gameUpload"); %>
+<% session.setAttribute("beforeSubmitJS", "" +
+	"var v = ''; " +
+	"$('#toolsSelect > :selected').each(function() { " +
+	"	v += $(this).val() + ','; " +
+	"}); " +
+	"document.getElementsByName('tools')[0].value = v;"); %>
 <% session.setAttribute("successJS", "$('#gameSubmitButton').click();"); %>
 <% session.setAttribute("multipart", true); %>
 <%@include file="../components/ajax.jsp" %>
