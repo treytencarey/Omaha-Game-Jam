@@ -5,6 +5,9 @@
 			var $form = $("<%= session.getAttribute("form") %>");
 			$form.submit(function(e) {
 				e.preventDefault();
+				<% if (session.getAttribute("beforeSubmitJS") != null) { %>
+					<%= session.getAttribute("beforeSubmitJS") %>
+				<% } %>
 				var params = {
 					type: "POST",
 					url: "${pageContext.request.contextPath}/<%= session.getAttribute("servlet") %>",
@@ -43,6 +46,7 @@
 	session.setAttribute("servlet", null);		// The servlet that is being triggered.
 	session.setAttribute("form", null);			// The form that is being submitted.
 	session.setAttribute("updates", null);		// (OPTIONAL) An Arrays.asList() of elements to update when the form is submitted.
+	session.setAttribute("beforeSubmitJS", null);// (OPTIONAL) A String of JavaScript to run before the form is submitted.
 	session.setAttribute("successJS", null);	// (OPTIONAL) A String of JavaScript to run if the form submission is successful.
 	session.setAttribute("errorJS", null);		// (OPTIONAL) A String of JavaScript to run if the form submission is unsuccessful.
 	session.setAttribute("multipart",null);		// (OPTIONAL) The Ajax request should be sent as a multipart (for uploading files).

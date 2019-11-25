@@ -6,20 +6,18 @@ import java.util.Map;
 /**
  * Represents a single row from the Mutators table. This does not interact with the DB in any way.
  */
-public class Mutator{
+public class Platform{
 
 	private Integer PKey;
-	private String title, desc;
-	public Mutator(String title, String desc) {
+	private String title;
+	public Platform(String title) {
 		this.setTitle(title);
-		this.setDesc(desc);
 	}
-	public Mutator(Integer PKey) {
-		List<Map<String, Object>> res = Database.executeQuery("SELECT * FROM Mutators WHERE PKey=" + PKey);
+	public Platform(Integer PKey) {
+		List<Map<String, Object>> res = Database.executeQuery("SELECT * FROM Platforms WHERE PKey=" + PKey);
 		if (res.size() == 0)
 			throw new NullPointerException();
-		this.setTitle(res.get(0).get("Title").toString());
-		this.setDesc(res.get(0).get("Description").toString());
+		this.setTitle(res.get(0).get("Name").toString());
 		this.setPKey(PKey);
 	}
 	public String getTitle() {
@@ -27,12 +25,6 @@ public class Mutator{
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getDesc() {
-		return desc;
-	}
-	public void setDesc(String desc) {
-		this.desc = desc;
 	}
 	public Integer getPKey() {
 		return PKey;

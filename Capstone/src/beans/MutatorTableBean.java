@@ -23,7 +23,7 @@ public class MutatorTableBean implements Serializable {
 	 */
 	public MutatorTableBean(String GamePKey)
 	{
-		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM AppliedMutators WHERE GamePKey=" + GamePKey);
+		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM GameMutators WHERE GamePKey=" + GamePKey);
 		//System.out.println(query);
 		ListIterator<Map<String, Object>> litr;
 		//appliedQuery looks like: [{GamePKey=1, MutatorPKey=1}, {GamePKey=1, MutatorPKey=5}]
