@@ -114,6 +114,12 @@
 								<div class="row">
 									<div class="row">
 										<%
+											if (gt.getGames().size() < 1)
+											{
+										%>
+											<h5>Jammer currently has no contributions.</h5>
+										<%
+											}
 											for(GameBean g : gt.getGames())
 											{
 												String gameLink = request.getContextPath() + "/game?id=" + g.getId();
