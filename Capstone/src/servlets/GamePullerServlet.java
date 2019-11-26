@@ -19,7 +19,7 @@ import beans.GameTableBean;
 @WebServlet("/gamepull")
 public class GamePullerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,24 +34,31 @@ public class GamePullerServlet extends HttpServlet {
 		GameTableBean gt = new GameTableBean();
 		gt.fillByEvent(request.getParameter("event"));
 		Iterator<GameBean> i = gt.getGames().iterator();
+		int gameCount = 0;
 		while (i.hasNext())
 		{
 			GameBean g = i.next();
-			String gameUrl = String.format("%s/game?id=%s", request.getContextPath(), g.getId());
-			String picUrl = String.format("%s/Uploads/Games/Thumbnails/%s", request.getContextPath(), g.getId()); 
-			
-			String s = String.format(
-					"<div class=\"col-sm-3\">"
-					+ "<div class=\"card\">"
-					+ "<a href=\"%s\"><img class=\"card-img-top zoom\" src=\"%s\" /></a>"
-					+ "<div class=\"card-body dark\">"
-					+ "<h5 class=\"card-title\"><a href=\"%s\">%s</a></h5>"
-					+ "<p class=\"card-text\">%s</p>"
-					+ "</div>"
-					+ "</div>"
+			String s = "";
+			if (gameCount % 3 == 0) {
+				s = "<div class=\"row\" style=\"margin-bottom: 50px;\">";
+			}
+			s = s + String.format(
+					  "<div class=\"card col-sm-3 gameCard\">"
+					+   "<div class=\"cardImgDiv\">"
+					+     "<img class=\"card-img-top\" src=\"%s\" alt=\"Game Icon\">"
+					+   "</div>"
+					+   "<div class=\"card-body\">"
+					+     "<h5 class=\"card-title\">%s</h5>"
+					+     "<div class=\"card-text\">%s</div>"
+					+     "<a href=\"%s\" class=\"btn btn-primary\">View Game</a>"
+					+   "</div>"
 					+ "</div>",
-					gameUrl, picUrl, gameUrl, g.getTitle(), g.getDesc()
+					request.getContextPath() + "/Uploads/Games/Thumbnails/" + g.getId(), g.getTitle(), g.getDesc(), request.getContextPath() + "/game?id=" + g.getId()
 					);
+			if (gameCount % 3 == 2) {
+				s = s + "</div>";
+			}
+			gameCount++;
 			response.getWriter().append(s);
 		}
 	}

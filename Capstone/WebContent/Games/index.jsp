@@ -1,3 +1,4 @@
+<%@page import="java.io.Console"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
 	import="beans.GameBean, beans.Event, beans.EventTableBean, java.util.Iterator" %>
@@ -20,6 +21,7 @@ Iterator<Event> i = et.getEvents().iterator();
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 	
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/gameViewStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 	
@@ -54,14 +56,15 @@ Iterator<Event> i = et.getEvents().iterator();
 <body>
 	<%@include  file="/Common/navbar.jsp" %>
 	<%@include file="/Games/newGameModal.jsp" %>
-	
 	<%
 		while (i.hasNext())
 		{
 			Event e = i.next();
 	%>
-			<h1><%= e.getTitle() %>: <%= e.getTheme() %></h1>
-			<div id="event<%= e.getKey() %>">
+			<div class="container gamesContainer">
+				<h3 style="color: black; width: 100%; text-align: center;"><%= e.getTitle() %>: <%= e.getTheme() %></h3>
+			</div>
+			<div id="event<%= e.getKey() %>" class="container">
 				<p>Loading games...</p>
 				<script type="text/javascript"> displayEventGames(<%= e.getKey() %>); </script>
 			</div>
