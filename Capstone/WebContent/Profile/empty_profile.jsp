@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"
-    import="beans.ProfileBean"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="beans.ProfileBean"%>
 <%
-ProfileBean p = new ProfileBean();
-Boolean canEdit = (Boolean)request.getAttribute("CanEdit");
+	ProfileBean p = new ProfileBean();
+	Boolean canEdit = (Boolean) request.getAttribute("CanEdit");
 %>
 <!DOCTYPE html>
 <html>
@@ -17,22 +15,25 @@ Boolean canEdit = (Boolean)request.getAttribute("CanEdit");
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/profileStyle.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/profileStyle.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/style.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/navStyle.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/subNavStyle.css">
 </head>
 <body>
-<%@include  file="/Common/navbar.jsp" %>
-<%
-if (canEdit.booleanValue())
-{
-%>
-	<%@include file="/Profile/editProfileModal.jsp" %>
-	<a id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Edit Profile</a>
-<%
-}
-%>
-Profile doesn't exist, yo!
+	<%@include file="/Common/navbar.jsp"%>
+	<%
+		if (canEdit.booleanValue()) {
+	%>
+	<%@include file="/Profile/editProfileModal.jsp"%>
+	<a class= "btn btn-primary" id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Edit Profile</a>
+	<%
+		}
+	%>
+	<div class="container emp-profile">
+		<div class="row">
+			<h3 style="color: black; width: 100%; text-align: center;">No profile has been created for this account yet.</h3>
+		</div>
+	</div>
 </body>
 </html>

@@ -23,12 +23,16 @@
 	<%@include  file="/Common/navbar.jsp" %>
 	<%@include file="/Events/newEventModal.jsp" %>
 	<%@include file="/Events/eventsDisplayModal.jsp" %>
+	<%@include file="/AdminPanel/submissions.jsp" %>
 	<div style="text-align: center;">
 		Admin Panel<br><br>
 		
 		<h3><b>Event Options:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEventModal">Create Event</button>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventsDisplayModal">View Events</button>
+		
+		<h3><b>Submissions:   </b></h3>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gameSubmissionsDisplayModal">View Game Submissions</button>
 		
 	</div>
 </body>

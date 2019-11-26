@@ -6,8 +6,10 @@ import java.io.Serializable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,11 +41,15 @@ public class Game extends HttpServlet implements Serializable{
 	/**
 	 * A list of mutators for the game by primary key.
 	 */
-	private List<Integer> mutators=new ArrayList<Integer>();
+	private List<Mutator> mutators=new ArrayList<Mutator>();
 	/**
 	 * A list of systems for the game by primary key.
 	 */
-	private List<Integer> systems=new ArrayList<Integer>();
+	private List<Platform> systems=new ArrayList<Platform>();
+	/**
+	 * A list of tools for the game by primary key.
+	 */
+	private List<Tool> tools=new ArrayList<Tool>();
 	/**
 	 * Whether or not the game is public.
 	 */
@@ -76,10 +82,31 @@ public class Game extends HttpServlet implements Serializable{
 			Map<String, String> params = Files.getLastPostParams(session);
 
 			// parse mutators
-			List<Integer> mutators=new ArrayList<Integer>();
+			List<Mutator> mutators=new ArrayList<Mutator>();
 			// parse systems
-			List<Integer> systems=new ArrayList<Integer>();
-			Game g = new Game(Integer.parseInt(session.getAttribute("accountPKey").toString()), 1, params.get("title"), params.get("description"), mutators, systems, true);
+			List<Platform> systems=new ArrayList<Platform>();
+			// parse tools
+			List<Tool> tools=new ArrayList<Tool>();
+			
+			for (Entry<String, String> param : params.entrySet())
+			{
+				if (param.getKey().indexOf("mutatorCheck") == 0)
+				{
+					mutators.add(new Mutator(Integer.parseInt(param.getValue())));
+				}
+				else if (param.getKey().indexOf("platformCheck") == 0)
+				{
+					systems.add(new Platform(Integer.parseInt(param.getValue())));
+				}
+				else if (param.getKey().equals("tools"))
+				{
+					for (String tool : param.getValue().split(","))
+						if (tool.length() > 0)
+							tools.add(new Tool(Integer.parseInt(tool)));
+				}
+			}
+			
+			Game g = new Game(Integer.parseInt(session.getAttribute("accountPKey").toString()), 1, params.get("title"), params.get("description"), mutators, systems, tools, true);
 			g.updateGame(params.get("PKey") != null ? Integer.parseInt(params.get("PKey").toString()) : -1);
 			
 			String tempPath = "/Uploads/temp/";
@@ -111,6 +138,17 @@ public class Game extends HttpServlet implements Serializable{
 			response.sendRedirect(session.getAttribute("curPage").toString());
 			return;
 		}
+		
+		boolean changingGameSubmissionPage = request.getParameter("gameSubmissionPageNo") != null;
+		if (changingGameSubmissionPage)
+		{
+			Integer pageNo = Integer.valueOf(request.getParameter("gameSubmissionPageNo").toString());
+			
+			System.out.println("SETTING PAGENO: " + String.valueOf(pageNo));
+			session.setAttribute("gameSubmissionPageNo", pageNo);
+			
+			return;
+		}
 	}
 
 	/**
@@ -121,14 +159,15 @@ public class Game extends HttpServlet implements Serializable{
 	 * @param systems a list of systems by primary key.
 	 * @param isPublic whether or not the game is public.
 	 */
-	public Game(Integer submitter, Integer event, String title, String desc, List<Integer> muators, List<Integer> systems, Boolean isPublic)
+	public Game(Integer submitter, Integer event, String title, String desc, List<Mutator> mutators, List<Platform> systems, List<Tool> tools, Boolean isPublic)
 	{
 		this.setSubmitter(submitter);
 		this.setEvent(event);
 		this.setTitle(title);
 		this.setDesc(desc);
-		this.setMutators(muators);
+		this.setMutators(mutators);
 		this.setSystems(systems);
+		this.setTools(tools);
 		this.setIsPublic(isPublic);
 	}
 
@@ -156,6 +195,33 @@ public class Game extends HttpServlet implements Serializable{
 		this.setTitle(game.get("Title").toString());
 		this.setDesc(game.get("Description").toString());
 		this.setIsPublic(game.get("IsPublic").toString().equals("1"));
+		
+		// get mutators
+		query = Database.executeQuery("SELECT MutatorPKey FROM GameMutators WHERE GamePKey=" + this.getId().toString());
+		List<Mutator> mutators = new ArrayList<Mutator>();
+		for (Map<String, Object> row : query)
+		{
+			mutators.add(new Mutator(Integer.parseInt(row.get("MutatorPKey").toString())));
+		}
+		this.setMutators(mutators);
+		
+		// get platforms
+		query = Database.executeQuery("SELECT PlatformPKey FROM GamePlatforms WHERE GamePKey=" + this.getId().toString());
+		List<Platform> platforms = new ArrayList<Platform>();
+		for (Map<String, Object> row : query)
+		{
+			platforms.add(new Platform(Integer.parseInt(row.get("PlatformPKey").toString())));
+		}
+		this.setSystems(platforms);
+		
+		// get tools
+		query = Database.executeQuery("SELECT ToolPKey FROM GameTools WHERE GamePKey=" + this.getId().toString());
+		List<Tool> tools = new ArrayList<Tool>();
+		for (Map<String, Object> row : query)
+		{
+			tools.add(new Tool(Integer.parseInt(row.get("ToolPKey").toString())));
+		}
+		this.setTools(tools);
 	}
 
 	/**
@@ -165,12 +231,32 @@ public class Game extends HttpServlet implements Serializable{
 	private void updateGame(int PKey)
 	{
 		Database.executeUpdate("INSERT OR REPLACE INTO Games (" + ((PKey >= 1) ? "PKey, " : "") + "EventPKey, SubmitterPKey, Title, Description, IsPublic, PlayLink) VALUES (" + ((PKey >= 1) ? String.valueOf(PKey) + ", " : "") + this.toString() + ", '')");
-		System.out.println("EXEC: " + "INSERT OR REPLACE INTO Games (" + ((PKey >= 1) ? "PKey, " : "") + "EventPKey, SubmitterPKey, Title, Description, IsPublic, PlayLink) VALUES (" + ((PKey >= 1) ? String.valueOf(PKey) + ", " : "") + this.toString() + ", '')");
 		if (PKey <= 0)
 		{
 			List<Map<String, Object>> m = Database.executeQuery("SELECT MAX(PKey) AS PKey FROM Games");
 			if (m.size() > 0)
 				this.setId(Integer.parseInt(m.get(0).get("PKey").toString()));
+		}
+		
+		// Reset and add mutators
+		Database.executeUpdate("DELETE FROM GameMutators WHERE GamePKey=" + this.getId().toString());
+		for (Mutator mutatorPKey : this.getMutators())
+		{
+			Database.executeUpdate("INSERT INTO GameMutators (GamePKey, MutatorPKey) VALUES (" + this.getId().toString() + ", " + mutatorPKey.getPKey().toString() + ")");
+		}
+		
+		// Reset and add platforms
+		Database.executeUpdate("DELETE FROM GamePlatforms WHERE GamePKey=" + this.getId().toString());
+		for (Platform platformPKey : this.getSystems())
+		{
+			Database.executeUpdate("INSERT INTO GamePlatforms (GamePKey, PlatformPKey) VALUES (" + this.getId().toString() + ", " + platformPKey.getPKey().toString() + ")");
+		}
+		
+		// Reset and add tools
+		Database.executeUpdate("DELETE FROM GameTools WHERE GamePKey=" + this.getId().toString());
+		for (Tool toolPKey : this.getTools())
+		{
+			Database.executeUpdate("INSERT INTO GameTools (GamePKey, ToolPKey) VALUES (" + this.getId().toString() + ", " + toolPKey.getPKey().toString() + ")");
 		}
 	}
 
@@ -220,7 +306,7 @@ public class Game extends HttpServlet implements Serializable{
 	 * Gets the mutators of the game by primary key.
 	 * @return The mutators of the game by primary key.
 	 */
-	public List<Integer> getMutators() {
+	public List<Mutator> getMutators() {
 		return mutators;
 	}
 
@@ -228,8 +314,16 @@ public class Game extends HttpServlet implements Serializable{
 	 * Gets the systems of the game by primary key.
 	 * @return The systems of the game by primary key.
 	 */
-	public List<Integer> getSystems() {
+	public List<Platform> getSystems() {
 		return systems;
+	}
+	
+	/**
+	 * Gets the tools of the game by primary key.
+	 * @return The tools of the game by primary key.
+	 */
+	public List<Tool> getTools() {
+		return tools;
 	}
 
 	/**
@@ -292,7 +386,7 @@ public class Game extends HttpServlet implements Serializable{
 	 * Sets the mutators of the game by primary key.
 	 * @param The mutators of the game by primary key.
 	 */
-	public void setMutators(List<Integer> mutators) {
+	public void setMutators(List<Mutator> mutators) {
 		this.mutators = mutators;
 	}
 
@@ -300,8 +394,16 @@ public class Game extends HttpServlet implements Serializable{
 	 * Sets the systems of the game by primary key.
 	 * @param The systems of the game by primary key.
 	 */
-	public void setSystems(List<Integer> systems) {
+	public void setSystems(List<Platform> systems) {
 		this.systems = systems;
+	}
+	
+	/**
+	 * Sets the tools of the game by primary key.
+	 * @param The tools of the game by primary key.
+	 */
+	public void setTools(List<Tool> tools) {
+		this.tools = tools;
 	}
 
 	/**

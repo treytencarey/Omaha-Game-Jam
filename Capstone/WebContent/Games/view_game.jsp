@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="utils.FolderReader, database.Game, database.Profile, beans.ContributorTableBean, database.Contributor, beans.RoleTableBean, database.Role, database.Mutator, beans.MutatorTableBean" %>
+	import="utils.FolderReader, database.Game, database.Profile, beans.ContributorTableBean, database.Contributor, beans.RoleTableBean, database.Role, database.Mutator, database.Platform, database.Tool, beans.MutatorTableBean" %>
 
 <%
 Game g = new Game(Integer.parseInt(request.getParameter("id")));
@@ -96,18 +96,22 @@ if (canEdit)
 					<label class="gameViewLabels" for="mutators">Mutators:</label>
 				</div>
 				<div class="col-sm-12 gameViewDetailCols">
-					<% for(Mutator m : mt.getMutators()) { %>
+					<% for(Mutator m : g.getMutators()) { %>
 						<p class="gameViewValues" id="mutators"><%= m.getTitle() %> - <%= m.getDesc() %></p>
 					<%}%>
 				</div>
 			</div>
 			<div class="row gameViewDetails">
 				<label class="gameViewLabels" for="platforms">Platforms:</label>
-				<p class="gameViewValues" id="platforms">Placeholder</p>
+				<% for (Platform p : g.getSystems()) { %>
+					<p class="gameViewValues" id="platforms"><%= p.getTitle() %><%= p != g.getSystems().get(g.getSystems().size()-1) ? ",&nbsp" : "" %></p>
+				<%}%>
 			</div>
 			<div class="row gameViewDetails">
 				<label class="gameViewLabels" for="tools">Tools:</label>
-				<p class="gameViewValues" id="tools">Placeholder</p>
+				<% for (Tool t : g.getTools()) { %>
+					<p class="gameViewValues" id="tools"><%= t.getTitle() %><%= t != g.getTools().get(g.getTools().size()-1) ? ",&nbsp" : "" %></p>
+				<%}%>
 			</div>
 			<div class="row gameViewDetails">
 				<div class="col-sm-12 gameViewDetailCols">
