@@ -39,7 +39,7 @@ Iterator<Event> i = et.getEvents().iterator();
 			xhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) { // AJAX successful
 					if (this.responseText === "") // No games found for this event.
-						message = "<p>No games have been submitted yet.</p>";
+						message = "<p style=\"width: fit-content; margin: auto; margin-bottom: 3%\">No games have been submitted yet.</p>";
 					else // 1+ games found.
 						message = this.responseText;
 				} else { // AJAX unsuccessful
@@ -65,7 +65,7 @@ Iterator<Event> i = et.getEvents().iterator();
 				<h3 style="color: black; width: 100%; text-align: center;"><%= e.getTitle() %>: <%= e.getTheme() %></h3>
 			</div>
 			<div id="event<%= e.getKey() %>" class="container">
-				<p>Loading games...</p>
+				<p style="width: fit-content; margin: auto; margin-bottom: 3%">Loading games...</p>
 				<script type="text/javascript"> displayEventGames(<%= e.getKey() %>); </script>
 			</div>
 	<%
