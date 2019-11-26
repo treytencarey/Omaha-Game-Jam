@@ -21,6 +21,8 @@
 <%@page import="beans.Event" %>
 <%
 	Event display = (Event)request.getAttribute("event");
+	String[] mutators = display.getMutators();
+	String[] mutatorDescriptions = display.getMutatorDescriptions();
 %>
 <%@include  file="/Common/navbar.jsp" %>
 
@@ -29,10 +31,20 @@
 	<h1 class="event-title"><b><%= display.getTitle() %></b></h1><br>
 	<h3 class="event-theme"><%= display.getTheme() %></h3><br>
 	<div id="event-description"><%= display.getDescription() %></div><br>
+	<h5>Mutators</h5>
+	<ul>
+		<%
+		for(int i = 0; i < mutators.length; i++){
+		%>
+			<li><%= mutators[i] %>: <%= mutatorDescriptions[i] %></li>
+		<%
+		}
+		%>
+	</ul>
 	<h5>From <%= display.getStartDate() %> to <%= display.getEndDate() %></h5>
 </div>
 
-<form class="was-validated" action="<%= request.getContextPath() %>/EventServlet" method = "post">
+<form class="was-validated" action="<%= request.getContextPath() %>/EventServlet?key="<%= display.getKey() %> method = "post">
 	<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
@@ -61,21 +73,10 @@
 			<div class="input-group newEventImages">
 				<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
 				<input type="file" class="custom-file-input" name="eventImage" id="validatedCustomFile" required/>
-			    <label class="form-control modalFields custom-file-label" for="validatedCustomFile">Choose Image(s)...</label>
-			    <div class="invalid-feedback">Please upload a valid image(s)</div>
+			    <label class="form-control modalFields custom-file-label" for="validatedCustomFile">Choose Image</label>
+			    <div class="invalid-feedback">Please upload a valid image</div>
 			    <div class="valid-feedback">Looks good!</div>
 		    </div>
-		    <input type="button" value="Add another image" class="add-image"/>
-		    
-		    <script>
-		    $(function(){
-		    	  $(".add-image").on('click', function(){
-	    	    		var ele = $(this).closest('.multiplValueFields').clone(true);
-		    	    	$(this).closest('.multiplValueFields').after(ele);
-			    	    $(this).remove();
-		    	  })
-	    	})
-		    </script>
 	  	</div>
 	  	<div class="form-group multiplValueFields">
 			<div class="input-group newEventMutators">
@@ -131,7 +132,7 @@
 				</script>
 	  		</div>
 	    </div>
-			<div class="form-group">
-			<button type="submit" name="newEventButton" class="btn btn-primary btn-block btn-lg">Submit</button>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary">Submit</button>
 		</div>
 	</form>

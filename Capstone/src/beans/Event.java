@@ -47,15 +47,41 @@ public class Event {
 	private String endDate = "";
 	
 	/**
+	 * The mutator list of the event.
+	 */
+	private String[] mutators = null;
+	
+	/**
+	 * The mutator description list of the event.
+	 */
+	private String[] mutatorDescriptions = null;
+	
+	/**
 	 * Gets an event from the database.
 	 * @param PKey an integer value of the event's primary key.
 	 */
 	public Event(int PKey) {
+		
+		//Get Event from database
 		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Events WHERE PKey=" + String.valueOf(PKey));
-	
 		if (query.size() == 0)
 			throw new NullPointerException();
 		Map<String, Object> event = query.get(0);
+		
+		//Get Mutators from database
+		List<Map<String, Object>> query2 = Database.executeQuery("SELECT * FROM Mutators WHERE EventPKey=" + String.valueOf(PKey));
+		if (query2.size() == 0)
+			throw new NullPointerException();
+		
+		mutators = new String[query2.size()];
+		mutatorDescriptions = new String[query2.size()];
+		
+		//Initialize mutators and mutatorDescriptions
+		for(int i = 0; i < mutators.length; i++) {
+			Map<String, Object> mutator = query2.get(i);
+			mutators[i] = mutator.get("Title").toString();
+			mutatorDescriptions[i] = mutator.get("Description").toString();
+		}
 		
 		key = PKey;
 		title = event.get("Title").toString();
@@ -161,4 +187,13 @@ public class Event {
 	public String getEndDate() {
 		return endDate;
 	}
+	
+	public String[] getMutators() {
+		return mutators;
+	}
+	
+	public String[] getMutatorDescriptions() {
+		return mutatorDescriptions;
+	}
+	
 }

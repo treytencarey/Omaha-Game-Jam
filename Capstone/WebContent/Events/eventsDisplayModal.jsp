@@ -24,24 +24,7 @@ ArrayList<Event> pastEvents = eventTable.getPastEvents();
 			<div class="modal-body">
 				<h3>Future Events</h3>
 				<table class="future-events">
-					<tr>
-						<th>Event Title</th>
-						<th>Event Dates</th>
-						<th>Options</th>
-					</tr>
-					<%
-					for(Event event : futureEvents){
-					%>
-						<tr>
-							<td><%= event.getTitle() %></td>
-							<td><%= event.getStartDate() %> - <%= event.getEndDate() %></td>
-							<td>
-								<button>Edit</button>
-								<button>Publish</button>
-								<button>Delete</button>
-							</td>
-						</tr>
-					<%}%>
+					
 				</table>
 				<br><hr><br>
 				
@@ -62,8 +45,9 @@ ArrayList<Event> pastEvents = eventTable.getPastEvents();
 									<form action="<%= request.getContextPath() %>/ViewEventServlet" method = "post">
 										<button type="submit" class="option" name="event-key" value="<%= event.getKey() %>" data-toggle="modal">Edit</button>
 									</form>
-									<button type="submit" class="option" name="event-key" value="<%= event.getKey() %>" data-toggle="modal" data-target="#newEventModal" data-dismiss="modal">Remove</button>
-									<button type="submit" class="option" name="event-key" value="<%= event.getKey() %>" data-toggle="modal" data-target="#newEventModal" data-dismiss="modal">Publish</button>
+									<form>
+										<button type="submit" class="option" name="event-key" value="<%= event.getKey() %>" data-toggle="modal" data-target="#newEventModal" data-dismiss="modal">Remove</button>
+									</form>
 							</td>
 						</tr>
 					<%}%>

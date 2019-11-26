@@ -24,7 +24,6 @@ public class EventPortalServlet extends HttpServlet {
      */
     public EventPortalServlet() {
         super();
-        
     }
 
 	/**
@@ -39,6 +38,11 @@ public class EventPortalServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		/**
+		 * String representing title of event
+		 */
+		String key = request.getParameter("key");
 		
 		/**
 		 * String representing title of event
@@ -79,19 +83,21 @@ public class EventPortalServlet extends HttpServlet {
 		 * String representing end date of event
 		 */
 		String endDate = request.getParameter("endDate");
-
 		
-		for(int i = 0; i < mutators.length; i++) {
-			System.out.println("Mutator "+i+": "+mutators[i]);
-		}
-		for(int i = 0; i < eventImages.length; i++) {
-			System.out.println("Mutator "+i+": "+eventImages[i]);
+		for(int i = 0; i < mutators.length; i++)
+			System.out.println(mutators[i]+":   "+mutatorDescriptions[i]);
+		
+		//Check if event pkey already exists in Events table
+		List<Map<String, Object>> check = Database.executeQuery("SELECT * FROM Events WHERE PKey=" + String.valueOf(key));
+		if(check.size() > 0) {
+			Database.executeUpdate("DELETE FROM Events WHERE PKey=\'" + key + "\'");
+			Database.executeUpdate("DELETE FROM Mutators WHERE EventPKey=\'" + key + "\'");
 		}
 		
 		Database.executeUpdate("INSERT OR REPLACE INTO Events (Title, Theme, Description, StartDate, EndDate) VALUES ('" + title + "', '" + theme + "', '" + eventDescription + "', '" + startDate + "', '" + endDate + "')");
 		List<Map<String, Object>> query = Database.executeQuery("SELECT PKey FROM Events WHERE Title=\'" + title + "\'");
 		for(int i = 0; i < mutators.length; i++) {
-			if(mutators[i] != null) {
+			if(mutators[i] != null && mutatorDescriptions[i] != null) {
 				Database.executeUpdate("INSERT OR REPLACE INTO Mutators (EventPKey, Title, Description) VALUES ('" + query.get(0).get("PKey").toString() + "', '" + mutators[i] + "', '" + mutatorDescriptions[i] + "')");
 			}
 		}
