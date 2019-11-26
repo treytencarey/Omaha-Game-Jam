@@ -106,6 +106,7 @@ public class EventTableBean implements Serializable {
 		
 		if (!query.isEmpty()) {
 			Database.executeUpdate("DELETE FROM Events WHERE PKey=\'"+event.getKey()+"\'");
+			Database.executeUpdate("DELETE FROM Mutators WHERE EventPKey=\'"+event.getKey()+"\'");
 		}
 	}
 }
