@@ -37,12 +37,20 @@ public class GamePullerServlet extends HttpServlet {
 		while (i.hasNext())
 		{
 			GameBean g = i.next();
+			String gameUrl = String.format("%s/game?id=%s", request.getContextPath(), g.getId());
+			String picUrl = String.format("%s/Uploads/Games/Thumbnails/%s", request.getContextPath(), g.getId()); 
+			
 			String s = String.format(
-					"<div>"
-					+ "<h2><a href=\"%s\">%s</a></h2>"
-					+ "<p>%s</p>"
+					"<div class=\"col-sm-3\">"
+					+ "<div class=\"card\">"
+					+ "<a href=\"%s\"><img class=\"card-img-top zoom\" src=\"%s\" /></a>"
+					+ "<div class=\"card-body dark\">"
+					+ "<h5 class=\"card-title\"><a href=\"%s\">%s</a></h5>"
+					+ "<p class=\"card-text\">%s</p>"
+					+ "</div>"
+					+ "</div>"
 					+ "</div>",
-					request.getContextPath() + "/game?id=" + g.getId(), g.getTitle(), g.getDesc()
+					gameUrl, picUrl, gameUrl, g.getTitle(), g.getDesc()
 					);
 			response.getWriter().append(s);
 		}
