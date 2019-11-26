@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.AccountBean;
 import beans.AttendeeTableBean;
 import beans.ContributorTableBean;
 import beans.EventTableBean;
@@ -48,6 +49,7 @@ public class ProfileViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProfileBean p;
+		AccountBean a;
 		AttendeeTableBean at;
 		EventTableBean et;
 		ContributorTableBean ct;
@@ -85,11 +87,20 @@ public class ProfileViewServlet extends HttpServlet {
 			
 			toJsp = "Profile/view_profile.jsp";
 		}
-			catch (EmptyQueryException eqe)
+		catch (EmptyQueryException eqe)
 		{
 			toJsp = "Profile/empty_profile.jsp";
 			System.out.println("Empty profile: " + eqe.getQuery());
-			
+		}
+		
+		try
+		{
+			a = new AccountBean(id);
+			request.setAttribute("Email", a.getEmail()); // Currently only need email, so don't send the entire bean.
+		}
+		catch (EmptyQueryException eqe)
+		{
+			System.out.println("Account not found. How is this possible???");
 		}
 		
 		at = new AttendeeTableBean();

@@ -2,6 +2,7 @@
 
 <%
 	ProfileBean p = (ProfileBean) request.getAttribute("Profile");
+	String email = (String) request.getAttribute("Email");
 	EventTableBean et = (EventTableBean) request.getAttribute("AttendedEvents");
 	GameTableBean gt = (GameTableBean) request.getAttribute("Games");
 	Map<String, ArrayList<String>> r = (Map<String, ArrayList<String>>) request.getAttribute("Roles");
@@ -10,6 +11,8 @@
 	// Set the page context so editProfileModal can also access these attributes.
 	pageContext.setAttribute("Profile", p);
 	pageContext.setAttribute("PicPath", picPath);
+	// For external_link_warning_modal
+	pageContext.setAttribute("Website", p.getWebsite());
 %>
 
 <!DOCTYPE html>
@@ -31,12 +34,12 @@
 </head>
 <body>
 	<%@include file="/Common/navbar.jsp"%>
-	<%@include file="/Profile/editProfileModal.jsp"%>
-
+	<%@include file="/Common/external_link_warning_modal.jsp"%>
 	<%
 		if (canEdit.booleanValue()) {
 	%>
-	<a id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Edit Profile</a>
+	<%@include file="/Profile/editProfileModal.jsp"%>
+	<a class= "btn btn-primary" id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Edit Profile</a>
 	<%
 		}
 	%>
@@ -79,8 +82,9 @@
 			<div class="row">
 				<div class="col-md-4">
 					<div class="profile-work">
-						<p>WORK LINK</p>
-						<a href="<%=p.getWebsite()%>">Website Link</a><br />
+						<p>WEBSITE</p>
+						<a id="websiteBtn" href="#externalLinkWarningModal" class="nav-link" data-toggle="modal"><%=p.getWebsite()%></a>
+						<br />
 						<p>SKILLS</p>
 						<%=p.getSkills()%>
 					</div>
@@ -101,7 +105,7 @@
 									<label>Email</label>
 								</div>
 								<div class="col-md-6">
-									<p><%=session.getAttribute("accountEmail")%></p>
+									<p><%= email %></p>
 								</div>
 							</div>
 							<div class="row">
