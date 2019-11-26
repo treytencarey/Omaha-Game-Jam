@@ -1,0 +1,67 @@
+.main-event-img {
+	object-fit: contain;
+	max-width: 40%;
+	max-height: 40%;
+	margin: 0 auto;
+	align: center;
+	display: block;
+	padding: 2px;
+	margin: 0 auto;
+}
+
+.admin-controls {
+	align: center;
+	margin: 0 auto;
+	display: block;
+	text-align: center;
+	padding: 15px;
+}
+
+.event-img {
+	object-fit: cover;
+	display: block;
+	max-width: 15em;
+	max-height: 15em;
+	padding: 5px;
+	align: center;
+}
+
+.event-photos-container {
+	width: 90%;
+	display: block;
+	align: center;
+	margin: 0 auto;
+}
+
+.admin-delete-container {
+	position: relative;
+	max-width: 30%;
+}
+
+.delete-overlay {
+	position: absolute;
+	bottom: 0;
+	background: rgb(0, 0, 0);
+	background: rgba(0, 0, 0, 0.5);
+	color: #f1f1f1;
+	width: 100%;
+	transition: .5s ease;
+	opacity: 0;
+	color: white;
+	font-size: 20px;
+	padding: 20px;
+	text-align: center;
+}
+
+.admin-delete-container:hover .delete-overlay {
+  opacity: 1;
+}
+
+.zoom {
+	transition: transform .2s; /* Animation */
+	margin: 0 auto;
+}
+
+.zoom:hover {
+	transform: scale(1.05);
+}
