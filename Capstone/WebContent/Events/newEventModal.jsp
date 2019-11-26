@@ -31,31 +31,20 @@
 							<div class="valid-feedback">Looks good!</div>
 						</div>
 					</div>
-
-					<div class="form-group multiplValueFields">
-						<div class="input-group newEventImages">
-							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-							<input type="file" class="custom-file-input" name="eventImage" id="validatedCustomFile" required/>
-						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile">Choose Image(s)...</label>
-						    <div class="invalid-feedback">Please upload a valid image(s)</div>
-						    <div class="valid-feedback">Looks good!</div>
-					    </div>
-					    <input type="button" value="Add another image" class="add-image"/>
-					    
-					    <script>
-					    $(function(){
-					    	  $(".add-image").on('click', function(){
-					    	    var ele = $(this).closest('.multiplValueFields').clone(true);
-					    	    $(this).closest('.multiplValueFields').after(ele);
-					    	    $(this).remove();
-					    	  })
-					    	})
-					    </script>
-				  	</div>
+					
+					<div class="input-group newEventImages">
+						<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
+						<input type="file" class="custom-file-input" name="eventImage" id="validatedCustomFile" required/>
+						<label class="form-control modalFields custom-file-label" for="validatedCustomFile">Choose Image</label>
+						<div class="invalid-feedback">Please upload a valid image</div>
+						<div class="valid-feedback">Looks good!</div>
+					</div>
+					
 				  	<div class="form-group multiplValueFields">
 						<div class="input-group newEventMutators">
 							<span class='input-group-addon icons'><i class='fa fa-exclamation'></i></span>
 							<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' />
+							<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Mutator Description' />
 							<div class="valid-feedback">Looks good!</div>
 						</div>
 						<input type="button" value="Add another mutator" class="add-mutator" />
