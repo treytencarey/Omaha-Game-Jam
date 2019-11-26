@@ -4806,5 +4806,15 @@
 		<servlet-name>ProfileEditServlet</servlet-name>
 		<url-pattern>/profile_edit</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GalleryServlet</servlet-name>
+		<servlet-class>servlets.GalleryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GalleryServlet</servlet-name>
+		<url-pattern>/Gallery</url-pattern>
+		<url-pattern>/gallery</url-pattern>
+	</servlet-mapping>
 
 </web-app>
