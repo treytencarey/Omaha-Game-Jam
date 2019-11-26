@@ -42,7 +42,7 @@ public class EventPortalServlet extends HttpServlet {
 		/**
 		 * String representing title of event
 		 */
-		String key = request.getParameter("key");
+		String PKey = request.getParameter("PKey");
 		
 		/**
 		 * String representing title of event
@@ -85,18 +85,20 @@ public class EventPortalServlet extends HttpServlet {
 		String endDate = request.getParameter("endDate");
 		
 		//Check if event pkey already exists in Events table
-		System.out.println(key);
-		List<Map<String, Object>> check = Database.executeQuery("SELECT * FROM Events WHERE PKey=" + String.valueOf(key));
-		if(check.size() > 0) {
-			Database.executeUpdate("DELETE FROM Events WHERE PKey=\'" + key + "\'");
-			Database.executeUpdate("DELETE FROM Mutators WHERE EventPKey=\'" + key + "\'");
-		}
+		System.out.println(PKey);
+		List<Map<String, Object>> check = Database.executeQuery("SELECT * FROM Events WHERE PKey=" + String.valueOf(PKey));
 		
-		Database.executeUpdate("INSERT OR REPLACE INTO Events (Title, Theme, Description, StartDate, EndDate) VALUES ('" + title + "', '" + theme + "', '" + eventDescription + "', '" + startDate + "', '" + endDate + "')");
-		List<Map<String, Object>> query = Database.executeQuery("SELECT PKey FROM Events WHERE Title=\'" + title + "\'");
-		for(int i = 0; i < mutators.length; i++) {
-			if(mutators[i] != null && mutatorDescriptions[i] != null) {
-				Database.executeUpdate("INSERT OR REPLACE INTO Mutators (EventPKey, Title, Description) VALUES ('" + query.get(0).get("PKey").toString() + "', '" + mutators[i] + "', '" + mutatorDescriptions[i] + "')");
+		if(check.size() > 0) {
+			Database.executeUpdate("UPDATE Events SET Title='"+title+"', Theme='"+theme+"', Description='"+eventDescription+"', StartDate='"+startDate+"', EndDate='"+endDate+" WHERE PKey='"+PKey+"'");
+			//Update Mutators
+		}
+		else {
+			Database.executeUpdate("INSERT OR REPLACE INTO Events (Title, Theme, Description, StartDate, EndDate) VALUES ('" + title + "', '" + theme + "', '" + eventDescription + "', '" + startDate + "', '" + endDate + "')");
+			List<Map<String, Object>> query = Database.executeQuery("SELECT PKey FROM Events WHERE Title=\'" + title + "\'");
+			for(int i = 0; i < mutators.length; i++) {
+				if(mutators[i] != null && mutatorDescriptions[i] != null) {
+					Database.executeUpdate("INSERT OR REPLACE INTO Mutators (EventPKey, Title, Description) VALUES ('" + query.get(0).get("PKey").toString() + "', '" + mutators[i] + "', '" + mutatorDescriptions[i] + "')");
+				}
 			}
 		}
 		response.sendRedirect(request.getContextPath() + "/Events/");
