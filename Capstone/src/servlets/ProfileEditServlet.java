@@ -32,12 +32,12 @@ public class ProfileEditServlet extends HttpServlet{
 		
 		Part picPart = request.getPart("pic");
 		Path path = FileSystems.getDefault().getPath(Main.context.getRealPath("/Uploads/Profiles/Pics/" + p.getId()));
-		//System.out.println(path);
-		
-		try (InputStream is = picPart.getInputStream())
-		{
-			Files.copy(is, path, REPLACE_EXISTING);
-		}
+
+		if (picPart.getSize() > 0) // Only update/add a picture if the user selected one.
+			try (InputStream is = picPart.getInputStream())
+			{
+				Files.copy(is, path, REPLACE_EXISTING);
+			}
 		
 		response.sendRedirect("profile?id=" + p.getId());
 	}

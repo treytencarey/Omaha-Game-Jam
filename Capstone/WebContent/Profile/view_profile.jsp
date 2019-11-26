@@ -108,14 +108,6 @@
 									<p><%= email %></p>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<label>Phone</label>
-								</div>
-								<div class="col-md-6">
-									<p>123 456 7890</p>
-								</div>
-							</div>
 						</div>
 						<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 							<div class="container">
