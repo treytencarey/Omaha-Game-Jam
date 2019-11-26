@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -33,11 +32,15 @@ public class ProfileEditServlet extends HttpServlet{
 		Part picPart = request.getPart("pic");
 		Path path = FileSystems.getDefault().getPath(Main.context.getRealPath("/Uploads/Profiles/Pics/" + p.getId()));
 
+		//System.out.println("picPart size: " + picPart.getSize());
 		if (picPart.getSize() > 0) // Only update/add a picture if the user selected one.
+		{
 			try (InputStream is = picPart.getInputStream())
 			{
-				Files.copy(is, path, REPLACE_EXISTING);
+				Files.deleteIfExists(path);
+				Files.copy(is, path);
 			}
+		}
 		
 		response.sendRedirect("profile?id=" + p.getId());
 	}

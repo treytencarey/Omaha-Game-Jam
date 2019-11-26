@@ -117,7 +117,7 @@
 											if (gt.getGames().size() < 1)
 											{
 										%>
-											<h5>Jammer currently has no contributions.</h5>
+											<h5><%= p.getName() %> currently has no contributions.</h5>
 										<%
 											}
 											for(GameBean g : gt.getGames())
