@@ -84,10 +84,8 @@ public class EventPortalServlet extends HttpServlet {
 		 */
 		String endDate = request.getParameter("endDate");
 		
-		for(int i = 0; i < mutators.length; i++)
-			System.out.println(mutators[i]+":   "+mutatorDescriptions[i]);
-		
 		//Check if event pkey already exists in Events table
+		System.out.println(key);
 		List<Map<String, Object>> check = Database.executeQuery("SELECT * FROM Events WHERE PKey=" + String.valueOf(key));
 		if(check.size() > 0) {
 			Database.executeUpdate("DELETE FROM Events WHERE PKey=\'" + key + "\'");

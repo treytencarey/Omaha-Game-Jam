@@ -79,11 +79,30 @@
 		    </div>
 	  	</div>
 	  	<div class="form-group multiplValueFields">
+			<%
+			if(mutators.length == 0){
+			%>
 			<div class="input-group newEventMutators">
 				<span class='input-group-addon icons'><i class='fa fa-exclamation'></i></span>
 				<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' />
+				<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Mutator Description' />
 				<div class="valid-feedback">Looks good!</div>
 			</div>
+			<input type="button" value="Add another mutator" class="add-mutator" />
+			<%
+			} 
+			else
+				for(int i = 0; i < mutators.length; i++){
+			%>
+			<div class="input-group newEventMutators">
+				<span class='input-group-addon icons'><i class='fa fa-exclamation'></i></span>
+				<input type='text' class='form-control modalFields' name='mutator' value='<%= mutators[i] %>' />
+				<input type='text' class='form-control modalFields' name='mutatorDescription' value='<%= mutatorDescriptions[i] %>' />
+				<div class="valid-feedback">Looks good!</div>
+			</div>
+			<%
+				}
+			%>
 			<input type="button" value="Add another mutator" class="add-mutator" />
 						
 						
