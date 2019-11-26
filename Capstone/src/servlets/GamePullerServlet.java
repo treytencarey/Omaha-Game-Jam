@@ -34,16 +34,31 @@ public class GamePullerServlet extends HttpServlet {
 		GameTableBean gt = new GameTableBean();
 		gt.fillByEvent(request.getParameter("event"));
 		Iterator<GameBean> i = gt.getGames().iterator();
+		int gameCount = 0;
 		while (i.hasNext())
 		{
 			GameBean g = i.next();
-			String s = String.format(
-					"<div>"
-					+ "<h2><a href=\"%s\">%s</a></h2>"
-					+ "<p>%s</p>"
+			String s = "";
+			if (gameCount % 3 == 0) {
+				s = "<div class=\"row\" style=\"margin-bottom: 50px;\">";
+			}
+			s = s + String.format(
+					  "<div class=\"card col-sm-3 gameCard\">"
+					+   "<div class=\"cardImgDiv\">"
+					+     "<img class=\"card-img-top\" src=\"%s\" alt=\"Game Icon\">"
+					+   "</div>"
+					+   "<div class=\"card-body\">"
+					+     "<h5 class=\"card-title\">%s</h5>"
+					+     "<div class=\"card-text\">%s</div>"
+					+     "<a href=\"%s\" class=\"btn btn-primary\">View Game</a>"
+					+   "</div>"
 					+ "</div>",
-					request.getContextPath() + "/game?id=" + g.getId(), g.getTitle(), g.getDesc()
+					request.getContextPath() + "/Uploads/Games/Thumbnails/" + g.getId(), g.getTitle(), g.getDesc(), request.getContextPath() + "/game?id=" + g.getId()
 					);
+			if (gameCount % 3 == 2) {
+				s = s + "</div>";
+			}
+			gameCount++;
 			response.getWriter().append(s);
 		}
 	}
