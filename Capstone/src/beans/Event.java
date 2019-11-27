@@ -131,35 +131,56 @@ public class Event {
 		startDate = "No Date";
 		endDate = "No Date";
 	}
-	
+
+	/**
+	 * Set title for event
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/**
+	 * Set theme for event
+	 */
 	public void setTheme(String theme) {
 		this.theme = theme;
 	}
 
+	/**
+	 * Set description for event
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * Set start date for event
+	 */
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
+	/**
+	 * Set end date for event
+	 */
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
-	public int getKey() {
-		return key;
-	}
-
+	/**
+	 * set pkey for event
+	 */
 	public void setKey(int key) {
 		this.key = key;
 	}
 
+	/**
+	 * returns pkey for event
+	 */
+	public int getKey() {
+		return key;
+	}
+	
 	/**
 	 * returns event title
 	 */
@@ -195,14 +216,23 @@ public class Event {
 		return endDate;
 	}
 	
+	/**
+	 * returns array of mutator pkeys for event
+	 */	
 	public String[] getMutatorPKeys() {
 		return mpkeys;
 	}
 	
+	/**
+	 * returns array of mutators for event
+	 */	
 	public String[] getMutators() {
 		return mutators;
 	}
 	
+	/**
+	 * returns array of mutator descriptions for event
+	 */	
 	public String[] getMutatorDescriptions() {
 		return mutatorDescriptions;
 	}
