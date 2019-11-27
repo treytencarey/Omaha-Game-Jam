@@ -80,7 +80,6 @@ public class EventTableBean implements Serializable {
 		ArrayList<Event> pastEvents = new ArrayList<Event>();
 		for(Event event : events) {
 			Date eventEndDate = new SimpleDateFormat("MM/dd/yyyy").parse(event.getEndDate());
-			
 			if(eventEndDate.before(new Date())) {
 				pastEvents.add(event);
 			}
