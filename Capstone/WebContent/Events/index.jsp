@@ -8,7 +8,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -18,6 +19,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 	
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/eventStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 	
@@ -48,7 +50,7 @@
 	}
 	
 	%>
-	
+	<!--
 	<div id="event-header">
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">
@@ -89,43 +91,131 @@
 				</a>
 			</div>
 		</div>
-		
+		 -->
 	<!-- Current Event -->
-	<div id="current-event">
-		<h1 class="event-title"><b><%= current.getTitle() %></b></h1><br>
-		<h3 class="event-theme"><%= current.getTheme() %></h3><br>
-		<div id="event-description"><%= current.getDescription() %></div><br>
-		<h5>From <%= current.getStartDate() %> to <%= current.getEndDate() %></h5>
+
+	<div class="container eventContainer rainbowBorder">
+		<div id="current-event" class="event">
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-9">
+					<h1 class="currentEventHeader">Current Event</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h3 style="float: right;">Title:</h3>
+				</div>
+				<div class="col-sm-9">
+					<h3 style="font-weight: 300;"><%= current.getTitle() %></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h3 style="float: right;">Theme:</h3>
+				</div>
+				<div class="col-sm-9">
+					<h3 style="font-weight: 300;"><%= current.getTheme() %></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h3 style="float: right;">Description:</h3>
+				</div>
+				<div class="col-sm-9">
+					<h3 style="font-weight: 300;"><%= current.getDescription() %></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h3 style="float: right;">When:</h3>
+				</div>
+				<div class="col-sm-9">
+					<h3 style="font-weight: 300;">From <%= current.getStartDate() %> to <%= current.getEndDate() %></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-9">
+					<button type="button" id="rsvp-button" class="btn btn-info">RSVP</button>
+					<button type="button" id="event-schedule-button" class="btn btn-warning">Event Schedule</button>
+					<a href=""><i class="fab fa-discord fa-3x" style="color: #7289da;"></i></a>
+				</div>
+			</div>
+		</div>
 	</div>
-	
-	<button type="button" id="rsvp-button">RSVP</button>
-	<button type="button" id="event-schedule-button">Event Schedule</button>
-	<button type="button" id="discord-button">Developer Discord</button>
 	
 	<!-- Future Event -->
-	<div id="upcoming-event">
-		<img src="../images/eventImages/sw.jpg">
-		<h1 class="event-title"><%= future.getTitle() %></h1>
-		<h3 class="event-theme"><%= future.getTheme() %></h3>
-		<h5>From <%= future.getStartDate() %> to <%= future.getEndDate() %></h5>
+	<% if (!future.getTitle().equals("Unavailable")) { %>
+	<div class="container eventContainer">
+		<div id="future-event" class="event">
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-9">
+					<h1 class="currentEventHeader">Future Event</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h3 style="float: right;">Title:</h3>
+				</div>
+				<div class="col-sm-9">
+					<h3 style="font-weight: 300;"><%= future.getTitle() %></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h3 style="float: right;">Theme:</h3>
+				</div>
+				<div class="col-sm-9">
+					<h3 style="font-weight: 300;"><%= future.getTheme() %></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h3 style="float: right;">Description:</h3>
+				</div>
+				<div class="col-sm-9">
+					<h3 style="font-weight: 300;"><%= future.getDescription() %></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h3 style="float: right;">When:</h3>
+				</div>
+				<div class="col-sm-9">
+					<h3 style="font-weight: 300;">From <%= future.getStartDate() %> to <%= future.getEndDate() %></h3>
+				</div>
+			</div>
+		</div>
 	</div>
+	<% }%>
 	
 	<!-- Past Events -->
-	<div id="past-events">
-		<h1>Past Events</h1>
-		<div class="container">
-			<div class="row mt-5 justify-content-center">	
-				<%for(Event event : past){%>
-					<div class="card card-custom mx-2 mb-3" style="max-width:350px;">
-						<img src="../images/its_spherical.jpg" class="card-image-top" alt="Card image">
-						<div class="card-body dark">
-					  		<h5 class="card-title"><%= event.getTitle() %></h5>
-					  		<h6 class="card-subtitle mb-2 text-muted"><%= event.getTheme() %></h6>
-					  		<p class="card-text"><%= event.getDescription() %></p>
-					  		<p class="card-text"><%= event.getStartDate() %></p>
-					  	</div>
+	<div class="container eventContainer" style="max-width: 1400px;">
+		<div id="past-events">
+			<h1 style="width: fit-content; margin: auto;">Past Events</h1>
+			<div class="container">
+				<%
+				int eventCounter = 0;
+				for(Event event : past){
+					if (eventCounter%3==0) {
+				%>
+					<div class="row mt-5 justify-content-center">
+					<% } %>
+						<div class="card card-custom col-sm-3" style="margin: auto; height: 500px;">
+							<img src="../images/its_spherical.jpg" class="card-image-top" style="width: 100%;" alt="Card image">
+							<div class="card-body dark">
+						  		<h5 class="card-title"><%= event.getTitle() %></h5>
+						  		<h6 class="card-subtitle mb-2 text-muted"><%= event.getTheme() %></h6>
+						  		<p class="card-text"><%= event.getDescription() %></p>
+						  		<p class="card-text" style="position: absolute; bottom: 20px;"><%= event.getStartDate() %></p>
+						  	</div>
+						</div>
+					<% if (eventCounter%3==2) { %>
 					</div>
-				<%}%>
+					<% } eventCounter++;
+					}%>
 			</div>
 		</div>
 	</div>
