@@ -53,11 +53,6 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
 			  	</form>
 		  	</div>
   		</div>
-  		<%	if (session.getAttribute("accountPKey") == null) { %>
-  			<p class="lead">
-    			<a class="btn btn-primary btn-med" style="cursor: pointer;" onclick="showRegisterModal()" role="button">Register Now!</a>
-  			</p>
-  		<% } %>
 	</div>
   	
   	<div class="pagePadding"></div>
