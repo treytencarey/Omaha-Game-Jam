@@ -35,10 +35,17 @@
 	<%
 	FolderReader fr = new FolderReader("/images/eventImages");
 	EventTableBean eventTable = new EventTableBean();
+	Event current = null;
+	Event future = null;
+	ArrayList<Event> past = null;
 	
-	Event current = eventTable.getCurrentEvent();
-	Event future = eventTable.getFutureEvent();
-	ArrayList<Event> past = eventTable.getPastEvents();
+	try{
+		current = eventTable.getCurrentEvent();
+		future = eventTable.getFutureEvent();
+		past = eventTable.getPastEvents();
+	} catch(Exception e){
+		//Do nothing for now
+	}
 	
 	%>
 	

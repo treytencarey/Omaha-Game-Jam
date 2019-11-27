@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form class="was-validated" action="<%= request.getContextPath() %>/EventServlet" method = "post">
+				<form class="was-validated" action="<%= request.getContextPath() %>/EventServlet" method = "post" enctype="multipart/form-data">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
@@ -32,10 +32,10 @@
 						</div>
 					</div>
 					
-					<div class="input-group newEventImages">
+					<div class="input-group">
 						<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-						<input type="file" class="custom-file-input" name="eventImage" id="validatedCustomFile" required/>
-						<label class="form-control modalFields custom-file-label" for="validatedCustomFile">Choose Image</label>
+						<input type="file" class="custom-file-input" name="eventImage" id="eventImage" required/>
+						<label class="form-control modalFields custom-file-label" for="eventImage">Choose Image</label>
 						<div class="invalid-feedback">Please upload a valid image</div>
 						<div class="valid-feedback">Looks good!</div>
 					</div>
