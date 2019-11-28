@@ -47,19 +47,9 @@ public class Event {
 	private String endDate = "";
 	
 	/**
-	 * The mutatorPKey list for the event
+	 * The list of mutators for the event
 	 */
-	private String[] mpkeys = null;
-	
-	/**
-	 * The mutator list of the event.
-	 */
-	private String[] mutators = null;
-	
-	/**
-	 * The mutator description list of the event.
-	 */
-	private String[] mutatorDescriptions = null;
+	private ArrayList<Mutator> mutators = new ArrayList<Mutator>();
 	
 	/**
 	 * Gets an event from the database.
@@ -78,16 +68,13 @@ public class Event {
 		if (query2.size() == 0)
 			throw new NullPointerException();
 		
-		mpkeys = new String[query2.size()];
-		mutators = new String[query2.size()];
-		mutatorDescriptions = new String[query2.size()];
-		
-		//Initialize mutators and mutatorDescriptions
-		for(int i = 0; i < mutators.length; i++) {
-			Map<String, Object> mutator = query2.get(i);
-			mpkeys[i] = mutator.get("PKey").toString();
-			mutators[i] = mutator.get("Title").toString();
-			mutatorDescriptions[i] = mutator.get("Description").toString();
+		//Initialize mutators list
+		for(Map<String, Object> mutator : query2) {
+		    mutators.add(new Mutator(
+		    				mutator.get("PKey").toString(),
+		    				mutator.get("Title").toString(),
+		    				mutator.get("Description").toString()
+		    			));
 		}
 		
 		key = PKey;
@@ -216,25 +203,11 @@ public class Event {
 		return endDate;
 	}
 	
-	/**
-	 * returns array of mutator pkeys for event
-	 */	
-	public String[] getMutatorPKeys() {
-		return mpkeys;
-	}
-	
-	/**
-	 * returns array of mutators for event
-	 */	
-	public String[] getMutators() {
+	public ArrayList<Mutator> getMutators(){
 		return mutators;
 	}
 	
-	/**
-	 * returns array of mutator descriptions for event
-	 */	
-	public String[] getMutatorDescriptions() {
-		return mutatorDescriptions;
+	public void setMutators(ArrayList<Mutator> m) {
+		mutators = m;
 	}
-	
 }
