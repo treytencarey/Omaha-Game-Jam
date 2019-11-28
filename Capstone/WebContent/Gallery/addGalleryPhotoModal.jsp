@@ -4,8 +4,8 @@
 <%@page import="project.Main"%>
 <%@page import="java.util.ArrayList"%>
 <%
-	EventTableBean eventTable = new EventTableBean();
-	ArrayList<Event> listEvents = eventTable.getPastEvents();
+	EventTableBean eTable = new EventTableBean();
+	ArrayList<Event> listEvents = eTable.getPastEvents();
 	request.setAttribute("listEvents", listEvents);
 %>
 <div id="addGalleryPhotoModal" class="modal fade">
