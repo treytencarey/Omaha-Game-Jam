@@ -20,10 +20,18 @@
 	
 </head>
 <body>
-	<%@include  file="/Common/navbar.jsp" %>
+	<%@include file="/Common/navbar.jsp" %>
 	<%@include file="/Events/newEventModal.jsp" %>
 	<%@include file="/Events/eventsDisplayModal.jsp" %>
+	<%@include file="/News/newArticleModal.jsp" %>
+	<%@include file="/Gallery/addGalleryPhotoModal.jsp" %>
 	<%@include file="/AdminPanel/submissions.jsp" %>
+	<%@page import="java.time.LocalDateTime" %>
+	<%@page import="java.time.format.DateTimeFormatter" %>
+	<%
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy");
+	   	String currentYear = dtf.format(LocalDateTime.now());
+	%>
 	<div style="text-align: center;">
 		Admin Panel<br><br>
 		
@@ -31,8 +39,18 @@
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEventModal">Create Event</button>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventsDisplayModal">View Events</button>
 		
+		<h3><b>News Options:   </b></h3>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newNewsArticleModal">Create Article</button>
+		<a href="<%= request.getContextPath() %>/News/Archive?year=<%= currentYear %>"><button type="button" class="btn btn-primary">View Articles</button></a>
+		
+		<h3><b>Gallery Options:   </b></h3>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addGalleryPhotoModal">Add Photo(s)</button>
+		<a href="<%= request.getContextPath() %>/Gallery"><button type="button" class="btn btn-primary">View Gallery</button></a>
+		
 		<h3><b>Submissions:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gameSubmissionsDisplayModal">View Game Submissions</button>
+		
+		
 		
 	</div>
 </body>
