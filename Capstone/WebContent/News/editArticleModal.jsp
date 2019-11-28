@@ -29,7 +29,7 @@
 							<div class="form-group">
 								<div class="input-group">
 									<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-								    <input type="file" class="custom-file-input" id="newsFile" name="newsFile">
+								    <input type="file" class="custom-file-input" id="newsFile" name="newsFile" accept="image/png,image/gif,image/jpeg">
 								    <label class="form-control modalFields custom-file-label" for="newsFile">Choose Image(s)...</label>
 							    </div>
 								    <label>(No uploaded image will keep the header image the same)</label>
