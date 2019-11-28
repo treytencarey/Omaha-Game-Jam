@@ -4808,6 +4808,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>ProfileModerateServlet</servlet-name>
+		<servlet-class>servlets.ProfileModerateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProfileModerateServlet</servlet-name>
+		<url-pattern>/profile_moderate</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>GalleryServlet</servlet-name>
 		<servlet-class>servlets.GalleryServlet</servlet-class>
 	</servlet>

@@ -47,6 +47,11 @@ public class Event {
 	private String endDate = "";
 	
 	/**
+	 * The mutatorPKey list for the event
+	 */
+	private String[] mpkeys = null;
+	
+	/**
 	 * The mutator list of the event.
 	 */
 	private String[] mutators = null;
@@ -73,12 +78,14 @@ public class Event {
 		if (query2.size() == 0)
 			throw new NullPointerException();
 		
+		mpkeys = new String[query2.size()];
 		mutators = new String[query2.size()];
 		mutatorDescriptions = new String[query2.size()];
 		
 		//Initialize mutators and mutatorDescriptions
 		for(int i = 0; i < mutators.length; i++) {
 			Map<String, Object> mutator = query2.get(i);
+			mpkeys[i] = mutator.get("PKey").toString();
 			mutators[i] = mutator.get("Title").toString();
 			mutatorDescriptions[i] = mutator.get("Description").toString();
 		}
@@ -124,35 +131,56 @@ public class Event {
 		startDate = "No Date";
 		endDate = "No Date";
 	}
-	
+
+	/**
+	 * Set title for event
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/**
+	 * Set theme for event
+	 */
 	public void setTheme(String theme) {
 		this.theme = theme;
 	}
 
+	/**
+	 * Set description for event
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * Set start date for event
+	 */
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
+	/**
+	 * Set end date for event
+	 */
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
-	public int getKey() {
-		return key;
-	}
-
+	/**
+	 * set pkey for event
+	 */
 	public void setKey(int key) {
 		this.key = key;
 	}
 
+	/**
+	 * returns pkey for event
+	 */
+	public int getKey() {
+		return key;
+	}
+	
 	/**
 	 * returns event title
 	 */
@@ -188,10 +216,23 @@ public class Event {
 		return endDate;
 	}
 	
+	/**
+	 * returns array of mutator pkeys for event
+	 */	
+	public String[] getMutatorPKeys() {
+		return mpkeys;
+	}
+	
+	/**
+	 * returns array of mutators for event
+	 */	
 	public String[] getMutators() {
 		return mutators;
 	}
 	
+	/**
+	 * returns array of mutator descriptions for event
+	 */	
 	public String[] getMutatorDescriptions() {
 		return mutatorDescriptions;
 	}

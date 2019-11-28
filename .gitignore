@@ -18,6 +18,7 @@
 !Capstone/WebContent/WEB-INF/lib/*.jar
 !Capstone/WebContent/images/*.*
 !Capstone/TestingUtils/*.*
+!Capstone/**/*.js
 !Servers/Tomcat-config/web.xml
 !docs/**/*.*
 /bin/

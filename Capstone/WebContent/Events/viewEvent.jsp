@@ -44,7 +44,10 @@
 	<h5>From <%= display.getStartDate() %> to <%= display.getEndDate() %></h5>
 </div>
 
-<form class="was-validated" action="<%= request.getContextPath() %>/EventServlet?key="<%= display.getKey() %> method = "post">
+<form class="was-validated" action="<%= request.getContextPath() %>/EventServlet" method = "post">
+	
+	<input type="hidden" value="<%= display.getKey() %>" name="PKey" />
+	
 	<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>

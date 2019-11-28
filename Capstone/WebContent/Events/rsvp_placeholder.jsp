@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="database.Database,beans.Event" %>
+    <%@ page import="database.Database,beans.Event, beans.EventTableBean" %>
    	<%@page import="java.util.List" %>
 	<%@page import="java.util.Map" %>
    
@@ -12,21 +12,22 @@
 try
 {
 	String apk = session.getAttribute("accountPKey").toString();
-	Event e = (Event)session.getAttribute("ActiveEvent");
-	List<Map<String, Object>> query = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE AccountPKey=" + apk + " AND EventPKey=" + e.getKey());
-	if (query.size() == 0) // Error contacting DB?
+	EventTableBean et = new EventTableBean();
+	Event ec = et.getCurrentEvent();
+	List<Map<String, Object>> results = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE AccountPKey=" + apk + " AND EventPKey=" + ec.getKey());
+	if (results.size() == 0) // Error contacting DB?
 		throw new NullPointerException();
 	
-	String count = query.get(0).get("COUNT(*)").toString();
+	String count = results.get(0).get("COUNT(*)").toString();
 	if (count.equals("0"))
 	{
 		//INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (1, 1);
-		String q = String.format("INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (%s, %s);", apk, e.getKey());
-		System.out.println(q);
-		if (Database.executeUpdate(q).length() == 0)
+		String query = String.format("INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (%s, %s);", apk, ec.getKey());
+		System.out.println(query);
+		if (Database.executeUpdate(query).length() == 0)
 		{
 %>
-You're now registered for <%= e.getTitle() %>!
+You're now registered for <%= ec.getTitle() %>!
 <%
 		}
 		else

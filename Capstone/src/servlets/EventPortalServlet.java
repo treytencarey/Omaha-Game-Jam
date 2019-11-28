@@ -1,21 +1,31 @@
 package servlets;
 
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import database.Database;
+import project.Main;
 
 /**
  * Servlet implementation class EventServlet
  */
 @WebServlet("/EventServlet")
+@MultipartConfig
 public class EventPortalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,10 +49,12 @@ public class EventPortalServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
+		String path;
+		
 		/**
 		 * String representing title of event
 		 */
-		String key = request.getParameter("key");
+		String PKey = request.getParameter("PKey");
 		
 		/**
 		 * String representing title of event
@@ -85,23 +97,47 @@ public class EventPortalServlet extends HttpServlet {
 		String endDate = request.getParameter("endDate");
 		
 		//Check if event pkey already exists in Events table
-		System.out.println(key);
-		List<Map<String, Object>> check = Database.executeQuery("SELECT * FROM Events WHERE PKey=" + String.valueOf(key));
-		if(check.size() > 0) {
-			Database.executeUpdate("DELETE FROM Events WHERE PKey=\'" + key + "\'");
-			Database.executeUpdate("DELETE FROM Mutators WHERE EventPKey=\'" + key + "\'");
-		}
+		List<Map<String, Object>> check = Database.executeQuery("SELECT * FROM Events WHERE PKey=" + String.valueOf(PKey));
 		
-		Database.executeUpdate("INSERT OR REPLACE INTO Events (Title, Theme, Description, StartDate, EndDate) VALUES ('" + title + "', '" + theme + "', '" + eventDescription + "', '" + startDate + "', '" + endDate + "')");
-		List<Map<String, Object>> query = Database.executeQuery("SELECT PKey FROM Events WHERE Title=\'" + title + "\'");
-		for(int i = 0; i < mutators.length; i++) {
-			if(mutators[i] != null && mutatorDescriptions[i] != null) {
-				Database.executeUpdate("INSERT OR REPLACE INTO Mutators (EventPKey, Title, Description) VALUES ('" + query.get(0).get("PKey").toString() + "', '" + mutators[i] + "', '" + mutatorDescriptions[i] + "')");
+		if(check.size() > 0) {
+			Database.executeUpdate("UPDATE Events SET Title='"+title+"', Theme='"+theme+"', Description='"+eventDescription+"', StartDate='"+startDate+"', EndDate='"+endDate+" WHERE PKey='"+PKey+"'");
+			//Update Mutators
+		}
+		else {
+			Database.executeUpdate("INSERT OR REPLACE INTO Events (Title, Theme, Description, StartDate, EndDate) VALUES ('" + title + "', '" + theme + "', '" + eventDescription + "', '" + startDate + "', '" + endDate + "')");
+			List<Map<String, Object>> query = Database.executeQuery("SELECT PKey FROM Events WHERE Title=\'" + title + "\'");
+			PKey = query.get(0).get("PKey").toString();
+			
+			for(int i = 0; i < mutators.length; i++) {
+				if(mutators[i] != null && mutatorDescriptions[i] != null) {
+					Database.executeUpdate("INSERT OR REPLACE INTO Mutators (EventPKey, Title, Description) VALUES ('" + PKey + "', '" + mutators[i] + "', '" + mutatorDescriptions[i] + "')");
+				}
 			}
 		}
+		
+		/**
+		 * Get the image from newsFile in form, and write to Upload/News/Photo
+		 */
+		if(!request.getPart("eventImage").getSubmittedFileName().isEmpty()) {
+			Part headerImg = request.getPart("eventImage");
+			path = getServerPath("/Uploads/Events/HeaderImages/HeaderImages");
+			Path imgPath = FileSystems.getDefault().getPath(path, PKey + "_header.png");
+
+			try (InputStream is = headerImg.getInputStream()) {
+				Files.copy(is, imgPath, REPLACE_EXISTING);
+			}
+		}
+		
 		response.sendRedirect(request.getContextPath() + "/Events/");
 		
 		
+	}
+	
+	private static String getServerPath(String orig) {
+		String[] splits = orig.replaceAll("\\\\", "/").split("/");
+		String fileName = splits[splits.length - 1];
+		String pth = Main.context.getRealPath(orig.substring(0, orig.length() - fileName.length()));
+		return pth;
 	}
 
 }

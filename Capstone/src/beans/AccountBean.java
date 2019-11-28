@@ -31,6 +31,15 @@ public class AccountBean implements Serializable {
 		this.setEmail(account.get("Email").toString());
 	}
 	
+	public boolean isAdmin()
+	{	
+		List<Map<String, Object>> results = Database.executeQuery("SELECT COUNT(*) FROM Admins WHERE AccountPKey=" + this.getId());
+		if (results.size() == 0) // Error contacting DB?
+			throw new NullPointerException();
+		String count = results.get(0).get("COUNT(*)").toString();
+		return count.equals("1"); // Since there's a unique constraint, there can only be 1 row at most
+	}
+	
 	public String getId() {
 		return id;
 	}

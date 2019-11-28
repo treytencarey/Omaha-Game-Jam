@@ -1,19 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="database.Database,beans.Event" %>
+<%@ page import="database.Database, beans.Event, beans.EventTableBean" %>
 
 <%
-// This should be moved into a servlet, but this'll have to do for now		
-List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM ActiveEvent");
-if (query.size() == 0)
-	throw new NullPointerException();
-Map<String, Object> ae = query.get(0);
-int epk = Integer.parseInt(ae.get("EventPKey").toString());
-		
-Event event = new Event(epk);
-session.setAttribute("ActiveEvent", event);
-query = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE EventPKey=" + epk);
-int numOfUsers = Integer.parseInt(query.get(0).get("COUNT(*)").toString());
+// This should be moved into a servlet, but this'll have to do for now
+EventTableBean et = new EventTableBean();
+Event ce = et.getCurrentEvent();
+String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE EventPKey=" + ce.getKey()).get(0).get("COUNT(*)").toString();
 %>
 
 <!DOCTYPE html>
@@ -46,11 +39,11 @@ int numOfUsers = Integer.parseInt(query.get(0).get("COUNT(*)").toString());
   	</div>
   	
   	<div class="jumbotron aboutSection" style="margin-top: 50px;">
-  		<h1 class="display-5">UPCOMING EVENT: <%= event.getTitle() %></h1>
+  		<h1 class="display-5">UPCOMING EVENT: <%= ce.getTitle() %></h1>
   		<hr class="my-2" style="background-color: #3b3b3b">
   		<div style="font-size: 18px">
-  			<p><%= event.getStartDate() %> - <%= event.getEndDate() %></p>
-  			<p style="font-size: 15px"><%=numOfUsers %> other Jammers have RSVP'd for this Jam.</p>
+  			<p><%= ce.getStartDate() %> - <%= ce.getEndDate() %></p>
+  			<p style="font-size: 15px"><%=rsvpd %> other Jammers have RSVP'd for this Jam.</p>
   			<div class="row">
 	  			<form action="./Events" style="margin-left: auto; margin-right: 10px;">
 	  				<input type="submit" class="btn btn-primary" href="./Events" value="Details">
@@ -60,11 +53,6 @@ int numOfUsers = Integer.parseInt(query.get(0).get("COUNT(*)").toString());
 			  	</form>
 		  	</div>
   		</div>
-  		<%	if (session.getAttribute("accountPKey") == null) { %>
-  			<p class="lead">
-    			<a class="btn btn-primary btn-med" style="cursor: pointer;" onclick="showRegisterModal()" role="button">Register Now!</a>
-  			</p>
-  		<% } %>
 	</div>
   	
   	<div class="pagePadding"></div>

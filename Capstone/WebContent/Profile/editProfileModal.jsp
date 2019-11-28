@@ -2,7 +2,6 @@
 <%
 	ProfileBean pp = (ProfileBean) pageContext.getAttribute("Profile");
 	String ppp = (String) pageContext.getAttribute("PicPath");
-	String id = (String) session.getAttribute("accountPKey");
 
 	if (pp == null)
 		pp = new ProfileBean();
@@ -19,7 +18,7 @@
 			</div>
 			<div class="modal-body">
 				<form class="was-validated" action="<%=request.getContextPath()%>/profile_edit" method="post" enctype="multipart/form-data" onsubmit="return isPicValid();">
-					<input type="hidden" name="id" value="<%=id%>">
+					<input type="hidden" name="id" value="<%= pp.getId() %>">
 
 					<!-- Simple pic upload -->
 					<div class="form-group">

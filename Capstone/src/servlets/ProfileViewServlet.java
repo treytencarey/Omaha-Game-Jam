@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.AccountBean;
 import beans.AttendeeTableBean;
@@ -62,7 +63,10 @@ public class ProfileViewServlet extends HttpServlet {
 		
 		try // Does an accountPKey attribute exist in the session? If not, can't edit.
 		{
-			canEdit = request.getSession().getAttribute("accountPKey").equals(id); // Did the profile's owner request to see this page? If so, they can edit it.
+			HttpSession s = request.getSession();
+			String apk = s.getAttribute("accountPKey").toString();
+			//canEdit = database.Account.isAdmin(s) || apk.equals(id); // Did the profile's owner request to see this page? If so, they can edit it.
+			canEdit = apk.equals(id); // Did the profile's owner request to see this page? If so, they can edit it.
 		}
 		catch (NullPointerException npe)
 		{
