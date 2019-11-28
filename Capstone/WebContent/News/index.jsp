@@ -28,7 +28,7 @@
 	<%@page import="java.time.LocalDateTime" %>
 	<%@page import="java.time.format.DateTimeFormatter" %>
 	<%@include file="/News/newArticleModal.jsp" %>
-	<% int[] postKeys = News.getMostRecentNewsPostsKeys(6, 0, 1);
+	<% int[] postKeys = News.getMostRecentNewsPostsKeys(6, 0, 0);
 	   News[] recentNews = new News[postKeys.length];
 	   for(int i = 0; i < recentNews.length; i++) {
 		   recentNews[i] = new News(postKeys[i]);
@@ -47,7 +47,7 @@
 						<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><img class="card-img-top zoom" src="<%= request.getContextPath() + "/Uploads/News/Photo/" + recentNews[i].getKey() + "_header.png" %>"/></a>
 				  		<div class="card-body dark">
 				  			<small><%= recentNews[i].getDate() %></small>
-				  			<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><h5 class="card-title"><%= recentNews[i].getTitle() %></h5></a>
+				  			<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><h5 class="card-title"><%= recentNews[i].getTitle() %><%if(recentNews[i].getIsPublic()== 0)  {%> [NOT PUBLIC]<% } %></h5></a>
 				  			<p class="card-text"><%= recentNews[i].getHeader() %></p>
 				  		</div>
 			  		</div>
