@@ -1,3 +1,4 @@
+<%@page import="database.Account"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="beans.ProfileBean, beans.GameTableBean, beans.GameBean, beans.Event, beans.EventTableBean, java.util.Map, java.util.ArrayList, java.util.Iterator"%>
 
 <%
@@ -13,6 +14,28 @@
 	pageContext.setAttribute("PicPath", picPath);
 	// For external_link_warning_modal
 	pageContext.setAttribute("Website", p.getWebsite());
+
+	boolean isAdmin = Account.isAdmin(session);	
+	// Create a message to display to admins moderating the content of this profile.
+	String s = p.getStatus();
+	String m;
+	switch (s)
+	{
+	case "-1":
+		m = "Profile was denied in its current state. NOT publicly visible.";
+		break;
+	case "0":
+		m = "Profile was previously denied but has resubmitted. NOT publicly visible.";
+		break;
+	case "1":
+		m = "Profile is unverified. Publicly visible.";
+		break;
+	case "2":
+		m = "Profile was approved in its current state. Publicly visible.";
+		break;
+	default:
+		m = "Something went wrong. Oops!";
+	}
 %>
 
 <!DOCTYPE html>
@@ -31,127 +54,150 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/style.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/navStyle.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/subNavStyle.css">
+<script>
+	function verify() {
+		moderate(2);
+	}
+	function deny() {
+		moderate(-1);
+	}
+	function moderate(x) {
+		document.getElementById('status').value = x;
+		document.getElementById('moderate_form').submit();
+	}
+</script>
 </head>
 <body>
 	<%@include file="/Common/navbar.jsp"%>
 	<%@include file="/Common/external_link_warning_modal.jsp"%>
 	<%
-		if (canEdit.booleanValue()) {
+		if (canEdit.booleanValue() || isAdmin) {
 	%>
 	<%@include file="/Profile/editProfileModal.jsp"%>
-	<a class= "btn btn-primary" id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Edit Profile</a>
+	<a class="btn btn-primary" id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Edit Profile</a>
+	<%
+		}
+	%>
+
+	<%
+		//if (adminStatus != null && adminStatus.equals("admin"))
+		if (isAdmin) {
+	%>
+	<p><%= m %></p>
+	<form id="moderate_form" action="<%=request.getContextPath()%>/profile_moderate" method="GET">
+		<input type="hidden" name="status" id="status">
+		<input type="hidden" name="id" value="<%= p.getId() %>">
+		<button type="button" class="btn btn-success" <%=p.getStatus().equals("2") ? "disabled" : ""%> onclick="verify();">Publicize Profile</button>
+		<button type="button" class="btn btn-danger" <%=p.getStatus().equals("-1") ? "disabled" : ""%> onclick="deny();">Depublicize Profile</button>
+	</form>
+
 	<%
 		}
 	%>
 
 	<div class="container emp-profile">
-		<form action="edit">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="profile-img">
-						<img src="<%=picPath%>" alt="" />
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="profile-head">
-						<h5>
-							<%=p.getName()%>
-						</h5>
-						<h6>
-							<%=p.getBio()%>
-						</h6>
-						
-						<%
-						Iterator<Event> ei = et.getEvents().iterator();
-						while (ei.hasNext())
-						{
-							Event e = ei.next();
-						%>
-						<a class="btn btn-primary" href="<%= request.getContextPath() %>/event?id=<%= e.getKey() %>"><%= e.getTitle() %></a>
-						<%
-						}
-						%>
-						
-						<ul class="nav nav-tabs" id="myTab" role="tablist">
-							<li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a></li>
-							<li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Games</a></li>
-						</ul>
-					</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="profile-img">
+					<img src="<%=picPath%>" alt="" />
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="profile-work">
-						<p>WEBSITE</p>
-						<a id="websiteBtn" href="#externalLinkWarningModal" class="nav-link" data-toggle="modal"><%=p.getWebsite()%></a>
-						<br />
-						<p>SKILLS</p>
-						<%=p.getSkills()%>
-					</div>
+			<div class="col-md-6">
+				<div class="profile-head">
+					<h5>
+						<%=p.getName()%>
+					</h5>
+					<h6>
+						<%=p.getBio()%>
+					</h6>
+
+					<%
+						Iterator<Event> ei = et.getEvents().iterator();
+						while (ei.hasNext()) {
+							Event e = ei.next();
+					%>
+					<a class="btn btn-primary" href="<%=request.getContextPath()%>/event?id=<%=e.getKey()%>"><%=e.getTitle()%></a>
+					<%
+						}
+					%>
+
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a></li>
+						<li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Games</a></li>
+					</ul>
 				</div>
-				<div class="col-md-8">
-					<div class="tab-content profile-tab" id="myTabContent">
-						<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-							<div class="row">
-								<div class="col-md-6">
-									<label>Name</label>
-								</div>
-								<div class="col-md-6">
-									<p><%=p.getName()%></p>
-								</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="profile-work">
+					<p>WEBSITE</p>
+					<a id="websiteBtn" href="#externalLinkWarningModal" class="nav-link" data-toggle="modal"><%=p.getWebsite()%></a> <br />
+					<p>SKILLS</p>
+					<%=p.getSkills()%>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="tab-content profile-tab" id="myTabContent">
+					<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+						<div class="row">
+							<div class="col-md-6">
+								<label>Name</label>
 							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<label>Email</label>
-								</div>
-								<div class="col-md-6">
-									<p><%= email %></p>
-								</div>
+							<div class="col-md-6">
+								<p><%=p.getName()%></p>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-							<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<label>Email</label>
+							</div>
+							<div class="col-md-6">
+								<p><%=email%></p>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+						<div class="container">
+							<div class="row">
 								<div class="row">
-									<div class="row">
-										<%
-											if (gt.getGames().size() < 1)
-											{
-										%>
-											<h5><%= p.getName() %> currently has no contributions.</h5>
-										<%
-											}
-											for(GameBean g : gt.getGames())
-											{
-												String gameLink = request.getContextPath() + "/game?id=" + g.getId();
-												String gamePicPath = request.getContextPath() + "/Uploads/Games/Thumbnails/" + g.getId();
-										%>
-										<div class="col-lg-3 col-md-4 col-xs-6 thumb">
-											<a class="thumbnail" href="<%= gameLink %>" data-image-id=""> <img class="img-thumbnail" src="<%= gamePicPath %>" alt="<%= g.getTitle() %>"></a>
-											<%= g.getTitle() %>
-											<ul>
+									<%
+										if (gt.getGames().size() < 1) {
+									%>
+									<h5><%=p.getName()%>
+										currently has no contributions.
+									</h5>
+									<%
+										}
+										for (GameBean g : gt.getGames()) {
+											String gameLink = request.getContextPath() + "/game?id=" + g.getId();
+											String gamePicPath = request.getContextPath() + "/Uploads/Games/Thumbnails/" + g.getId();
+									%>
+									<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+										<a class="thumbnail" href="<%=gameLink%>" data-image-id=""> <img class="img-thumbnail" src="<%=gamePicPath%>" alt="<%=g.getTitle()%>"></a>
+										<%=g.getTitle()%>
+										<ul>
 											<%
 												ArrayList<String> roles = r.get(g.getId());
-												Iterator<String> i = roles.iterator();
-												while (i.hasNext())
-												{
+													Iterator<String> i = roles.iterator();
+													while (i.hasNext()) {
 											%>
-												<li><%= i.next() %></li>
-											<%	
+											<li><%=i.next()%></li>
+											<%
 												}
 											%>
-											</ul>
-										</div>
-										<%		
-											}
-										%>
+										</ul>
 									</div>
+									<%
+										}
+									%>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</form>
+		</div>
 	</div>
 </body>
 </html>

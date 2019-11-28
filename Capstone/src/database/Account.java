@@ -26,6 +26,8 @@ import java.util.Base64;
 @WebServlet("/accountServlet")
 public class Account extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String USER_CLASS_ADMIN = "admin";
+	private static final String USER_CLASS_USER = "user";
 
 	/**
 	 * Handles form submissions for the accountServlet.
@@ -101,12 +103,12 @@ public class Account extends HttpServlet {
 
 			String accountPKey = map.get("PKey").toString();
 			
-			List<?> isAdmin = Database.executeQuery("SELECT PKey FROM Admins WHERE PKey = " + accountPKey);
+			List<?> isAdmin = Database.executeQuery("SELECT AccountPKey FROM Admins WHERE AccountPKey = " + accountPKey);
 			if(isAdmin.isEmpty()) {
-				session.setAttribute("userClass", "user");
+				session.setAttribute("userClass", USER_CLASS_USER);
 			}
 			else {
-				session.setAttribute("userClass", "admin");
+				session.setAttribute("userClass", USER_CLASS_ADMIN);
 			}
 				
 			session.setAttribute("accountPKey",accountPKey);
@@ -133,7 +135,7 @@ public class Account extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Database.executeUpdate("INSERT INTO AccountPermissions (Permissions) VALUES (" + 1 + ")");
+		//Database.executeUpdate("INSERT INTO AccountPermissions (Permissions) VALUES (" + 1 + ")");
 		return Database.executeUpdate("INSERT INTO Accounts (Email, Password) VALUES ('" + email + "', '" + password + "')");
 	}
 
@@ -170,5 +172,17 @@ public class Account extends HttpServlet {
 	private static Key generateKey() throws Exception {
 	    Key key = new SecretKeySpec(keyValue, ALGORITHM);
 	    return key;
+	}
+	
+	/**
+	 * Determines whether the logged-in user stored in the session is an admin or not.
+	 * This doesn't contact the database, it simply checks for a session attribute that should be stored on login.
+	 * @param session The session object to check.
+	 * @return Whether user is an admin or not.
+	 */
+	public static boolean isAdmin(HttpSession session)
+	{
+		String uc = session.getAttribute("userClass").toString();
+		return uc != null && uc.equals(USER_CLASS_ADMIN);
 	}
 }

@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="beans.ProfileBean"%>
 <%
 	ProfileBean p = new ProfileBean();
+	p.setId(request.getParameter("id"));
 	Boolean canEdit = (Boolean) request.getAttribute("CanEdit");
+	pageContext.setAttribute("Profile", p);
 %>
 <!DOCTYPE html>
 <html>
@@ -26,7 +28,7 @@
 		if (canEdit.booleanValue()) {
 	%>
 	<%@include file="/Profile/editProfileModal.jsp"%>
-	<a class= "btn btn-primary" id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Edit Profile</a>
+	<a class= "btn btn-primary" id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Create Profile</a>
 	<%
 		}
 	%>

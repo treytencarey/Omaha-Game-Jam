@@ -6,6 +6,7 @@ import java.util.Map;
 
 import database.Database;
 import exceptions.EmptyQueryException;
+import exceptions.UnsuccessfulUpdateException;
 
 /**
  * Model for the DB's Profiles table, used to retrieve 1 row for a single Profile.
@@ -34,6 +35,22 @@ public class ProfileBean implements Serializable{
 	 * The skills of the profile.
 	 */
 	private String skills;
+	private String status;
+	
+	/**
+	 * Query the database for the status of the profile for AccountPKey of id.
+	 * @param id AccountPKey of desired profile
+	 * @return status of profile
+	 * @throws EmptyQueryException 
+	 */
+	public static String queryStatus(String id) throws EmptyQueryException
+	{
+		String qstr = "SELECT Status FROM Profiles WHERE AccountPKey=" + id;
+		List<Map<String, Object>> query = Database.executeQuery(qstr);
+		if (query.size() == 0)
+			throw new EmptyQueryException(qstr);
+		return query.get(0).get("Status").toString();
+	}
 	
 	
 	/**
@@ -54,6 +71,7 @@ public class ProfileBean implements Serializable{
 		this.setBio(account.get("Bio").toString());
 		this.setWebsite(account.get("Website").toString());
 		this.setSkills(account.get("SkillsList").toString());
+		this.setStatus(account.get("Status").toString());
 	}
 	
 	/**
@@ -63,30 +81,61 @@ public class ProfileBean implements Serializable{
 	 * @param website a string of the profile's website.
 	 * @param skills a string of the profile's skills.
 	 */
-	public ProfileBean(String id, String name, String bio, String website, String skills)
+	public ProfileBean(String id, String name, String bio, String website, String skills, String status)
 	{
 		this.setId(id);
 		this.setName(name);
 		this.setBio(bio);
 		this.setWebsite(website);
 		this.setSkills(skills);
+		this.setStatus(status);
 	}
 	
 	/**
 	 * Gets a blank profile.
 	 */
 	public ProfileBean() {
-		this("", "", "", "", "");
+		this("", "", "", "", "", "");
 	}
 	
 	/**
 	 * Updates the profile in the database with the given primary key to the values of the profile.
 	 * @param PKey an integer value of the profile's primary key.
+	 * @throws UnsuccessfulUpdateException 
 	 */
-	public void writeChanges()
+	public void writeChanges() throws UnsuccessfulUpdateException
 	{
-		Database.executeUpdate(String.format("INSERT OR REPLACE INTO Profiles (AccountPKey, Name, Bio, Website, SkillsList) VALUES (%s, '%s', '%s', '%s', '%s');",
-				this.getId(), this.getName(), this.getBio(), this.getWebsite(), this.getSkills()) );
+		String query = String.format("INSERT OR REPLACE INTO Profiles (AccountPKey, Name, Bio, Website, SkillsList, Status) VALUES (%s, '%s', '%s', '%s', '%s', '%s');",
+				this.getId(), this.getName(), this.getBio(), this.getWebsite(), this.getSkills(), this.getStatus());
+		String message = Database.executeUpdate(query);
+		if (! message.equals(""))
+			throw new UnsuccessfulUpdateException(query, message);
+	}
+	
+	/**
+	 * @return The status of this profile.
+	 * <ul>
+	 * <li>-1: denied (not public)</li>
+	 * <li>0: untrusted, unverified (not public)</li>
+	 * <li>1: trusted, unverified (public)</li>
+	 * <li>2: verified (public)</li>
+	 * </ul>
+	 */
+	public String getStatus() {
+		return this.status;
+	}
+	
+	/**
+	 * @param status The status set to.
+	 * <ul>
+	 * <li>-1: denied (not public)</li>
+	 * <li>0: untrusted, unverified (not public)</li>
+	 * <li>1: trusted, unverified (public)</li>
+	 * <li>2: verified (public)</li>
+	 * </ul>
+	 */
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	/**
