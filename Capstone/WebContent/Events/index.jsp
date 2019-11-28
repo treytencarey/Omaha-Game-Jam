@@ -50,52 +50,12 @@
 	}
 	
 	%>
-	<!--
-	<div id="event-header">
-		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-				<%
-				for(int i = 1; i < fr.getFileList().length; i++) {
-				%>
-				<li data-target="#carouselExampleIndicators" data-slide-to=<%= i %>></li>
-				<%
-				}
-				%>
-				</ol>
-				<div class="carousel-inner rounded" style="height: 35%;">
-					<%
-					String[] carouselItems = fr.getFileList();
-					%>
-					<div class="carousel-item mh-100 active">
-					<img class="d-block w-100 img-responsive" src="../images/eventImages/<%= carouselItems[0] %>" alt="Slide 1">
-					</div>
-					<%
-					for(int i = 1; i < carouselItems.length; i++) {
-					%>
-					<div class="carousel-item mh-100">
-						<img class="d-block w-100 img-responsive" src="../images/eventImages/<%= carouselItems[i] %>" alt="Slide <%= i + 1 %>">
-					</div>
-					<%
-					}
-					%>
-				</div>
-				<a class="carousel-control-prev" href="#carouselExampleIndicators"
-					role="button" data-slide="prev"> <span
-					class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-					class="sr-only">Previous</span>
-				</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-					role="button" data-slide="next"> <span
-					class="carousel-control-next-icon" aria-hidden="true"></span> <span
-					class="sr-only">Next</span>
-				</a>
-			</div>
-		</div>
-		 -->
+	
 	<!-- Current Event -->
 
 	<div class="container eventContainer rainbowBorder">
 		<div id="current-event" class="event">
+			<img src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= current.getKey() %>_header.png" class="rounded" style="max-width: 100%; max-height: 100%;"/>
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-9">
@@ -149,6 +109,7 @@
 	<% if (!future.getTitle().equals("Unavailable")) { %>
 	<div class="container eventContainer">
 		<div id="future-event" class="event">
+		<img src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= future.getKey() %>_header.png" style="max-width: 100%; max-height: 100%;"/>
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-9">

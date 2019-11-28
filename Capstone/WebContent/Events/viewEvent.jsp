@@ -17,35 +17,73 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
-
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/eventStyle.css">
+</head>
+<body>
 <%@page import="beans.Event" %>
+<%@page import="beans.Mutator" %>
 <%
 	Event display = (Event)request.getAttribute("event");
-	String[] mutators = display.getMutators();
-	String[] mutatorDescriptions = display.getMutatorDescriptions();
 %>
 <%@include  file="/Common/navbar.jsp" %>
 
 <!-- Display Event -->
-<div id="current-event">
-	<h1 class="event-title"><b><%= display.getTitle() %></b></h1><br>
-	<h3 class="event-theme"><%= display.getTheme() %></h3><br>
-	<div id="event-description"><%= display.getDescription() %></div><br>
-	<h5>Mutators</h5>
-	<ul>
-		<%
-		for(int i = 0; i < mutators.length; i++){
-		%>
-			<li><%= mutators[i] %>: <%= mutatorDescriptions[i] %></li>
-		<%
-		}
-		%>
-	</ul>
-	<h5>From <%= display.getStartDate() %> to <%= display.getEndDate() %></h5>
+
+<div class="container eventContainer rainbowBorder">
+		<div id="current-event" class="event">
+			<img src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= display.getKey() %>_header.png" class="rounded" style="max-width: 100%; max-height: 100%;"/>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-9">
+					<h1 class="currentEventHeader">Event</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h3 style="float: right;">Title:</h3>
+				</div>
+				<div class="col-sm-9">
+					<h3 style="font-weight: 300;"><%= display.getTitle() %></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h3 style="float: right;">Theme:</h3>
+				</div>
+				<div class="col-sm-9">
+					<h3 style="font-weight: 300;"><%= display.getTheme() %></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h3 style="float: right;">Description:</h3>
+				</div>
+				<div class="col-sm-9">
+					<h3 style="font-weight: 300;"><%= display.getDescription() %></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h3 style="float: right;">When:</h3>
+				</div>
+				<div class="col-sm-9">
+					<h3 style="font-weight: 300;">From <%= display.getStartDate() %> to <%= display.getEndDate() %></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-9">
+					<button type="button" id="rsvp-button" class="btn btn-info">RSVP</button>
+					<button type="button" id="event-schedule-button" class="btn btn-warning">Event Schedule</button>
+					<a href=""><i class="fab fa-discord fa-3x" style="color: #7289da;"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
-<form class="was-validated" action="<%= request.getContextPath() %>/EventServlet" method = "post">
-	
+<form class="was-validated mw-50" autocomplete="off" action="<%= request.getContextPath() %>/EventServlet" method = "post">
+	<input autocomplete="false" type="hidden" type="text" style="display:none;" />
 	<input type="hidden" value="<%= display.getKey() %>" name="PKey" />
 	
 	<div class="form-group">
@@ -83,7 +121,7 @@
 	  	</div>
 	  	<div class="form-group multiplValueFields">
 			<%
-			if(mutators.length == 0){
+			if(display.getMutators().isEmpty()){
 			%>
 			<div class="input-group newEventMutators">
 				<span class='input-group-addon icons'><i class='fa fa-exclamation'></i></span>
@@ -95,12 +133,12 @@
 			<%
 			} 
 			else
-				for(int i = 0; i < mutators.length; i++){
+				for(Mutator mutator : display.getMutators()){
 			%>
 			<div class="input-group newEventMutators">
 				<span class='input-group-addon icons'><i class='fa fa-exclamation'></i></span>
-				<input type='text' class='form-control modalFields' name='mutator' value='<%= mutators[i] %>' />
-				<input type='text' class='form-control modalFields' name='mutatorDescription' value='<%= mutatorDescriptions[i] %>' />
+				<input type='text' class='form-control modalFields' name='mutator' value='<%= mutator.getName() %>' />
+				<input type='text' class='form-control modalFields' name='mutatorDescription' value='<%= mutator.getDescription() %>' />
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 			<%
@@ -158,3 +196,5 @@
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</div>
 	</form>
+	</body>
+</html>
