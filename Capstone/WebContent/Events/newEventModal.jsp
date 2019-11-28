@@ -6,7 +6,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form class="was-validated" action="<%= request.getContextPath() %>/EventServlet" method = "post" enctype="multipart/form-data">
+				<form class="was-validated" autocomplete="off" action="<%= request.getContextPath() %>/EventServlet" method = "post" enctype="multipart/form-data">
+					<input type="hidden" name="hidden" type="text" style="display:none;" />
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
@@ -51,13 +52,22 @@
 						
 						
 					    <script>
-					    $(function(){
+					    	$(function(){
+					    	 	 $(".add-mutator").on('click', function(){
+					    		    var ele = $(this).closest('.multiplValueFields').clone(true);
+					    		    $(this).closest('.multiplValueFields').after(ele);
+					    		    $(this).remove();
+					    		  })
+					    	})
+					    
+					    /*$(function(){
 					    	  $(".add-mutator").on('click', function(){
 					    	    var ele = $(this).closest('.multiplValueFields').clone(true);
 					    	    $(this).closest('.multiplValueFields').after(ele);
 					    	    $(this).remove();
 					    	  })
 					    	})
+					    */
 					    </script>
 					</div>
 					
