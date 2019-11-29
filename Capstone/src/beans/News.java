@@ -88,7 +88,7 @@ public class News {
 	 * Gets PKeys for the most recent public News articles in the database.
 	 * @param a - Number of PKeys to get
 	 * @param p - PKey to exclude from array
-	 * @param pub - If the news articles include public articles (0 to include them, else do not)
+	 * @param pub - If the news articles include non-public articles (0 to include them, else do not)
 	 * @return The array of PKeys for the News articles
 	 */
 	public static int[] getMostRecentNewsPostsKeys(int a, int p , int pub) {

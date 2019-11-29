@@ -4760,6 +4760,7 @@
 	<servlet-mapping>
 		<servlet-name>NewsServlet</servlet-name>
 		<url-pattern>/News/view</url-pattern>
+		<url-pattern>/news/view</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>

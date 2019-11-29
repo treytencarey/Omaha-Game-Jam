@@ -4,8 +4,8 @@
 <%@page import="project.Main"%>
 <%@page import="java.util.ArrayList"%>
 <%
-	EventTableBean eventTable = new EventTableBean();
-	ArrayList<Event> listEvents = eventTable.getPastEvents();
+	EventTableBean eTable = new EventTableBean();
+	ArrayList<Event> listEvents = eTable.getPastEvents();
 	request.setAttribute("listEvents", listEvents);
 %>
 <div id="addGalleryPhotoModal" class="modal fade">
@@ -19,7 +19,7 @@
 				<form class="was-validated" action="<%=request.getContextPath()%>/GalleryServlet" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<div class="input-group">
-							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span> <input type="file" class="custom-file-input" id="galleryUploads" name="galleryUploads" required multiple> <label class="form-control modalFields custom-file-label" for="galleryUploads">Choose Image(s)...</label>
+							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span> <input type="file" class="custom-file-input" id="galleryUploads" name="galleryUploads" accept="image/png,image/gif,image/jpeg" required multiple> <label class="form-control modalFields custom-file-label" for="galleryUploads">Choose Image(s)...</label>
 							<div class="invalid-feedback">Please upload a valid image.</div>
 						</div>
 					</div>

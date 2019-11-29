@@ -53,8 +53,7 @@ public class NewsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
-		List<Map<String, Object>> query = Database
-				.executeQuery("SELECT * FROM Blogs WHERE PKey=" + id + " AND IsPublic = 1");
+		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Blogs WHERE PKey=" + id);
 		News news;
 
 		if (id == null || query.size() == 0) {
@@ -104,7 +103,7 @@ public class NewsServlet extends HttpServlet {
 		String currentDate = dtf.format(LocalDateTime.now());
 
 		List<Map<String, Object>> query = null;
-		
+
 		/**
 		 * Find the path where the body txt file will go
 		 */
@@ -116,15 +115,15 @@ public class NewsServlet extends HttpServlet {
 			query = Database.executeQuery(
 					"SELECT PKey FROM Blogs WHERE Date=\'" + currentDate + "\' AND Title=\'" + reqTitle + "\'");
 		}
-		
+
 		if (request.getParameter("editNewsArticleButton") != null) {
 			String id = request.getParameter("newsId");
 			Database.executeUpdate("UPDATE Blogs SET Date=\'" + currentDate + "\', Title=\'" + reqTitle
 					+ "\', IsPublic=\'" + isPublicDb + "\', Header=\'" + reqHeader + "\' WHERE PKey=" + id);
 			query = Database.executeQuery("SELECT PKey FROM Blogs WHERE Pkey=" + id);
 		}
-		
-		if(request.getParameter("deleteNewsArticleButton") != null) {
+
+		if (request.getParameter("deleteNewsArticleButton") != null) {
 			String id = request.getParameter("newsId");
 			Database.executeUpdate("DELETE FROM Blogs WHERE PKey=" + id);
 			Files.deleteIfExists(Paths.get(path + id + "_body.txt"));
@@ -147,7 +146,7 @@ public class NewsServlet extends HttpServlet {
 		/**
 		 * Get the image from newsFile in form, and write to Upload/News/Photo
 		 */
-		if(!request.getPart("newsFile").getSubmittedFileName().isEmpty()) {
+		if (!request.getPart("newsFile").getSubmittedFileName().isEmpty()) {
 			Part headerImg = request.getPart("newsFile");
 			path = getServerPath("/Uploads/News/Photo/Photo");
 			Path imgPath = FileSystems.getDefault().getPath(path, pKey + "_header.png");

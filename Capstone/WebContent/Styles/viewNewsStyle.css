@@ -67,6 +67,17 @@
   transform: scale(1.05);
 }
 
+a {
+	outline: none;
+	color: inherit;
+	text-decoration: none;
+}
+
+a:hover {
+	outline: none;
+	color: inherit;
+}
+
 @media only screen and (max-width: 600px) {
 	.news-container {
 		width: 80%;

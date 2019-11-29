@@ -65,7 +65,11 @@
 			</div>
 			<%
 				}
-					}
+					} else {
+			%>
+				No photos have been posted for this event.
+			<%
+				}
 			%>
 		</div>
 	</div>
