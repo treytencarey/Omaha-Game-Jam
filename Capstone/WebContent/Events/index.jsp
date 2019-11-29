@@ -165,7 +165,7 @@
 					<div class="row mt-5 justify-content-center">
 					<% } %>
 						<div class="card card-custom col-sm-3" style="margin: auto; height: 500px;">
-							<img src="../images/its_spherical.jpg" class="card-image-top" style="width: 100%;" alt="Card image">
+							<img src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= event.getKey() %>_header.png" style="max-width: 100%; max-height: 100%;">
 							<div class="card-body dark">
 						  		<h5 class="card-title"><%= event.getTitle() %></h5>
 						  		<h6 class="card-subtitle mb-2 text-muted"><%= event.getTheme() %></h6>

@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form class="was-validated" autocomplete="off" action="<%= request.getContextPath() %>/EventServlet" method = "post" enctype="multipart/form-data">
+				<form class="was-validated" autocomplete="off" action="<%= request.getContextPath() %>/EventServlet" method="post" enctype="multipart/form-data" onsubmit="return datecheck();" >
 					<input type="hidden" name="hidden" type="text" style="display:none;" />
 					<div class="form-group">
 						<div class="input-group">
@@ -86,12 +86,13 @@
 							      };
 							      date_input.datepicker(options);
 							    })
+							    
 							</script>
 				  		</div>
 				  		<div class="form-group eventDates col-sm-6">
 			    	  		<input class="input-group form-control datePicker" id="endDate" name="endDate" placeholder="MM/DD/YYY" type="text" required/>
 						    <script>
-							    $(document).ready(function(){
+						    $(document).ready(function(){
 							      var date_input=$('input[name="endDate"]'); //our date input has the name "date"
 							      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 							      var options={
@@ -102,6 +103,7 @@
 							      };
 							      date_input.datepicker(options);
 							    })
+							    
 							</script>
 				  		</div>
 				    </div>
@@ -114,3 +116,23 @@
 		</div>
 	</div>
 </div>
+<script>
+console.log(new Date());
+function datecheck(){
+	var sd = document.getElementById('startDate').value;
+	var ed = document.getElementById('endDate').value;
+	
+	var sdparts = sd.split('/');
+	var edparts = ed.split('/');
+	
+	const st = new Date(sdparts[2],sdparts[0],sdparts[1]);
+	const et = new Date(edparts[2],edparts[0],edparts[1]);
+	if(st < et){
+		return true;
+	}
+	else{
+		alert("End date must come after start date.");
+		return false;
+	}	
+}
+</script>

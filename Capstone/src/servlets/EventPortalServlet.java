@@ -102,6 +102,32 @@ public class EventPortalServlet extends HttpServlet {
 		if(check.size() > 0) {
 			Database.executeUpdate("UPDATE Events SET Title='"+title+"', Theme='"+theme+"', Description='"+eventDescription+"', StartDate='"+startDate+"', EndDate='"+endDate+" WHERE PKey='"+PKey+"'");
 			//Update Mutators
+			List<Map<String, Object>> m = Database.executeQuery("SELECT * FROM Mutators WHERE EventPKey=" + String.valueOf(PKey));
+			for(int i = 0; i < m.size(); i++) {
+				boolean tf = false;
+				int index = -1;
+				
+				for(int j = 0; j < mutators.length; j++) {
+					if(m.get(i).get("Title").equals(mutators[j])) {
+						tf = true;
+						index = j;
+						break;
+					}
+				}
+				if(tf) {
+					Database.executeUpdate("UPDATE Mutators SET Title='"+mutators[index]+"', Description='"+mutatorDescriptions[index]+"' WHERE Title="+m.get(i).get("Title"));
+					mutators[index] = null;
+					mutatorDescriptions[index] = null;
+					
+				} else {
+					Database.executeUpdate("DELETE FROM Mutators WHERE Title='"+m.get(i).get("Title"));
+				}
+			}
+			for(int i = 0; i < mutators.length; i++) {
+				if(mutators[i] != null) {
+					Database.executeUpdate("INSERT OR REPLACE INTO Mutators (EventPKey, Title, Description) VALUES ('" + PKey + "', '" + mutators[i] + "', '" + mutatorDescriptions[i] + "')");
+				}
+			}
 		}
 		else {
 			Database.executeUpdate("INSERT OR REPLACE INTO Events (Title, Theme, Description, StartDate, EndDate) VALUES ('" + title + "', '" + theme + "', '" + eventDescription + "', '" + startDate + "', '" + endDate + "')");
