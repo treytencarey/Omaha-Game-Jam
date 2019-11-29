@@ -182,7 +182,13 @@ public class Account extends HttpServlet {
 	 */
 	public static boolean isAdmin(HttpSession session)
 	{
-		String uc = session.getAttribute("userClass").toString();
-		return uc != null && uc.equals(USER_CLASS_ADMIN);
+		try {
+			String uc = session.getAttribute("userClass").toString();
+			return uc != null && uc.equals(USER_CLASS_ADMIN);
+		}
+		catch (NullPointerException npe)
+		{
+			return false;
+		}
 	}
 }
