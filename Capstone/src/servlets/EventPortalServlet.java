@@ -173,6 +173,8 @@ public class EventPortalServlet extends HttpServlet {
 			try (InputStream is = headerImg.getInputStream()) {
 				Files.copy(is, imgPath, REPLACE_EXISTING);
 			}
+			
+			NewsServlet.addNewsArticle(title, theme, eventDescription, isPublic, headerImg);
 		}
 		
 		response.sendRedirect(request.getContextPath() + "/AdminPanel/");
