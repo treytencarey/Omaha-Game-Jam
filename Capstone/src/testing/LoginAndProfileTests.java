@@ -47,13 +47,8 @@ public class LoginAndProfileTests {
 	 * Opens the WebDriver browser.
 	 */
 	@BeforeClass
-	public static void openBrowser() {
-		System.setProperty("webdriver.chrome.driver", "./TestingUtils/chromedriver.exe");
-		driver = new ChromeDriver();
-		generateRandomLogin();
-		//let webpage load in
-		driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
+	public static void setup() {
+		driver = TestFunctions.openBrowser(driver);
 	}
 	
 	/**
