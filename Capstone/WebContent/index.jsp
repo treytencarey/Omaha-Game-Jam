@@ -35,7 +35,7 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
 	<%@page import="beans.News" %>
 	
 	<div class="mainEventParent">
-		<img class="mainEventImg rounded" src="./images/gamejam.png"/>
+		<img class="mainEventImg rounded" src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= ce.getKey() %>_header.png" style="height:100%; width:100%;"/>
   	</div>
   	
   	<div class="jumbotron aboutSection" style="margin-top: 50px;">

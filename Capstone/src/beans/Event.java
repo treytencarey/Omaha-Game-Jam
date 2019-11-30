@@ -17,6 +17,11 @@ import database.Database;
 public class Event {
 
 	/**
+	 * visiblity of the event, 1 is public, 0 is not
+	 */
+	private int isPublic;
+	
+	/**
 	 * The key of the event.
 	 */
 	private int key;
@@ -76,7 +81,7 @@ public class Event {
 		    				mutator.get("Description").toString()
 		    			));
 		}
-		
+		isPublic = (int)event.get("IsPublic");
 		key = PKey;
 		title = event.get("Title").toString();
 		theme = event.get("Theme").toString();
@@ -99,6 +104,7 @@ public class Event {
 	 */
 	public Event(Map<String, Object> queryRow)
 	{	
+		this.setVisibility(0);
 		this.setKey(Integer.parseInt(queryRow.get("PKey").toString()));
 		this.setTitle(queryRow.get("Title").toString());
 		this.setTheme(queryRow.get("Theme").toString());
@@ -117,8 +123,12 @@ public class Event {
 		description = "Unavailable";
 		startDate = "No Date";
 		endDate = "No Date";
+		isPublic = 0;
 	}
 
+	public void setVisibility(int i) {
+		isPublic = i;
+	}
 	/**
 	 * Set title for event
 	 */
@@ -161,6 +171,9 @@ public class Event {
 		this.key = key;
 	}
 
+	public boolean IsPublic() {
+		return (isPublic == 1);
+	}
 	/**
 	 * returns pkey for event
 	 */
@@ -203,10 +216,16 @@ public class Event {
 		return endDate;
 	}
 	
+	/**
+	 * returns arraylist of event mutators
+	 */
 	public ArrayList<Mutator> getMutators(){
 		return mutators;
 	}
 	
+	/**
+	 * sets event mutators
+	 */
 	public void setMutators(ArrayList<Mutator> m) {
 		mutators = m;
 	}

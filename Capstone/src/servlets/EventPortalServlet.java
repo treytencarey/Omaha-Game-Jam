@@ -2,11 +2,13 @@ package servlets;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +54,11 @@ public class EventPortalServlet extends HttpServlet {
 		String path;
 		
 		/**
+		 * int representing visibility of event, 1 is visible, 0 is not
+		 */
+		int isPublic = 0;
+		
+		/**
 		 * String representing title of event
 		 */
 		String PKey = request.getParameter("PKey");
@@ -72,11 +79,6 @@ public class EventPortalServlet extends HttpServlet {
 		String eventDescription = request.getParameter("eventDescription");
 		
 		/**
-		 * String array representing image list for event
-		 */
-		String[] eventImages = request.getParameterValues("eventImage");
-		
-		/**
 		 * String array representing mutator list for event
 		 */
 		String[] mutators = request.getParameterValues("mutator");
@@ -95,27 +97,42 @@ public class EventPortalServlet extends HttpServlet {
 		 * String representing end date of event
 		 */
 		String endDate = request.getParameter("endDate");
+
+		if (request.getParameter("toDelete") != null) {
+			String id = request.getParameter("newsId");
+			Database.executeUpdate("DELETE FROM Mutators WHERE EventPKey=" + PKey);
+			Database.executeUpdate("DELETE FROM Events WHERE PKey=" + PKey);
+			//Files.deleteIfExists(Paths.get(path + id + "_body.txt"));
+			path = getServerPath("/Uploads/Events/HeaderImages/HeaderImages");
+			Files.deleteIfExists(Paths.get(path + PKey + "_header.png"));
+			response.sendRedirect(request.getContextPath() + "/AdminPanel/");
+			return;
+		}
 		
 		//Check if event pkey already exists in Events table
 		List<Map<String, Object>> check = Database.executeQuery("SELECT * FROM Events WHERE PKey=" + String.valueOf(PKey));
 		
 		if(check.size() > 0) {
-			Database.executeUpdate("UPDATE Events SET Title='"+title+"', Theme='"+theme+"', Description='"+eventDescription+"', StartDate='"+startDate+"', EndDate='"+endDate+" WHERE PKey='"+PKey+"'");
+			if(request.getParameter("visibility") != null) {
+				isPublic = 1;
+			}
 			//Update Mutators
 			List<Map<String, Object>> m = Database.executeQuery("SELECT * FROM Mutators WHERE EventPKey=" + String.valueOf(PKey));
 			for(int i = 0; i < m.size(); i++) {
 				boolean tf = false;
 				int index = -1;
+				String mName = m.get(i).get("Title").toString();
+				String mPkey = m.get(i).get("PKey").toString();
 				
 				for(int j = 0; j < mutators.length; j++) {
-					if(m.get(i).get("Title").equals(mutators[j])) {
+					if(mName.equals(mutators[j])) {
 						tf = true;
 						index = j;
 						break;
 					}
 				}
 				if(tf) {
-					Database.executeUpdate("UPDATE Mutators SET Title='"+mutators[index]+"', Description='"+mutatorDescriptions[index]+"' WHERE Title="+m.get(i).get("Title"));
+					Database.executeUpdate("UPDATE Mutators SET Title=\'"+mutators[index]+"\', Description=\'"+mutatorDescriptions[index]+"\' WHERE PKey="+mPkey);
 					mutators[index] = null;
 					mutatorDescriptions[index] = null;
 					
@@ -128,9 +145,10 @@ public class EventPortalServlet extends HttpServlet {
 					Database.executeUpdate("INSERT OR REPLACE INTO Mutators (EventPKey, Title, Description) VALUES ('" + PKey + "', '" + mutators[i] + "', '" + mutatorDescriptions[i] + "')");
 				}
 			}
+			Database.executeUpdate("UPDATE Events SET Title=\'" + title + "\', Theme=\'" + theme + "\', Description=\'" + eventDescription + "\', StartDate=\'" + startDate + "\', EndDate=\'" + endDate + "\', IsPublic=\'" + isPublic + "\' WHERE PKey=" + PKey);
 		}
 		else {
-			Database.executeUpdate("INSERT OR REPLACE INTO Events (Title, Theme, Description, StartDate, EndDate) VALUES ('" + title + "', '" + theme + "', '" + eventDescription + "', '" + startDate + "', '" + endDate + "')");
+			Database.executeUpdate("INSERT OR REPLACE INTO Events (Title, Theme, Description, StartDate, EndDate, IsPublic) VALUES ('" + title + "', '" + theme + "', '" + eventDescription + "', '" + startDate + "', '" + endDate + "', '" + isPublic +"')");
 			List<Map<String, Object>> query = Database.executeQuery("SELECT PKey FROM Events WHERE Title=\'" + title + "\'");
 			PKey = query.get(0).get("PKey").toString();
 			
@@ -142,9 +160,12 @@ public class EventPortalServlet extends HttpServlet {
 		}
 		
 		/**
-		 * Get the image from newsFile in form, and write to Upload/News/Photo
+		 * Get the image from event submission form, and write to Upload/Events/HeaderImages
 		 */
 		if(!request.getPart("eventImage").getSubmittedFileName().isEmpty()) {
+			File file = new File(request.getContextPath()+"/Uploads/Events/HeaderImages/"+PKey+"_header.png");
+			file.delete();
+	        
 			Part headerImg = request.getPart("eventImage");
 			path = getServerPath("/Uploads/Events/HeaderImages/HeaderImages");
 			Path imgPath = FileSystems.getDefault().getPath(path, PKey + "_header.png");
@@ -154,7 +175,7 @@ public class EventPortalServlet extends HttpServlet {
 			}
 		}
 		
-		response.sendRedirect(request.getContextPath() + "/Events/");
+		response.sendRedirect(request.getContextPath() + "/AdminPanel/");
 		
 		
 	}

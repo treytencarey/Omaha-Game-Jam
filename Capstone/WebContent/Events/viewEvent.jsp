@@ -84,6 +84,7 @@
 
 <form class="was-validated mw-50" autocomplete="off" action="<%= request.getContextPath() %>/EventServlet" method = "post" enctype="multipart/form-data" onsubmit="return datecheck();">
 	<input autocomplete="false" type="hidden" type="text" style="display:none;" />
+	<input type="hidden" id="toDelete" name="toDelete"></input>
 	<input type="hidden" value="<%= display.getKey() %>" name="PKey" />
 	
 	<div class="form-group">
@@ -113,10 +114,8 @@
 		
 		<div class="input-group">
 			<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-			<input type="file" class="custom-file-input" name="eventImage" id="eventImage" required/>
+			<input type="file" class="custom-file-input" name="eventImage" id="eventImage" />
 			<label class="form-control modalFields custom-file-label" for="eventImage">Choose Image</label>
-			<div class="invalid-feedback">Please upload a valid image</div>
-			<div class="valid-feedback">Looks good!</div>
 		</div>
 	  	
 	  	<div class="form-group multiplValueFields">
@@ -192,10 +191,15 @@
 				</script>
 	  		</div>
 	    </div>
+	     
+	    <div class="form-group col-sm-6">
+    	  	Make Public: <input type="checkbox" id="visibility" name="visibility" <% if(display.IsPublic()) {%> checked <% } %> />
+    	</div>
+    	
 		<div class="form-group">
-			<button type="submit" class="btn btn-primary">Submit Changes</button>
+			<button onclick="return checkChange()" class="btn btn-primary">Submit Changes</button>
 			<button onclick="window.location.href='<%= request.getContextPath()+"/AdminPanel" %>'" class="btn btn-primary">Cancel Changes</button>
-			<button type="submit" class="btn btn-primary" style="background-color: red;">Delete Event</button>
+			<button onclick="return checkRemove();" class="btn btn-primary" id="deleteEventButton" style="background-color: red;">Delete Event</button>
 		</div>
 	</form>
 	<script>
@@ -215,6 +219,17 @@
 				alert("End date must come after start date.");
 				return false;
 			}	
+		}
+		function checkRemove(){
+			var remove = confirm("Are you sure you want to delete this event?");
+			if(remove){
+				document.getElementById('toDelete').value = "yes";
+				return true;
+			}
+			else return false;
+		}
+		function checkChange(){
+			confirm("Submit changes?");
 		}
 	</script>
 	</body>

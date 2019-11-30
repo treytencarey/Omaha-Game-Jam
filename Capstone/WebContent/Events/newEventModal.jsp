@@ -8,6 +8,7 @@
 			<div class="modal-body">
 				<form class="was-validated" autocomplete="off" action="<%= request.getContextPath() %>/EventServlet" method="post" enctype="multipart/form-data" onsubmit="return datecheck();" >
 					<input type="hidden" name="hidden" type="text" style="display:none;" />
+					
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
