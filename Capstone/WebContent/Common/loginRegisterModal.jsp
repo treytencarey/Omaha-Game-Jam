@@ -27,7 +27,7 @@
 					</div>
 					<div class="form-group">
 						<input name="loginButton" style="display: none;">
-						<button type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
+						<button id="modalLoginBtn" type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
 					</div>
 					<p class="hint-text"><a href="#">Forgot Password?</a></p>
 				</form>
@@ -76,7 +76,7 @@
 					</div>
 					<div class="form-group">
 						<input name="registerButton" style="display: none;">
-						<button type="submit" class="btn btn-primary btn-block btn-lg">Register</button>
+						<button id="registerBtn" type="submit" class="btn btn-primary btn-block btn-lg">Register</button>
 					</div>
 				</form>
 			</div>
