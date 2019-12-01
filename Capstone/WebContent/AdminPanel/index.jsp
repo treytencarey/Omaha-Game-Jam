@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%
+		if(!Account.isAdmin(request.getSession())) {
+			System.out.println("not admin");
+			response.sendRedirect(request.getContextPath()+"/index.jsp");
+		}
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy");
+	   	String currentYear = dtf.format(LocalDateTime.now());
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,18 +29,18 @@
 	
 </head>
 <body>
+
 	<%@include file="/Common/navbar.jsp" %>
 	<%@include file="/Events/newEventModal.jsp" %>
 	<%@include file="/Events/eventsDisplayModal.jsp" %>
 	<%@include file="/News/newArticleModal.jsp" %>
 	<%@include file="/Gallery/addGalleryPhotoModal.jsp" %>
-	<%@include file="/AdminPanel/submissions.jsp" %>
+	
 	<%@page import="java.time.LocalDateTime" %>
 	<%@page import="java.time.format.DateTimeFormatter" %>
-	<%
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy");
-	   	String currentYear = dtf.format(LocalDateTime.now());
-	%>
+	<%@page import="database.Account" %>
+	
+	
 	<div style="text-align: center;">
 		Admin Panel<br><br>
 		
@@ -49,9 +58,6 @@
 		
 		<h3><b>Submissions:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gameSubmissionsDisplayModal">View Game Submissions</button>
-		
-		
-		
 	</div>
 </body>
 </html>

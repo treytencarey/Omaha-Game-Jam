@@ -2,7 +2,17 @@
 <%@page import="beans.EventTableBean" %>
 <%@page import="beans.Event" %>
 <%@page import="database.Database"%>
-
+<style>
+table td{
+	margin: 12px;
+	padding: 12px;
+}
+table {
+	border-collapse: separate;
+	border-spacing: 10px;
+	*border-collapse: expression('separate', cellSpacing = '10px');
+}
+</style>
 <%
 EventTableBean eventTable = new EventTableBean();
 
