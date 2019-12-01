@@ -1,5 +1,7 @@
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+
 <div id="newEventModal" class="modal fade">
-	<div class="modal-dialog modal-login newMods">
+	<div class="modal-dialog modal-xl modal-login newMods">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title">Create New Event</h4>
@@ -25,12 +27,11 @@
 							<div class="valid-feedback">Looks good!</div>
 						</div>
 					</div>
+					 
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
 							<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" placeholder="Description" required></textarea>
-							<div class="invalid-feedback">Please enter a valid description</div>
-							<div class="valid-feedback">Looks good!</div>
 						</div>
 					</div>
 					
@@ -118,7 +119,17 @@
 	</div>
 </div>
 <script>
-console.log(new Date());
+var bodyField;
+loadEditor();
+
+function loadEditor() { 
+	bodyField = new nicEditor({fullPanel: true}).panelInstance("eventDescription");
+	$("eventDescription").width("100%");
+	$('.nicEdit-panelContain').parent().css({width:'100%', padding:"0"});
+    $('.nicEdit-panelContain').parent().next().css({width:'100%', padding:"5px"});
+    $('.nicEdit-main').css({width:'100%', padding:"0", minHeight:"80px"});
+}
+
 function datecheck(){
 	var sd = document.getElementById('startDate').value;
 	var ed = document.getElementById('endDate').value;

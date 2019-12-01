@@ -49,9 +49,9 @@
 		
 		<h3><b>Submissions:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gameSubmissionsDisplayModal">View Game Submissions</button>
-		
-		
-		
+		<form action="<%= request.getContextPath() %>/PageOptionsServlet" method="post">
+			<button type="submit" class="btn btn-primary">Page Options</button>
+		</form>
 	</div>
 </body>
 </html>

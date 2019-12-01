@@ -3,7 +3,7 @@
 	  <div class=" navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav ml-auto">
 				<li class="nav-item indvTabs">
-			  		<a class="nav-link" href="<%= request.getContextPath() %>/AdminPanel">Admin Menu</a>
+			  		<a class="nav-link" href="<%= request.getContextPath() %>/AdminPanel">Admin Panel</a>
 				</li>
     		<% if (request.getRequestURI().equals(request.getContextPath()+"/profile") && request.getParameter("id").equals(session.getAttribute("accountPKey")))  { %>
 		      <li class="nav-item indvTabs">
@@ -32,7 +32,7 @@
 		        <a id="addEventBtn" href="#newEventModal" class="nav-link" data-toggle="modal">Add Event</a>
 		      </li>
 		      <li class="nav-item indvTabs">
-		        <a class="nav-link" href="#">Edit Event</a>
+		        <a class="nav-link" href="#eventsDisplayModal">View Events</a>
 		      </li>
 	      	<%}%>
 	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/News/"))  { %>
