@@ -120,43 +120,48 @@
 			<label class="form-control modalFields custom-file-label" for="eventImage">Choose Image</label>
 		</div>
 	  	
-	  	<div class="form-group multiplValueFields">
-			<%
-			if(display.getMutators().isEmpty()){
-			%>
-			<div class="input-group newEventMutators">
-				<span class='input-group-addon icons'><i class='fa fa-exclamation'></i></span>
-				<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' />
-				<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Mutator Description' />
-				<div class="valid-feedback">Looks good!</div>
-			</div>
-			<input type="button" value="Add another mutator" class="add-mutator" />
-			<%
-			} 
-			else
-				for(Mutator mutator : display.getMutators()){
-			%>
-			<div class="input-group newEventMutators">
-				<span class='input-group-addon icons'><i class='fa fa-exclamation'></i></span>
-				<input type='text' class='form-control modalFields' name='mutator' value='<%= mutator.getName() %>' />
-				<input type='text' class='form-control modalFields' name='mutatorDescription' value='<%= mutator.getDescription() %>' />
-				<div class="valid-feedback">Looks good!</div>
-			</div>
-			<%
+	  	<div class="multiplValueFields items" style="display: inline-block;">
+			<button type="button" class="add_field_button">Add Mutator</button>
+				<%
+				if(!display.getMutators().isEmpty()){
+					for(Mutator mutator : display.getMutators()){
+				%>
+					<div class="form-group">
+						<input type='text' class='form-control modalFields' name='mutator' value='<%= mutator.getName() %>' />
+						<input type='text' class='form-control modalFields' name='mutatorDescription' value='<%= mutator.getDescription() %>' />
+						<a href="#" class="remove_field"><i class="fa fa-times"></i></a>
+					</div>
+				<%
+					}
 				}
-			%>
-			<input type="button" value="Add another mutator" class="add-mutator" />
-						
-						
-		    <script>
-			    $(function(){
-			    	  $(".add-mutator").on('click', function(){
-				    	    var ele = $(this).closest('.multiplValueFields').clone(true);
-				    	    $(this).closest('.multiplValueFields').after(ele);
-				    	    $(this).remove();
-			    	  })
-		    	})
-		    </script>
+				%>
+			
+				<script>
+					$(document).ready(function() {
+						var max_fields = 20;
+					    var wrapper = $(".items");
+					    var add_button = $(".add_field_button");
+					    	 
+					    var x = 1; 
+					    $(add_button).click(function(e){ 
+						    e.preventDefault();
+						    if(x < max_fields){ 
+							    x++; 
+							    $(wrapper).append(
+								    '<div class="form-group">' +
+								    	"<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' />" +
+										"<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Mutator Description' />" +
+								   		'<a href="#" class="remove_field"><i class="fa fa-times"></a></div>'
+							    ); 
+						    }
+					    });
+					    	 
+					    $(wrapper).on("click",".remove_field", function(e){ //user click on remove field
+					    e.preventDefault(); $(this).parent('div').remove(); x--;
+					    })
+				  });
+					    
+			 </script>
 		</div>
 			
   		<div class="row">

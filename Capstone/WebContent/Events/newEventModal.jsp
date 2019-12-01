@@ -1,5 +1,12 @@
 <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-
+<style>
+.modal-body {
+    position: relative;
+    overflow-y: auto;
+    max-height: 400px;
+    padding: 15px;
+}
+</style>
 <div id="newEventModal" class="modal fade">
 	<div class="modal-dialog modal-xl modal-login newMods">
 		<div class="modal-content">
@@ -43,33 +50,37 @@
 						<div class="valid-feedback">Looks good!</div>
 					</div>
 					
-				  	<div class="form-group multiplValueFields">
-						<div class="input-group newEventMutators">
-							<span class='input-group-addon icons'><i class='fa fa-exclamation'></i></span>
-							<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' />
-							<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Mutator Description' />
-							<div class="valid-feedback">Looks good!</div>
-						</div>
-						<input type="button" value="Add another mutator" class="add-mutator" />
+				  	<div class="form-group multiplValueFields items">
+
+						<button type="button" class="add_field_button">Add Mutator</button>
+						<!-- <input type="button" value="Add another mutator" class="add-mutator" /> -->
 						
 						
 					    <script>
-					    	$(function(){
-					    	 	 $(".add-mutator").on('click', function(){
-					    		    var ele = $(this).closest('.multiplValueFields').clone(true);
-					    		    $(this).closest('.multiplValueFields').after(ele);
-					    		    $(this).remove();
-					    		  })
+					    $(document).ready(function() {
+					    	var max_fields = 20; //maximum input boxes allowed
+					    	var wrapper = $(".items"); //Fields wrapper
+					    	var add_button = $(".add_field_button"); //Add button ID
+					    	 
+					    	var x = 1; //initlal text box count
+					    	$(add_button).click(function(e){ //on add input button click
+						    	e.preventDefault();
+						    	if(x < max_fields){ //max input box allowed
+							    	x++; //text box increment
+							    	$(wrapper).append(
+								    	'<div class="form-group">' +
+								    	"<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' />" +
+										"<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Mutator Description' />" +
+								    	'<a href="#" class="remove_field"><i class="fa fa-times"></a></div>'
+							    	); //add input box
+						    	}
+					    	});
+					    	 
+					    	$(wrapper).on("click",".remove_field", function(e){ //user click on remove field
+					    	e.preventDefault(); $(this).parent('div').remove(); x--;
 					    	})
+					    	});
 					    
-					    /*$(function(){
-					    	  $(".add-mutator").on('click', function(){
-					    	    var ele = $(this).closest('.multiplValueFields').clone(true);
-					    	    $(this).closest('.multiplValueFields').after(ele);
-					    	    $(this).remove();
-					    	  })
-					    	})
-					    */
 					    </script>
 					</div>
 					
@@ -119,6 +130,14 @@
 	</div>
 </div>
 <script>
+$('.modal').on('show.bs.modal', function () {
+    $(this).find('.modal-body').css({
+           width:'auto', //probably not needed
+           height:'auto', //probably not needed 
+           'max-height':'100%'
+    });
+});
+
 var bodyField;
 loadEditor();
 
