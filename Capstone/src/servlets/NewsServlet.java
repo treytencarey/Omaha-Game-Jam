@@ -130,6 +130,16 @@ public class NewsServlet extends HttpServlet {
 		response.sendRedirect(redirectLink);
 	}
 
+	/**
+	 * Adds a news article to the database
+	 * @param title - Title of the news article
+	 * @param subtitle - Subtitle of the news article
+	 * @param body - Body of the news article (saved to a txt file)
+	 * @param isPublic - If the article is public (0 for not public, 1 for public)
+	 * @param headerImg - The image for the header
+	 * @return the PKey of the created news article database entry
+	 * @throws IOException
+	 */
 	public static String addNewsArticle(String title, String subtitle, String body, int isPublic, Part headerImg) throws IOException {
 		List<Map<String, Object>> query = null;
 		/**
@@ -166,6 +176,17 @@ public class NewsServlet extends HttpServlet {
 		return pKey;
 	}
 	
+	/**
+	 * Edits the news article based on given parameters
+	 * @param id - the id/PKey of the article in the database
+	 * @param title - the title of the news article
+	 * @param subtitle - Subtitle of the news article
+	 * @param body - Body of the news article (saved to a txt file)
+	 * @param isPublic - If the article is public (0 for not public, 1 for public)
+	 * @param headerImg - The image for the header (if null, image will stay the same)
+	 * @return the PKey of the created news article database entry
+	 * @throws IOException
+	 */
 	public static String editNewsArticle(String id, String title, String subtitle, String body, int isPublic, Part headerImg) throws IOException {
 		List<Map<String, Object>> query = null;
 		/**
@@ -201,6 +222,11 @@ public class NewsServlet extends HttpServlet {
 		return pKey;
 	}
 	
+	/**
+	 * Deletes news article from the database, along with its body and image from file directories
+	 * @param id - The id/PKey of the news article in the database
+	 * @throws IOException
+	 */
 	public static void deleteNewsArticle(String id) throws IOException {
 		String path = getServerPath("/Uploads/News/Body/Body");
 		Database.executeUpdate("DELETE FROM Blogs WHERE PKey=" + id);
@@ -209,6 +235,13 @@ public class NewsServlet extends HttpServlet {
 		Files.deleteIfExists(Paths.get(path + id + "_header.png"));
 	}
 	
+	/**
+	 * Creates the body file for the news article
+	 * @param pKey - The PKey of the article in the database, used for filename
+	 * @param path - The path where the txt file is saved
+	 * @param body - The content/text in the file
+	 * @throws IOException
+	 */
 	private static void createFile(String pKey, String path, String body) throws IOException {
 		/**
 		 * Create the file in the form of PKey_body.txt and write/overwrite to the file
@@ -220,6 +253,11 @@ public class NewsServlet extends HttpServlet {
 		outFile.close();
 	}
 
+	/**
+	 * Gets the real server path from the original path given
+	 * @param orig - The original path
+	 * @return The real server path
+	 */
 	private static String getServerPath(String orig) {
 		String[] splits = orig.replaceAll("\\\\", "/").split("/");
 		String fileName = splits[splits.length - 1];
