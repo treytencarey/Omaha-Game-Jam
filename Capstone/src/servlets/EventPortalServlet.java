@@ -187,17 +187,16 @@ public class EventPortalServlet extends HttpServlet {
 		 */
 		if(!request.getPart("eventImage").getSubmittedFileName().isEmpty()) {
 			File file = new File(request.getContextPath()+"/Uploads/Events/HeaderImages/"+PKey+"_header.png");
-			file.delete();
 	        
 			Part headerImg = request.getPart("eventImage");
 			path = getServerPath("/Uploads/Events/HeaderImages/HeaderImages");
+			Files.deleteIfExists(Paths.get(path + PKey + "_header.png"));
 			Path imgPath = FileSystems.getDefault().getPath(path, PKey + "_header.png");
-
+			
 			try (InputStream is = headerImg.getInputStream()) {
 				Files.copy(is, imgPath, REPLACE_EXISTING);
 			}
 			
-			NewsServlet.addNewsArticle(title, theme, eventDescription, isPublic, headerImg);
 		}
 		
 		response.sendRedirect(request.getContextPath() + "/AdminPanel/");
