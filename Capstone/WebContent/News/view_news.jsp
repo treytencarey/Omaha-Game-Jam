@@ -25,10 +25,9 @@
 
 	<%
 		try {
-			int newsId = Integer.parseInt(request.getParameter("id"));
-			News n = new News(newsId);
+			News n = (News)request.getAttribute("News");
 			request.setAttribute("newsTitle", n.getTitle());
-			int[] postKeys = News.getMostRecentNewsPostsKeys(3, newsId, 1);
+			int[] postKeys = News.getMostRecentNewsPostsKeys(3, n.getKey(), 1);
 			News[] recentNews = new News[postKeys.length];
 			for (int i = 0; i < recentNews.length; i++) {
 				recentNews[i] = new News(postKeys[i]);
