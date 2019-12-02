@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="utils.FolderReader, database.Game, database.Profile, beans.ContributorTableBean, database.Contributor, beans.RoleTableBean, database.Role, database.Mutator, database.Platform, database.Tool, beans.MutatorTableBean" %>
+	import="utils.FolderReader, database.Game, database.Profile, beans.ContributorTableBean, database.Contributor, beans.RoleTableBean, beans.Event, database.Role, database.Mutator, database.Platform, database.Tool, beans.MutatorTableBean" %>
 
 <%
 Game g = new Game(Integer.parseInt(request.getParameter("id")));
 MutatorTableBean mt = ((MutatorTableBean)request.getAttribute("MutatorTable"));
 ContributorTableBean ct = ((ContributorTableBean)request.getAttribute("ContributorTable"));
+Event e = new Event(g.getEvent());
 boolean canEdit = ((Boolean)request.getAttribute("CanEdit")).booleanValue();
 final String MEDIA_PATH = "/Uploads/Games";
 final String MEDIA_PATH_FULL = request.getContextPath() + MEDIA_PATH;
@@ -23,7 +24,7 @@ final String MEDIA_PATH_FULL = request.getContextPath() + MEDIA_PATH;
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="<%= request.getContextPath() %>/js/events.js"></script>
@@ -37,6 +38,9 @@ final String MEDIA_PATH_FULL = request.getContextPath() + MEDIA_PATH;
 </head>
 <body>
 <%@include  file="/Common/navbar.jsp" %>
+<% if (session.getAttribute("accountPKey") != null && g.getSubmitter() == Integer.parseInt(session.getAttribute("accountPKey").toString())) { %>
+	<%@include  file="/Games/newGameModal.jsp" %>
+<% } %>
 
 <%-- <%
 if (canEdit)
@@ -89,7 +93,7 @@ if (canEdit)
 			</div>
 			<div class="row gameViewDetails">
 				<label class="gameViewLabels" for="jamYear">Jam Year:</label>
-				<p class="gameViewValues" id="jamYear">Submitted for the <%= g.getEvent() %> jam.</p>
+				<p class="gameViewValues" id="jamYear">Submitted for the <%= e.getTitle() %> jam.</p>
 			</div>
 			<div class="row gameViewDetails">
 				<div class="col-sm-12 gameViewDetailCols">

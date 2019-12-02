@@ -79,7 +79,7 @@ public class Files extends HttpServlet {
 		
 		// Full file paths, so we can check if any of the same name has been uploaded (for input multiple)
 		List<String> fullPaths = new ArrayList<String>();
-		   
+		
 		String contentType = request.getContentType();
 		if ((contentType.indexOf("multipart/form-data") >= 0)) {
 			DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -94,6 +94,8 @@ public class Files extends HttpServlet {
 				{
 					FileItem fi = (FileItem)i.next();
 					if ( !fi.isFormField () )  {
+						if (fi.getSize() == 0)
+							continue;
 						String PKey = null;
 						if (fi.getFieldName().indexOf("file") == 0)
 							PKey = fi.getFieldName().substring("file".length());
@@ -129,7 +131,7 @@ public class Files extends HttpServlet {
 					}
 				}
 				 
-				response.sendRedirect(session.getAttribute("curPage").toString());
+				// response.sendRedirect(session.getAttribute("curPage").toString());
 			}catch(Exception ex) {
 				System.out.println(ex);
 				ex.printStackTrace();
