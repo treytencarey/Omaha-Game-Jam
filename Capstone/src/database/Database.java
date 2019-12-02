@@ -118,6 +118,12 @@ public class Database extends HttpServlet {
 	    {
 	    	System.err.println(e.getMessage());
 	    	err = e.getMessage();
+	    	if (err.indexOf("[SQLITE_CONSTRAINT_TRIGGER]") == 0)
+	    	{
+	    		String fnd = "causing the SQL statement to abort (";
+	    		err = err.substring(err.indexOf(fnd)+fnd.length());
+	    		err = err.substring(0,err.length()-1);
+	    	}
 	    }       
 	    finally
 	    {         
