@@ -35,6 +35,7 @@
 	<%@include file="/Events/eventsDisplayModal.jsp" %>
 	<%@include file="/News/newArticleModal.jsp" %>
 	<%@include file="/Gallery/addGalleryPhotoModal.jsp" %>
+	<%@include file="/AdminPanel/submissions.jsp" %>
 	
 	<%@page import="java.time.LocalDateTime" %>
 	<%@page import="java.time.format.DateTimeFormatter" %>
