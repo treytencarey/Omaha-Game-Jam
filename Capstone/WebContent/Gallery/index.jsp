@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@include file="/Common/navbar.jsp"%>
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -9,7 +10,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
@@ -21,7 +22,6 @@
 
 </head>
 <body>
-	<%@include file="/Common/navbar.jsp"%>
 	<%@include file="addGalleryPhotoModal.jsp"%>
 	<%@include file="deleteGalleryPhotoModal.jsp"%>
 	<%@page import="beans.EventTableBean"%>
@@ -42,10 +42,11 @@
 		final String MEDIA_PATH_FULL = request.getContextPath() + MEDIA_PATH;
 		ArrayList<Event> events = (ArrayList<Event>) request.getAttribute("events");
 		//get three latest events
-		for (int i = events.size() - 1; i >= 0 && i != events.size() - 4; i--) {
+		try {
+			for (int i = events.size() - 1; i >= 0 && i != events.size() - 4; i--) {
 	%>
 	<div>
-		<img class="main-event-img rounded" src="<%=request.getContextPath()%>/images/spoopy.png" />
+		<img class="main-event-img rounded" src="<%=request.getContextPath()%>/Uploads/Events/HeaderImages/<%= events.get(i).getKey() %>_header.png"/>
 	</div>
 	<h5 style="text-align: center;"><%=events.get(i).getTitle()%></h5>
 	<br>
@@ -53,9 +54,9 @@
 		<div class="row justify-content-center">
 			<%
 				FolderReader fr = new FolderReader(MEDIA_PATH + "/" + events.get(i).getKey());
-					String[] galleryPhotos = fr.getFileList();
-					if (galleryPhotos != null) {
-						for (int j = 0; j < galleryPhotos.length; j++) {
+						String[] galleryPhotos = fr.getFileList();
+						if (galleryPhotos != null) {
+							for (int j = 0; j < galleryPhotos.length; j++) {
 			%>
 			<div class="admin-delete-container">
 				<a href="<%=MEDIA_PATH_FULL%>/<%=events.get(i).getKey()%>/<%=galleryPhotos[j]%>" data-toggle="lightbox" data-gallery="event-gallery"><img class="event-img zoom" src="<%=MEDIA_PATH_FULL%>/<%=events.get(i).getKey()%>/<%=galleryPhotos[j]%>"></a>
@@ -65,9 +66,9 @@
 			</div>
 			<%
 				}
-					} else {
+						} else {
 			%>
-				No photos have been posted for this event.
+			No photos have been posted for this event.
 			<%
 				}
 			%>
@@ -75,6 +76,8 @@
 	</div>
 	<hr class="my-2" style="background-color: #3b3b3b">
 	<%
+		}
+		} catch (Exception e) {
 		}
 	%>
 </body>

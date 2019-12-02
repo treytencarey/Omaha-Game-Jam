@@ -37,6 +37,10 @@
 	   String currentYear = dtf.format(LocalDateTime.now());
 	%>
 	
+	<div class="admin-controls">
+		<h5>Admin Controls:</h5>
+		<a id="addArticleBtn" href="#newNewsArticleModal" class="btn btn-primary btn-med" style="cursor: pointer;" role="button" data-toggle="modal">Add Article</a>
+	</div>
 	<h4 class="page-text">Recent News</h4>
 	<br>
 	<div class="container" style="text-align: center;">
