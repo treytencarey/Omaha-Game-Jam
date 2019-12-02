@@ -38,7 +38,7 @@
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
-							<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" placeholder="Description" required></textarea>
+							<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" placeholder="Description"></textarea>
 						</div>
 					</div>
 					
@@ -50,7 +50,7 @@
 						<div class="valid-feedback">Looks good!</div>
 					</div>
 					
-				  	<div class="form-group multiplValueFields items">
+				  	<div class="input-group multiplValueFields items" style="display: inline-block;">
 
 						<button type="button" class="add_field_button">Add Mutator</button>
 						<!-- <input type="button" value="Add another mutator" class="add-mutator" /> -->
@@ -99,7 +99,6 @@
 							      };
 							      date_input.datepicker(options);
 							    })
-							    
 							</script>
 				  		</div>
 				  		<div class="form-group eventDates col-sm-6">
@@ -129,6 +128,7 @@
 		</div>
 	</div>
 </div>
+
 <script>
 $('.modal').on('show.bs.modal', function () {
     $(this).find('.modal-body').css({

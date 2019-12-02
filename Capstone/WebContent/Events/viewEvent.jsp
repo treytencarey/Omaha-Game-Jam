@@ -12,18 +12,18 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<script src="<%= request.getContextPath() %>/js/events.js"></script>
+	<script src="<%=request.getContextPath()%>/js/events.js"></script>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 	
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/eventStyle.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/style.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/navStyle.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/subNavStyle.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/eventStyle.css">
 </head>
 <body>
 <%@page import="beans.Event" %>
-<%@page import="beans.Mutator" %>
+<%@page import="database.Mutator" %>
 <%
 	Event display = (Event)request.getAttribute("event");
 %>
@@ -33,7 +33,7 @@
 
 <div class="container eventContainer rainbowBorder">
 		<div id="current-event" class="event">
-			<img src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= display.getKey() %>_header.png" class="rounded" style="max-width: 100%; max-height: 100%;"/>
+			<img src="<%=request.getContextPath()%>/Uploads/Events/HeaderImages/<%=display.getKey()%>_header.png" class="rounded" style="max-width: 100%; max-height: 100%;"/>
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-9">
@@ -45,7 +45,7 @@
 					<h3 style="float: right;">Title:</h3>
 				</div>
 				<div class="col-sm-9">
-					<h3 style="font-weight: 300;"><%= display.getTitle() %></h3>
+					<h3 style="font-weight: 300;"><%=display.getTitle()%></h3>
 				</div>
 			</div>
 			<div class="row">
@@ -53,7 +53,7 @@
 					<h3 style="float: right;">Theme:</h3>
 				</div>
 				<div class="col-sm-9">
-					<h3 style="font-weight: 300;"><%= display.getTheme() %></h3>
+					<h3 style="font-weight: 300;"><%=display.getTheme()%></h3>
 				</div>
 			</div>
 			<div class="row">
@@ -61,7 +61,7 @@
 					<h3 style="float: right;">Description:</h3>
 				</div>
 				<div class="col-sm-9">
-					<h3 style="font-weight: 300;"><%= display.getDescription() %></h3>
+					<h3 style="font-weight: 300;"><%=display.getDescription()%></h3>
 				</div>
 			</div>
 			<div class="row">
@@ -69,7 +69,7 @@
 					<h3 style="float: right;">When:</h3>
 				</div>
 				<div class="col-sm-9">
-					<h3 style="font-weight: 300;">From <%= display.getStartDate() %> to <%= display.getEndDate() %></h3>
+					<h3 style="font-weight: 300;">From <%=display.getStartDate()%> to <%=display.getEndDate()%></h3>
 				</div>
 			</div>
 			<div class="row">
@@ -84,15 +84,16 @@
 	</div>
 </div>
 
-<form class="was-validated mw-50" autocomplete="off" action="<%= request.getContextPath() %>/EventServlet" method = "post" enctype="multipart/form-data" onsubmit="return datecheck();">
+<form class="was-validated mw-50" autocomplete="off" action="<%=request.getContextPath()%>/EventServlet" method = "post" enctype="multipart/form-data" onsubmit="return datecheck();">
 	<input autocomplete="false" type="hidden" type="text" style="display:none;" />
-	<input type="hidden" id="toDelete" name="toDelete"></input>
-	<input type="hidden" value="<%= display.getKey() %>" name="PKey" />
+	<input type="hidden" id="toDelete" name="toDelete" value="no"></input>
+	
+	<input type="hidden" value="<%=display.getKey()%>" name="PKey" />
 	
 	<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
-				<input type="text" class="form-control modalFields" name="title" value="<%= display.getTitle() %>" required>
+				<input type="text" class="form-control modalFields" name="title" value="<%=display.getTitle()%>" required>
 				<div class="invalid-feedback">Please enter a valid event theme</div>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
@@ -100,7 +101,7 @@
 		<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
-				<input type="text" class="form-control modalFields" name="theme" value="<%= display.getTheme() %>" required>
+				<input type="text" class="form-control modalFields" name="theme" value="<%=display.getTheme()%>" required>
 				<div class="invalid-feedback">Please enter a valid event theme</div>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
@@ -108,7 +109,7 @@
 		<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
-				<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" required><%= display.getDescription() %></textarea>
+				<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" required><%=display.getDescription()%></textarea>
 				<div class="invalid-feedback">Please enter a valid description</div>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
@@ -120,15 +121,15 @@
 			<label class="form-control modalFields custom-file-label" for="eventImage">Choose Image</label>
 		</div>
 	  	
-	  	<div class="multiplValueFields items" style="display: inline-block;">
+	  	<div class="input-group multiplValueFields items" style="display: inline-block;">
 			<button type="button" class="add_field_button">Add Mutator</button>
 				<%
-				if(!display.getMutators().isEmpty()){
-					for(Mutator mutator : display.getMutators()){
+					if(!display.getMutators().isEmpty()){
+							for(Mutator mutator : display.getMutators()){
 				%>
 					<div class="form-group">
-						<input type='text' class='form-control modalFields' name='mutator' value='<%= mutator.getName() %>' />
-						<input type='text' class='form-control modalFields' name='mutatorDescription' value='<%= mutator.getDescription() %>' />
+						<input type='text' class='form-control modalFields' name='mutator' value='<%= mutator.getTitle() %>' />
+						<input type='text' class='form-control modalFields' name='mutatorDescription' value='<%= mutator.getDesc() %>' />
 						<a href="#" class="remove_field"><i class="fa fa-times"></i></a>
 					</div>
 				<%

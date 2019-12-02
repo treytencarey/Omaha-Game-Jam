@@ -2,7 +2,6 @@
     pageEncoding="ISO-8859-1"%>
 <%
 		if(!Account.isAdmin(request.getSession())) {
-			System.out.println("not admin");
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
 		}
 		
