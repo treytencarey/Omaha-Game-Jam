@@ -45,9 +45,14 @@
 		      <li class="nav-item indvTabs">
 		        <a id="addGameBtn" href="#newGameModal" class="nav-link" data-toggle="modal">Submit Game</a>
 		      </li>
-		      <li class="nav-item indvTabs">
-		        <a class="nav-link" href="#">Edit Game</a>
-		      </li>
+	      	<%}%>
+	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/Games/view_game.jsp")) { %>
+	      	  <%@page import="database.Game" %>
+	      	  <% if (session.getAttribute("accountPKey") != null && new Game(Integer.parseInt(request.getParameter("id").toString())).getSubmitter() == Integer.parseInt(session.getAttribute("accountPKey").toString())) { %>
+			      <li class="nav-item indvTabs">
+			      	<a id="editGameBtn" href="#newGameModal" class="nav-link" data-toggle="modal">Edit Game</a>
+			      </li>
+			  <% } %>
 	      	<%}%>
 	    </ul>
 	  </div>
