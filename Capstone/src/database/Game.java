@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.EventTableBean;
 import project.Main;
 import utils.Utils;
 
@@ -106,7 +107,16 @@ public class Game extends HttpServlet implements Serializable{
 				}
 			}
 			
-			Game g = new Game(Integer.parseInt(session.getAttribute("accountPKey").toString()), 1, params.get("title"), params.get("description"), mutators, systems, tools, true);
+			Game g = null;
+			try {
+				g = new Game(Integer.parseInt(session.getAttribute("accountPKey").toString()), new EventTableBean().getCurrentEvent().getKey(), params.get("title"), params.get("description"), mutators, systems, tools, true);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				response.sendRedirect(session.getAttribute("curPage").toString());
+				return;
+			}
 			g.updateGame(request.getParameter("PKey") != null ? Integer.parseInt(request.getParameter("PKey").toString()) : -1);
 			
 			String tempPath = "/Uploads/temp/";
