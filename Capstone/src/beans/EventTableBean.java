@@ -40,6 +40,39 @@ public class EventTableBean implements Serializable {
 		this.events = events;
 	}
 
+	private ArrayList<Event> sortEvents(ArrayList<Event> toSort, int order) throws ParseException{
+		ArrayList<Event> sorted = new ArrayList<Event>();
+		Event next = null;
+		Date nextDate = null;
+		
+		if(order > 0)
+			nextDate = new SimpleDateFormat("MM/dd/yyyy").parse("12/31/3000");
+		else if(order < 0)
+			nextDate = new SimpleDateFormat("MM/dd/yyyy").parse("12/31/1900");
+		
+		while(toSort.size() > 0) {
+			for(Event event : toSort) {
+				Date eventDate = new SimpleDateFormat("MM/dd/yyyy").parse(event.getStartDate());
+				if(order > 0) {
+					if(eventDate.before(nextDate)) {
+						next = event;
+						nextDate = eventDate;
+					}
+				}
+				else if(order < 0) {
+					if(eventDate.after(nextDate)) {
+						next = event;
+						nextDate = eventDate;
+					}
+				}
+			}
+			sorted.add(next);
+			toSort.remove(next);
+		}
+		
+		
+		return sorted;
+	}
 	/**
 	 * Returns the most current event in the Events table
 	 */
@@ -84,7 +117,7 @@ public class EventTableBean implements Serializable {
 				pastEvents.add(event);
 			}
 		}
-		return pastEvents;
+		return sortEvents(pastEvents, -1);
 	}
 	
 	public ArrayList<Event> getFutureEvents() throws ParseException {
@@ -96,7 +129,7 @@ public class EventTableBean implements Serializable {
 				futureEvents.add(event);
 			}
 		}
-		return futureEvents;
+		return sortEvents(futureEvents, 1);
 	}
 	
 	public void deleteEvent(Event event) {
