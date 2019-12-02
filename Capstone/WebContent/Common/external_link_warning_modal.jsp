@@ -1,7 +1,7 @@
 <%
 String url = (String)pageContext.getAttribute("Website");
 String vUrl;
-if (! url.substring(0, 3).equals("http")) // Ensure website has "http" included.
+if (url.indexOf("http") != 0) // Ensure website has "http" included.
 	vUrl = "http://" + url;
 else
 	vUrl = url;

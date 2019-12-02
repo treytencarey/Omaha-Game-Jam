@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import database.Database;
+import database.Mutator;
 
 /**
  * 
@@ -70,16 +71,10 @@ public class Event {
 		
 		//Get Mutators from database
 		List<Map<String, Object>> query2 = Database.executeQuery("SELECT * FROM Mutators WHERE EventPKey=" + String.valueOf(PKey));
-		if (query2.size() == 0)
-			throw new NullPointerException();
 		
 		//Initialize mutators list
 		for(Map<String, Object> mutator : query2) {
-		    mutators.add(new Mutator(
-		    				mutator.get("PKey").toString(),
-		    				mutator.get("Title").toString(),
-		    				mutator.get("Description").toString()
-		    			));
+		    mutators.add(new Mutator((int)mutator.get("PKey")));
 		}
 		isPublic = (int)event.get("IsPublic");
 		key = PKey;

@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.EventTableBean;
 import project.Main;
 import utils.Utils;
 
@@ -106,8 +107,17 @@ public class Game extends HttpServlet implements Serializable{
 				}
 			}
 			
-			Game g = new Game(Integer.parseInt(session.getAttribute("accountPKey").toString()), 1, params.get("title"), params.get("description"), mutators, systems, tools, true);
-			g.updateGame(params.get("PKey") != null ? Integer.parseInt(params.get("PKey").toString()) : -1);
+			Game g = null;
+			try {
+				g = new Game(Integer.parseInt(session.getAttribute("accountPKey").toString()), new EventTableBean().getCurrentEvent().getKey(), params.get("title"), params.get("description"), mutators, systems, tools, true);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				response.sendRedirect(session.getAttribute("curPage").toString());
+				return;
+			}
+			g.updateGame(request.getParameter("PKey") != null ? Integer.parseInt(request.getParameter("PKey").toString()) : -1);
 			
 			String tempPath = "/Uploads/temp/";
 			for (String file : Utils.getFilesInDir(tempPath))
@@ -192,6 +202,7 @@ public class Game extends HttpServlet implements Serializable{
 
 		this.setId(PKey);
 		this.setSubmitter(Integer.parseInt(game.get("SubmitterPKey").toString()));
+		this.setEvent(Integer.valueOf(game.get("EventPKey").toString()));
 		this.setTitle(game.get("Title").toString());
 		this.setDesc(game.get("Description").toString());
 		this.setIsPublic(game.get("IsPublic").toString().equals("1"));
@@ -236,6 +247,10 @@ public class Game extends HttpServlet implements Serializable{
 			List<Map<String, Object>> m = Database.executeQuery("SELECT MAX(PKey) AS PKey FROM Games");
 			if (m.size() > 0)
 				this.setId(Integer.parseInt(m.get(0).get("PKey").toString()));
+		}
+		else
+		{
+			this.setId(PKey);
 		}
 		
 		// Reset and add mutators

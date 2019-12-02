@@ -4781,6 +4781,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>PublishServlet</servlet-name>
+		<servlet-class>servlets.PublishEventNewsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PublishServlet</servlet-name>
+		<url-pattern>/Publish/News</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>NewsArchivePortalServlet</servlet-name>
 		<servlet-class>servlets.NewsArchivePortalServlet</servlet-class>
 	</servlet>
