@@ -28,7 +28,15 @@
 		if (canEdit.booleanValue()) {
 	%>
 	<%@include file="/Profile/editProfileModal.jsp"%>
-	<a class= "btn btn-primary" id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Create Profile</a>
+		<nav id="subNavBar" class="navbar navbar-expand navbar-light bg-light">
+			<div class=" navbar-collapse" id="navbarSupportedContent">
+		    	<ul class="navbar-nav ml-auto">
+		    		<li class="nav-item indvTabs">
+						<a id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Edit Profile</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
 	<%
 		}
 	%>
