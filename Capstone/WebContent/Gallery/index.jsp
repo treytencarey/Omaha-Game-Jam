@@ -42,6 +42,7 @@
 		final String MEDIA_PATH_FULL = request.getContextPath() + MEDIA_PATH;
 		ArrayList<Event> events = (ArrayList<Event>) request.getAttribute("events");
 		//get three latest events
+		try {
 		for (int i = events.size() - 1; i >= 0 && i != events.size() - 4; i--) {
 	%>
 	<div>
@@ -76,6 +77,7 @@
 	<hr class="my-2" style="background-color: #3b3b3b">
 	<%
 		}
+		} catch (Exception e) {}
 	%>
 </body>
 <script>
