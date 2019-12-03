@@ -68,9 +68,9 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
 	  			<% for(int i = 0; i < recentNews.length; i++) { %>
 	  				<div class="col-sm">
 						<div class="card">
-							<a href="<%=request.getContextPath()%>/News/view?id=<%=recentNews[i].getKey()%>"><img class="card-img-top zoom" src="<%= request.getContextPath() + "/Uploads/News/Photo/" + recentNews[i].getKey() + "_header.png" %>"/></a>
+							<a href="<%=request.getContextPath()%>/News/view?newsid=<%=recentNews[i].getKey()%>"><img class="card-img-top zoom" src="<%= request.getContextPath() + "/Uploads/News/Photo/" + recentNews[i].getKey() + "_header.png" %>"/></a>
 						  		<div class="card-body dark">
-						  			<a href="<%= request.getContextPath() %>/News/view?id=<%= recentNews[i].getKey() %>"><h5 class="card-title"><%=recentNews[i].getTitle() %></h5></a>
+						  			<a href="<%= request.getContextPath() %>/News/view?newsid=<%= recentNews[i].getKey() %>"><h5 class="card-title"><%=recentNews[i].getTitle() %></h5></a>
 						  			<p class="card-text"><%=recentNews[i].getHeader() %></p>
 						  		</div>
 					  	</div>
