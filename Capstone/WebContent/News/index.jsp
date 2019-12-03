@@ -53,28 +53,6 @@
 	</div>
 	<h4 class="page-text">Recent News</h4>
 	<br>
-	<%
-		if (currentEventKey > 0) {
-	%>
-	<div class="col-sm" style="text-align: center;">
-		<div class="card" style="width: 30rem;">
-			<a href="<%=request.getContextPath()%>/News/view?newsid=<%=currentEventArticle.getKey()%>"><img class="card-img-top zoom" src="<%=request.getContextPath() + "/Uploads/Events/HeaderImages/" + currentEventKey + "_header.png"%>" /></a>
-			<div class="card-body dark">
-				<small><%=currentEventArticle.getDate()%></small> <a href="<%=request.getContextPath()%>/News/view?newsid=<%=currentEventArticle.getKey()%>"><h5 class="card-title"><%=currentEventArticle.getTitle()%>
-						<%
-							if (currentEventArticle.getIsPublic() == 0) {
-						%>
-						[NOT PUBLIC]<%
-							}
-						%>
-					</h5></a>
-				<p class="card-text"><%=currentEventArticle.getHeader()%></p>
-			</div>
-		</div>
-	</div>
-	<%
-		}
-	%>
 	<div class="container" style="text-align: center;">
 		<div class="row justify-content-center">
 			<%

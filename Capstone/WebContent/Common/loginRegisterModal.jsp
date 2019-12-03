@@ -32,7 +32,7 @@
 					<p class="hint-text"><a href="#">Forgot Password?</a></p>
 				</form>
 			</div>
-			<div class="modal-footer"><a href="#registerModal" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Create account</a></div>
+			<div class="modal-footer"><a id="registerModalLink" href="#registerModal" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Create account</a></div>
 		</div>
 	</div>
 </div>
