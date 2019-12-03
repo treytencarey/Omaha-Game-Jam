@@ -177,6 +177,27 @@ public class NewsServlet extends HttpServlet {
 	}
 	
 	/**
+	 * Adds a news article to the database that references an event
+	 * @param title - Title of the news article
+	 * @param subtitle - Subtitle of the news article
+	 * @param body - Body of the news article (saved to a txt file)
+	 * @param isPublic - If the article is public (0 for not public, 1 for public)
+	 * @param eventKey - the primary key of the event being referenced
+	 * @throws IOException
+	 */
+	public static void addEventNewsArticle(String title, String subtitle, String body, int isPublic, int eventKey) throws IOException {
+		List<Map<String, Object>> query = null;
+		/**
+		 * Format the date to MM/dd/yyyy to display in database/page
+		 */
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		String currentDate = dtf.format(LocalDateTime.now());
+
+		Database.executeUpdate("INSERT OR REPLACE INTO Blogs(Date, Title, IsPublic, Header, EventID) VALUES (\'" + currentDate
+				+ "\', \'" + title + "\', \'" + isPublic + "\', \'" + subtitle + "\', \'" + eventKey + "\')");
+	}
+	
+	/**
 	 * Edits the news article based on given parameters
 	 * @param id - the id/PKey of the article in the database
 	 * @param title - the title of the news article
