@@ -3,7 +3,6 @@
 .modal-body {
     position: relative;
     overflow-y: auto;
-    max-height: 400px;
     padding: 15px;
 }
 </style>

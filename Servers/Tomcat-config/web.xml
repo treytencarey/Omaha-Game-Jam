@@ -4790,6 +4790,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>EventScheduleServlet</servlet-name>
+		<servlet-class>servlets.EventScheduleServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EventScheduleServlet</servlet-name>
+		<url-pattern>/EventScheduleServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>NewsArchivePortalServlet</servlet-name>
 		<servlet-class>servlets.NewsArchivePortalServlet</servlet-class>
 	</servlet>

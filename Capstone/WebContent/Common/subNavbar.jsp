@@ -17,7 +17,7 @@
 		        <a id="addEventBtn" href="#newEventModal" class="nav-link" data-toggle="modal">Add Event</a>
 		      </li>
 		      <li class="nav-item indvTabs">
-		        <a id="viewEventsBtn" href="#eventsDisplayModal" class="nav-link" data-toggle="modal">View Event</a>
+		        <a id="viewEventsBtn" href="#eventsDisplayModal" class="nav-link" data-toggle="modal">View Events</a>
 		      </li>
 	      	<%}%>
 	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/News/"))  { %>
