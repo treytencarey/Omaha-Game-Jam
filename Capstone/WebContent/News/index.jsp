@@ -58,9 +58,9 @@
 	%>
 	<div class="col-sm" style="text-align: center;">
 		<div class="card" style="width: 30rem;">
-			<a href="<%=request.getContextPath()%>/News/view?id=<%=currentEventArticle.getKey()%>"><img class="card-img-top zoom" src="<%=request.getContextPath() + "/Uploads/Events/HeaderImages/" + currentEventKey + "_header.png"%>" /></a>
+			<a href="<%=request.getContextPath()%>/News/view?newsid=<%=currentEventArticle.getKey()%>"><img class="card-img-top zoom" src="<%=request.getContextPath() + "/Uploads/Events/HeaderImages/" + currentEventKey + "_header.png"%>" /></a>
 			<div class="card-body dark">
-				<small><%=currentEventArticle.getDate()%></small> <a href="<%=request.getContextPath()%>/News/view?id=<%=currentEventArticle.getKey()%>"><h5 class="card-title"><%=currentEventArticle.getTitle()%>
+				<small><%=currentEventArticle.getDate()%></small> <a href="<%=request.getContextPath()%>/News/view?newsid=<%=currentEventArticle.getKey()%>"><h5 class="card-title"><%=currentEventArticle.getTitle()%>
 						<%
 							if (currentEventArticle.getIsPublic() == 0) {
 						%>
@@ -82,9 +82,9 @@
 			%>
 			<div class="col-sm">
 				<div class="card">
-					<a href="<%=request.getContextPath()%>/News/view?id=<%=recentNews[i].getKey()%>"><img class="card-img-top zoom" src="<%=request.getContextPath() + "/Uploads/News/Photo/" + recentNews[i].getKey() + "_header.png"%>" /></a>
+					<a href="<%=request.getContextPath()%>/News/view?newsid=<%=recentNews[i].getKey()%>"><img class="card-img-top zoom" src="<%=request.getContextPath() + "/Uploads/News/Photo/" + recentNews[i].getKey() + "_header.png"%>" /></a>
 					<div class="card-body dark">
-						<small><%=recentNews[i].getDate()%></small> <a href="<%=request.getContextPath()%>/News/view?id=<%=recentNews[i].getKey()%>"><h5 class="card-title"><%=recentNews[i].getTitle()%>
+						<small><%=recentNews[i].getDate()%></small> <a href="<%=request.getContextPath()%>/News/view?newsid=<%=recentNews[i].getKey()%>"><h5 class="card-title"><%=recentNews[i].getTitle()%>
 								<%
 									if (recentNews[i].getIsPublic() == 0) {
 								%>

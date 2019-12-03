@@ -52,7 +52,7 @@ public class NewsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String id = request.getParameter("id");
+		String id = request.getParameter("newsid");
 		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Blogs WHERE PKey=" + id);
 		News news;
 
@@ -126,7 +126,7 @@ public class NewsServlet extends HttpServlet {
 		 * Add the PKey to the id parameter in url so that user gets redirected to the
 		 * page they just created/edited
 		 */
-		redirectLink = redirectLink + "/view?id=" + pKey;
+		redirectLink = redirectLink + "/view?newsid=" + pKey;
 		response.sendRedirect(redirectLink);
 	}
 
