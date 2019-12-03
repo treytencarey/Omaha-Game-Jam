@@ -57,3 +57,22 @@
 .rainbowBorder:after {
 	filter: blur(50px);
 }
+
+.scrolling-wrapper {
+	overflow-x: scroll;
+  	overflow-y: hidden;
+  	white-space: nowrap;
+  	width: fit-content;
+  	max-width: 953px;
+}
+
+.scrolling-wrapper > .card {
+	display: inline-block;
+	word-break: break-word;
+	white-space: normal;
+	margin: 0px 10px !important;
+}
+
+#past-events > button {
+	outline: none;
+}
