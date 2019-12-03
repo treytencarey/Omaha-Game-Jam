@@ -53,7 +53,7 @@
 	<div class="event-photos-container">
 		<div class="row justify-content-center">
 			<%
-				FolderReader fr = new FolderReader(MEDIA_PATH + "/" + events.get(i).getKey());
+			FolderReader fr = new FolderReader(MEDIA_PATH + "/" + events.get(i).getKey());
 						String[] galleryPhotos = fr.getFileList();
 						if (galleryPhotos != null) {
 							for (int j = 0; j < galleryPhotos.length; j++) {

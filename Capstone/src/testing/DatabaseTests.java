@@ -32,20 +32,18 @@ public class DatabaseTests {
 		driver.manage().window().maximize();
 	}
 	
+	/*
 	@Test
-<<<<<<< HEAD
 	public void test1_checkDatabaseInsertAndDelete() {
 		TestDatabase.executeUpdate("INSERT INTO Blogs(Date, Title, IsPublic, Header) VALUES (\'11/11/11\', \'Test\', \'0\', \'Test\')");
 		String test = TestDatabase.executeQuery("SELECT PKey FROM Blogs WHERE Date=\'11/11/11\' AND Title=\'Test\'").get(0).get("PKey").toString();
 		assertEquals(true, test != null);
-=======
 	public void test1_checkDatabaseNotNull() throws ClassNotFoundException, SQLException {
 		System.out.println(executeQuery("SELECT * From Blogs"));
->>>>>>> df87ab8e168b6452b265b37964c1fad9ca72e63b
 	}
 	
 	@Test
 	public void test2_checkLoginInsertAndLogin() {
 		
-	}
+	} */
 }
