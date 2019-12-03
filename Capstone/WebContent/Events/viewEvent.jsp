@@ -109,7 +109,7 @@
 		<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
-				<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" required><%=display.getDescription()%></textarea>
+				<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" ><%=display.getDescription()%></textarea>
 				<div class="invalid-feedback">Please enter a valid description</div>
 				<div class="valid-feedback">Looks good!</div>
 			</div>

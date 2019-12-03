@@ -49,7 +49,7 @@ ArrayList<Event> pastEvents = eventTable.getPastEvents();
 									<form action="<%= request.getContextPath() %>/ViewEventServlet" method = "post">
 										<button type="submit" class="option" name="event-key" value="<%= event.getKey() %>" data-toggle="modal">Edit</button>
 									</form>
-									<form action="<%= request.getContextPath() %>/EventScheduleServlet" method = "post">
+									<form action="<%= request.getContextPath() %>/EventScheduleServlet" method = "get">
 										<button type="submit" class="option" name="event-key" value="<%= event.getKey() %>" data-toggle="modal">Schedule</button>
 									</form>
 							</td>
