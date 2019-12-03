@@ -12,6 +12,7 @@ import beans.ContributorTableBean;
 import beans.GameBean;
 import beans.MutatorTableBean;
 import database.Contributor;
+import database.Game;
 
 /**
  * Controller that verifies game exists, stores necessary DB data in the session, and determines whether the logged in user can edit the game.
@@ -41,11 +42,9 @@ public class GameViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String id = request.getParameter("id");
-		GameBean g; // Bean to store all game info in; to be passed to the JSP
+		Game g; // Bean to store all game info in; to be passed to the JSP
 		MutatorTableBean mt;
 		ContributorTableBean ct;
-		HttpSession session; // User's session, used to retrieve AccountPKey
-		Object apk; // The user's AccountPKey
 		Boolean canEdit; // Attribute send to JSP that determines if logged in user can edit the current Game (logged in? registered for current event? submittor? contributor?)
 		
 		/**
@@ -53,7 +52,7 @@ public class GameViewServlet extends HttpServlet {
 		 */
 		try
 		{
-			g = new GameBean(id);
+			g = new Game(Integer.parseInt(id));
 		}
 			catch (NullPointerException npe)
 		{
@@ -75,10 +74,14 @@ public class GameViewServlet extends HttpServlet {
 		/**
 		 * Determine if logged in user can edit
 		 */
-		canEdit = new Boolean(false);
-		session = request.getSession();  
-		
-		apk = session.getAttribute("accountPKey");
+		canEdit = CanEdit(g, ct, request.getSession());
+		request.setAttribute("CanEdit", canEdit);
+        request.getRequestDispatcher(SUCCESS_JSP).forward(request, response); // If all successful, forward to view_game.jsp
+	}
+	
+	public static boolean CanEdit(Game g, ContributorTableBean ct, HttpSession session) {
+		boolean canEdit = false;
+		String apk = session.getAttribute("accountPKey") != null ? session.getAttribute("accountPKey").toString() : null;
 		if (apk != null)
 		{
 			String s = apk.toString();
@@ -94,8 +97,7 @@ public class GameViewServlet extends HttpServlet {
 				}
 			}
 		}
-		request.setAttribute("CanEdit", canEdit);
-        request.getRequestDispatcher(SUCCESS_JSP).forward(request, response); // If all successful, forward to view_game.jsp
+		return canEdit;
 	}
 
 	/**

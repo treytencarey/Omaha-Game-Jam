@@ -32,7 +32,7 @@
 		}
 	</style>
 	
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="<%= request.getContextPath() %>/js/events.js"></script>
@@ -176,35 +176,52 @@
 	</div>
 	<% }%>
 	
+	<script>
+		function goLeft() {
+			var leftPos = $('.scrolling-wrapper').scrollLeft();
+			$(".scrolling-wrapper").animate({scrollLeft: leftPos - 313}, 500);
+		}
+		function goLeftOpacity() {
+			$("#goLeftIcon").css('opacity', '0.6');
+		}
+		function goLeftOpacityOff() {
+			$("#goLeftIcon").css('opacity', '1.0');
+		}
+		function goRight() {
+			var leftPos = $('.scrolling-wrapper').scrollLeft();
+			$(".scrolling-wrapper").animate({scrollLeft: leftPos + 313}, 500);
+		}
+		function goRightOpacity() {
+			$("#goRightIcon").css('opacity', '0.6');
+		}
+		function goRightOpacityOff() {
+			$("#goRightIcon").css('opacity', '1.0');
+		}
+	</script>
+	
 	<!-- Past Events -->
 	<div class="container eventContainer" style="max-width: 1400px;">
 		<div id="past-events">
 			<h1 style="width: fit-content; margin: auto;">Past Events</h1>
-			<div class="container">
+			<button onclick="goLeft()" onmousedown="goLeftOpacity()" onmouseup="goLeftOpacityOff()" style="position: relative; top: 209.5px; float: left;"><i id="goLeftIcon" class="fas fa-chevron-circle-left fa-7x"></i></button>
+			<button onclick="goRight()" onmousedown="goRightOpacity()" onmouseup="goRightOpacityOff()" style="position: relative; top: 209.5px; float: right;"><i id="goRightIcon" class="fas fa-chevron-circle-right fa-7x"></i></button>
+			<div class="container scrolling-wrapper">				
 				<%
-				int eventCounter = 0;
 				for(Event event : past){
-					if (eventCounter%3==0) {
 				%>
-					<div class="row mt-5 justify-content-center">
-					<% } %>
-						<div class="card card-custom col-sm-3 zoom" style="margin: auto; height: 500px; min-width: 300px;">
-							<img src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= event.getKey() %>_header.png" style="max-width: 100%; max-height: 100%;">
-							<div class="card-body dark">
-						  		<h5 class="card-title"><%= event.getTitle() %></h5>
-						  		<h6 class="card-subtitle mb-2 text-muted"><%= event.getTheme() %></h6>
-						  		<p class="card-text"><%= event.getDescription() %></p>
-						  		<p class="card-text" style="position: absolute; bottom: 20px;"><%= event.getStartDate() %></p>
-						  		
-						  	</div>
-						  	<div class="overlay">
-						  		<button onclick="window.location.href='<%= request.getContextPath()+"/Events/pastEvent.jsp?event="+event.getKey() %>'" class="btn btn-primary">Check it out</button>
-						  	</div>
+					<div class="card dark" style="margin: auto; height: 500px; width: 18rem;">
+						<img src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= event.getKey() %>_header.png" class="card-img-top" alt="Game Icon" style="max-width: 100%; max-height: 100%;">
+						<div class="card-body dark">
+							<h5 class="card-title"><%= event.getTitle() %></h5>
+							<h6 class="card-subtitle mb-2 text-muted"><%= event.getTheme() %></h6>
+							<p class="card-text"><%= event.getDescription() %></p>
+							<p class="card-text" style="position: absolute; bottom: 20px;"><%= event.getStartDate() %></p>
 						</div>
-					<% if (eventCounter%3==2) { %>
+						<div class="overlay">
+					  		<button onclick="window.location.href='<%= request.getContextPath()+"/Events/pastEvent.jsp?event="+event.getKey() %>'" class="btn btn-primary">Check it out</button>
+					  	</div>
 					</div>
-					<% } eventCounter++;
-					}%>
+				<% } %>
 			</div>
 		</div>
 	</div>

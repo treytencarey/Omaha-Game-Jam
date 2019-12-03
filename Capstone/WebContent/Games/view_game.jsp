@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="utils.FolderReader, database.Game, database.Profile, beans.ContributorTableBean, database.Contributor, beans.RoleTableBean, beans.Event, database.Role, database.Mutator, database.Platform, database.Tool, beans.MutatorTableBean" %>
+	import="utils.FolderReader, servlets.GameViewServlet, database.Game, database.Profile, beans.ContributorTableBean, database.Contributor, beans.RoleTableBean, beans.Event, database.Role, database.Mutator, database.Platform, database.Tool, beans.MutatorTableBean" %>
 
 <%
 Game g = new Game(Integer.parseInt(request.getParameter("id")));
-MutatorTableBean mt = ((MutatorTableBean)request.getAttribute("MutatorTable"));
-ContributorTableBean ct = ((ContributorTableBean)request.getAttribute("ContributorTable"));
+MutatorTableBean mt = new MutatorTableBean(request.getParameter("id"));
+ContributorTableBean ct =  new ContributorTableBean(); ct.fillByGame(request.getParameter("id"));
 Event e = new Event(g.getEvent());
-boolean canEdit = ((Boolean)request.getAttribute("CanEdit")).booleanValue();
+boolean canEdit = GameViewServlet.CanEdit(g, ct, session);
 final String MEDIA_PATH = "/Uploads/Games";
 final String MEDIA_PATH_FULL = request.getContextPath() + MEDIA_PATH;
 
