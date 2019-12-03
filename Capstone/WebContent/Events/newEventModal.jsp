@@ -8,7 +8,7 @@
 }
 </style>
 <div id="newEventModal" class="modal fade">
-	<div class="modal-dialog modal-xl modal-login newMods">
+	<div class="modal-dialog modal-md modal-login newMods">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title">Create New Event</h4>
@@ -44,44 +44,60 @@
 					
 					<div class="input-group">
 						<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-						<input type="file" class="custom-file-input" name="eventImage" id="eventImage" required/>
-						<label class="form-control modalFields custom-file-label" for="eventImage">Choose Image</label>
+						<input type="file" style="width: unset; opacity: 1; margin-left: 10px;" class="custom-file-input" name="eventImage" id="eventImage" required/>
 						<div class="invalid-feedback">Please upload a valid image</div>
 						<div class="valid-feedback">Looks good!</div>
 					</div>
 					
-				  	<div class="input-group multiplValueFields items" style="display: inline-block;">
-
-						<button type="button" class="add_field_button">Add Mutator</button>
-						<!-- <input type="button" value="Add another mutator" class="add-mutator" /> -->
+				  	<div class="input-group items" style="display: inline-block;">
+				  		<div class="row">
+				  			<div class="col-sm-1">
+				  				<span style="margin-left: 5px;" class="input-group-addon icons"><i class="fa fa-flask"></i></span>
+				  			</div>
+				  			<div class="col-sm-11">
+				  				<div class="mutatorFields">
 						
-						
-					    <script>
-					    $(document).ready(function() {
-					    	var max_fields = 20; //maximum input boxes allowed
-					    	var wrapper = $(".items"); //Fields wrapper
-					    	var add_button = $(".add_field_button"); //Add button ID
-					    	 
-					    	var x = 1; //initlal text box count
-					    	$(add_button).click(function(e){ //on add input button click
-						    	e.preventDefault();
-						    	if(x < max_fields){ //max input box allowed
-							    	x++; //text box increment
-							    	$(wrapper).append(
-								    	'<div class="form-group">' +
-								    	"<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' />" +
-										"<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Mutator Description' />" +
-								    	'<a href="#" class="remove_field"><i class="fa fa-times"></a></div>'
-							    	); //add input box
-						    	}
-					    	});
-					    	 
-					    	$(wrapper).on("click",".remove_field", function(e){ //user click on remove field
-					    	e.preventDefault(); $(this).parent('div').remove(); x--;
-					    	})
-					    	});
-					    
-					    </script>
+							    </div>
+								<button style="width: 100%; margin: auto;" type="button" class="add_field_button">Add Mutator</button>
+								<!-- <input type="button" value="Add another mutator" class="add-mutator" /> -->
+								
+								
+							    <script>
+							    $(document).ready(function() {
+							    	var max_fields = 20; //maximum input boxes allowed
+							    	var wrapper = $(".mutatorFields"); //Fields wrapper
+							    	var add_button = $(".add_field_button"); //Add button ID
+							    	 
+							    	var x = 1; //initlal text box count
+							    	$(add_button).click(function(e){ //on add input button click
+								    	e.preventDefault();
+								    	if(x < max_fields){ //max input box allowed
+									    	x++; //text box increment
+									    	$(wrapper).append(
+										    	'<div class="form-group">' +
+										    		'<div class="row">' +
+										    			'<div class="col-sm-6" style="padding-bottom: 0px;">' +
+										    				"<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' />" +
+									    				'</div>' +
+									    				'<div class="col-sm-6" style="padding-bottom: 0px;">' +
+															"<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Description' />" +
+														'</div>' +
+													'</div>' +
+										    		'<a href="#" class="remove_field" style="color: red; margin-left: 10px;">Remove Mutator</a>' +
+									    		'</div>'
+									    	); //add input box
+								    	}
+							    	});
+							    	 
+							    	$(wrapper).on("click",".remove_field", function(e){ //user click on remove field
+							    		e.preventDefault(); $(this).parent('div').remove(); x--;
+							    		console.log("hi");
+							    	})
+							    	});
+							    
+							    </script>
+				  			</div>
+				  		</div>
 					</div>
 					
 			  		<div class="row">
@@ -137,17 +153,6 @@ $('.modal').on('show.bs.modal', function () {
            'max-height':'100%'
     });
 });
-
-var bodyField;
-loadEditor();
-
-function loadEditor() { 
-	bodyField = new nicEditor({fullPanel: true}).panelInstance("eventDescription");
-	$("eventDescription").width("100%");
-	$('.nicEdit-panelContain').parent().css({width:'100%', padding:"0"});
-    $('.nicEdit-panelContain').parent().next().css({width:'100%', padding:"5px"});
-    $('.nicEdit-main').css({width:'100%', padding:"0", minHeight:"80px"});
-}
 
 function datecheck(){
 	var sd = document.getElementById('startDate').value;

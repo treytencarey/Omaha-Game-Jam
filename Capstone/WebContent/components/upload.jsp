@@ -9,7 +9,7 @@
 					<i class="fa fa-cloud-upload"></i> Custom Upload
 				</label>
 		<% } %>
-				<input id="<%= session.getAttribute("uploadInputID") == null ? "file" + String.valueOf(PKey) : session.getAttribute("uploadInputID") %>" name="file<%= PKey %>" type="file" <%= session.getAttribute("uploadInputAttributes") != null ? session.getAttribute("uploadInputAttributes") : "" %> <% if (session.getAttribute("uploadInputOnly") == null) { %> onchange="document.getElementById('uploadSubmit').click();" <% } %>/>
+				<input style="width: unset; opacity: 1; margin-left: 10px;" id="<%= session.getAttribute("uploadInputID") == null ? "file" + String.valueOf(PKey) : session.getAttribute("uploadInputID") %>" name="file<%= PKey %>" type="file" <%= session.getAttribute("uploadInputAttributes") != null ? session.getAttribute("uploadInputAttributes") : "" %> <% if (session.getAttribute("uploadInputOnly") == null) { %> onchange="document.getElementById('uploadSubmit').click();" <% } %>/>
 		<% if (session.getAttribute("uploadInputOnly") == null) { %>
 				<button id="uploadSubmit"></button>
 			<% if (session.getAttribute("uploadIncludeForm") != null) { %>

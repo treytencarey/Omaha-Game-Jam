@@ -38,7 +38,6 @@ if (request.getParameter("id") != null)
                           	<% session.setAttribute("uploadInputID", "validatedCustomFile1"); %>
                           	<% session.setAttribute("uploadInputAttributes", "class='custom-file-input' " + (game != null ? "" : "required")); %>
                             <%@include file="../components/upload.jsp" %>
-							<label class="form-control modalFields custom-file-label" for="validatedCustomFile1">Choose Icon...</label>
 						    <div class="invalid-feedback">Please upload a valid icon</div>
 					    </div>
 				  	</div>
@@ -75,7 +74,6 @@ if (request.getParameter("id") != null)
                           	<% session.setAttribute("uploadInputID", "validatedCustomFile2"); %>
                           	<% session.setAttribute("uploadInputAttributes", "class='custom-file-input' multiple " + (game != null ? "" : "required")); %>
                             <%@include file="../components/upload.jsp" %>
-						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile2">Choose Screenshot(s)...</label>
 						    <div class="invalid-feedback">Please upload a valid screenshot(s)</div>
 					    </div>
 				  	</div>
@@ -119,6 +117,56 @@ if (request.getParameter("id") != null)
 								<!-- <input type="text" class="form-control creditField" name="credit" placeholder="Name"> -->
 							</div>
 						</div>
+					</div>
+					<div class="input-group items" style="display: inline-block;">
+				  		<div class="row">
+				  			<div class="col-sm-1">
+				  				<span style="margin-left: 5px;" class="input-group-addon icons"><i class="fa fa-flask"></i></span>
+				  			</div>
+				  			<div class="col-sm-11">
+				  				<div class="mutatorFields">
+						
+							    </div>
+								<button style="width: 100%; margin: auto;" type="button" class="add_field_button">Add Mutator</button>
+								<!-- <input type="button" value="Add another mutator" class="add-mutator" /> -->
+								
+								
+							    <script>
+							    $(document).ready(function() {
+							    	var max_fields = 20; //maximum input boxes allowed
+							    	var wrapper = $(".mutatorFields"); //Fields wrapper
+							    	var add_button = $(".add_field_button"); //Add button ID
+							    	 
+							    	var x = 1; //initlal text box count
+							    	$(add_button).click(function(e){ //on add input button click
+								    	e.preventDefault();
+								    	if(x < max_fields){ //max input box allowed
+									    	x++; //text box increment
+									    	$(wrapper).append(
+										    	'<div class="form-group">' +
+										    		'<div class="row">' +
+										    			'<div class="col-sm-6" style="padding-bottom: 0px;">' +
+										    				"<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' />" +
+									    				'</div>' +
+									    				'<div class="col-sm-6" style="padding-bottom: 0px;">' +
+															"<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Description' />" +
+														'</div>' +
+													'</div>' +
+										    		'<a href="#" class="remove_field" style="color: red; margin-left: 10px;">Remove Mutator</a>' +
+									    		'</div>'
+									    	); //add input box
+								    	}
+							    	});
+							    	 
+							    	$(wrapper).on("click",".remove_field", function(e){ //user click on remove field
+							    		e.preventDefault(); $(this).parent('div').remove(); x--;
+							    		console.log("hi");
+							    	})
+							    	});
+							    
+							    </script>
+				  			</div>
+				  		</div>
 					</div>
 
 					<div class="form-group">
