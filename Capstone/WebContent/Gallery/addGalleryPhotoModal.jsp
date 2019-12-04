@@ -24,7 +24,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<select class="browser-default custom-select" name="galleryEvent" id="galleryEvent">
+						<select class="browser-default custom-select" name="galleryEvent">
 							<%
 								for (int i = listEvents.size() - 1; i >= 0; i--) {
 									if (i == listEvents.size() - 1) {

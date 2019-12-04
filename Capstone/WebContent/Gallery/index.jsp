@@ -48,7 +48,7 @@
 		ArrayList<Event> events = (ArrayList<Event>) request.getAttribute("events");
 		//get three latest events
 		try {
-			for (int i = 0; i < 3 && i != events.size() - 3; i++) {
+			for (int i = 0; i < events.size(); i++) {
 	%>
 	<div>
 		<img class="main-event-img rounded" src="<%=request.getContextPath()%>/Uploads/Events/HeaderImages/<%= events.get(i).getKey() %>_header.png"/>

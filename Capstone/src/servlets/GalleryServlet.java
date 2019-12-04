@@ -55,8 +55,11 @@ public class GalleryServlet extends HttpServlet {
 			ArrayList<Event> pastEvents = eventTable.getPastEvents();
 			
 			events.add(eventTable.getCurrentEvent());
-			for(int i = 0; i < pastEvents.size(); i++)
+			for(int i = 0; i < pastEvents.size(); i++) {
 				events.add(pastEvents.get(i));
+				if(events.size() == 3)
+					break;
+			}
 			
 			if (id == null) {
 				request.setAttribute("events", events);
