@@ -121,7 +121,7 @@
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-9">
-					<button type="button" id="rsvp-button" class="btn btn-info">RSVP</button>
+					<%@include file="/components/RSVPButton.jsp" %>
 					<button type="button" id="event-schedule-button" class="btn btn-warning">Event Schedule</button>
 					<a href=""><i class="fab fa-discord fa-3x" style="color: #7289da;"></i></a>
 				</div>
@@ -225,5 +225,7 @@
 			</div>
 		</div>
 	</div>
+	
+	<div id="toastDiv"></div>
 </body>
 </html>

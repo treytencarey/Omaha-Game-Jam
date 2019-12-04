@@ -106,6 +106,7 @@ public class Event {
 		this.setDescription(queryRow.get("Description").toString());
 		this.setStartDate(queryRow.get("StartDate").toString());
 		this.setEndDate(queryRow.get("EndDate").toString());
+		System.out.println("NEW EVENT DATES: " + this.getStartDate() + ", " + this.getEndDate());
 	}
 	
 	/**

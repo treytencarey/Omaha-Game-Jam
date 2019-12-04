@@ -9,6 +9,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +20,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import beans.Event;
+import beans.EventTableBean;
 import database.Mutator;
 import database.Database;
 import project.Main;
@@ -52,6 +56,65 @@ public class EventPortalServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		boolean RSVPing = request.getParameter("RSVPButton") != null;
+		if (RSVPing)
+		{
+			HttpSession session = request.getSession(false);
+			
+			if (session.getAttribute("accountPKey") == null)
+			{
+				response.setStatus(400);
+				response.getWriter().print("You must log in or create an account first!");
+				response.getWriter().flush();
+				return;
+			}
+			
+			String apk = session.getAttribute("accountPKey").toString();
+			EventTableBean et = new EventTableBean();
+			Event ec;
+			try {
+				ec = et.getCurrentEvent();
+			} catch (ParseException e) {
+				response.setStatus(400);
+				response.getWriter().print("Error communicating with DB.");
+				response.getWriter().flush();
+				return;
+			}
+			List<Map<String, Object>> results = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE AccountPKey=" + apk + " AND EventPKey=" + ec.getKey());
+			if (results.size() == 0) // Error contacting DB?
+				throw new NullPointerException();
+			
+			String success = "";
+			
+			String count = results.get(0).get("COUNT(*)").toString();
+			if (count.equals("0"))
+			{
+				//INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (1, 1);
+				String query = String.format("INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (%s, %s);", apk, ec.getKey());
+				System.out.println(query);
+				if (Database.executeUpdate(query).length() == 0)
+				{
+					success = "You're now registered for " + ec.getTitle();
+				}
+				else
+				{
+					response.setStatus(400);
+					response.getWriter().print("Error communicating with DB.");
+					response.getWriter().flush();
+					return;
+				}
+			}
+			else
+			{
+				success = "You're already registered!";
+			}
+			response.setStatus(200);
+			response.getWriter().print(success);
+			response.getWriter().flush();
+			
+			return;
+		}		
 		
 		String path;
 		
