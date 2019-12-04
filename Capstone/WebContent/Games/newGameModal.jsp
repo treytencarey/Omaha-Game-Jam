@@ -32,6 +32,13 @@ if (request.getParameter("id") != null)
 					</div>
 					<div class="form-group">
 						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-link"></i></span>
+							<input type="url" class="form-control modalFields" name="title" placeholder="Link" value="<%= game != null ? game.getLink() : "" %>" required>
+							<div class="invalid-feedback">Please enter a valid URL</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
 						    <% session.setAttribute("uploadFilePath", "Uploads/temp/gamesub_0" + session.getAttribute("accountPKey")); %>
                           	<% session.setAttribute("uploadInputOnly", true); %>
@@ -109,33 +116,22 @@ if (request.getParameter("id") != null)
 					    	</select>
 				    	</div>
 				  	</div>
-				  	<div class="form-group">
-						<div class="input-group">
-							<span class="input-group-addon icons"><i class="fa fa-wrench"></i></span>
-					      	<legend class="col-form-label col-sm-2 pt-0 checkLabel">Credits</legend>
-					      	<div class="col-sm-8">
-								<!-- <input type="text" class="form-control creditField" name="credit" placeholder="Name"> -->
-							</div>
-						</div>
-					</div>
 					<div class="input-group items" style="display: inline-block;">
 				  		<div class="row">
 				  			<div class="col-sm-1">
-				  				<span style="margin-left: 5px;" class="input-group-addon icons"><i class="fa fa-flask"></i></span>
+				  				<span style="margin-left: 5px;" class="input-group-addon icons"><i class="fa fa-user"></i></span>
 				  			</div>
 				  			<div class="col-sm-11">
-				  				<div class="mutatorFields">
+				  				<div class="authorFields">
 						
 							    </div>
-								<button style="width: 100%; margin: auto;" type="button" class="add_field_button">Add Mutator</button>
-								<!-- <input type="button" value="Add another mutator" class="add-mutator" /> -->
-								
+								<button style="width: 100%; margin: auto; margin-top: 8px; margin-bottom: 30px;" type="button" class="add_author_button">Add Author</button>								
 								
 							    <script>
 							    $(document).ready(function() {
 							    	var max_fields = 20; //maximum input boxes allowed
-							    	var wrapper = $(".mutatorFields"); //Fields wrapper
-							    	var add_button = $(".add_field_button"); //Add button ID
+							    	var wrapper = $(".authorFields"); //Fields wrapper
+							    	var add_button = $(".add_author_button"); //Add button ID
 							    	 
 							    	var x = 1; //initlal text box count
 							    	$(add_button).click(function(e){ //on add input button click
@@ -146,13 +142,13 @@ if (request.getParameter("id") != null)
 										    	'<div class="form-group">' +
 										    		'<div class="row">' +
 										    			'<div class="col-sm-6" style="padding-bottom: 0px;">' +
-										    				"<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' />" +
+										    				"<input type='text' class='form-control modalFields' name='author' placeholder='Author' required/>" +
 									    				'</div>' +
 									    				'<div class="col-sm-6" style="padding-bottom: 0px;">' +
-															"<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Description' />" +
+															"<input type='text' class='form-control modalFields' name='authorRole' placeholder='Role' required/>" +
 														'</div>' +
 													'</div>' +
-										    		'<a href="#" class="remove_field" style="color: red; margin-left: 10px;">Remove Mutator</a>' +
+										    		'<a href="#" class="remove_field" style="color: red; margin-left: 10px;">Remove Author</a>' +
 									    		'</div>'
 									    	); //add input box
 								    	}
@@ -160,7 +156,6 @@ if (request.getParameter("id") != null)
 							    	 
 							    	$(wrapper).on("click",".remove_field", function(e){ //user click on remove field
 							    		e.preventDefault(); $(this).parent('div').remove(); x--;
-							    		console.log("hi");
 							    	})
 							    	});
 							    
