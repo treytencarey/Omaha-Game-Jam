@@ -4781,11 +4781,11 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>PublishServlet</servlet-name>
+		<servlet-name>PublishEventNewsServlet</servlet-name>
 		<servlet-class>servlets.PublishEventNewsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>PublishServlet</servlet-name>
+		<servlet-name>PublishEventNewsServlet</servlet-name>
 		<url-pattern>/Publish/News</url-pattern>
 	</servlet-mapping>
 	

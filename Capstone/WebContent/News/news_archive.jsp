@@ -64,7 +64,7 @@
 			News[] newsPosts = (News[]) request.getAttribute("newsPosts");
 			for (int i = newsPosts.length - 1; i >= 0; i--) {
 		%>
-		<a href="<%=request.getContextPath()%>/News/view?id=<%=newsPosts[i].getKey()%>">
+		<a href="<%=request.getContextPath()%>/News/view?newsid=<%=newsPosts[i].getKey()%>">
 			<li class="media archive-item"><img class="mr-3 archive-img-container" src="<%=request.getContextPath() + "/Uploads/News/Photo/" + newsPosts[i].getKey() + "_header.png"%>">
 				<div class="media-body align-self-center">
 					<h6 class="mt-0 mb-1"><%=newsPosts[i].getTitle()%></h6>

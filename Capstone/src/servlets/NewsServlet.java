@@ -23,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.apache.commons.io.FileUtils;
+
 import beans.News;
 import database.Database;
 import project.Main;
@@ -52,7 +54,7 @@ public class NewsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String id = request.getParameter("id");
+		String id = request.getParameter("newsid");
 		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Blogs WHERE PKey=" + id);
 		News news;
 
@@ -126,7 +128,7 @@ public class NewsServlet extends HttpServlet {
 		 * Add the PKey to the id parameter in url so that user gets redirected to the
 		 * page they just created/edited
 		 */
-		redirectLink = redirectLink + "/view?id=" + pKey;
+		redirectLink = redirectLink + "/view?newsid=" + pKey;
 		response.sendRedirect(redirectLink);
 	}
 
@@ -171,6 +173,40 @@ public class NewsServlet extends HttpServlet {
 			try (InputStream is = headerImg.getInputStream()) {
 				Files.copy(is, imgPath, REPLACE_EXISTING);
 			}
+		}
+		
+		return pKey;
+	}
+	
+	/**
+	 * Adds a news article to the database
+	 * @param title - Title of the news article
+	 * @param subtitle - Subtitle of the news article
+	 * @param body - Body of the news article (saved to a txt file)
+	 * @param isPublic - If the article is public (0 for not public, 1 for public)
+	 * @param eventPKey - The PKey of the event to copy header photo from
+	 * @return the PKey of the created news article database entry
+	 * @throws IOException
+	 */
+	public static String addEventNewsArticle(String title, String subtitle, String body, int isPublic, int eventPKey) throws IOException {
+		String pKey;
+		
+		//check if the event already has an article to prevent duplicates
+		List<Map<String, Object>> query = Database.executeQuery("SELECT PKey FROM Blogs WHERE Title=\'" + title + "\' AND Header=\'" + subtitle + "\'");
+		if(!query.isEmpty()) {
+			pKey = query.get(0).get("PKey").toString();
+			return pKey;
+		}
+		
+		pKey = addNewsArticle(title, subtitle, body, isPublic, (Part)null);
+		File headerSrc = new File(getServerPath("/Uploads/Events/HeaderImages/HeaderImages") + "/" + eventPKey + "_header.png");
+		File newsDest = new File(getServerPath("/Uploads/News/Photo/Photo") + "/" + pKey + "_header.png");
+
+		try {
+			FileUtils.copyFile(headerSrc, newsDest);
+		} catch(IOException e) {
+			e.printStackTrace();
+			return pKey;
 		}
 		
 		return pKey;

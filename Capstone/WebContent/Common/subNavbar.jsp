@@ -20,11 +20,6 @@
 		        <a id="viewEventsBtn" href="#eventsDisplayModal" class="nav-link" data-toggle="modal">View Events</a>
 		      </li>
 	      	<%}%>
-	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/News/"))  { %>
-		      <li class="nav-item indvTabs">
-		        <a id="add-article-btn" href="#newNewsArticleModal" class="nav-link" data-toggle="modal">Add Article</a>
-		      </li>
-	      	<%}%>
 	    <%}%>
 				
     		<% if (request.getRequestURI().equals(request.getContextPath()+"/profile") && request.getParameter("id").equals(session.getAttribute("accountPKey")))  { %>

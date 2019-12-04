@@ -9,16 +9,14 @@
 				<form class="was-validated" action="<%= request.getContextPath() %>/NewsServlet" method = "post" enctype="multipart/form-data">
 					<div class="form-group">
 						<div class="input-group">
-							<span class="input-group-addon icons"><i class="fas fa-newspaper"></i></span>
 							<input type="text" class="form-control modalFields" name="newsTitle" placeholder="Title" required>
 							<div class="invalid-feedback">Please enter a valid title.</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="input-group">
-							<span class="input-group-addon icons"><i class="fas fa-heading"></i></span>
-							<input type="text" class="form-control modalFields" name="newsHeader" placeholder="Header" required>
-							<div class="invalid-feedback">Please enter a valid header.</div>
+							<input type="text" class="form-control modalFields" name="newsHeader" placeholder="Subtitle" required>
+							<div class="invalid-feedback">Please enter a valid subtitle.</div>
 						</div>
 					</div>
 					<div class="form-group">

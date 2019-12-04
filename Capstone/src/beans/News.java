@@ -46,6 +46,11 @@ public class News {
 	private int isPublic = 0;
 	
 	/**
+	 * The event that the article is pointing to (can be null if it is unrelated to any event)
+	 */
+	private int eventKey;
+	
+	/**
 	 * Gets a News article from the database.
 	 * @param PKey an integer value of the News article's primary key.
 	 */
@@ -61,6 +66,11 @@ public class News {
 		header = newsPost.get("Header").toString();
 		date = newsPost.get("Date").toString();
 		isPublic = Integer.parseInt(newsPost.get("IsPublic").toString());
+		try {
+			eventKey = Integer.parseInt(newsPost.get("EventID").toString());
+		} catch(NullPointerException e) {
+			eventKey = -1;
+		}
 	}
 	
 	/**
@@ -93,17 +103,39 @@ public class News {
 	 */
 	public static int[] getMostRecentNewsPostsKeys(int a, int p , int pub) {
 		String kQueryString, sQueryString;
+		int currentEvent;
+		try {
+			currentEvent = getNewsKeyFromEventKey(new EventTableBean().getCurrentEvent().getKey());
+		} catch(Exception e) {
+			currentEvent = -1;
+		}
 		
 		if(pub == 0) {
-			kQueryString = "SELECT PKey FROM Blogs WHERE NOT PKey=\'" + Integer.toString(p) + "\'";
-			sQueryString = "SELECT COUNT(*) FROM Blogs WHERE NOT PKey=\'" + Integer.toString(p) + "\'";
+			//kQueryString = "SELECT PKey FROM Blogs WHERE NOT PKey=\'" + Integer.toString(p) + "\' AND NOT EventID=\'" + Integer.toString(currentEvent) + "\'";
+			//sQueryString = "SELECT COUNT(*) FROM Blogs WHERE NOT PKey=\'" + Integer.toString(p) + "\' AND NOT EventID=\'" + Integer.toString(currentEvent) + "\'";
+			kQueryString = "SELECT PKey FROM Blogs WHERE NOT PKey=\'" + Integer.toString(p) + "\' AND NOT PKey=" + currentEvent;
+			sQueryString = "SELECT COUNT(*) FROM Blogs WHERE NOT PKey=\'" + Integer.toString(p) + "\' AND NOT PKey=" + currentEvent;
 		}
 		else {
-			kQueryString = "SELECT PKey FROM Blogs WHERE IsPublic=1 AND NOT PKey=\'" + Integer.toString(p) + "\'";
-			sQueryString = "SELECT COUNT(*) FROM Blogs WHERE IsPublic=1 AND NOT PKey=\'" + Integer.toString(p) + "\'";
+			kQueryString = "SELECT PKey FROM Blogs WHERE IsPublic=1 AND NOT PKey=\'" + Integer.toString(p) + "\' AND NOT PKey=" + currentEvent;
+			sQueryString = "SELECT COUNT(*) FROM Blogs WHERE IsPublic=1 AND NOT PKey=\'" + Integer.toString(p) + "\' AND NOT PKey=" + currentEvent;
 		}
 		
 		return queryNewsDatabase(a, kQueryString, sQueryString);
+	}
+	
+	public static int getNewsKeyFromEventKey(int k) {
+		String query = "SELECT PKey FROM Blogs WHERE EventID=\'" + k + "\'";
+		int pKey;
+		List<Map<String, Object>> pKeyQuery = Database.executeQuery(query);
+		
+		try {
+			pKey = Integer.parseInt(pKeyQuery.get(0).get("PKey").toString());
+		} catch(Exception e) {
+			pKey = -1;
+		}
+		
+		return pKey;
 	}
 	
 	/**
@@ -175,6 +207,14 @@ public class News {
 	 */
 	public int getIsPublic() {
 		return this.isPublic;
+	}
+	
+	/**
+	 * Gets the eventKey of the News article.
+	 * @return The eventKey of the News article.
+	 */
+	public int getEventKey() {
+		return this.eventKey;
 	}
 	
 	/**

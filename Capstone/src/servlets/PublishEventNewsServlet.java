@@ -39,7 +39,7 @@ public class PublishEventNewsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		int isPublic = 0;
 		Event current = new Event(request.getParameter("key"));
@@ -49,8 +49,8 @@ public class PublishEventNewsServlet extends HttpServlet {
 		
 		File file = new File(request.getContextPath()+"/Uploads/Events/HeaderImages/"+request.getParameter("key")+"_header.png");
 		
-		NewsServlet.addNewsArticle(current.getTitle(), current.getTheme(), current.getDescription(), isPublic, (Part) file);
-		response.sendRedirect(request.getContextPath() + "/AdminPanel/");
+		String newsKey = NewsServlet.addEventNewsArticle(current.getTitle(), current.getTheme(), current.getDescription(), isPublic, Integer.parseInt(request.getParameter("key")));
+		response.sendRedirect(request.getContextPath() + "/News/view?newsid=" + newsKey);
 	}
 
 	/**

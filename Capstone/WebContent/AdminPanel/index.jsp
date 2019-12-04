@@ -52,7 +52,7 @@
 		<h3><b>News Options:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newNewsArticleModal">Create Article</button>
 		<a href="<%= request.getContextPath() %>/News/Archive?year=<%= currentYear %>"><button type="button" class="btn btn-primary">View Articles</button></a>
-		<a href="<%= request.getContextPath() %>/PublishServlet?key=<%= events.getCurrentEvent().getKey() %>"><button type="button" class="btn btn-primary">Publish Event News</button></a>
+		<a href="<%= request.getContextPath() %>/Publish/News?key=<%= events.getCurrentEvent().getKey() %>"><button type="button" class="btn btn-primary">Publish Event News</button></a>
 		
 		<h3><b>Gallery Options:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addGalleryPhotoModal">Add Photo(s)</button>
@@ -62,4 +62,28 @@
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gameSubmissionsDisplayModal">View Game Submissions</button>
 	</div>
 </body>
+<script>
+	var bodyField;
+	loadEditor();
+
+	function loadEditor() {
+		bodyField = new nicEditor({
+			fullPanel : true
+		}).panelInstance("newsBody");
+		$("newsBody").width("100%");
+		$('.nicEdit-panelContain').parent().css({
+			width : '100%',
+			padding : "0"
+		});
+		$('.nicEdit-panelContain').parent().next().css({
+			width : '100%',
+			padding : "5px"
+		});
+		$('.nicEdit-main').css({
+			width : '100%',
+			padding : "0",
+			minHeight : "80px"
+		});
+	}
+</script>
 </html>
