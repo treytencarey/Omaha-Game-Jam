@@ -48,9 +48,9 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
 	  			<form action="./Events" style="margin-left: auto; margin-right: 10px;">
 	  				<input type="submit" class="btn btn-primary" href="./Events" value="Details">
 				</form>
-	  			<form action="Events/rsvp_placeholder.jsp" style="margin-right: auto; margin-left: 10px;">
-			  	  	<input type="submit" class="btn btn-primary" value="RSVP">
-			  	</form>
+	  			<div style="margin-right: auto; margin-left: 10px;">
+	  				<%@include file="/components/RSVPButton.jsp" %>
+	  			</div>
 		  	</div>
   		</div>
 	</div>
@@ -86,7 +86,7 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
   			<p>Omaha Game Jam is a free 2 day game development event where participants build games from scratch around a secret theme. At the end of dev time, everyone presents, plays, and votes on superlative awards. Individuals 18+ and teams are welcome!</p>
   		</div>
   		<%	if (session.getAttribute("accountPKey") == null) { %>
-  			<p class="lead">
+  			<p class="lead" id="registerNowButton">
     			<a class="btn btn-primary btn-med" style="cursor: pointer;" onclick="showRegisterModal()" role="button">Register Now!</a>
   			</p>
   		<% } %>
@@ -110,4 +110,5 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
 		$("#registerModal").modal("show");
 	}
 </script>
+	<div id="toastDiv"></div>
 </html>
