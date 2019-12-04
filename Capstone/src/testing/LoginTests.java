@@ -59,26 +59,15 @@ public class LoginTests {
 	}
 	
 	/**
-	 * Tests to see if the registration fails due to invalid email.
-	 */
-	@Test
-	public void test2_noAtSignInRegister() {
-		String noAtEmail = junitEmail.replace("@", "");
-		
-		enterRegister(noAtEmail, junitPass);
-		assertEquals(true, TestFunctions.checkIfElementExists(driver, "registerBtn", true)); //register button element should still be on page since invalid email was entered
-	}
-	
-	/**
 	 * Tests if registration succeeds or fails.
 	 */
 	@Test
-	public void test4_registerTest() {
+	public void test2_registerTest() {
 		String userbarText;
 		TestFunctions.goToPage(driver, "http://localhost:8080/Capstone/");
 		
 		enterRegister(junitEmail, junitPass);
-		userbarText = driver.findElement(By.id("accountBtn")).getText();
+		userbarText = driver.findElement(By.id("loggedInAccountBtn")).getText();
 		
 		//test if user bar has the 'logged in as' text, indicating a successful login
 		assertEquals(true, userbarText.contains(junitEmail));
@@ -88,8 +77,10 @@ public class LoginTests {
 	 * Checks if logout works
 	 */
 	@Test
-	public void test5_logoutTest() {
-		driver.findElement(By.id("accountBtn")).click();
+	public void test3_logoutTest() throws InterruptedException {
+		TestFunctions.goToPage(driver, "http://localhost:8080/Capstone/");
+		
+		driver.findElement(By.xpath("//button[contains(text(),'" + junitEmail + "')]")).click();
 		driver.findElement(By.id("logoutBtn")).click();
 		
 		assertEquals(true, TestFunctions.checkIfElementExists(driver, "loginBtn", true));
@@ -99,14 +90,15 @@ public class LoginTests {
 	 * Tests if the login function works on all pages
 	 */
 	@Test
-	public void test6_testLoginOnAllPages() {
+	public void test4_testLoginOnAllPages() {
 		String[] pages = {"http://localhost:8080/Capstone/", "http://localhost:8080/Capstone/Events", "http://localhost:8080/Capstone/Games", "http://localhost:8080/Capstone/Gallery", "http://localhost:8080/Capstone/News"};
 		
 		for(int i = 0; i  < pages.length; i++) {
 			TestFunctions.goToPage(driver, pages[i]);
 			enterLogin(junitEmail, junitPass);
-			assertEquals(true, TestFunctions.checkIfElementExists(driver, "accountBtn", true));
-			driver.findElement(By.id("accountBtn")).click();
+			TestFunctions.goToPage(driver, pages[i]);
+			assertEquals(true, TestFunctions.checkIfElementExists(driver, "loggedInAccountBtn", true));
+			driver.findElement(By.id("loggedInAccountBtn")).click();
 			driver.findElement(By.id("logoutBtn")).click();
 		}
 	}
@@ -125,7 +117,7 @@ public class LoginTests {
 	
 	private void enterRegister(String n, String p) {
 		driver.findElement(By.id("loginBtn")).click();
-		driver.findElement(By.xpath("//a[@href='#registerModal']")).click();
+		driver.findElement(By.linkText("Create account")).click();
 		driver.findElement(By.id("validationEmail")).sendKeys(n);
 		driver.findElement(By.id("validationPass1")).sendKeys(p);
 		driver.findElement(By.id("validationPass2")).sendKeys(p);

@@ -121,8 +121,6 @@ public class News {
 			sQueryString = "SELECT COUNT(*) FROM Blogs WHERE IsPublic=1 AND NOT PKey=\'" + Integer.toString(p) + "\' AND NOT PKey=" + currentEvent;
 		}
 		
-		System.out.println(Database.executeQuery(kQueryString).size());
-		
 		return queryNewsDatabase(a, kQueryString, sQueryString);
 	}
 	
