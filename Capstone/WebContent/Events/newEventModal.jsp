@@ -91,7 +91,6 @@
 							    	 
 							    	$(wrapper).on("click",".remove_field", function(e){ //user click on remove field
 							    		e.preventDefault(); $(this).parent('div').remove(); x--;
-							    		console.log("hi");
 							    	})
 							    	});
 							    
