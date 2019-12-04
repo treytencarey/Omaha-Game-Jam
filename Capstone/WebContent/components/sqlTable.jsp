@@ -29,6 +29,6 @@
 			});
 		</script>
 <% 	}
-	session.setAttribute("tableSQL", null);			// The SQL that the table is populated with.
-	session.setAttribute("tableSQLPage", null);		// (OPTIONAL) The page that the table should be on.
+	session.removeAttribute("tableSQL");			// The SQL that the table is populated with.
+	session.removeAttribute("tableSQLPage");		// (OPTIONAL) The page that the table should be on.
 %>

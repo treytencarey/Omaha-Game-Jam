@@ -51,9 +51,18 @@ public class GalleryServlet extends HttpServlet {
 		 * Setup gallery page for the current event if no id is given
 		 */
 		try {
+			ArrayList<Event> events = new ArrayList<Event>();
 			ArrayList<Event> pastEvents = eventTable.getPastEvents();
+			
+			events.add(eventTable.getCurrentEvent());
+			for(int i = 0; i < pastEvents.size(); i++) {
+				events.add(pastEvents.get(i));
+				if(events.size() == 3)
+					break;
+			}
+			
 			if (id == null) {
-				request.setAttribute("events", pastEvents);
+				request.setAttribute("events", events);
 				request.getRequestDispatcher(DESTINATION_JSP).forward(request, response);
 				return;
 			}

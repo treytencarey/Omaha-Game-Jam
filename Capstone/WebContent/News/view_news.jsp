@@ -25,8 +25,11 @@
 
 	<%
 		try {
+			boolean isAdmin = Account.isAdmin(session);	
 			News n = (News)request.getAttribute("News");
 			request.setAttribute("newsTitle", n.getTitle());
+			if(n.getIsPublic()== 0 && !isAdmin)
+				throw new NullPointerException();
 			int[] postKeys = News.getMostRecentNewsPostsKeys(3, n.getKey(), 1);
 			News[] recentNews = new News[postKeys.length];
 			for (int i = 0; i < recentNews.length; i++) {
@@ -36,9 +39,11 @@
 	<%@include file="/News/editArticleModal.jsp" %>
 	<%@include file="/News/deleteArticleModal.jsp" %>
 	<div class="admin-controls">
-		<%if(n.getIsPublic()== 0)  {%><h5>ADMIN NOTE: This article is not available to the public. Use "Edit Article" and check "Make Public" to make it public.</h5><br><% } %>
+		<% if(n.getIsPublic()== 0)  {%><h5>ADMIN NOTE: This article is not available to the public. Use "Edit Article" and check "Make Public" to make it public.</h5><br><% } %>
+		<% if(isAdmin) { %>
 		<h5>Admin Controls:</h5>
 		<a id="editArticleBtn" href="#editNewsArticleModal" class="btn btn-primary btn-med" style="cursor: pointer;" role="button" data-toggle="modal">Edit Article</a> <a id="deleteArticleBtn" href="#deleteNewsArticleModal" class="btn btn-primary btn-med" style="cursor: pointer; background-color: red; border-color: red;" role="button" data-toggle="modal">Delete Article</a>
+		<% } %>
 	</div>
 	<div class="news-container">
 		<div>
@@ -126,6 +131,7 @@
 	<%
 		} catch (NullPointerException e) {
 	%>
+	<br>
 	<div class="row">
 		<h3 style="width: 100%; text-align: center;">This isn't the news page you're looking for.</h3>
 	</div>

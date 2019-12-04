@@ -38,7 +38,7 @@
 		    	<li><button id="loginBtn" class="btn btn-link my-2 my-sm-0" name="login"><a id="loginBtn" href="#loginModal" class="trigger-btn" data-toggle="modal">Login</a></button></li>
 		    <%	} else { %>
 		    	<li>
-		    		<button id="accountBtn" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    		<button id="loggedInAccountBtn" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    			<%= session.getAttribute("accountEmail") %>
 		    		</button>
 		    		<div id="profileDropdown" class="dropdown-menu dropdown-menu-right">

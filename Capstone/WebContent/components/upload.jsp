@@ -17,10 +17,10 @@
 			<% } %>
 		<% } %>
 <% 	}
-	session.setAttribute("uploadFilePath", null);			// The file path for the uploader MUST BE GIVEN for it to work.
-	session.setAttribute("uploadIncludeForm", null);		// (OPTIONAL) Set to any value to include the upload's own form. Leave blank to not use form.
-	session.setAttribute("uploadID", null);					// (OPTIONAL) The ID of the form, if uploadIncludeForm is set.
-	session.setAttribute("uploadInputOnly", null);			// (OPTIONAL) Use only the input, no form or labels. Overrides uploadIncludeForm.
-	session.setAttribute("uploadInputID", null);			// (OPTIONAL) The ID of the input. Creates a new ID if none given.
-	session.setAttribute("uploadInputAttributes", null);	// (OPTIONAL) The attributes of the input.
+	session.removeAttribute("uploadFilePath");			// The file path for the uploader MUST BE GIVEN for it to work.
+	session.removeAttribute("uploadIncludeForm");		// (OPTIONAL) Set to any value to include the upload's own form. Leave blank to not use form.
+	session.removeAttribute("uploadID");				// (OPTIONAL) The ID of the form, if uploadIncludeForm is set.
+	session.removeAttribute("uploadInputOnly");		// (OPTIONAL) Use only the input, no form or labels. Overrides uploadIncludeForm.
+	session.removeAttribute("uploadInputID");			// (OPTIONAL) The ID of the input. Creates a new ID if none given.
+	session.removeAttribute("uploadInputAttributes");	// (OPTIONAL) The attributes of the input.
 %>
