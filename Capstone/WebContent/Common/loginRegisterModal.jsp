@@ -39,7 +39,7 @@
 <% session.setAttribute("servlet", "accountServlet"); %>
 <% session.setAttribute("form", "#loginForm"); %>
 <%@page import="java.util.Arrays" %>
-<% session.setAttribute("updates", Arrays.asList("#loginUL", "#subNavBar")); %>
+<% session.setAttribute("updates", Arrays.asList("#loginUL", "#subNavBar", "#registerNowButton")); %>
 <% session.setAttribute("successJS", "$('#loginModal').modal('hide');"); %>
 <% session.setAttribute("errorJS", "document.getElementById('loginModalError').style.display='block'; document.getElementById('loginModalErrorMessage').innerText=request.responseText;"); %>
 <%@include file="../components/ajax.jsp" %>
