@@ -31,10 +31,15 @@
 	<%@page import="java.util.ArrayList"%>
 	<%@page import="utils.FolderReader"%>
 
+	<%
+		boolean isAdmin = Account.isAdmin(session);
+		if(isAdmin) {
+	%>
 	<div class="admin-controls">
 		<h5 style="text-align: center;">Admin Controls:</h5>
 		<a id="addPhotoBtn" href="#addGalleryPhotoModal" class="btn btn-primary btn-med" style="cursor: pointer;" role="button" data-toggle="modal">Add Photo(s)</a>
 	</div>
+	<% } %>
 	<h4 style="text-align: center;">Gallery</h4>
 	<br>
 	<%
@@ -43,7 +48,7 @@
 		ArrayList<Event> events = (ArrayList<Event>) request.getAttribute("events");
 		//get three latest events
 		try {
-			for (int i = events.size() - 1; i >= 0 && i != events.size() - 4; i--) {
+			for (int i = 0; i < 3 && i != events.size() - 3; i++) {
 	%>
 	<div>
 		<img class="main-event-img rounded" src="<%=request.getContextPath()%>/Uploads/Events/HeaderImages/<%= events.get(i).getKey() %>_header.png"/>
@@ -58,11 +63,13 @@
 						if (galleryPhotos != null) {
 							for (int j = 0; j < galleryPhotos.length; j++) {
 			%>
-			<div class="admin-delete-container">
+			<div class="individual-photo-container">
 				<a href="<%=MEDIA_PATH_FULL%>/<%=events.get(i).getKey()%>/<%=galleryPhotos[j]%>" data-toggle="lightbox" data-gallery="event-gallery"><img class="event-img zoom" src="<%=MEDIA_PATH_FULL%>/<%=events.get(i).getKey()%>/<%=galleryPhotos[j]%>"></a>
-				<div class="delete-overlay">
-					<a id="deleteGalleryPhotosButton" href="#deleteGalleryPhotoModal" class="btn btn-primary btn-med" style="cursor: pointer; background-color: red; border-color: red; margin: 0 auto;" role="button" data-toggle="modal" data-id="<%=galleryPhotos[j]%>@__eventId<%=i%>">Delete</a>
-				</div>
+				<% if(isAdmin) { %>
+					<div class="delete-overlay">
+						<a id="deleteGalleryPhotosButton" href="#deleteGalleryPhotoModal" class="btn btn-primary btn-med" style="cursor: pointer; background-color: red; border-color: red; margin: 0 auto;" role="button" data-toggle="modal" data-id="<%=galleryPhotos[j]%>@__eventId<%=i%>">Delete</a>
+					</div>
+				<% } %>
 			</div>
 			<%
 				}

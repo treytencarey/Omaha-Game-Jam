@@ -30,15 +30,15 @@
 	<%@page import="beans.Event"%>
 	<%@include file="/News/newArticleModal.jsp"%>
 	<%
-		EventTableBean eventTable = new EventTableBean();
-		int currentEventKey;
-		try {
-			currentEventKey = eventTable.getCurrentEvent().getKey();
-		} catch (Exception e) {
-			currentEventKey = -1;
-		}
-		News currentEventArticle = new News(News.getNewsKeyFromEventKey(currentEventKey));
-		int[] postKeys = News.getMostRecentNewsPostsKeys(6, 0, 0);
+		boolean isAdmin = Account.isAdmin(session);
+		int[] postKeys;
+		
+		//only show non-public articles to admins
+		if(isAdmin)
+			postKeys = News.getMostRecentNewsPostsKeys(6, 0, 0);
+		else
+			postKeys = News.getMostRecentNewsPostsKeys(6, 0, 1);
+		
 		News[] recentNews = new News[postKeys.length];
 		for (int i = 0; i < recentNews.length; i++) {
 			recentNews[i] = new News(postKeys[i]);
@@ -47,10 +47,13 @@
 		String currentYear = dtf.format(LocalDateTime.now());
 	%>
 
-	<div class="admin-controls">
-		<h5>Admin Controls:</h5>
-		<a id="addArticleBtn" href="#newNewsArticleModal" class="btn btn-primary btn-med" style="cursor: pointer;" role="button" data-toggle="modal">Add Article</a>
-	</div>
+	<% if(isAdmin) { %>
+		<div class="admin-controls">
+			<h5>Admin Controls:</h5>
+			<a id="addArticleBtn" href="#newNewsArticleModal" class="btn btn-primary btn-med" style="cursor: pointer;" role="button" data-toggle="modal">Add Article</a>
+		</div>
+	<% } %>
+	<br>
 	<h4 class="page-text">Recent News</h4>
 	<br>
 	<div class="container" style="text-align: center;">
