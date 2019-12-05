@@ -135,6 +135,7 @@ if (request.getParameter("id") != null)
 							    	 
 							    	var x = 1; //initlal text box count
 							    	$(add_button).click(function(e){ //on add input button click
+							    		e.stopPropagation();
 								    	e.preventDefault();
 								    	if(x < max_fields){ //max input box allowed
 									    	x++; //text box increment
