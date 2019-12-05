@@ -23,15 +23,14 @@ public class EventTableBean implements Serializable {
 	/**
 	 * Fetch the events DB's Events table and instantiate an EventTableBean with them.
 	 * @param EventPKey the id of the event to get games for.
-	 * @throws ParseException 
+	 * 
 	 */
-	public EventTableBean() throws ParseException
+	public EventTableBean()
 	{
 		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Events");
         java.util.ListIterator<Map<String, Object>> litr = query.listIterator();
         while(litr.hasNext())
         	events.add(new Event(litr.next()));
-        events = sort(events);
 	}
 	
 	// Bean getter / setter
@@ -115,7 +114,7 @@ public class EventTableBean implements Serializable {
 			}
 		}
 		
-		return pastEvents;
+		return sort(pastEvents);
 	}
 	
 	public ArrayList<Event> getFutureEvents() throws ParseException {
@@ -128,7 +127,7 @@ public class EventTableBean implements Serializable {
 			}
 		}
 		
-		return futureEvents;
+		return sort(futureEvents);
 	}
 	
 	public void deleteEvent(Event event) {
