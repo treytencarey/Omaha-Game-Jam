@@ -137,6 +137,10 @@
 							</div>
 				    		<a href="#" class="remove_field" style="color: red; margin-left: 10px;">Remove Mutator</a>
 			    		</div>
+			    		<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
+							<input type="file" style="width: unset; opacity: 1; margin-left: 10px;" class="custom-file-input" name="eventImage" id="eventImage" />
+						</div>
 					<%
 						}
 					}
