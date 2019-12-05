@@ -124,7 +124,7 @@
 					<a href=""><i class="fab fa-discord fa-3x" style="color: #7289da;"></i></a>
 				</div>
 			</div>
-			<div class="row" id="event-schedule-description" style="text-align: center; display:none">
+			<div class="row" id="event-schedule-description" style="text-align:center; display:none;">
 				<%= current.getSchedule() %>
 			</div>
 		</div>

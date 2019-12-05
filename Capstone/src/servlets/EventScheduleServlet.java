@@ -49,7 +49,7 @@ public class EventScheduleServlet extends HttpServlet {
 		List<Map<String, Object>> check = Database.executeQuery("SELECT * FROM EventSchedules WHERE EventPKey=" + eventPKey);
 		
 		if(check.size() > 0) {
-			Database.executeUpdate("UPDATE EventSchedule SET Schedule=\'" + schedule + "\' WHERE EventPKey=" + eventPKey);
+			Database.executeUpdate("UPDATE EventSchedules SET Schedule=\'" + schedule + "\' WHERE EventPKey=" + eventPKey);
 		}
 		else{
 			Database.executeUpdate("INSERT OR REPLACE INTO EventSchedules (EventPKey, Schedule) VALUES ('" + eventPKey + "', '" + schedule + "')");

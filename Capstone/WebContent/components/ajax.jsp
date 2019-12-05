@@ -2,8 +2,7 @@
 		 session.getAttribute("form") != null	) { %>
 		 <%@page import="java.util.List" %>
 		<script>
-			var $form = $("<%= session.getAttribute("form") %>");
-			$form.submit(function(e) {
+			$("<%= session.getAttribute("form") %>").submit(function(e) {
 				e.preventDefault();
 				<% if (session.getAttribute("beforeSubmitJS") != null) { %>
 					<%= session.getAttribute("beforeSubmitJS") %>
