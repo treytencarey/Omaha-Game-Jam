@@ -53,7 +53,7 @@
 	text-align: center;
 }
 
-.admin-delete-container:hover .delete-overlay {
+.individual-photo-container:hover .delete-overlay {
   opacity: 1;
 }
 

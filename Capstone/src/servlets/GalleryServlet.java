@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -54,12 +55,10 @@ public class GalleryServlet extends HttpServlet {
 			ArrayList<Event> events = new ArrayList<Event>();
 			ArrayList<Event> pastEvents = eventTable.getPastEvents();
 			
+			Collections.reverse(pastEvents);
 			events.add(eventTable.getCurrentEvent());
-			for(int i = 0; i < pastEvents.size(); i++) {
+			for(int i = 0; i < pastEvents.size(); i++)
 				events.add(pastEvents.get(i));
-				if(events.size() == 3)
-					break;
-			}
 			
 			if (id == null) {
 				request.setAttribute("events", events);
@@ -82,18 +81,24 @@ public class GalleryServlet extends HttpServlet {
 		 * Redirect link back to the gallery page
 		 */
 		String redirectLink = request.getContextPath() + "/Gallery";
-		EventTableBean eventTable = new EventTableBean();
-
-		ArrayList<Event> eventList;
+		
+		ArrayList<Event> events = new ArrayList<Event>();
 		try {
-			eventList = eventTable.getPastEvents();
+			EventTableBean evTable = new EventTableBean();
+			ArrayList<Event> pastEvents = evTable.getPastEvents();
+			
+			Collections.reverse(pastEvents);
+			events.add(evTable.getCurrentEvent());
+			for (int i = 0; i < pastEvents.size(); i++) {
+				events.add(pastEvents.get(i));
+			}
 		} catch (Exception e) {
 			System.err.println(e);
 			return;
 		}
 
 		int eventNum = Integer.parseInt(request.getParameter("galleryEvent"));
-		int eventPKey = eventList.get(eventNum).getKey();
+		int eventPKey = events.get(eventNum).getKey();
 
 		if (request.getParameter("addGalleryPhotosButton") != null) {
 			for (Part part : request.getParts()) {

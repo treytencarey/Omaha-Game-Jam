@@ -14,6 +14,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
+
 <link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/style.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/navStyle.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/subNavStyle.css">
