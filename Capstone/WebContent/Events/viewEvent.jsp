@@ -84,17 +84,18 @@
 	</div>
 </div>
 
-<form class="was-validated mw-50" autocomplete="off" action="<%=request.getContextPath()%>/EventServlet" method = "post" enctype="multipart/form-data" onsubmit="return datecheck();">
-	<input autocomplete="false" type="hidden" type="text" style="display:none;" />
-	<input type="hidden" id="toDelete" name="toDelete" value="no"></input>
-	
-	<input type="hidden" value="<%=display.getKey()%>" name="PKey" />
-	
-	<div class="form-group">
+<div class="container eventContainer">
+	<form class="was-validated" autocomplete="off" action="<%= request.getContextPath() %>/EventServlet" method="post" enctype="multipart/form-data" onsubmit="return datecheck();" >
+		<input autocomplete="false" type="hidden" type="text" style="display:none;" />
+		<input type="hidden" id="toDelete" name="toDelete" value="no"></input>
+		
+		<input type="hidden" value="<%=display.getKey()%>" name="PKey" />
+		
+		<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
 				<input type="text" class="form-control modalFields" name="title" value="<%=display.getTitle()%>" required>
-				<div class="invalid-feedback">Please enter a valid event theme</div>
+				<div class="invalid-feedback">Please enter a valid event title</div>
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 		</div>
@@ -106,102 +107,127 @@
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 		</div>
+		 
 		<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
-				<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" ><%=display.getDescription()%></textarea>
-				<div class="invalid-feedback">Please enter a valid description</div>
-				<div class="valid-feedback">Looks good!</div>
+				<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" required><%=display.getDescription()%></textarea>
 			</div>
 		</div>
 		
-		<div class="input-group">
-			<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-			<input type="file" class="custom-file-input" name="eventImage" id="eventImage" />
-			<label class="form-control modalFields custom-file-label" for="eventImage">Choose Image</label>
-		</div>
-	  	
-	  	<div class="input-group multiplValueFields items" style="display: inline-block;">
-			<button type="button" class="add_field_button">Add Mutator</button>
-				<%
-					if(!display.getMutators().isEmpty()){
-							for(Mutator mutator : display.getMutators()){
-				%>
-					<div class="form-group">
-						<input type='text' class='form-control modalFields' name='mutator' value='<%= mutator.getTitle() %>' />
-						<input type='text' class='form-control modalFields' name='mutatorDescription' value='<%= mutator.getDesc() %>' />
-						<a href="#" class="remove_field"><i class="fa fa-times"></i></a>
-					</div>
-				<%
+	  	<div class="input-group items" style="display: inline-block;">
+	  		<div class="row" style="width: 100%;">
+	  			<div class="col-sm-1" style="max-width: 30px;">
+	  				<span style="margin-left: 5px;" class="input-group-addon icons"><i class="fa fa-flask"></i></span>
+	  			</div>
+	  			<div class="col-sm-11">
+	  				<div class="mutatorFields">
+					<%
+						if(!display.getMutators().isEmpty()){
+								for(Mutator mutator : display.getMutators()){
+					%>
+						<div class="form-group">
+				    		<div class="row">
+				    			<div class="col-sm-6" style="padding-bottom: 0px;">
+				    				<input type='text' class='form-control modalFields' name='mutator' value='<%= mutator.getTitle() %>' required/>
+			    				</div>
+			    				<div class="col-sm-6" style="padding-bottom: 0px;">
+									<input type='text' class='form-control modalFields' name='mutatorDescription' value='<%= mutator.getDesc() %>' required/>
+								</div>
+							</div>
+				    		<a href="#" class="remove_field" style="color: red; margin-left: 10px;">Remove Mutator</a>
+			    		</div>
+					<%
+						}
 					}
-				}
-				%>
-			
-				<script>
-					$(document).ready(function() {
-						var max_fields = 20;
-					    var wrapper = $(".items");
-					    var add_button = $(".add_field_button");
-					    	 
-					    var x = 1; 
-					    $(add_button).click(function(e){ 
-						    e.preventDefault();
-						    if(x < max_fields){ 
-							    x++; 
-							    $(wrapper).append(
-								    '<div class="form-group">' +
-								    	"<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' />" +
-										"<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Mutator Description' />" +
-								   		'<a href="#" class="remove_field"><i class="fa fa-times"></a></div>'
-							    ); 
-						    }
-					    });
-					    	 
-					    $(wrapper).on("click",".remove_field", function(e){ //user click on remove field
-					    e.preventDefault(); $(this).parent('div').remove(); x--;
-					    })
-				  });
-					    
-			 </script>
+					%>
+			    </div>
+				<button style="width: 100%; margin: auto;" type="button" class="add_field_button">Add Mutator</button>
+				<!-- <input type="button" value="Add another mutator" class="add-mutator" /> -->
+				
+				
+			    <script>
+			    $(document).ready(function() {
+			    	var max_fields = 20; //maximum input boxes allowed
+			    	var wrapper = $(".mutatorFields"); //Fields wrapper
+			    	var add_button = $(".add_field_button"); //Add button ID
+			    	 
+			    	var x = 1; //initlal text box count
+			    	$(add_button).click(function(e){ //on add input button click
+				    	e.preventDefault();
+				    	if(x < max_fields){ //max input box allowed
+					    	x++; //text box increment
+					    	$(wrapper).append(
+						    	'<div class="form-group">' +
+						    		'<div class="row">' +
+						    			'<div class="col-sm-6" style="padding-bottom: 0px;">' +
+						    				"<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' required/>" +
+					    				'</div>' +
+					    				'<div class="col-sm-6" style="padding-bottom: 0px;">' +
+											"<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Description' required/>" +
+										'</div>' +
+									'</div>' +
+						    		'<a href="#" class="remove_field" style="color: red; margin-left: 10px;">Remove Mutator</a>' +
+					    		'</div>'
+					    	); //add input box
+				    	}
+			    	});
+			    	 
+			    	$(wrapper).on("click",".remove_field", function(e){ //user click on remove field
+			    		e.preventDefault(); $(this).parent('div').remove(); x--;
+			    	})
+			    	});
+			    
+			    </script>
+	  			</div>
+	  		</div>
 		</div>
-			
-  		<div class="row">
-	  		<div class="form-group eventDates col-sm-6">
-    	  		<input class="input-group form-control datePicker" id="startDate" name="startDate" value="<%= display.getStartDate() %>" type="text" required/>
-			    <script>
+		<div class="input-group items" style="display: inline-block;">
+	  		<div class="row" style="width: 100%;">
+	  			<div class="col-sm-1" style="max-width: 30px;"></div>
+		  		<div class="form-group eventDates col-sm-5">
+	    	  		<input class="input-group form-control datePicker" id="startDate" name="startDate" value="<%=display.getStartDate()%>" type="text" required/>
+				    <script>
+					    $(document).ready(function(){
+					      var date_input=$('input[name="startDate"]'); //our date input has the name "date"
+					      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+					      var options={
+					        format: 'mm/dd/yyyy',
+					        container: container,
+					        todayHighlight: true,
+					        autoclose: true,
+					      };
+					      date_input.datepicker(options);
+					    })
+					</script>
+		  		</div>
+		  		<div class="form-group eventDates col-sm-5">
+	    	  		<input class="input-group form-control datePicker" id="endDate" name="endDate" value="<%=display.getEndDate()%>" type="text" required/>
+				    <script>
 				    $(document).ready(function(){
-				      var date_input=$('input[name="startDate"]'); //our date input has the name "date"
-				      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-				      var options={
-				        format: 'mm/dd/yyyy',
-				        container: container,
-				        todayHighlight: true,
-				        autoclose: true,
-				      };
-				      date_input.datepicker(options);
-				    })
-				</script>
-	  		</div>
-	  		<div class="form-group eventDates col-sm-6">
-    	  		<input class="input-group form-control datePicker" id="endDate" name="endDate" value="<%= display.getEndDate() %>" type="text" required/>
-			    <script>
-				    $(document).ready(function(){
-				      var date_input=$('input[name="endDate"]'); //our date input has the name "date"
-				      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-				      var options={
-				        format: 'mm/dd/yyyy',
-				        container: container,
-				        todayHighlight: true,
-				        autoclose: true,
-				      };
-				      date_input.datepicker(options);
-				    })
-				</script>
-	  		</div>
+					      var date_input=$('input[name="endDate"]'); //our date input has the name "date"
+					      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+					      var options={
+					        format: 'mm/dd/yyyy',
+					        container: container,
+					        todayHighlight: true,
+					        autoclose: true,
+					      };
+					      date_input.datepicker(options);
+					    })
+					    
+					</script>
+		  		</div>
+		    </div>
 	    </div>
-	     
-	    <div class="form-group col-sm-6">
-    	  	Make Public: <input type="checkbox" id="visibility" name="visibility" <% if(display.IsPublic()) {%> checked <% } %> />
+	    
+	    <div class="input-group items" style="display: inline-block;">
+		    <div class="row" style="width: 100%;">
+			    <div class="col-sm-1" style="max-width: 30px;"></div>
+			    <div class="form-group col-sm-6" style="margin-left: 10px;">
+		    	  	Make Public: <input type="checkbox" id="visibility" name="visibility" <% if(display.IsPublic()) {%> checked <% } %> />
+		    	</div>
+	    	</div>
     	</div>
     	
 		<div class="form-group">
@@ -209,18 +235,8 @@
 			<button onclick="return checkRemove();" class="btn btn-primary" id="deleteEventButton" style="background-color: red;">Delete Event</button>
 		</div>
 	</form>
+</div>
 	<script>
-		var bodyField;
-		loadEditor();
-	
-		function loadEditor() { 
-			bodyField = new nicEditor({fullPanel: true}).panelInstance("eventDescription");
-			$("eventDescription").width("100%");
-			$('.nicEdit-panelContain').parent().css({width:'100%', padding:"0"});
-		    $('.nicEdit-panelContain').parent().next().css({width:'100%', padding:"5px"});
-		    $('.nicEdit-main').css({width:'100%', padding:"0", minHeight:"80px"});
-		}
-		
 		function datecheck(){
 			var sd = document.getElementById('startDate').value;
 			var ed = document.getElementById('endDate').value;

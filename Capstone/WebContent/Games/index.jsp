@@ -51,9 +51,14 @@ Iterator<Event> i = et.getEvents().iterator();
 			xhttp.open("GET", "<%= request.getContextPath() %>/gamepull?event="+eventId, true);
 			xhttp.send();
 		}
+		
+		function changePageColor() {
+		   $(".mainNavItems").find(".active").removeClass("active");
+		   $("#gamesButton").addClass("active");
+		}
 	</script>
 </head>
-<body>
+<body onload="changePageColor()">
 	<%@include  file="/Common/navbar.jsp" %>
 	<%@include file="/Games/newGameModal.jsp" %>
 	<%

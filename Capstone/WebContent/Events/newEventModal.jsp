@@ -21,7 +21,7 @@
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-gamepad"></i></span>
 							<input type="text" class="form-control modalFields" name="title" placeholder="Title" required>
-							<div class="invalid-feedback">Please enter a valid event theme</div>
+							<div class="invalid-feedback">Please enter a valid event title</div>
 							<div class="valid-feedback">Looks good!</div>
 						</div>
 					</div>
@@ -37,7 +37,7 @@
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
-							<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" placeholder="Description"></textarea>
+							<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" placeholder="Description" required></textarea>
 						</div>
 					</div>
 					
@@ -76,10 +76,10 @@
 										    	'<div class="form-group">' +
 										    		'<div class="row">' +
 										    			'<div class="col-sm-6" style="padding-bottom: 0px;">' +
-										    				"<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' />" +
+										    				"<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' required/>" +
 									    				'</div>' +
 									    				'<div class="col-sm-6" style="padding-bottom: 0px;">' +
-															"<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Description' />" +
+															"<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Description' required/>" +
 														'</div>' +
 													'</div>' +
 										    		'<a href="#" class="remove_field" style="color: red; margin-left: 10px;">Remove Mutator</a>' +

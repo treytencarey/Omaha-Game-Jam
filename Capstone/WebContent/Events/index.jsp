@@ -44,10 +44,17 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 	
+	<script>
+		function changePageColor() {
+		   $(".mainNavItems").find(".active").removeClass("active");
+		   $("#eventsButton").addClass("active");
+		}
+	</script>
 </head>
-<body>
+<body onload="changePageColor()">
 	<%@include  file="/Common/navbar.jsp" %>
 	<%@include file="/Events/newEventModal.jsp" %>
+	<%@include file="/Events/eventsDisplayModal.jsp" %>
 	<%@page import="beans.EventTableBean" %>
 	<%@page import="beans.Event" %>
 	<%@page import="database.Database" %>
@@ -56,7 +63,7 @@
 
 	
 	<%
-	EventTableBean eventTable = new EventTableBean();
+	eventTable = new EventTableBean();
 	Event current = null;
 	Event future = null;
 	ArrayList<Event> past = null;
