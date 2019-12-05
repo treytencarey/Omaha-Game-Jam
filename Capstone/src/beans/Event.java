@@ -53,6 +53,11 @@ public class Event {
 	private String endDate = "";
 	
 	/**
+	 * The daily and hourly schedule of an event
+	 */
+	private String schedule = "";
+	
+	/**
 	 * The list of mutators for the event
 	 */
 	private ArrayList<Mutator> mutators = new ArrayList<Mutator>();
@@ -72,6 +77,9 @@ public class Event {
 		//Get Mutators from database
 		List<Map<String, Object>> query2 = Database.executeQuery("SELECT * FROM Mutators WHERE EventPKey=" + String.valueOf(PKey));
 		
+		//Get event schedule from database
+		List<Map<String, Object>> query3 = Database.executeQuery("SELECT * FROM EventSchedules WHERE EventPKey=" + String.valueOf(PKey));
+		
 		//Initialize mutators list
 		for(Map<String, Object> mutator : query2) {
 		    mutators.add(new Mutator((int)mutator.get("PKey")));
@@ -83,6 +91,12 @@ public class Event {
 		description = event.get("Description").toString();
 		startDate = event.get("StartDate").toString();
 		endDate = event.get("EndDate").toString();
+		if(query3.size() > 0) {
+			setSchedule(query3.get(0).get("Schedule").toString());
+		}
+		else {
+			setSchedule("Currently no Schedule");
+		}
 	}
 	
 	/**
@@ -99,6 +113,9 @@ public class Event {
 	 */
 	public Event(Map<String, Object> queryRow)
 	{	
+		//Get event schedule from database
+		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM EventSchedules WHERE EventPKey=" + Integer.parseInt(queryRow.get("PKey").toString()));
+		
 		this.setVisibility(0);
 		this.setKey(Integer.parseInt(queryRow.get("PKey").toString()));
 		this.setTitle(queryRow.get("Title").toString());
@@ -106,6 +123,8 @@ public class Event {
 		this.setDescription(queryRow.get("Description").toString());
 		this.setStartDate(queryRow.get("StartDate").toString());
 		this.setEndDate(queryRow.get("EndDate").toString());
+		if(query.size() > 0)
+			this.setSchedule(query.get(0).get("Schedule").toString());
 	}
 	
 	/**
@@ -184,6 +203,13 @@ public class Event {
 	}
 	
 	/**
+	 * returns event schedule
+	 */
+	public String getSchedule() {
+		return schedule;
+	}
+	
+	/**
 	 * returns event theme
 	 */
 	public String getTheme() {
@@ -223,5 +249,11 @@ public class Event {
 	 */
 	public void setMutators(ArrayList<Mutator> m) {
 		mutators = m;
+	}
+	/**
+	 * sets event schedule
+	 */
+	public void setSchedule(String s) {
+		schedule = s;
 	}
 }

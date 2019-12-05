@@ -73,9 +73,7 @@
 	
 	<!-- Current Event -->
 	<%
-	if(current == null) {
-		current = past.get(0);
-	}
+	if(!current.IsPublic()) {
 	%>
 	<div class="container eventContainer rainbowBorder">
 		<div id="current-event" class="event">
@@ -126,9 +124,20 @@
 					<a href=""><i class="fab fa-discord fa-3x" style="color: #7289da;"></i></a>
 				</div>
 			</div>
+			<div class="row" id="event-schedule-description" style="text-align: center; display:none">
+				<%= current.getSchedule() %>
+			</div>
 		</div>
 	</div>
-	
+	<%
+	} else {
+	%>
+	<div class="container eventContainer">
+	<h1>No Current Event</h1>
+	</div>
+	<%
+	}
+	%>
 	<!-- Future Event -->
 	<% if (future != null && future.IsPublic()) { %>
 	<div class="container eventContainer">
@@ -228,4 +237,12 @@
 	
 	<div id="toastDiv"></div>
 </body>
+<script>
+$(document).ready(function(){
+
+	$("#event-schedule-button").click(function(){
+		$("#event-schedule-description").toggle();
+	});
+});
+</script>
 </html>

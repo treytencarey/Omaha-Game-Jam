@@ -54,6 +54,8 @@ public class EventScheduleServlet extends HttpServlet {
 		else{
 			Database.executeUpdate("INSERT OR REPLACE INTO EventSchedules (EventPKey, Schedule) VALUES ('" + eventPKey + "', '" + schedule + "')");
 		}
+		
+		response.sendRedirect(request.getContextPath() + "/AdminPanel/");
 	}
 
 }
