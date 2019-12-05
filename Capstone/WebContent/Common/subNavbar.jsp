@@ -20,6 +20,20 @@
 		        <a id="viewEventsBtn" href="#eventsDisplayModal" class="nav-link" data-toggle="modal">View Events</a>
 		      </li>
 	      	<%}%>
+	      	
+	      	<!-- Check if user is on Gallery page -->
+	    	<% if (request.getRequestURI().equals(request.getContextPath()+"/Gallery/index.jsp"))  { %>
+		      <li class="nav-item indvTabs">
+		        <a id="addPhotoBtn" href="#addGalleryPhotoModal" class="nav-link" data-toggle="modal">Add Photo(s)</a>
+		      </li>
+	      	<%}%>
+	      	
+	      	<!-- Check if user is on News page -->
+	    	<% if (request.getRequestURI().equals(request.getContextPath()+"/News/"))  { %>
+		      <li class="nav-item indvTabs">
+		        <a id="addArticleBtn" href="#newNewsArticleModal" class="nav-link" data-toggle="modal">Add Article</a>
+		      </li>
+	      	<%}%>
 	    <%}%>
 				
     		<% if (request.getRequestURI().equals(request.getContextPath()+"/profile") && request.getParameter("id").equals(session.getAttribute("accountPKey")))  { %>

@@ -129,15 +129,32 @@ if (canEdit)
 					<label class="gameViewLabels" for="screenshots">Screenshots:</label>
 				</div>
 				<div id="screenshots" class="carousel slide" data-ride="carousel">
-				  	<ol class="carousel-indicators">
-					    <li data-target="#screenshots" data-slide-to="0" class="active"></li>
-					    <li data-target="#screenshots" data-slide-to="1"></li>
-					    <li data-target="#screenshots" data-slide-to="2"></li>
-				  	</ol>
+					<%
+						FolderReader fr = new FolderReader(MEDIA_PATH + "/Screenshots/" + g.getId());
+						String[] carouselItems = fr.getFileList();
+						if (carouselItems != null) {
+					%>
+							<ol class="carousel-indicators">
+					<%
+							for (int x = 0; x < carouselItems.length; x++) {
+								if (x == 0) {
+					%>
+									<li data-target="#screenshots" data-slide-to="0" class="active"></li>
+					<%
+								}
+								else {
+					%>
+									<li data-target="#screenshots" data-slide-to=x></li>
+					<%
+								}
+							}
+					%>
+							</ol>
+					<%
+						}
+					%>
 				  	<div class="carousel-inner">
 				  		<%
-							FolderReader fr = new FolderReader(MEDIA_PATH + "/Screenshots/" + g.getId());
-							String[] carouselItems = fr.getFileList();
 							if (carouselItems != null)
 							{
 						%>

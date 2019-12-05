@@ -17,9 +17,16 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/newsStyle.css">
+	
+	<script>
+		function changePageColor() {
+		   $(".mainNavItems").find(".active").removeClass("active");
+		   $("#newsButton").addClass("active");
+		}
+	</script>
 </head>
 
-<body>
+<body onload="changePageColor()">
 	<%@include file="/Common/navbar.jsp"%>
 	<%@page import="beans.News"%>
 	<%@page import="project.Main"%>
@@ -46,15 +53,8 @@
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy");
 		String currentYear = dtf.format(LocalDateTime.now());
 	%>
-
-	<% if(isAdmin) { %>
-		<div class="admin-controls">
-			<h5>Admin Controls:</h5>
-			<a id="addArticleBtn" href="#newNewsArticleModal" class="btn btn-primary btn-med" style="cursor: pointer;" role="button" data-toggle="modal">Add Article</a>
-		</div>
-	<% } %>
 	<br>
-	<h4 class="page-text">Recent News</h4>
+	<h4 class="page-text" style="width: fit-content;">Recent News</h4>
 	<br>
 	<div class="container" style="text-align: center;">
 		<div class="row justify-content-center">

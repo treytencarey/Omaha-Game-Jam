@@ -24,11 +24,18 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
+	
+	<script>
+		function changePageColor() {
+		   $(".mainNavItems").find(".active").removeClass("active");
+		   $("#homeButton").addClass("active");
+		}
+	</script>
 </head>
 <!-- A lot of this page is hard-coded at the moment as a sort of proof of concept -->
 <!-- Admins will be able to update the homepage in the future -->
 
-<body>
+<body onload="changePageColor()">
 	<%@include file="Common/navbar.jsp" %>
 	<%@page import="java.util.List" %>
 	<%@page import="java.util.Map" %>
