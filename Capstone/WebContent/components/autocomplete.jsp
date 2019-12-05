@@ -3,10 +3,6 @@
   box-sizing: border-box;
 }
 
-body {
-  font: 16px Arial;  
-}
-
 /*the container must be positioned relative:*/
 .autocomplete {
   position: relative;

@@ -19,8 +19,14 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/subNavStyle.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/galleryStyle.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
+<script>
+	function changePageColor() {
+	   $(".mainNavItems").find(".active").removeClass("active");
+	   $("#galleryButton").addClass("active");
+	}
+</script>
 </head>
-<body>
+<body onload="changePageColor()">
 	<%@include file="/Common/navbar.jsp"%>
 	<%@include file="addGalleryPhotoModal.jsp"%>
 	<%@include file="deleteGalleryPhotoModal.jsp"%>
@@ -30,18 +36,10 @@
 	<%@page import="project.Main"%>
 	<%@page import="java.util.ArrayList"%>
 	<%@page import="utils.FolderReader"%>
-
+	<div style="padding-top: 50px;"></div> 
 	<%
 		boolean isAdmin = Account.isAdmin(session);
-		if(isAdmin) {
 	%>
-	<div class="admin-controls">
-		<h5 style="text-align: center;">Admin Controls:</h5>
-		<a id="addPhotoBtn" href="#addGalleryPhotoModal" class="btn btn-primary btn-med" style="cursor: pointer;" role="button" data-toggle="modal">Add Photo(s)</a>
-	</div>
-	<% } %>
-	<h4 style="text-align: center;">Gallery</h4>
-	<br>
 	<%
 		final String MEDIA_PATH = "/Uploads/Gallery";
 		final String MEDIA_PATH_FULL = request.getContextPath() + MEDIA_PATH;
