@@ -32,13 +32,19 @@ if (request.getParameter("id") != null)
 					</div>
 					<div class="form-group">
 						<div class="input-group">
+							<span class="input-group-addon icons"><i class="fa fa-link"></i></span>
+							<input type="url" class="form-control modalFields" name="title" placeholder="Link" value="<%= game != null ? game.getLink() : "" %>" required>
+							<div class="invalid-feedback">Please enter a valid URL</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
 						    <% session.setAttribute("uploadFilePath", "Uploads/temp/gamesub_0" + session.getAttribute("accountPKey")); %>
                           	<% session.setAttribute("uploadInputOnly", true); %>
                           	<% session.setAttribute("uploadInputID", "validatedCustomFile1"); %>
                           	<% session.setAttribute("uploadInputAttributes", "class='custom-file-input' " + (game != null ? "" : "required")); %>
                             <%@include file="../components/upload.jsp" %>
-							<label class="form-control modalFields custom-file-label" for="validatedCustomFile1">Choose Icon...</label>
 						    <div class="invalid-feedback">Please upload a valid icon</div>
 					    </div>
 				  	</div>
@@ -75,7 +81,6 @@ if (request.getParameter("id") != null)
                           	<% session.setAttribute("uploadInputID", "validatedCustomFile2"); %>
                           	<% session.setAttribute("uploadInputAttributes", "class='custom-file-input' multiple " + (game != null ? "" : "required")); %>
                             <%@include file="../components/upload.jsp" %>
-						    <label class="form-control modalFields custom-file-label" for="validatedCustomFile2">Choose Screenshot(s)...</label>
 						    <div class="invalid-feedback">Please upload a valid screenshot(s)</div>
 					    </div>
 				  	</div>
@@ -111,14 +116,53 @@ if (request.getParameter("id") != null)
 					    	</select>
 				    	</div>
 				  	</div>
-				  	<div class="form-group">
-						<div class="input-group">
-							<span class="input-group-addon icons"><i class="fa fa-wrench"></i></span>
-					      	<legend class="col-form-label col-sm-2 pt-0 checkLabel">Credits</legend>
-					      	<div class="col-sm-8">
-								<!-- <input type="text" class="form-control creditField" name="credit" placeholder="Name"> -->
-							</div>
-						</div>
+					<div class="input-group items" style="display: inline-block;">
+				  		<div class="row">
+				  			<div class="col-sm-1">
+				  				<span style="margin-left: 5px;" class="input-group-addon icons"><i class="fa fa-user"></i></span>
+				  			</div>
+				  			<div class="col-sm-11">
+				  				<div class="authorFields">
+						
+							    </div>
+								<button style="width: 100%; margin: auto; margin-top: 8px; margin-bottom: 30px;" type="button" class="add_author_button">Add Author</button>								
+								
+							    <script>
+							    $(document).ready(function() {
+							    	var max_fields = 20; //maximum input boxes allowed
+							    	var wrapper = $(".authorFields"); //Fields wrapper
+							    	var add_button = $(".add_author_button"); //Add button ID
+							    	 
+							    	var x = 1; //initlal text box count
+							    	$(add_button).click(function(e){ //on add input button click
+							    		e.stopPropagation();
+								    	e.preventDefault();
+								    	if(x < max_fields){ //max input box allowed
+									    	x++; //text box increment
+									    	$(wrapper).append(
+										    	'<div class="form-group">' +
+										    		'<div class="row">' +
+										    			'<div class="col-sm-6" style="padding-bottom: 0px;">' +
+										    				"<input type='text' class='form-control modalFields' name='author' placeholder='Author' required/>" +
+									    				'</div>' +
+									    				'<div class="col-sm-6" style="padding-bottom: 0px;">' +
+															"<input type='text' class='form-control modalFields' name='authorRole' placeholder='Role' required/>" +
+														'</div>' +
+													'</div>' +
+										    		'<a href="#" class="remove_field" style="color: red; margin-left: 10px;">Remove Author</a>' +
+									    		'</div>'
+									    	); //add input box
+								    	}
+							    	});
+							    	 
+							    	$(wrapper).on("click",".remove_field", function(e){ //user click on remove field
+							    		e.preventDefault(); $(this).parent('div').remove(); x--;
+							    	})
+							    	});
+							    
+							    </script>
+				  			</div>
+				  		</div>
 					</div>
 
 					<div class="form-group">

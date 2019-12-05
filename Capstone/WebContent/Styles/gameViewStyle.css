@@ -89,6 +89,7 @@
 .gameCard {
 	margin: auto;
 	height: 500px;
+	min-width: 285px;
 }
 
 .cardImgDiv {

@@ -22,11 +22,13 @@
 			        success: function (data){
 			           <% if (session.getAttribute("updates") != null) {
 			           	  	for (String update : (List<String>)session.getAttribute("updates")) { %>
-		        	   			if ($('<%= update %>')[0].tagName == 'IMG') {
-		        	   				$('<%= update %>')[0].src += '?_=' + new Date().getTime(); 
-		        	   			} else {
-		        	   				$('<%= update %>').replaceWith($('<%= update %>',data));
-		        	   			}
+			           	  		if ($('<%= update %>').length) {
+			        	   			if ($('<%= update %>')[0].tagName == 'IMG') {
+			        	   				$('<%= update %>')[0].src += '?_=' + new Date().getTime(); 
+			        	   			} else {
+			        	   				$('<%= update %>').replaceWith($('<%= update %>',data));
+			        	   			}
+			           	  		}
 		        	   <% 	}
 			           	  } %>
 			           	<% if (session.getAttribute("successJS") != null) { %>

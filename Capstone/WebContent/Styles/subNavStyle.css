@@ -30,6 +30,7 @@
 	margin-right: 1rem;
 	background-color: transparent !important;
 	height: 44px;
+	z-index: 1;
 }
 #subNavBar div, #subNavBar div ul {
 	height: 100%;
