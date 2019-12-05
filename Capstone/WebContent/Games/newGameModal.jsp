@@ -174,7 +174,6 @@ if (request.getParameter("id") != null)
 									    					'$("#contributorAutoCompleteSubmit").click();' +
 									    				'}' +
 									    			'});' +
-									    			'autocomplete(document.getElementsByName("author'+y+'")[0],["AA","BB"]);' +
 									    		'<\/script>'
 									    	); //add input box
 									    	$('#noOfAuthors').val(parseInt($('#noOfAuthors').val(), 10)+1);
