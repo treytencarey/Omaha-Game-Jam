@@ -23,13 +23,15 @@ public class EventTableBean implements Serializable {
 	/**
 	 * Fetch the events DB's Events table and instantiate an EventTableBean with them.
 	 * @param EventPKey the id of the event to get games for.
+	 * @throws ParseException 
 	 */
-	public EventTableBean()
+	public EventTableBean() throws ParseException
 	{
 		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Events");
         java.util.ListIterator<Map<String, Object>> litr = query.listIterator();
         while(litr.hasNext())
         	events.add(new Event(litr.next()));
+        events = sort(events);
 	}
 	
 	// Bean getter / setter
@@ -39,11 +41,30 @@ public class EventTableBean implements Serializable {
 	public void setEvents(ArrayList<Event> events) {
 		this.events = events;
 	}
-
-	private ArrayList<Event> sortEvents(ArrayList<Event> eventList, int order) throws ParseException{
-		//TO DO
-		return null;
+	
+	public ArrayList<Event> sort(ArrayList<Event> usev) throws ParseException{
+		ArrayList<Event> unsorted = (ArrayList<Event>) usev.clone();
+		ArrayList<Event> sorted = new ArrayList<Event>();
+		
+		Event lowEvent = null;
+		
+		while(unsorted.size() > 0) {
+			Date lowEDate = new SimpleDateFormat("MM/dd/yyyy").parse("12/31/3000");
+			
+			for(Event event : unsorted) {
+				Date esd = new SimpleDateFormat("MM/dd/yyyy").parse(event.getStartDate());
+				
+				if(esd.before(lowEDate)) {
+					lowEvent = event;
+					lowEDate = esd;
+				}
+			}
+			sorted.add(lowEvent);
+			unsorted.remove(lowEvent);
+		}
+		return sorted;
 	}
+	
 	/**
 	 * Returns the most current event in the Events table
 	 */
@@ -60,9 +81,14 @@ public class EventTableBean implements Serializable {
 				soonestEvent = event;
 			}
 		}
+		
 		return soonestEvent;
 	}
-	
+	/**
+	 * 
+	 * @return the second soonest event
+	 * @throws ParseException
+	 */
 	public Event getFutureEvent() throws ParseException {
 		Event futureEvent = new Event();
 		Date curEDate = new SimpleDateFormat("MM/dd/yyyy").parse(getCurrentEvent().getStartDate());
