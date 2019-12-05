@@ -7,12 +7,12 @@
 <%
 	EventTableBean eTable = new EventTableBean();
 	ArrayList<Event> listEvents = new ArrayList<Event>();
-	ArrayList<Event> pastEvents = eTable.getPastEvents();
+	ArrayList<Event> pEvents = eTable.getPastEvents();
 
-	Collections.reverse(pastEvents);
+	Collections.reverse(pEvents);
 	listEvents.add(eTable.getCurrentEvent());
-	for (int i = 0; i < pastEvents.size(); i++) {
-		listEvents.add(pastEvents.get(i));
+	for (int i = 0; i < pEvents.size(); i++) {
+		listEvents.add(pEvents.get(i));
 	}
 	
 	request.setAttribute("listEvents", listEvents);
