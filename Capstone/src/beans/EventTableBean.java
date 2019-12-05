@@ -23,6 +23,7 @@ public class EventTableBean implements Serializable {
 	/**
 	 * Fetch the events DB's Events table and instantiate an EventTableBean with them.
 	 * @param EventPKey the id of the event to get games for.
+	 * 
 	 */
 	public EventTableBean()
 	{
@@ -39,11 +40,30 @@ public class EventTableBean implements Serializable {
 	public void setEvents(ArrayList<Event> events) {
 		this.events = events;
 	}
-
-	private ArrayList<Event> sortEvents(ArrayList<Event> eventList, int order) throws ParseException{
-		//TO DO
-		return null;
+	
+	public ArrayList<Event> sort(ArrayList<Event> usev) throws ParseException{
+		ArrayList<Event> unsorted = (ArrayList<Event>) usev.clone();
+		ArrayList<Event> sorted = new ArrayList<Event>();
+		
+		Event lowEvent = null;
+		
+		while(unsorted.size() > 0) {
+			Date lowEDate = new SimpleDateFormat("MM/dd/yyyy").parse("12/31/3000");
+			
+			for(Event event : unsorted) {
+				Date esd = new SimpleDateFormat("MM/dd/yyyy").parse(event.getStartDate());
+				
+				if(esd.before(lowEDate)) {
+					lowEvent = event;
+					lowEDate = esd;
+				}
+			}
+			sorted.add(lowEvent);
+			unsorted.remove(lowEvent);
+		}
+		return sorted;
 	}
+	
 	/**
 	 * Returns the most current event in the Events table
 	 */
@@ -60,9 +80,14 @@ public class EventTableBean implements Serializable {
 				soonestEvent = event;
 			}
 		}
+		
 		return soonestEvent;
 	}
-	
+	/**
+	 * 
+	 * @return the second soonest event
+	 * @throws ParseException
+	 */
 	public Event getFutureEvent() throws ParseException {
 		Event futureEvent = new Event();
 		Date curEDate = new SimpleDateFormat("MM/dd/yyyy").parse(getCurrentEvent().getStartDate());
@@ -89,7 +114,7 @@ public class EventTableBean implements Serializable {
 			}
 		}
 		
-		return pastEvents;
+		return sort(pastEvents);
 	}
 	
 	public ArrayList<Event> getFutureEvents() throws ParseException {
@@ -102,7 +127,7 @@ public class EventTableBean implements Serializable {
 			}
 		}
 		
-		return futureEvents;
+		return sort(futureEvents);
 	}
 	
 	public void deleteEvent(Event event) {
