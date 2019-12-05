@@ -68,7 +68,14 @@ if (canEdit)
 					<%
 					for(Contributor c : ct.getContributors())
 					{
-						Profile p = new Profile(Integer.parseInt(c.getAccountPKey()));
+						Profile p;
+						try {
+							p = new Profile(Integer.parseInt(c.getAccountPKey()));
+						} catch (Exception profE) {
+							// TODO - What should happen if a profile doesn't exist?
+							// Continue just to not display. Perhaps it should show a dummy profile pic and the email as the name?
+							continue;
+						}
 						RoleTableBean rti = new RoleTableBean(c.getRolePKey());
 					%>
 						<div class="d-flex flex-row border rounded" style="border: none !important;">

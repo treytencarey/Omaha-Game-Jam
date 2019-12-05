@@ -52,6 +52,10 @@ public class Game extends HttpServlet implements Serializable{
 	 */
 	private List<Tool> tools=new ArrayList<Tool>();
 	/**
+	 * A list of tools for the game by primary key.
+	 */
+	private List<Contributor> contributors=new ArrayList<Contributor>();
+	/**
 	 * Whether or not the game is public.
 	 */
 	private Boolean isPublic=true;
@@ -107,14 +111,67 @@ public class Game extends HttpServlet implements Serializable{
 				}
 			}
 			
+			List<Contributor> contributors=new ArrayList<Contributor>();
+			int noOfAuthors = params.get("noOfAuthors") != null ? Integer.parseInt(params.get("noOfAuthors").toString()) : 0;
+			int authorI = 1;
+			while (noOfAuthors >= 0)
+			{
+				if (params.get("author" + String.valueOf(authorI)) != null)
+				{
+					String authorName = params.get("author" + String.valueOf(authorI));
+					String authorRole = params.get("authorRole" + String.valueOf(authorI));
+					
+					List<Map<String, Object>> dbAuthors;
+					// Step 1. Check if exact email exists first. This is because it's possible that, especially with trolls, someone could set their name to the same email address (thus, causing an error for anyone submitting a game).
+					dbAuthors = Database.executeQuery("" +
+							"SELECT PKey FROM Accounts WHERE lower(Email) = lower('" + authorName + "')"
+							);
+					if (dbAuthors.size() == 0)
+					{
+						// Step 2. Check if there are any near-matches for emails or profile names. 
+						dbAuthors = Database.executeQuery("" +
+								"SELECT DISTINCT PKey FROM (" + 
+								"	SELECT PKey FROM Accounts WHERE lower(Email) like lower('" + authorName + "%')" + 
+								"	UNION" + 
+								"	SELECT AccountPKey AS PKey FROM Profiles WHERE lower(Name) like lower('" + authorName + "%')" + 
+								")"
+								);
+					}
+					if (dbAuthors.size() > 1)
+					{
+						response.setStatus(400);
+						response.getWriter().print("Couldn't determine an email or profile name for author \"" + authorName + "\". Please be more specific.");
+						response.getWriter().flush();
+						return;
+					}
+					else if (dbAuthors.size() == 0)
+					{
+						response.setStatus(400);
+						response.getWriter().print("No emails or profile names matching author \"" + authorName + "\". Please select an existing author.");
+						response.getWriter().flush();
+						return;
+					}
+
+					contributors.add(new Contributor(dbAuthors.get(0).get("PKey").toString(), authorRole));
+					
+					noOfAuthors--;
+				}
+				authorI++;
+				// There's gotta be some limit, right? No one would add and remove this many authors.
+				if (authorI > 5000)
+					break;
+			}
+			
 			Game g = null;
 			try {
-				g = new Game(Integer.parseInt(session.getAttribute("accountPKey").toString()), new EventTableBean().getCurrentEvent().getKey(), params.get("title"), params.get("description"), mutators, systems, tools, true);
+				g = new Game(Integer.parseInt(session.getAttribute("accountPKey").toString()), new EventTableBean().getCurrentEvent().getKey(), params.get("title"), params.get("link"), params.get("description"), mutators, systems, tools, contributors, true);
 			}
 			catch (Exception e)
 			{
 				e.printStackTrace();
-				response.sendRedirect(session.getAttribute("curPage").toString());
+				response.setStatus(400);
+				response.getWriter().print("Failed to update game.");
+				response.getWriter().flush();
 				return;
 			}
 			g.updateGame(request.getParameter("PKey") != null ? Integer.parseInt(request.getParameter("PKey").toString()) : -1);
@@ -133,7 +190,9 @@ public class Game extends HttpServlet implements Serializable{
 				}
 			}
 			
-			response.sendRedirect(request.getContextPath() + "/game?id=" + String.valueOf(g.getId()));
+			response.setStatus(200);
+			response.getWriter().print(request.getContextPath() + "/game?id=" + String.valueOf(g.getId()));
+			response.getWriter().flush();
 			return;
 		}
 		
@@ -169,15 +228,17 @@ public class Game extends HttpServlet implements Serializable{
 	 * @param systems a list of systems by primary key.
 	 * @param isPublic whether or not the game is public.
 	 */
-	public Game(Integer submitter, Integer event, String title, String desc, List<Mutator> mutators, List<Platform> systems, List<Tool> tools, Boolean isPublic)
+	public Game(Integer submitter, Integer event, String title, String link, String desc, List<Mutator> mutators, List<Platform> systems, List<Tool> tools, List<Contributor> contributors, Boolean isPublic)
 	{
 		this.setSubmitter(submitter);
 		this.setEvent(event);
 		this.setTitle(title);
+		this.setLink(link);
 		this.setDesc(desc);
 		this.setMutators(mutators);
 		this.setSystems(systems);
 		this.setTools(tools);
+		this.setContributors(contributors);
 		this.setIsPublic(isPublic);
 	}
 
@@ -204,6 +265,7 @@ public class Game extends HttpServlet implements Serializable{
 		this.setSubmitter(Integer.parseInt(game.get("SubmitterPKey").toString()));
 		this.setEvent(Integer.valueOf(game.get("EventPKey").toString()));
 		this.setTitle(game.get("Title").toString());
+		this.setLink(game.get("PlayLink").toString());
 		this.setDesc(game.get("Description").toString());
 		this.setIsPublic(game.get("IsPublic").toString().equals("1"));
 		
@@ -233,6 +295,15 @@ public class Game extends HttpServlet implements Serializable{
 			tools.add(new Tool(Integer.parseInt(row.get("ToolPKey").toString())));
 		}
 		this.setTools(tools);
+		
+		// get contributors
+		query = Database.executeQuery("SELECT AccountPKey, RolePKey FROM Contributors WHERE GamePKey=" + this.getId().toString());
+		List<Contributor> contributors = new ArrayList<Contributor>();
+		for (Map<String, Object> row : query)
+		{
+			contributors.add(new Contributor(row.get("AccountPKey").toString(), this.getId().toString(), row.get("RolePKey").toString()));
+		}
+		this.setContributors(contributors);
 	}
 
 	/**
@@ -241,7 +312,8 @@ public class Game extends HttpServlet implements Serializable{
 	 */
 	private void updateGame(int PKey)
 	{
-		Database.executeUpdate("INSERT OR REPLACE INTO Games (" + ((PKey >= 1) ? "PKey, " : "") + "EventPKey, SubmitterPKey, Title, Description, IsPublic, PlayLink) VALUES (" + ((PKey >= 1) ? String.valueOf(PKey) + ", " : "") + this.toString() + ", '')");
+		Database.executeUpdate("INSERT OR REPLACE INTO Games (" + ((PKey >= 1) ? "PKey, " : "") + "EventPKey, SubmitterPKey, Title, Description, IsPublic, PlayLink) VALUES (" + ((PKey >= 1) ? String.valueOf(PKey) + ", " : "") + this.toString() + ")");
+		System.out.println("INSERT OR REPLACE INTO Games (" + ((PKey >= 1) ? "PKey, " : "") + "EventPKey, SubmitterPKey, Title, Description, IsPublic, PlayLink) VALUES (" + ((PKey >= 1) ? String.valueOf(PKey) + ", " : "") + this.toString() + ")");
 		if (PKey <= 0)
 		{
 			List<Map<String, Object>> m = Database.executeQuery("SELECT MAX(PKey) AS PKey FROM Games");
@@ -273,6 +345,13 @@ public class Game extends HttpServlet implements Serializable{
 		{
 			Database.executeUpdate("INSERT INTO GameTools (GamePKey, ToolPKey) VALUES (" + this.getId().toString() + ", " + toolPKey.getPKey().toString() + ")");
 		}
+		
+		// Reset and add contributors
+		Database.executeUpdate("DELETE FROM Contributors WHERE GamePKey=" + this.getId().toString());
+		for (Contributor contributorPKey : this.getContributors())
+		{
+			Database.executeUpdate("INSERT INTO Contributors (AccountPKey, GamePKey, RolePKey) VALUES (" + contributorPKey.getAccountPKey() + ", " + this.getId().toString() + ", " + contributorPKey.getRolePKey().toString() + ")");
+		}
 	}
 
 	/**
@@ -290,7 +369,7 @@ public class Game extends HttpServlet implements Serializable{
 	@Override
 	public String toString()
 	{
-		return String.valueOf(event) + ", " + String.valueOf(submitter) + ", '" + Database.formatString(title) + "', '" + Database.formatString(desc) + "', " + ((isPublic) ? "1" : "0");
+		return String.valueOf(event) + ", " + String.valueOf(submitter) + ", '" + Database.formatString(title) + "', '" + Database.formatString(desc) + "', " + ((isPublic) ? "1" : "0") + ", '" + Database.formatString(link) + "'";
 	}
 	
 	/**
@@ -339,6 +418,14 @@ public class Game extends HttpServlet implements Serializable{
 	 */
 	public List<Tool> getTools() {
 		return tools;
+	}
+	
+	/**
+	 * Gets the contributors of the game by primary key.
+	 * @return The contributors of the game by primary key.
+	 */
+	public List<Contributor> getContributors() {
+		return contributors;
 	}
 
 	/**
@@ -419,6 +506,17 @@ public class Game extends HttpServlet implements Serializable{
 	 */
 	public void setTools(List<Tool> tools) {
 		this.tools = tools;
+	}
+	
+	/**
+	 * Sets the contributors of the game by primary key.
+	 * @param The contributors of the game by primary key.
+	 */
+	public void setContributors(List<Contributor> contributors) {
+		// It's possible that contributors were created before the game, but get set after game creation.
+		for (Contributor contributor : contributors)
+			contributor.setGamePKey(this.getId().toString());
+		this.contributors = contributors;
 	}
 
 	/**
