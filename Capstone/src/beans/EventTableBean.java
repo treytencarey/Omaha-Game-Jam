@@ -40,6 +40,10 @@ public class EventTableBean implements Serializable {
 		this.events = events;
 	}
 
+	private ArrayList<Event> sortEvents(ArrayList<Event> eventList, int order) throws ParseException{
+		//TO DO
+		return null;
+	}
 	/**
 	 * Returns the most current event in the Events table
 	 */
@@ -84,6 +88,7 @@ public class EventTableBean implements Serializable {
 				pastEvents.add(event);
 			}
 		}
+		
 		return pastEvents;
 	}
 	
@@ -96,6 +101,7 @@ public class EventTableBean implements Serializable {
 				futureEvents.add(event);
 			}
 		}
+		
 		return futureEvents;
 	}
 	
