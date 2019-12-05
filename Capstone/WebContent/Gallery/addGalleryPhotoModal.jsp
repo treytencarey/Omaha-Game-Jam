@@ -3,9 +3,18 @@
 <%@page import="database.Database"%>
 <%@page import="project.Main"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Collections" %>
 <%
 	EventTableBean eTable = new EventTableBean();
-	ArrayList<Event> listEvents = eTable.getPastEvents();
+	ArrayList<Event> listEvents = new ArrayList<Event>();
+	ArrayList<Event> pastEvents = eTable.getPastEvents();
+
+	Collections.reverse(pastEvents);
+	listEvents.add(eTable.getCurrentEvent());
+	for (int i = 0; i < pastEvents.size(); i++) {
+		listEvents.add(pastEvents.get(i));
+	}
+	
 	request.setAttribute("listEvents", listEvents);
 %>
 <div id="addGalleryPhotoModal" class="modal fade">
@@ -24,16 +33,16 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<select class="browser-default custom-select" name="galleryEvent">
+						<select class="browser-default custom-select" name="galleryEvent" id="galleryEventKey">
 							<%
-								for (int i = listEvents.size() - 1; i >= 0; i--) {
-									if (i == listEvents.size() - 1) {
+								for (int i = 0; i < listEvents.size(); i++) {
+									if (i == 0) {
 							%>
-							<option value="<%= i %>" selected><%=listEvents.get(i).getTitle()%></option>
+							<option value="<%=i%>" selected><%=listEvents.get(i).getTitle()%></option>
 							<%
 								} else {
 							%>
-							<option value="<%= i %>"><%=listEvents.get(i).getTitle()%></option>
+							<option value="<%=i%>"><%=listEvents.get(i).getTitle()%></option>
 							<%
 								}
 								}
