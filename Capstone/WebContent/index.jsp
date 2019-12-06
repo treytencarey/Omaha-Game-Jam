@@ -31,6 +31,7 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
 		   $("#homeButton").addClass("active");
 		}
 	</script>
+	<title>Home</title>
 </head>
 <!-- A lot of this page is hard-coded at the moment as a sort of proof of concept -->
 <!-- Admins will be able to update the homepage in the future -->

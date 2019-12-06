@@ -124,6 +124,11 @@ public class EventPortalServlet extends HttpServlet {
 		int isPublic = 0;
 		
 		/**
+		 * String representing schedule of event
+		 */
+		String schedule = request.getParameter("eventSchedule");
+		
+		/**
 		 * String representing title of event
 		 */
 		String PKey = request.getParameter("PKey");
@@ -177,6 +182,17 @@ public class EventPortalServlet extends HttpServlet {
 		List<Map<String, Object>> check = Database.executeQuery("SELECT * FROM Events WHERE PKey=" + String.valueOf(PKey));
 		
 		if(check.size() > 0) {
+			
+			//Update event schedule
+			List<Map<String, Object>> check2 = Database.executeQuery("SELECT * FROM EventSchedules WHERE EventPKey=" + PKey);
+			
+			if(check2.size() > 0) {
+				Database.executeUpdate("UPDATE EventSchedules SET Schedule=\'" + schedule + "\' WHERE EventPKey=" + PKey);
+			}
+			else{
+				Database.executeUpdate("INSERT OR REPLACE INTO EventSchedules (EventPKey, Schedule) VALUES ('" + PKey + "', '" + schedule + "')");
+			}
+			
 			if(request.getParameter("visibility") != null) {
 				isPublic = 1;
 			}

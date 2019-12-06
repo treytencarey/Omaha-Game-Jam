@@ -24,6 +24,7 @@
 		   $("#newsButton").addClass("active");
 		}
 	</script>
+<title>News</title>
 </head>
 
 <body onload="changePageColor()">

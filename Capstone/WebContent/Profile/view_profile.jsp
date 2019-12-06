@@ -66,6 +66,7 @@
 		document.getElementById('moderate_form').submit();
 	}
 </script>
+<title>View Profile</title>
 </head>
 <body>
 	<%@include file="/Common/navbar.jsp"%>

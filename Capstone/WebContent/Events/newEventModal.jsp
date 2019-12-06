@@ -58,42 +58,6 @@
 						
 							    </div>
 								<button style="width: 100%; margin: auto;" type="button" class="add_field_button">Add Mutator</button>
-								<!-- <input type="button" value="Add another mutator" class="add-mutator" /> -->
-								
-								
-							    <script>
-							    $(document).ready(function() {
-							    	var max_fields = 20; //maximum input boxes allowed
-							    	var wrapper = $(".mutatorFields"); //Fields wrapper
-							    	var add_button = $(".add_field_button"); //Add button ID
-							    	 
-							    	var x = 1; //initlal text box count
-							    	$(add_button).click(function(e){ //on add input button click
-								    	e.preventDefault();
-								    	if(x < max_fields){ //max input box allowed
-									    	x++; //text box increment
-									    	$(wrapper).append(
-										    	'<div class="form-group">' +
-										    		'<div class="row">' +
-										    			'<div class="col-sm-6" style="padding-bottom: 0px;">' +
-										    				"<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' required/>" +
-									    				'</div>' +
-									    				'<div class="col-sm-6" style="padding-bottom: 0px;">' +
-															"<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Description' required/>" +
-														'</div>' +
-													'</div>' +
-										    		'<a href="#" class="remove_field" style="color: red; margin-left: 10px;">Remove Mutator</a>' +
-									    		'</div>'
-									    	); //add input box
-								    	}
-							    	});
-							    	 
-							    	$(wrapper).on("click",".remove_field", function(e){ //user click on remove field
-							    		e.preventDefault(); $(this).parent('div').remove(); x--;
-							    	})
-							    	});
-							    
-							    </script>
 				  			</div>
 				  		</div>
 					</div>
@@ -101,36 +65,9 @@
 			  		<div class="row">
 				  		<div class="form-group eventDates col-sm-6">
 			    	  		<input class="input-group form-control datePicker" id="startDate" name="startDate" placeholder="MM/DD/YYY" type="text" required/>
-						    <script>
-							    $(document).ready(function(){
-							      var date_input=$('input[name="startDate"]'); //our date input has the name "date"
-							      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-							      var options={
-							        format: 'mm/dd/yyyy',
-							        container: container,
-							        todayHighlight: true,
-							        autoclose: true,
-							      };
-							      date_input.datepicker(options);
-							    })
-							</script>
 				  		</div>
 				  		<div class="form-group eventDates col-sm-6">
 			    	  		<input class="input-group form-control datePicker" id="endDate" name="endDate" placeholder="MM/DD/YYY" type="text" required/>
-						    <script>
-						    $(document).ready(function(){
-							      var date_input=$('input[name="endDate"]'); //our date input has the name "date"
-							      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-							      var options={
-							        format: 'mm/dd/yyyy',
-							        container: container,
-							        todayHighlight: true,
-							        autoclose: true,
-							      };
-							      date_input.datepicker(options);
-							    })
-							    
-							</script>
 				  		</div>
 				    </div>
 
@@ -144,6 +81,71 @@
 </div>
 
 <script>
+var eventBodyField;
+loadEditor();
+
+function loadEditor() { 
+	eventBodyField = new nicEditor({fullPanel: true}).panelInstance("eventDescription");
+	$("eventDescription").width("100%");
+	$('.nicEdit-panelContain').parent().css({width:'100%', padding:"0"});
+    $('.nicEdit-panelContain').parent().next().css({width:'100%', padding:"5px"});
+    $('.nicEdit-main').css({width:'100%', padding:"0", minHeight:"80px"});
+}
+
+$(document).ready(function() {
+	var max_fields = 20; //maximum input boxes allowed
+	var wrapper = $(".mutatorFields"); //Fields wrapper
+	var add_button = $(".add_field_button"); //Add button ID
+	 
+	var x = 1; //initlal text box count
+	$(add_button).click(function(e){ //on add input button click
+    	e.preventDefault();
+    	if(x < max_fields){ //max input box allowed
+	    	x++; //text box increment
+	    	$(wrapper).append(
+		    	'<div class="form-group">' +
+		    		'<div class="row">' +
+		    			'<div class="col-sm-6" style="padding-bottom: 0px;">' +
+		    				"<input type='text' class='form-control modalFields' name='mutator' placeholder='Mutator' required/>" +
+	    				'</div>' +
+	    				'<div class="col-sm-6" style="padding-bottom: 0px;">' +
+							"<input type='text' class='form-control modalFields' name='mutatorDescription' placeholder='Description' required/>" +
+						'</div>' +
+					'</div>' +
+		    		'<a href="#" class="remove_field" style="color: red; margin-left: 10px;">Remove Mutator</a>' +
+	    		'</div>'
+	    	); //add input box
+    	}
+	});
+	 
+	$(wrapper).on("click",".remove_field", function(e){ //user click on remove field
+		e.preventDefault(); $(this).parent('div').remove(); x--;
+	})
+	});
+$(document).ready(function(){
+    var date_input=$('input[name="startDate"]'); //our date input has the name "date"
+    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+    var options={
+      format: 'mm/dd/yyyy',
+      container: container,
+      todayHighlight: true,
+      autoclose: true,
+    };
+    date_input.datepicker(options);
+  })
+  
+$(document).ready(function(){
+    var date_input=$('input[name="endDate"]'); //our date input has the name "date"
+    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+    var options={
+      format: 'mm/dd/yyyy',
+      container: container,
+      todayHighlight: true,
+      autoclose: true,
+    };
+    date_input.datepicker(options);
+  })
+  
 $('.modal').on('show.bs.modal', function () {
     $(this).find('.modal-body').css({
            width:'auto', //probably not needed

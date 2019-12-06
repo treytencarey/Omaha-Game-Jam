@@ -57,6 +57,7 @@ Iterator<Event> i = et.getEvents().iterator();
 		   $("#gamesButton").addClass("active");
 		}
 	</script>
+	<title>Games</title>
 </head>
 <body onload="changePageColor()">
 	<%@include  file="/Common/navbar.jsp" %>

@@ -35,6 +35,7 @@ final String MEDIA_PATH_FULL = request.getContextPath() + MEDIA_PATH;
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/gameViewStyle.css">
+	<title>View Games</title>
 </head>
 <body>
 <%@include  file="/Common/navbar.jsp" %>

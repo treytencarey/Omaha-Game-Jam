@@ -26,6 +26,7 @@
 	   $("#galleryButton").addClass("active");
 	}
 </script>
+<title>Gallery</title>
 </head>
 <body onload="changePageColor()">
 	<%@include file="/Common/navbar.jsp"%>

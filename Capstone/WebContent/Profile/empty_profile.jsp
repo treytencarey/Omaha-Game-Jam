@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/style.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/navStyle.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/Styles/subNavStyle.css">
+<title>View Profile</title>
 </head>
 <body>
 	<%@include file="/Common/navbar.jsp"%>

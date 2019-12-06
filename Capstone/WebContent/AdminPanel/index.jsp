@@ -26,7 +26,7 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/style.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
-	
+	<title>Admin Panel</title>
 </head>
 <body>
 
@@ -43,7 +43,6 @@
 	
 	
 	<div style="text-align: center;">
-		Admin Panel<br><br>
 		
 		<h3><b>Event Options:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEventModal">Create Event</button>

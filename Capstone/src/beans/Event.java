@@ -116,7 +116,7 @@ public class Event {
 		//Get event schedule from database
 		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM EventSchedules WHERE EventPKey=" + Integer.parseInt(queryRow.get("PKey").toString()));
 		
-		this.setVisibility(0);
+		this.setVisibility(Integer.parseInt(queryRow.get("IsPublic").toString()));
 		this.setKey(Integer.parseInt(queryRow.get("PKey").toString()));
 		this.setTitle(queryRow.get("Title").toString());
 		this.setTheme(queryRow.get("Theme").toString());
@@ -186,7 +186,7 @@ public class Event {
 	}
 
 	public boolean IsPublic() {
-		return (isPublic == 1);
+		return isPublic == 1;
 	}
 	/**
 	 * returns pkey for event
