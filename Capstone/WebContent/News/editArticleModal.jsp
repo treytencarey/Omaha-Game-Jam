@@ -10,13 +10,13 @@
 						<form class="was-validated" action="<%= request.getContextPath() %>/NewsServlet" method = "post" enctype="multipart/form-data">
 							<div class="form-group">
 								<div class="input-group">
-									<input value="<%= n.getTitle() %>" type="text" class="form-control modalFields" name="newsTitle" placeholder="Title" required>
+									<input value="<%= n.getTitle() %>" type="text" class="form-control modalFields" name="newsTitle" placeholder="Title" maxlength="80" required>
 									<div class="invalid-feedback">Please enter a valid title.</div>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="input-group">
-									<input value="<%= n.getHeader() %>" type="text" class="form-control modalFields" name="newsHeader" placeholder="Subtitle" required>
+									<input value="<%= n.getHeader() %>" type="text" class="form-control modalFields" name="newsHeader" placeholder="Subtitle" maxlength="80" required>
 									<div class="invalid-feedback">Please enter a valid subtitle.</div>
 								</div>
 							</div>

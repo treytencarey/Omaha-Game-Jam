@@ -54,7 +54,7 @@ public class LoginTests {
 	 */
 	@Test
 	public void test1_testUrl() {
-		TestFunctions.goToPage(driver, "http://localhost:8080/Capstone/");
+		TestFunctions.goToHomepage(driver);
 		assertEquals(driver.getCurrentUrl(), "http://localhost:8080/Capstone/");
 	}
 	
@@ -64,7 +64,7 @@ public class LoginTests {
 	@Test
 	public void test2_registerTest() {
 		String userbarText;
-		TestFunctions.goToPage(driver, "http://localhost:8080/Capstone/");
+		TestFunctions.goToHomepage(driver);
 		
 		enterRegister(junitEmail, junitPass);
 		userbarText = driver.findElement(By.id("loggedInAccountBtn")).getText();
@@ -78,7 +78,7 @@ public class LoginTests {
 	 */
 	@Test
 	public void test3_logoutTest() throws InterruptedException {
-		TestFunctions.goToPage(driver, "http://localhost:8080/Capstone/");
+		TestFunctions.goToHomepage(driver);
 		
 		driver.findElement(By.xpath("//button[contains(text(),'" + junitEmail + "')]")).click();
 		driver.findElement(By.id("logoutBtn")).click();
@@ -115,6 +115,11 @@ public class LoginTests {
 		driver.findElement(By.id("modalLoginBtn")).click();
 	}
 	
+	/**
+	 * Enters the given login information to register to the site.
+	 * @param n a string value of the email (username).
+	 * @param p a string of the password.
+	 */
 	private void enterRegister(String n, String p) {
 		driver.findElement(By.id("loginBtn")).click();
 		driver.findElement(By.linkText("Create account")).click();

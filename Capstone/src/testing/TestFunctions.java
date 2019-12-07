@@ -38,6 +38,14 @@ public class TestFunctions {
 	}
 	
 	/**
+	 * Makes web browser go to homepage
+	 * @param driver
+	 */
+	public static void goToHomepage(WebDriver driver) {
+		driver.get("http://localhost:8080/Capstone");
+	}
+	
+	/**
 	 * Takes a screenshot of the page and saves it.
 	 * @param filename a string of the file location to save to.
 	 */
@@ -85,5 +93,20 @@ public class TestFunctions {
 	public static String generatePassword() {
 		Random random = new Random();
 		return "TestPassword!" + random.nextInt(99);
+	}
+	
+	/**
+	 * Generates a string with given number of characters to test for field overflows
+	 * @param chars - Number of characters to put in string
+	 * @return String
+	 */
+	public static String generateLongString(int chars) {
+		String rtn = "";
+		Random random = new Random();
+		for(int i = 0; i < chars; i++) {
+			rtn = rtn + random.nextInt(9);
+		}
+		
+		return rtn;
 	}
 }
