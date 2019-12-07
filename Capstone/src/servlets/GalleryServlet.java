@@ -57,8 +57,14 @@ public class GalleryServlet extends HttpServlet {
 			
 			Collections.reverse(pastEvents);
 			events.add(eventTable.getCurrentEvent());
-			for(int i = 0; i < pastEvents.size(); i++)
+			/**
+			 * Display only three most recent event galleries for the default page
+			 */
+			for(int i = 0; i < pastEvents.size(); i++) {
+				if(events.size() == 3)
+					break;
 				events.add(pastEvents.get(i));
+			}
 			
 			if (id == null) {
 				request.setAttribute("events", events);
