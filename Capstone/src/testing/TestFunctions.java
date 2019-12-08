@@ -13,6 +13,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import database.Database;
+
 public class TestFunctions {
 	/**
 	 * Sets up the Chrome browser for testing
@@ -75,6 +77,13 @@ public class TestFunctions {
 		} catch(NoSuchElementException e) {
 			return false;
 		}
+	}
+	
+	public static void loginAdmin(WebDriver driver) {
+		driver.findElement(By.id("loginBtn")).click();
+		driver.findElement(By.name("email")).sendKeys("admintest@test");
+		driver.findElement(By.name("password")).sendKeys("Testpassword1!");
+		driver.findElement(By.id("modalLoginBtn")).click();
 	}
 	
 	/**
