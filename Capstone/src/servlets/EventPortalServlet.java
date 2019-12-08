@@ -96,6 +96,7 @@ public class EventPortalServlet extends HttpServlet {
 				if (Database.executeUpdate(query).length() == 0)
 				{
 					success = "You're now registered for " + ec.getTitle();
+					request.setAttribute("EventPKey", ec.getKey());
 				}
 				else
 				{

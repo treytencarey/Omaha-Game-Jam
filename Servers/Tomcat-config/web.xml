@@ -4734,6 +4734,10 @@
         project.Main
        </listener-class>
      </listener>
+     
+	<listener>
+		<listener-class>weblisteners.ActivityStashWriter</listener-class>
+	</listener>
 
 	<servlet>
 		<servlet-name>submitGame</servlet-name>
