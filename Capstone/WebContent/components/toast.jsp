@@ -1,4 +1,4 @@
-<div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000" style="position: absolute; bottom: 50px; right: 50px;">
+<div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000" style="position: fixed; bottom: 50px; right: 50px;">
   <div class="toast-header">
     <!-- <img src="..." class="rounded mr-2" alt="...">  -->
     <strong class="mr-auto">[[TOASTTITLE]]</strong>

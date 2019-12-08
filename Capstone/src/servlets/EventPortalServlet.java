@@ -84,31 +84,48 @@ public class EventPortalServlet extends HttpServlet {
 			List<Map<String, Object>> results = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE AccountPKey=" + apk + " AND EventPKey=" + ec.getKey());
 			if (results.size() == 0) // Error contacting DB?
 				throw new NullPointerException();
+			String count = results.get(0).get("COUNT(*)").toString();
 			
 			String success = "";
 			
-			String count = results.get(0).get("COUNT(*)").toString();
-			if (count.equals("0"))
-			{
-				//INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (1, 1);
-				String query = String.format("INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (%s, %s);", apk, ec.getKey());
-				System.out.println(query);
-				if (Database.executeUpdate(query).length() == 0)
+			if (request.getParameter("RSVPButton").toString().equals("RSVP")) {
+				if (count.equals("0"))
 				{
-					success = "You're now registered for " + ec.getTitle();
-					request.setAttribute("EventPKey", ec.getKey());
+					//INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (1, 1);
+					String query = String.format("INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (%s, %s);", apk, ec.getKey());
+					System.out.println(query);
+					if (Database.executeUpdate(query).length() == 0)
+					{
+						success = "You're now registered for " + ec.getTitle();
+						request.setAttribute("EventPKey", ec.getKey());
+					}
+					else
+					{
+						response.setStatus(400);
+						response.getWriter().print("Error communicating with DB.");
+						response.getWriter().flush();
+						return;
+					}
+				}
+				else
+				{
+					success = "You're already registered!";
+				}
+			}
+			else // UnRSVP'ing 
+			{
+				if (!count.equals("0"))
+				{
+					Database.executeUpdate("DELETE FROM Attendees WHERE AccountPKey=" + apk + " AND EventPKey=" + ec.getKey());
+					success = "You're no longer registered for " + ec.getTitle();
 				}
 				else
 				{
 					response.setStatus(400);
-					response.getWriter().print("Error communicating with DB.");
+					response.getWriter().print("You are not registered for this event.");
 					response.getWriter().flush();
 					return;
 				}
-			}
-			else
-			{
-				success = "You're already registered!";
 			}
 			response.setStatus(200);
 			response.getWriter().print(success);
