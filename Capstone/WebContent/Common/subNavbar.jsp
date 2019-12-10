@@ -1,4 +1,11 @@
 <%@page import="database.Account" %>
+<%@page import="beans.EventTableBean" %>
+<%@page import="beans.Event" %>
+<%@page import="java.util.Date" %>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.ParseException" %>
+<%@page import="java.text.SimpleDateFormat" %>
+
 <nav id="subNavBar" class="navbar navbar-expand navbar-light bg-light">
 <!-- Check if user is logged in -->
 <%	if (session.getAttribute("accountPKey") != null) { %>
@@ -50,7 +57,29 @@
                 </form>
 		      </li>
 	      	<%}%>
-	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/Games/"))  { %>
+	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/Games/"))  { 
+	      		EventTableBean etb = new EventTableBean();
+	      		Event curE = etb.getCurrentEvent();
+	      		Date start = new SimpleDateFormat("MM/dd/yyyy").parse(curE.getStartDate());
+	      		Date end = new SimpleDateFormat("MM/dd/yyyy").parse(curE.getEndDate());
+	      		Calendar c = Calendar.getInstance();
+	      		c.setTime(start);
+	      		c.add(Calendar.DATE, -1);
+	      		start = c.getTime();
+	      		c = Calendar.getInstance();
+	      		c.setTime(end);
+	      		c.add(Calendar.DATE, 1);
+	      		end = c.getTime();
+	      		
+	      		System.out.println(start+" - "+end);
+	      		Date current = new Date();
+	      			if(current.before(end) && current.after(start)){ 
+	      				System.out.println("Event happening");
+	      				} 
+	      			else{
+	      				System.out.println("Event not happening");
+	      					}
+	      	%>
 		      <li class="nav-item indvTabs">
 		        <a id="addGameBtn" href="#newGameModal" class="nav-link" data-toggle="modal">Submit Game</a>
 		      </li>

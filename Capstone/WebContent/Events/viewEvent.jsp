@@ -80,6 +80,9 @@
 					<a href=""><i class="fab fa-discord fa-3x" style="color: #7289da;"></i></a>
 				</div>
 			</div>
+			<div class="row rounded" id="event-schedule-description" style="margin: auto; padding: auto; display:none;">
+				<h6><%= display.getSchedule() %></h6>
+			</div>
 		</div>
 	</div>
 </div>
@@ -107,12 +110,16 @@
 				<div class="valid-feedback">Looks good!</div>
 			</div>
 		</div>
-		 
+		 <h3>Event Description</h3>
 		<div class="form-group">
 			<div class="input-group">
-				<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
-				<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" required><%=display.getDescription()%></textarea>
+				<textarea class="form-control modalFields" id="eventDescription" name="eventDescription"><%=display.getDescription()%></textarea>
 			</div>
+		</div>
+		
+		<div class="input-group">
+			<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
+			<input type="file" style="width: unset; opacity: 1; margin-left: 10px;" class="custom-file-input" name="eventImage" id="eventImage" />
 		</div>
 		
 	  	<div class="input-group items" style="display: inline-block;">
@@ -149,7 +156,7 @@
 				<button style="width: 100%; margin: auto;" type="button" class="add_field_button">Add Mutator</button>
 
 			    <br><br>
-			    <h1>Event Schedule</h1>
+			    <h3>Event Schedule</h3>
 			    <div class="form-group">
 					<div class="input-group">
 						<textarea class="form-control modalFields" id="eventSchedule" name="eventSchedule" placeholder="Schedule"><%=display.getSchedule()%></textarea>
@@ -284,8 +291,18 @@
 			else return false;
 		}
 		function checkChange(){
-			confirm("Submit changes?");
+			var submit = confirm("Submit changes?");
+			if(submit){
+				return true;
+			}
+			else return false;
 		}
+		$(document).ready(function(){
+
+			$("#event-schedule-button").click(function(){
+				$("#event-schedule-description").toggle();
+			});
+		});
 	</script>
 	</body>
 </html>
