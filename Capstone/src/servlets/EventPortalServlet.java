@@ -322,6 +322,7 @@ public class EventPortalServlet extends HttpServlet {
 	 * @throws IOException
 	 */
 	private static void createFile(String pKey, String path, String body) throws IOException {
+		System.out.print(path+pKey+"_body.txt");
 		/**
 		 * Create the file in the form of PKey_body.txt and write/overwrite to the file
 		 */
