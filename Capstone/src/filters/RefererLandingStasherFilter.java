@@ -65,7 +65,7 @@ public class RefererLandingStasherFilter implements Filter {
 		finally
 		{
 			s.setAttribute("AccessDate", date); // Set date no matter what (gets set not when they arrive, but at the last page they visit before their session expires).
-			System.out.println(date);
+			//System.out.println(date);
 		}
 
 		// pass the request along the filter chain

@@ -5,13 +5,17 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
+import project.Main;
+
 /**
  * Listens for Session expiration and appends its attributes to activities.csv.
  */
+@WebListener
 public class ActivityStashWriter implements HttpSessionListener {
 //	private static Integer instances = 0;
 //	private static BufferedWriter bw; // Singleton that all ActivityStashWriters use (but it looks like there's only 1 instantiated based on my tests)
@@ -48,9 +52,9 @@ public class ActivityStashWriter implements HttpSessionListener {
 			System.out.println("AccountPKey: " + AccountPKey);
 			System.out.println("RSVPdEventPKey: " + RSVPdEventPKey);
 			System.out.println("AccessDate: " + AccessDate);
-			
+			System.out.println("from Main: " + Main.context.getRealPath(VIRTUAL_CSV_PATH));
 			File af = new File(session.getServletContext().getRealPath(VIRTUAL_CSV_PATH));
-//			System.out.println(af.getAbsolutePath());
+			System.out.println(af.getAbsolutePath());
 //			System.out.println(af.exists());
 			if (af.exists()) // If CSV already exists: just initialize bw
 			{
