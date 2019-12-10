@@ -37,7 +37,7 @@
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
-							<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" placeholder="Description" required></textarea>
+							<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" placeholder="Description"></textarea>
 						</div>
 					</div>
 					
