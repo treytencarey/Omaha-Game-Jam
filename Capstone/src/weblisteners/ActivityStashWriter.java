@@ -23,6 +23,11 @@ public class ActivityStashWriter implements HttpSessionListener {
 	private static final String CSV_HEADER_LINE = "AccountPKey,Referer,Landing,RSVPdEventPKey,AccessDate\n"; // Header line to begin the CSV file with in case CSV doesn't exist.
 	private BufferedWriter bw; // Singleton that all ActivityStashWriters use (but it looks like there's only 1 instantiated based on my tests)
 	
+	public ActivityStashWriter() {
+		// TODO Auto-generated constructor stub
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nActivityStashWriter CREATED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! YAYAYAYAYAYAYAY\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	}
+	
 	@Override
 	public void sessionCreated(HttpSessionEvent se) {
 		HttpSessionListener.super.sessionCreated(se);
