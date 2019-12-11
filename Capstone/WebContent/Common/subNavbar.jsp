@@ -5,6 +5,9 @@
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.ParseException" %>
 <%@page import="java.text.SimpleDateFormat" %>
+<%@page import="java.util.Map" %>
+<%@page import="java.util.List" %>
+<%@page import="database.Database" %>
 
 <nav id="subNavBar" class="navbar navbar-expand navbar-light bg-light">
 <!-- Check if user is logged in -->
@@ -70,20 +73,26 @@
 	      		c.setTime(end);
 	      		c.add(Calendar.DATE, 1);
 	      		end = c.getTime();
-	      		
-	      		System.out.println(start+" - "+end);
 	      		Date current = new Date();
+	      		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Attendees WHERE AccountPKey="+session.getAttribute("accountPKey").toString());
+	      		
+	      		if(query.size() > 0){
+	      		System.out.println(start+" - "+end);
+	      		
 	      			if(current.before(end) && current.after(start)){ 
-	      				System.out.println("Event happening");
-	      				} 
-	      			else{
-	      				System.out.println("Event not happening");
-	      					}
 	      	%>
-		      <li class="nav-item indvTabs">
-		        <a id="addGameBtn" href="#newGameModal" class="nav-link" data-toggle="modal">Submit Game</a>
-		      </li>
-	      	<%}%>
+		      	<li class="nav-item indvTabs">
+		        	<a id="addGameBtn" href="#newGameModal" class="nav-link" data-toggle="modal">Submit Game</a>
+		      	</li>
+	      	<%} else {%>
+	      		<li class="nav-item indvTabs">
+		        	<a id="addGameBtn" href="#" class="nav-link text-light" data-toggle="tooltip" title="No event currently happening" >Submit Game</a>
+		      	</li>
+	      	<%}} else { %>
+	      		<li class="nav-item indvTabs">
+		        	<a id="addGameBtn" href="#" class="nav-link text-light" data-toggle="tooltip" title="You must RSVP for the current event to Submit a Game" >Submit Game</a>
+		      	</li>
+	      	<%} %>
 	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/Games/view_game.jsp")) { %>
 	      	  <%@page import="database.Game" %>
 	      	  <% if (session.getAttribute("accountPKey") != null && new Game(Integer.parseInt(request.getParameter("id").toString())).getSubmitter() == Integer.parseInt(session.getAttribute("accountPKey").toString())) { %>
@@ -94,5 +103,5 @@
 	      	<%}%>
 	    </ul>
 	  </div>
-<%	} %>
+<%	}} %>
 </nav>
