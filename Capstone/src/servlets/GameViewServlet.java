@@ -89,7 +89,6 @@ public class GameViewServlet extends HttpServlet {
 				canEdit = new Boolean(true);
 			for(Contributor c : ct.getContributors()) // Is the user a contributor?
 			{
-				//System.out.println();
 				if (apk.toString().equals(c.getAccountPKey()))
 				{
 					canEdit = new Boolean(true);

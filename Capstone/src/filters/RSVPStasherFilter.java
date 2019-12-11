@@ -38,7 +38,6 @@ public class RSVPStasherFilter implements Filter {
 		chain.doFilter(request, response);
 		//Done after EventServlet
 		HttpServletRequest httpRequest;
-//		System.out.println("yeet doing RSVPStasher");
 		try
 		{
 			httpRequest = (HttpServletRequest)request;

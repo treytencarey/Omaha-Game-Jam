@@ -3,6 +3,7 @@ package servlets;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.FileSystems;
@@ -84,31 +85,47 @@ public class EventPortalServlet extends HttpServlet {
 			List<Map<String, Object>> results = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE AccountPKey=" + apk + " AND EventPKey=" + ec.getKey());
 			if (results.size() == 0) // Error contacting DB?
 				throw new NullPointerException();
+			String count = results.get(0).get("COUNT(*)").toString();
 			
 			String success = "";
 			
-			String count = results.get(0).get("COUNT(*)").toString();
-			if (count.equals("0"))
-			{
-				//INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (1, 1);
-				String query = String.format("INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (%s, %s);", apk, ec.getKey());
-				System.out.println(query);
-				if (Database.executeUpdate(query).length() == 0)
+			if (request.getParameter("RSVPButton").toString().equals("RSVP")) {
+				if (count.equals("0"))
 				{
-					success = "You're now registered for " + ec.getTitle();
-					request.setAttribute("EventPKey", ec.getKey());
+					//INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (1, 1);
+					String query = String.format("INSERT INTO Attendees (AccountPKey, EventPKey) VALUES (%s, %s);", apk, ec.getKey());
+					if (Database.executeUpdate(query).length() == 0)
+					{
+						success = "You're now registered for " + ec.getTitle();
+						request.setAttribute("EventPKey", ec.getKey());
+					}
+					else
+					{
+						response.setStatus(400);
+						response.getWriter().print("Error communicating with DB.");
+						response.getWriter().flush();
+						return;
+					}
+				}
+				else
+				{
+					success = "You're already registered!";
+				}
+			}
+			else // UnRSVP'ing 
+			{
+				if (!count.equals("0"))
+				{
+					Database.executeUpdate("DELETE FROM Attendees WHERE AccountPKey=" + apk + " AND EventPKey=" + ec.getKey());
+					success = "You're no longer registered for " + ec.getTitle();
 				}
 				else
 				{
 					response.setStatus(400);
-					response.getWriter().print("Error communicating with DB.");
+					response.getWriter().print("You are not registered for this event.");
 					response.getWriter().flush();
 					return;
 				}
-			}
-			else
-			{
-				success = "You're already registered!";
 			}
 			response.setStatus(200);
 			response.getWriter().print(success);
@@ -172,9 +189,16 @@ public class EventPortalServlet extends HttpServlet {
 		if (request.getParameter("toDelete") != null && request.getParameter("toDelete").contentEquals("yes")) {
 			Database.executeUpdate("DELETE FROM Mutators WHERE EventPKey=" + PKey);
 			Database.executeUpdate("DELETE FROM Events WHERE PKey=" + PKey);
-			//Files.deleteIfExists(Paths.get(path + id + "_body.txt"));
+			try {
 			path = getServerPath("/Uploads/Events/HeaderImages/HeaderImages");
 			Files.deleteIfExists(Paths.get(path + PKey + "_header.png"));
+			path = getServerPath("/Uploads/Events/Schedule/Schedule");
+			Files.deleteIfExists(Paths.get(path + PKey + "_body.txt"));
+			path = getServerPath("/Uploads/Events/Body/Body");
+			Files.deleteIfExists(Paths.get(path + PKey + "_body.txt"));
+			} catch(Exception e) {
+
+			}
 			response.sendRedirect(request.getContextPath() + "/AdminPanel/");
 			return;
 		}
@@ -183,16 +207,6 @@ public class EventPortalServlet extends HttpServlet {
 		List<Map<String, Object>> check = Database.executeQuery("SELECT * FROM Events WHERE PKey=" + String.valueOf(PKey));
 		
 		if(check.size() > 0) {
-			
-			//Update event schedule
-			List<Map<String, Object>> check2 = Database.executeQuery("SELECT * FROM EventSchedules WHERE EventPKey=" + PKey);
-			
-			if(check2.size() > 0) {
-				Database.executeUpdate("UPDATE EventSchedules SET Schedule=\'" + schedule + "\' WHERE EventPKey=" + PKey);
-			}
-			else{
-				Database.executeUpdate("INSERT OR REPLACE INTO EventSchedules (EventPKey, Schedule) VALUES ('" + PKey + "', '" + schedule + "')");
-			}
 			
 			if(request.getParameter("visibility") != null) {
 				isPublic = 1;
@@ -246,14 +260,28 @@ public class EventPortalServlet extends HttpServlet {
 				}
 			}
 
-			//Update Event
+			//Update Event, event description, and event schedule
 			Database.executeUpdate("UPDATE Events SET Title=\'" + title + "\', Theme=\'" + theme + "\', Description=\'" + eventDescription + "\', StartDate=\'" + startDate + "\', EndDate=\'" + endDate + "\', IsPublic=\'" + isPublic + "\' WHERE PKey=" + PKey);
 			
+			path = getServerPath("/Uploads/Events/Body/Body");
+			createFile(PKey, path, eventDescription);
+			path = getServerPath("/Uploads/Events/Schedule/Schedule");
+			createFile(PKey, path, schedule);
 		}
-		else {
-			Database.executeUpdate("INSERT OR REPLACE INTO Events (Title, Theme, Description, StartDate, EndDate, IsPublic) VALUES ('" + title + "', '" + theme + "', '" + eventDescription + "', '" + startDate + "', '" + endDate + "', '" + isPublic +"')");
+		else { //Insert new mutators and event into database
+			Database.executeUpdate("INSERT OR REPLACE INTO Events (Title, Theme, Description, StartDate, EndDate, IsPublic) VALUES ('" + title + "', '" + theme + "', '" + " " + "', '" + startDate + "', '" + endDate + "', '" + isPublic +"')");
 			List<Map<String, Object>> query = Database.executeQuery("SELECT PKey FROM Events WHERE Title=\'" + title + "\'");
 			PKey = query.get(0).get("PKey").toString();
+			
+			//Create event description file
+			path = getServerPath("/Uploads/Events/Body/Body");
+			createFile(PKey, path, eventDescription);
+			path = getServerPath("/Uploads/Events/Schedule/Schedule");
+			if(schedule == null || schedule == "") {
+				schedule = "No Schedule Available";
+			}
+			createFile(PKey, path, schedule);
+			
 			if(mutators != null) {
 				for(int i = 0; i < mutators.length; i++) {
 					if(mutators[i] != null && mutatorDescriptions[i] != null) {
@@ -262,11 +290,9 @@ public class EventPortalServlet extends HttpServlet {
 				}
 			}
 		}
-		/**
-		 * Get the image from event submission form, and write to Upload/Events/HeaderImages
-		 */
+		
+		//Upload event image
 		if(!request.getPart("eventImage").getSubmittedFileName().isEmpty()) {
-			File file = new File(request.getContextPath()+"/Uploads/Events/HeaderImages/"+PKey+"_header.png");
 	        
 			Part headerImg = request.getPart("eventImage");
 			path = getServerPath("/Uploads/Events/HeaderImages/HeaderImages");
@@ -286,6 +312,25 @@ public class EventPortalServlet extends HttpServlet {
 		response.sendRedirect(request.getContextPath() + "/AdminPanel/");
 		
 		
+	}
+	
+	/**
+	 * Creates the body file for the news article
+	 * @param pKey - The PKey of the article in the database, used for filename
+	 * @param path - The path where the txt file is saved
+	 * @param body - The content/text in the file
+	 * @throws IOException
+	 */
+	private static void createFile(String pKey, String path, String body) throws IOException {
+		System.out.print(path+pKey+"_body.txt");
+		/**
+		 * Create the file in the form of PKey_body.txt and write/overwrite to the file
+		 */
+		File file = new File(path + pKey + "_body.txt");
+		file.createNewFile();
+		FileOutputStream outFile = new FileOutputStream(file);
+		outFile.write(body.getBytes());
+		outFile.close();
 	}
 	
 	private static String getServerPath(String orig) {

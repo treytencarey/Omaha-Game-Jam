@@ -8,13 +8,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.GameBean;
 import beans.GameTableBean;
+import database.Account;
 
 
 /**
- * Controller that serves AJAX requests from the Game Portal to display games.
+ * Controller that serves AJAX requests from the Game Portal to display games. Currently serves HTML, but in the future, should just send JSON/XML.
  */
 @WebServlet("/gamepull")
 public class GamePullerServlet extends HttpServlet {
@@ -35,15 +37,46 @@ public class GamePullerServlet extends HttpServlet {
 		gt.fillByEvent(request.getParameter("event"));
 		Iterator<GameBean> i = gt.getGames().iterator();
 		int gameCount = 0;
+		HttpSession session = request.getSession();
+		boolean isAdmin = Account.isAdmin(session);
+		
 		while (i.hasNext())
 		{
 			GameBean g = i.next();
+			String color = "";
 			String s = "";
+			
+			if (! isAdmin)
+			{
+				if (! g.isPublic())
+				{
+					continue;
+				}
+			}
+			else // If user is admin, change colors of game cards to reflect their moderation status.
+			{
+				switch (g.getStatus())
+				{
+				case "-1":
+					color = "red";
+					break;
+				case "0":
+					color = "yellow";
+					break;
+				case "1":
+					color = "greenyellow";
+					break;
+				case "2":
+					color = "green";
+					break;
+				}
+			}
+			
 			if (gameCount % 3 == 0) {
 				s = "<div class=\"row\" style=\"margin-bottom: 50px;\">";
 			}
 			s = s + String.format(
-					  "<div class=\"card col-sm-3 gameCard\">"
+					  "<div class=\"card col-sm-3 gameCard\" style='background-color:%s;'>"
 					+   "<div class=\"cardImgDiv\">"
 					+     "<img class=\"card-img-top\" src=\"%s\" alt=\"Game Icon\">"
 					+   "</div>"
@@ -53,7 +86,7 @@ public class GamePullerServlet extends HttpServlet {
 					+     "<a href=\"%s\" class=\"btn btn-primary\">View Game</a>"
 					+   "</div>"
 					+ "</div>",
-					request.getContextPath() + "/Uploads/Games/Thumbnails/" + g.getId(), g.getTitle(), g.getDesc(), request.getContextPath() + "/game?id=" + g.getId()
+					color, request.getContextPath() + "/Uploads/Games/Thumbnails/" + g.getId(), g.getTitle(), g.getDesc(), request.getContextPath() + "/game?id=" + g.getId()
 					);
 			if (gameCount % 3 == 2) {
 				s = s + "</div>";

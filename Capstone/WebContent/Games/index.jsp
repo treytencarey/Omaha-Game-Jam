@@ -63,6 +63,21 @@ Iterator<Event> i = et.getEvents().iterator();
 	<%@include  file="/Common/navbar.jsp" %>
 	<%@include file="/Games/newGameModal.jsp" %>
 	<%
+	if (Account.isAdmin(session))
+	{
+	%>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3" style="background-color:green;">Public, verified</div>
+			<div class="col-sm-3" style="background-color:greenyellow;">Public, unverified</div>
+			<div class="col-sm-3" style="background-color:yellow;">Not public, unverified</div>
+			<div class="col-sm-3" style="background-color:red;">Not public, verified</div>
+		</div>
+	</div>
+	<%
+	}
+	%>
+	<%
 		while (i.hasNext())
 		{
 			Event e = i.next();
