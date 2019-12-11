@@ -12,7 +12,7 @@ import database.Database;
 public class GameBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private String id, event, submitter, title, desc, link, isPublic;
+	private String id, event, submitter, title, desc, link, status;
 	
 	/**
 	 * Instantiate a new GameBean with blank fields.
@@ -20,7 +20,7 @@ public class GameBean implements Serializable{
 	 */
 	public GameBean()
 	{
-		id = event = submitter = title = desc = link = isPublic = "";
+		id = event = submitter = title = desc = link = status = "";
 	}
 	
 	/**
@@ -44,52 +44,99 @@ public class GameBean implements Serializable{
 		this.setTitle(queryRow.get("Title").toString());
 		this.setDesc(queryRow.get("Description").toString());
 		this.setLink(queryRow.get("PlayLink").toString());
-		this.setIsPublic(queryRow.get("IsPublic").toString());
+		this.setStatus(queryRow.get("Status").toString());
 	}
 	
-	public String getIsPublic() {
-		return isPublic;
+	/**
+	 * @return whether this page is public or not
+	 */
+	public boolean isPublic()
+	{
+		return (this.status.equals("2") || this.status.equals("1"));
 	}
-	public void setIsPublic(String isPublic) {
-		this.isPublic = isPublic;
-	}
+
+	/**
+	 * @return the id
+	 */
 	public String getId() {
 		return id;
 	}
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
+	/**
+	 * @return the event
+	 */
 	public String getEvent() {
 		return event;
 	}
+	/**
+	 * @param event the event to set
+	 */
 	public void setEvent(String event) {
 		this.event = event;
 	}
+	/**
+	 * @return the submitter
+	 */
 	public String getSubmitter() {
 		return submitter;
 	}
+	/**
+	 * @param submitter the submitter to set
+	 */
 	public void setSubmitter(String submitter) {
 		this.submitter = submitter;
 	}
+	/**
+	 * @return the title
+	 */
 	public String getTitle() {
 		return title;
 	}
+	/**
+	 * @param title the title to set
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	/**
+	 * @return the desc
+	 */
 	public String getDesc() {
 		return desc;
 	}
+	/**
+	 * @param desc the desc to set
+	 */
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
+	/**
+	 * @return the link
+	 */
 	public String getLink() {
 		return link;
 	}
+	/**
+	 * @param link the link to set
+	 */
 	public void setLink(String link) {
 		this.link = link;
 	}
-	
-	
-
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }
