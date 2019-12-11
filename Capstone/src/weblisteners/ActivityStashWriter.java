@@ -30,8 +30,8 @@ public class ActivityStashWriter implements HttpSessionListener {
 	
 	@Override
 	public void sessionCreated(HttpSessionEvent se) {
-		HttpSessionListener.super.sessionCreated(se);
 		System.out.println("Session created!"); // Just to show this class is listening, don't actually need this method overridden.
+		HttpSessionListener.super.sessionCreated(se);
 	}
 
 	/**
