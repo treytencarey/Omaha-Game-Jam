@@ -74,7 +74,7 @@
 	      		c.add(Calendar.DATE, 1);
 	      		end = c.getTime();
 	      		Date current = new Date();
-	      		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Attendees WHERE AccountPKey="+session.getAttribute("accountPKey").toString());
+	      		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Attendees WHERE AccountPKey="+session.getAttribute("accountPKey").toString()+" AND EventPKey="+curE.getKey());
 	      		
 	      		if(query.size() > 0){
 	      		System.out.println(start+" - "+end);
