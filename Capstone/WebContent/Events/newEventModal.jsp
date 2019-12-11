@@ -57,7 +57,7 @@
 				  				<div class="mutatorFields">
 						
 							    </div>
-								<button style="width: 100%; margin: auto;" type="button" class="add_field_button">Add Mutator</button>
+								<button style="width: 100%; margin: auto;" type="button" class="add_field_button" id="addMutatorBtn">Add Mutator</button>
 				  			</div>
 				  		</div>
 					</div>

@@ -4844,5 +4844,4 @@
 		<url-pattern>/Gallery</url-pattern>
 		<url-pattern>/gallery</url-pattern>
 	</servlet-mapping>
-
 </web-app>

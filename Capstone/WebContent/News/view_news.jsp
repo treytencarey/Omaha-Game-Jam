@@ -28,7 +28,7 @@
 			boolean isAdmin = Account.isAdmin(session);	
 			News n = (News)request.getAttribute("News");
 			request.setAttribute("newsTitle", n.getTitle());
-			if(n.getIsPublic()== 0 && !isAdmin)
+			if(n.getIsPublic() == 0 && !isAdmin)
 				throw new NullPointerException();
 			int[] postKeys = News.getMostRecentNewsPostsKeys(3, n.getKey(), 1);
 			News[] recentNews = new News[postKeys.length];
@@ -51,9 +51,9 @@
 				Posted on
 				<%=n.getDate()%></div>
 			<img class="mainImg rounded" src="<%=request.getContextPath() + "/Uploads/News/Photo/" + n.getKey() + "_header.png"%>" />
-			<h1 style="text-align: center;"><%=n.getTitle()%></h1>
+			<h1 style="text-align: center; word-wrap:break-word; white-space:normal;"><%=n.getTitle()%></h1>
 			<br>
-			<h4 style="text-align: center;"><%=n.getHeader()%></h4>
+			<h4 style="text-align: center; word-wrap:break-word; white-space:normal;"><%=n.getHeader()%></h4>
 			<br>
 			<div id="news-body" class="news-body"><%=n.getBody()%></div>
 		</div>
