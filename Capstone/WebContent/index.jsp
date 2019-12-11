@@ -42,26 +42,39 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
 	<%@page import="java.util.Map" %>
 	<%@page import="beans.News" %>
 	
-	<div class="mainEventParent">
-		<img class="mainEventImg rounded" src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= ce.getKey() %>_header.png" style="height:100%; width:100%;"/>
-  	</div>
-  	
-  	<div class="jumbotron aboutSection" style="margin-top: 50px;">
-  		<h1 class="display-5">UPCOMING EVENT: <%= ce.getTitle() %></h1>
-  		<hr class="my-2" style="background-color: #3b3b3b">
-  		<div style="font-size: 18px">
-  			<p><%= ce.getStartDate() %> - <%= ce.getEndDate() %></p>
-  			<p style="font-size: 15px"><%=rsvpd %> other Jammers have RSVP'd for this Jam.</p>
-  			<div class="row">
-	  			<form action="./Events" style="margin-left: auto; margin-right: 10px;">
-	  				<input type="submit" class="btn btn-primary" href="./Events" value="Details">
-				</form>
-	  			<div style="margin-right: auto; margin-left: 10px;">
-	  				<%@include file="/components/RSVPButton.jsp" %>
-	  			</div>
-		  	</div>
-  		</div>
+		<%
+	if(ce.IsPublic()) {
+	%>
+		<div class="mainEventParent">
+			<img class="mainEventImg rounded" src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= ce.getKey() %>_header.png" style="height:100%; width:100%;"/>
+	  	</div>
+	  	
+	  	<div class="jumbotron aboutSection" style="margin-top: 50px;">
+	  		<h1 class="display-5">UPCOMING EVENT: <%= ce.getTitle() %></h1>
+	  		<hr class="my-2" style="background-color: #3b3b3b">
+	  		<div style="font-size: 18px">
+	  			<p><%= ce.getStartDate() %> - <%= ce.getEndDate() %></p>
+	  			<p style="font-size: 15px"><%=rsvpd %> other Jammers have RSVP'd for this Jam.</p>
+	  			<div class="row">
+		  			<form action="./Events" style="margin-left: auto; margin-right: 10px;">
+		  				<input type="submit" class="btn btn-primary" href="./Events" value="Details">
+					</form>
+		  			<div style="margin-right: auto; margin-left: 10px;">
+		  				<%@include file="/components/RSVPButton.jsp" %>
+		  			</div>
+			  	</div>
+	  		</div>
+		</div>
+	<%
+	} else {
+	%>
+	<div class="container eventContainer">
+		<h1>No Current Event</h1>
 	</div>
+	<%
+	}
+	%>
+	
   	
   	<div class="pagePadding"></div>
   	

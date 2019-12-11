@@ -28,6 +28,7 @@
 	<%@include  file="/Common/navbar.jsp" %>
 	<%@page import="beans.EventTableBean" %>
 	<%@page import="beans.Event" %>
+	<%@page import="database.Mutator" %>
 	<%@page import="project.Main" %>
 	<%@page import="java.util.ArrayList" %>
 	
@@ -72,7 +73,19 @@
 					<h3 style="font-weight: 300;">From <%= current.getStartDate() %> to <%= current.getEndDate() %></h3>
 				</div>
 			</div>
-			
+			<div class="row">
+				<div class="col-sm-3">
+					<h3 style="float: right;">Mutators:</h3>
+				</div>
+				<%
+				ArrayList<Mutator> mutators = current.getMutators();
+				for(Mutator mutator : mutators){
+				%>
+				<div class="col-sm-9">
+					<h3 style="font-weight: 300;"><%= mutator.getTitle()%>:  <%= mutator.getDesc() %></h3>
+				</div>
+				<%} %>
+			</div>
 		</div>
 	</div>
 </body>
