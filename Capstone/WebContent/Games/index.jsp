@@ -62,21 +62,7 @@ Iterator<Event> i = et.getEvents().iterator();
 <body onload="changePageColor()">
 	<%@include  file="/Common/navbar.jsp" %>
 	<%@include file="/Games/newGameModal.jsp" %>
-	<%
-	if (Account.isAdmin(session))
-	{
-	%>
-	<div class="container">
-		<div class="row" style="border: solid 5px black;">
-			<div class="col-sm-3" style="background-color:green; color: black; font-weight: 600;">Public, verified</div>
-			<div class="col-sm-3" style="background-color:greenyellow; color: black; font-weight: 600;">Public, unverified</div>
-			<div class="col-sm-3" style="background-color:yellow; color: black; font-weight: 600;">Not public, unverified</div>
-			<div class="col-sm-3" style="background-color:red; color: black; font-weight: 600;">Not public, verified</div>
-		</div>
-	</div>
-	<%
-	}
-	%>
+	
 	<%
 		while (i.hasNext())
 		{

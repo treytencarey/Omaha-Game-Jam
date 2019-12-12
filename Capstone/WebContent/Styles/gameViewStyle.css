@@ -155,3 +155,16 @@
 	position: absolute;
 	bottom: 15px;
 }
+
+.gameTypeBanner {
+	border-bottom: 50px solid red;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	height: 0;
+	width: 200px;
+	transform: rotate(-45deg);
+	margin-left: -62px;
+	margin-top: 16px;
+	position: absolute;
+	color: black;
+}
