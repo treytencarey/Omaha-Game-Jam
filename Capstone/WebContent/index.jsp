@@ -69,7 +69,7 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
 	} else {
 	%>
 	<div class="container eventContainer">
-		<h1>No Current Event</h1>
+		<h1 style="width: -webkit-fit-content;margin: auto;">No Current Event</h1>
 	</div>
 	<%
 	}

@@ -143,7 +143,7 @@
 	} else {
 	%>
 	<div class="container eventContainer">
-		<h1>No Current Event</h1>
+		<h1 style="width: -webkit-fit-content;margin: auto;">No Current Event</h1>
 	</div>
 	<%
 	}

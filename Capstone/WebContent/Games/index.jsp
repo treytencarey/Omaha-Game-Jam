@@ -1,10 +1,10 @@
 <%@page import="java.io.Console"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="beans.GameBean, beans.Event, beans.EventTableBean, java.util.Iterator" %>
+	import="beans.GameBean, beans.Event, beans.EventTableBean, java.util.ListIterator" %>
 <%
 EventTableBean et = new EventTableBean();
-Iterator<Event> i = et.getEvents().iterator();
+ListIterator<Event> i = et.getEvents().listIterator(et.getEvents().size());
 %>
 
 <!DOCTYPE html>
@@ -64,9 +64,9 @@ Iterator<Event> i = et.getEvents().iterator();
 	<%@include file="/Games/newGameModal.jsp" %>
 	
 	<%
-		while (i.hasNext())
+		while (i.hasPrevious())
 		{
-			Event e = i.next();
+			Event e = i.previous();
 	%>
 			<div class="container gamesContainer">
 				<h3><%= e.getTitle() %>: <%= e.getTheme() %></h3>
