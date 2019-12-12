@@ -1,19 +1,19 @@
 <%@page import="database.Account"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="beans.ProfileBean, beans.GameTableBean, beans.GameBean, beans.Event, beans.EventTableBean, java.util.Map, java.util.ArrayList, java.util.Iterator"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="constants.ProfileConstants, beans.ProfileBean, beans.GameTableBean, beans.GameBean, beans.Event, beans.EventTableBean, java.util.Map, java.util.ArrayList, java.util.Iterator"%>
 
 <%
-	ProfileBean p = (ProfileBean) request.getAttribute("Profile");
-	String email = (String) request.getAttribute("Email");
-	EventTableBean et = (EventTableBean) request.getAttribute("AttendedEvents");
-	GameTableBean gt = (GameTableBean) request.getAttribute("Games");
-	Map<String, ArrayList<String>> r = (Map<String, ArrayList<String>>) request.getAttribute("Roles");
-	String picPath = (String) request.getAttribute("PicPath");
-	Boolean canEdit = (Boolean) request.getAttribute("CanEdit");
+	ProfileBean p = (ProfileBean) request.getAttribute(ProfileConstants.PROFILE);
+	String email = (String) request.getAttribute(ProfileConstants.EMAIL);
+	EventTableBean et = (EventTableBean) request.getAttribute(ProfileConstants.ATTENDED_EVENTS);
+	GameTableBean gt = (GameTableBean) request.getAttribute(ProfileConstants.GAMES);
+	Map<String, ArrayList<String>> r = (Map<String, ArrayList<String>>) request.getAttribute(ProfileConstants.ROLES);
+	String picPath = (String) request.getAttribute(ProfileConstants.PIC_PATH);
+	Boolean canEdit = (Boolean) request.getAttribute(ProfileConstants.CAN_EDIT);
 	// Set the page context so editProfileModal can also access these attributes.
-	pageContext.setAttribute("Profile", p);
-	pageContext.setAttribute("PicPath", picPath);
+	pageContext.setAttribute(ProfileConstants.PROFILE, p);
+	pageContext.setAttribute(ProfileConstants.PIC_PATH, picPath);
 	// For external_link_warning_modal
-	pageContext.setAttribute("Website", p.getWebsite());
+	pageContext.setAttribute(ProfileConstants.WEBSITE, p.getWebsite());
 
 	boolean isAdmin = Account.isAdmin(session);	
 	// Create a message to display to admins moderating the content of this profile.

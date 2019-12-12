@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="beans.ProfileBean"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="constants.ProfileConstants, beans.ProfileBean"%>
 <%
-	ProfileBean pp = (ProfileBean) pageContext.getAttribute("Profile");
-	String ppp = (String) pageContext.getAttribute("PicPath");
+	ProfileBean pp = (ProfileBean) pageContext.getAttribute(ProfileConstants.PROFILE);
+	String ppp = (String) pageContext.getAttribute(ProfileConstants.PIC_PATH);
 
 	if (pp == null)
 		pp = new ProfileBean();
@@ -30,22 +30,24 @@
 
 					<div class="form-group">
 						<div class="input-group">
-							<span class="input-group-addon icons"><i class="fa fa-user"></i></span> <input type="text" class="form-control modalFields" name="name" placeholder="Full Name" value="<%=pp.getName()%>" required>
-							<div class="invalid-feedback">Please enter a valid name</div>
+							<span class="input-group-addon icons"><i class="fa fa-envelope"></i></span> <input type="email" class="form-control modalFields" name="email" placeholder="Email" value="<%=session.getAttribute("accountEmail")%>" required disabled>
+							<div class="invalid-feedback">Please enter a valid email</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="input-group">
-							<span class="input-group-addon icons"><i class="fa fa-envelope"></i></span> <input type="email" class="form-control modalFields" name="email" placeholder="Email" value="<%=session.getAttribute("accountEmail")%>" required>
-							<div class="invalid-feedback">Please enter a valid email</div>
+							<span class="input-group-addon icons"><i class="fa fa-user"></i></span> <input type="text" class="form-control modalFields" name="name" placeholder="Full Name" value="<%=pp.getName()%>" required>
+							<div class="invalid-feedback">Please enter a valid name</div>
 						</div>
 					</div>
+					<!--
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-phone"></i></span> <input type="text" class="form-control modalFields" name="phoneNumber" placeholder="Phone Number" value="(402) 867-5309" required disabled>
 							<div class="invalid-feedback">Please enter a valid phone number</div>
 						</div>
 					</div>
+					  -->
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-info"></i></span> <input type="text" class="form-control modalFields" name="bio" placeholder="Bio" value="<%=pp.getBio()%>">

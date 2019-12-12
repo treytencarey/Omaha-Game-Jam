@@ -24,6 +24,8 @@ import beans.RoleTableBean;
 import database.Contributor;
 import exceptions.EmptyQueryException;
 import project.Main;
+import constants.ProfileConstants;
+import constants.SessionConstants;
 
 /**
  * Controller that verifies profile exists, stores necessary DB data in the session, and determines whether the logged in user can edit the profile.
@@ -31,6 +33,10 @@ import project.Main;
 @WebServlet("/profile")
 public class ProfileViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String UNSET_PICPATH = "https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg";
+	private static final String EMPTY_PAGE = "Profile/empty_profile.jsp";
+	private static final String SUCCESS_PAGE = "Profile/view_profile.jsp";
+	
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -64,7 +70,7 @@ public class ProfileViewServlet extends HttpServlet {
 		try // Does an accountPKey attribute exist in the session? If not, can't edit.
 		{
 			HttpSession s = request.getSession();
-			String apk = s.getAttribute("accountPKey").toString();
+			String apk = s.getAttribute(SessionConstants.ACCOUNT_PKEY).toString();
 			//canEdit = database.Account.isAdmin(s) || apk.equals(id); // Did the profile's owner request to see this page? If so, they can edit it.
 			canEdit = apk.equals(id); // Did the profile's owner request to see this page? If so, they can edit it.
 		}
@@ -72,35 +78,34 @@ public class ProfileViewServlet extends HttpServlet {
 		{
 			canEdit = false;
 		}
-		request.setAttribute("CanEdit", new Boolean(canEdit));
+		request.setAttribute(ProfileConstants.CAN_EDIT, new Boolean(canEdit));
 		
 		try // Get the Profile from the DB
 		{
 			p = new ProfileBean(id);
-			request.setAttribute("Profile", p);
+			request.setAttribute(ProfileConstants.PROFILE, p);
 			
 			// Set profile pic path
 			picPath = "/Uploads/Profiles/Pics/" + id;
 			File f = new File(Main.context.getRealPath(picPath));
-			//System.out.println(f.length());
         	if (!f.exists() || f.length() == 0) // Display default if file is empty or non-existent
-        		picPath = "https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg";
+        		picPath = UNSET_PICPATH;
         	else
         		picPath = request.getContextPath() + picPath;
-			request.setAttribute("PicPath", picPath);
+			request.setAttribute(ProfileConstants.PIC_PATH, picPath);
 			
-			toJsp = "Profile/view_profile.jsp";
+			toJsp = SUCCESS_PAGE;
 		}
 		catch (EmptyQueryException eqe)
 		{
-			toJsp = "Profile/empty_profile.jsp";
+			toJsp = EMPTY_PAGE;
 			System.out.println("Empty profile: " + eqe.getQuery());
 		}
 		
 		try
 		{
 			a = new AccountBean(id);
-			request.setAttribute("Email", a.getEmail()); // Currently only need email, so don't send the entire bean.
+			request.setAttribute(ProfileConstants.EMAIL, a.getEmail()); // Currently only need email, so don't send the entire bean.
 		}
 		catch (EmptyQueryException eqe)
 		{
@@ -110,7 +115,7 @@ public class ProfileViewServlet extends HttpServlet {
 		at = new AttendeeTableBean();
 		at.fillByAccountIds(id);
 		et = new EventTableBean();
-		request.setAttribute("AttendedEvents", et);
+		request.setAttribute(ProfileConstants.ATTENDED_EVENTS, et);
 		
 		ct = new ContributorTableBean();
 		ct.fillByAccount(id);
@@ -138,12 +143,12 @@ public class ProfileViewServlet extends HttpServlet {
 				ids.set(j, rt.getTitle(ids.get(j))); // Replace the ArrayList element (ID) with Title
 			}
 		}
-		request.setAttribute("Roles", roles);
+		request.setAttribute(ProfileConstants.ROLES, roles);
 		
 		ArrayList<String> gameIds = ct.getGameIds();
 		gt = new GameTableBean();
 		gt.fillByIds(gameIds.toArray(new String[gameIds.size()]));
-		request.setAttribute("Games", gt);
+		request.setAttribute(ProfileConstants.GAMES, gt);
 		
 		request.getRequestDispatcher(toJsp).forward(request, response); // If all successful, forward to view_game.jsp
 	}

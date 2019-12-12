@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+import constants.SessionConstants;
 
 /**
  * Listens for Session expiration and appends its attributes to activities.csv.
@@ -31,11 +32,11 @@ public class ActivityStashWriter implements HttpSessionListener {
 			HttpSession session = se.getSession();
 
 			// Retrieve attributes from Session
-			String AccountPKey = formatAttributeForCSV(session.getAttribute("accountPKey"));
-			String Referer = formatAttributeForCSV(session.getAttribute("Referer"));
-			String Landing = formatAttributeForCSV(session.getAttribute("Landing"));
-			String RSVPdEventPKey = formatAttributeForCSV(session.getAttribute("RSVPdEventPKey"));
-			String AccessDate = formatAttributeForCSV(session.getAttribute("AccessDate"));
+			String AccountPKey = formatAttributeForCSV(session.getAttribute(SessionConstants.ACCOUNT_PKEY));
+			String Referer = formatAttributeForCSV(session.getAttribute(SessionConstants.REFERER));
+			String Landing = formatAttributeForCSV(session.getAttribute(SessionConstants.LANDING));
+			String RSVPdEventPKey = formatAttributeForCSV(session.getAttribute(SessionConstants.RSVPD_EVENT_PKEY));
+			String AccessDate = formatAttributeForCSV(session.getAttribute(SessionConstants.ACCESS_DATE));
 			
 			// Print out the attributes
 			System.out.println("Session expired! Appending to activities.csv...");

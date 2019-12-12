@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="beans.ProfileBean"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="constants.ProfileConstants, beans.ProfileBean"%>
 <%
 	ProfileBean p = new ProfileBean();
 	p.setId(request.getParameter("id"));
-	Boolean canEdit = (Boolean) request.getAttribute("CanEdit");
-	pageContext.setAttribute("Profile", p);
+	Boolean canEdit = (Boolean) request.getAttribute(ProfileConstants.CAN_EDIT);
+	pageContext.setAttribute(ProfileConstants.PROFILE, p);
 %>
 <!DOCTYPE html>
 <html>
