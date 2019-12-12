@@ -37,7 +37,7 @@
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon icons"><i class="fa fa-comment"></i></span>
-							<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" placeholder="Description" required></textarea>
+							<textarea class="form-control modalFields" id="eventDescription" name="eventDescription" placeholder="Description"></textarea>
 						</div>
 					</div>
 					
@@ -57,9 +57,17 @@
 				  				<div class="mutatorFields">
 						
 							    </div>
-								<button style="width: 100%; margin: auto;" type="button" class="add_field_button">Add Mutator</button>
+								<button style="width: 100%; margin: auto;" type="button" class="add_field_button" id="addMutatorBtn">Add Mutator</button>
 				  			</div>
 				  		</div>
+					</div>
+					
+					<br><br>
+				    <h3>Event Schedule</h3>
+				    <div class="form-group">
+						<div class="input-group">
+							<textarea class="form-control modalFields" id="eventSchedule" name="eventSchedule" placeholder="Schedule"></textarea>
+						</div>
 					</div>
 					
 			  		<div class="row">
@@ -82,10 +90,12 @@
 
 <script>
 var eventBodyField;
+var scheduleBodyField;
 loadEditor();
 
 function loadEditor() { 
 	eventBodyField = new nicEditor({fullPanel: true}).panelInstance("eventDescription");
+	scheduleBodyField = new nicEditor({fullPanel: true}).panelInstance("eventSchedule");
 	$("eventDescription").width("100%");
 	$('.nicEdit-panelContain').parent().css({width:'100%', padding:"0"});
     $('.nicEdit-panelContain').parent().next().css({width:'100%', padding:"5px"});

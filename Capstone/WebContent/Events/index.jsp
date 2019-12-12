@@ -68,7 +68,7 @@
 	eventTable = new EventTableBean();
 	Event current = null;
 	Event future = null;
-	ArrayList<Event> past = null;
+	ArrayList<Event> past = new ArrayList<Event>();
 	
 	try{
 		current = eventTable.getCurrentEvent();
@@ -132,17 +132,18 @@
 					<button type="button" id="event-schedule-button" class="btn btn-warning">Event Schedule</button>
 					<a href=""><i class="fab fa-discord fa-3x" style="color: #7289da;"></i></a>
 				</div>
-			</div>
-			<div class="row rounded" id="event-schedule-description" style="margin: auto; padding: auto; display:none;">
-				<%= current.getSchedule() %>
+				<div class="row rounded" id="event-schedule-description" style="width: 100%; margin: auto; padding: auto; display:none;">
+					<h6><%= current.getSchedule() %></h6>
+				</div>
 			</div>
 		</div>
+		
 	</div>
 	<%
 	} else {
 	%>
 	<div class="container eventContainer">
-		<h1>No Current Event</h1>
+		<h1 style="width: -webkit-fit-content;margin: auto;">No Current Event</h1>
 	</div>
 	<%
 	}
@@ -218,9 +219,10 @@
 	</script>
 	
 	<!-- Past Events -->
+	<%if(!past.isEmpty()) {%>
 	<div class="container eventContainer" style="max-width: 1400px;">
 		<div id="past-events">
-			<h1 style="width: fit-content; margin: auto;">Past Events</h1>
+			<h1 style="width: fit-content; margin: auto; margin-bottom: 50px;">Past Events</h1>
 			<button onclick="goLeft()" onmousedown="goLeftOpacity()" onmouseup="goLeftOpacityOff()" style="position: relative; top: 209.5px; float: left;"><i id="goLeftIcon" class="fas fa-chevron-circle-left fa-7x"></i></button>
 			<button onclick="goRight()" onmousedown="goRightOpacity()" onmouseup="goRightOpacityOff()" style="position: relative; top: 209.5px; float: right;"><i id="goRightIcon" class="fas fa-chevron-circle-right fa-7x"></i></button>
 			<div class="container scrolling-wrapper">				
@@ -245,6 +247,7 @@
 	</div>
 	
 	<div id="toastDiv"></div>
+	<%} %>
 </body>
 <script>
 $('.nicEdit-panelContain').parent().css({width:'100%', padding:"0"});

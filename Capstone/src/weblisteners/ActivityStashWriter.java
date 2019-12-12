@@ -5,43 +5,40 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+import constants.SessionConstants;
 
 /**
  * Listens for Session expiration and appends its attributes to activities.csv.
  */
+@WebListener
 public class ActivityStashWriter implements HttpSessionListener {
 //	private static Integer instances = 0;
 //	private static BufferedWriter bw; // Singleton that all ActivityStashWriters use (but it looks like there's only 1 instantiated based on my tests)
 	private static final String VIRTUAL_CSV_PATH = "Analytics/activities.csv"; // Path to CSV file from realPath (WebContent I think)
 	private static final String CSV_HEADER_LINE = "AccountPKey,Referer,Landing,RSVPdEventPKey,AccessDate\n"; // Header line to begin the CSV file with in case CSV doesn't exist.
 	private BufferedWriter bw; // Singleton that all ActivityStashWriters use (but it looks like there's only 1 instantiated based on my tests)
-	
-	@Override
-	public void sessionCreated(HttpSessionEvent se) {
-		HttpSessionListener.super.sessionCreated(se);
-		System.out.println("Session created!"); // Just to show this class is listening, don't actually need this method overridden.
-	}
 
 	/**
 	 * Once a Session is about to expire, collects its attributes and stores them in activities.csv. If that file doesn't exist, create it and write its headers.
 	 */
-	@Override
 	public void sessionDestroyed(HttpSessionEvent se)
 	{
-		HttpSessionListener.super.sessionDestroyed(se);
 		try
 		{
 			HttpSession session = se.getSession();
 
-			String AccountPKey = formatAttributeForCSV(session.getAttribute("accountPKey"));
-			String Referer = formatAttributeForCSV(session.getAttribute("Referer"));
-			String Landing = formatAttributeForCSV(session.getAttribute("Landing"));
-			String RSVPdEventPKey = formatAttributeForCSV(session.getAttribute("RSVPdEventPKey"));
-			String AccessDate = formatAttributeForCSV(session.getAttribute("AccessDate"));
+			// Retrieve attributes from Session
+			String AccountPKey = formatAttributeForCSV(session.getAttribute(SessionConstants.ACCOUNT_PKEY));
+			String Referer = formatAttributeForCSV(session.getAttribute(SessionConstants.REFERER));
+			String Landing = formatAttributeForCSV(session.getAttribute(SessionConstants.LANDING));
+			String RSVPdEventPKey = formatAttributeForCSV(session.getAttribute(SessionConstants.RSVPD_EVENT_PKEY));
+			String AccessDate = formatAttributeForCSV(session.getAttribute(SessionConstants.ACCESS_DATE));
 			
+			// Print out the attributes
 			System.out.println("Session expired! Appending to activities.csv...");
 			System.out.println("Referer: " + Referer);
 			System.out.println("Landing: " + Landing);
@@ -49,9 +46,9 @@ public class ActivityStashWriter implements HttpSessionListener {
 			System.out.println("RSVPdEventPKey: " + RSVPdEventPKey);
 			System.out.println("AccessDate: " + AccessDate);
 			
+			// Prepare activities.csv
 			File af = new File(session.getServletContext().getRealPath(VIRTUAL_CSV_PATH));
-//			System.out.println(af.getAbsolutePath());
-//			System.out.println(af.exists());
+			System.out.println(af.getAbsolutePath());
 			if (af.exists()) // If CSV already exists: just initialize bw
 			{
 				FileWriter fw = new FileWriter(af, true);
@@ -65,6 +62,7 @@ public class ActivityStashWriter implements HttpSessionListener {
 				bw.write(CSV_HEADER_LINE);
 			}
 			
+			// Append attributes to activities.csv
 			bw.append(String.format("%s,%s,%s,%s,%s\n", AccountPKey, Referer, Landing, RSVPdEventPKey, AccessDate)); // Append this user's Session attributes
 			bw.flush();
 		}
@@ -92,4 +90,13 @@ public class ActivityStashWriter implements HttpSessionListener {
 		result.replace(",", "\",\""); // Wrap all commas in double quotes
 		return result;
 	}
+	
+//	public ActivityStashWriter() {
+//		// TODO Auto-generated constructor stub
+//		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nActivityStashWriter CREATED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! YAYAYAYAYAYAYAY\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+//	}
+//	
+//	public void sessionCreated(HttpSessionEvent se) {
+//		System.out.println("Session created!"); // Just to show this class is listening, don't actually need this method overridden.
+//	}
 }

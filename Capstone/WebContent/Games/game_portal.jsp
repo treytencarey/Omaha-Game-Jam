@@ -30,7 +30,7 @@ Iterator<Event> i = et.getEvents().iterator();
 function displayEventGames(eventId) {
 	let xhttp;
  	let message; // The HTML to put inside the event div.
- 	let divId = "event".concat(eventId);
+ 	let divId = "event".concat(eventId); // Construct the HTML element ID. Ex: <div id="event1">
  	
 	if (eventId == "") {
 		document.getElementById(divId).innerHTML = "";
@@ -43,6 +43,10 @@ function displayEventGames(eventId) {
 				message = "<p>No games have been submitted yet.</p>";
 			else // 1+ games found.
 				message = this.responseText;
+		
+//			let jsonObj = JSON.parse(this.responseText); // Javascript function JSON.parse to parse JSON data
+//			document.getElementById("Name").innerHTML = jsonObj.name;
+//			document.getElementById("Country").innerHTML = jsonObj.country;
 		} else { // AJAX unsuccessful
 			message = "Error retrieving games.";
 		}
@@ -58,6 +62,22 @@ function displayEventGames(eventId) {
 
 <%@include  file="/Common/navbar.jsp" %>
 <%@include file="/Games/newGameModal.jsp" %>
+
+<%
+if (Account.isAdmin(session))
+{
+%>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-3" style="background-color:green;">Public, verified</div>
+		<div class="col-sm-3" style="background-color:greenyellow;">Public, unverified</div>
+		<div class="col-sm-3" style="background-color:yellow;">Not public, unverified</div>
+		<div class="col-sm-3" style="background-color:red;">Not public, verified</div>
+	</div>
+</div>
+<%
+}
+%>
 
 <div class="container" style="text-align: center;">
 	<%

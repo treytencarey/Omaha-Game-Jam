@@ -13,6 +13,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import database.Database;
+
 public class TestFunctions {
 	/**
 	 * Sets up the Chrome browser for testing
@@ -35,6 +37,14 @@ public class TestFunctions {
 	 */
 	public static void goToPage(WebDriver driver, String url) {
 		driver.get(url);
+	}
+	
+	/**
+	 * Makes web browser go to homepage
+	 * @param driver
+	 */
+	public static void goToHomepage(WebDriver driver) {
+		driver.get("http://localhost:8080/Capstone");
 	}
 	
 	/**
@@ -69,6 +79,13 @@ public class TestFunctions {
 		}
 	}
 	
+	public static void loginAdmin(WebDriver driver) {
+		driver.findElement(By.id("loginBtn")).click();
+		driver.findElement(By.name("email")).sendKeys("admintest@test");
+		driver.findElement(By.name("password")).sendKeys("Testpassword1!");
+		driver.findElement(By.id("modalLoginBtn")).click();
+	}
+	
 	/**
 	 * Generates a random login
 	 * @return String for login email
@@ -85,5 +102,20 @@ public class TestFunctions {
 	public static String generatePassword() {
 		Random random = new Random();
 		return "TestPassword!" + random.nextInt(99);
+	}
+	
+	/**
+	 * Generates a string with given number of characters to test for field overflows
+	 * @param chars - Number of characters to put in string
+	 * @return String
+	 */
+	public static String generateLongString(int chars) {
+		String rtn = "";
+		Random random = new Random();
+		for(int i = 0; i < chars; i++) {
+			rtn = rtn + random.nextInt(9);
+		}
+		
+		return rtn;
 	}
 }

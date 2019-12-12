@@ -133,13 +133,11 @@ public class Files extends HttpServlet {
 				 
 				// response.sendRedirect(session.getAttribute("curPage").toString());
 			}catch(Exception ex) {
-				System.out.println(ex);
 				ex.printStackTrace();
 			}
 		}else{
 			// failed to upload file
 		}
 		session.setAttribute("filesPostParams", postParams);
-		System.out.println(postParams);
 	}
 }

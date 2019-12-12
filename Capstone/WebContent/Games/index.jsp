@@ -1,10 +1,10 @@
 <%@page import="java.io.Console"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="beans.GameBean, beans.Event, beans.EventTableBean, java.util.Iterator" %>
+	import="beans.GameBean, beans.Event, beans.EventTableBean, java.util.ListIterator" %>
 <%
 EventTableBean et = new EventTableBean();
-Iterator<Event> i = et.getEvents().iterator();
+ListIterator<Event> i = et.getEvents().listIterator(et.getEvents().size());
 %>
 
 <!DOCTYPE html>
@@ -62,17 +62,20 @@ Iterator<Event> i = et.getEvents().iterator();
 <body onload="changePageColor()">
 	<%@include  file="/Common/navbar.jsp" %>
 	<%@include file="/Games/newGameModal.jsp" %>
+	
 	<%
-		while (i.hasNext())
+		while (i.hasPrevious())
 		{
-			Event e = i.next();
+			Event e = i.previous();
 	%>
 			<div class="container gamesContainer">
-				<h3 style="color: black; width: 100%; text-align: center;"><%= e.getTitle() %>: <%= e.getTheme() %></h3>
-			</div>
-			<div id="event<%= e.getKey() %>" class="container">
-				<p style="width: fit-content; margin: auto; margin-bottom: 3%">Loading games...</p>
-				<script type="text/javascript"> displayEventGames(<%= e.getKey() %>); </script>
+				<h3><%= e.getTitle() %>: <%= e.getTheme() %></h3>
+				<div class="gamesDivContainer">
+					<div id="event<%= e.getKey() %>" class="container">
+						<p style="width: fit-content; margin: auto; margin-bottom: 3%">Loading games...</p>
+						<script type="text/javascript"> displayEventGames(<%= e.getKey() %>); </script>
+					</div>
+				</div>
 			</div>
 	<%
 		}

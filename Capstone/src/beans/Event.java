@@ -3,12 +3,17 @@ package beans;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
 import database.Database;
 import database.Mutator;
+import project.Main;
 
 /**
  * 
@@ -77,9 +82,6 @@ public class Event {
 		//Get Mutators from database
 		List<Map<String, Object>> query2 = Database.executeQuery("SELECT * FROM Mutators WHERE EventPKey=" + String.valueOf(PKey));
 		
-		//Get event schedule from database
-		List<Map<String, Object>> query3 = Database.executeQuery("SELECT * FROM EventSchedules WHERE EventPKey=" + String.valueOf(PKey));
-		
 		//Initialize mutators list
 		for(Map<String, Object> mutator : query2) {
 		    mutators.add(new Mutator((int)mutator.get("PKey")));
@@ -88,15 +90,10 @@ public class Event {
 		key = PKey;
 		title = event.get("Title").toString();
 		theme = event.get("Theme").toString();
-		description = event.get("Description").toString();
+		description = readEventDFile();
 		startDate = event.get("StartDate").toString();
 		endDate = event.get("EndDate").toString();
-		if(query3.size() > 0) {
-			setSchedule(query3.get(0).get("Schedule").toString());
-		}
-		else {
-			setSchedule("Currently no Schedule");
-		}
+		schedule = readEventSFile();
 	}
 	
 	/**
@@ -113,18 +110,15 @@ public class Event {
 	 */
 	public Event(Map<String, Object> queryRow)
 	{	
-		//Get event schedule from database
-		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM EventSchedules WHERE EventPKey=" + Integer.parseInt(queryRow.get("PKey").toString()));
 		
 		this.setVisibility(Integer.parseInt(queryRow.get("IsPublic").toString()));
 		this.setKey(Integer.parseInt(queryRow.get("PKey").toString()));
 		this.setTitle(queryRow.get("Title").toString());
 		this.setTheme(queryRow.get("Theme").toString());
-		this.setDescription(queryRow.get("Description").toString());
+		this.description = readEventDFile();
 		this.setStartDate(queryRow.get("StartDate").toString());
 		this.setEndDate(queryRow.get("EndDate").toString());
-		if(query.size() > 0)
-			this.setSchedule(query.get(0).get("Schedule").toString());
+		this.schedule = readEventSFile();
 	}
 	
 	/**
@@ -139,7 +133,35 @@ public class Event {
 		endDate = "No Date";
 		isPublic = 0;
 	}
-
+	
+	/**
+	 * Reads file for event description
+	 * @return description for event
+	 */
+	private String readEventDFile(){
+		String des = "";
+		String path = getServerPath("/Uploads/Events/Body/");
+		try {
+			des = new String(Files.readAllBytes(Paths.get(path+"\\Body\\"+key+"_body.txt")));
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		return des;
+	}
+	/**
+	 * Reads file for event schedule
+	 * @return description for event
+	 */
+	private String readEventSFile(){
+		String sche = "";
+		String path = getServerPath("/Uploads/Events/Schedule/");
+		try {
+			sche = new String(Files.readAllBytes(Paths.get(path+"\\Schedule\\"+key+"_body.txt")));
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		return sche;
+	}
 	public void setVisibility(int i) {
 		isPublic = i;
 	}
@@ -255,5 +277,11 @@ public class Event {
 	 */
 	public void setSchedule(String s) {
 		schedule = s;
+	}
+	private static String getServerPath(String orig) {
+		String[] splits = orig.replaceAll("\\\\", "/").split("/");
+		String fileName = splits[splits.length -1];
+		String pth = Main.context.getRealPath(orig.substring(0, orig.length() - 1 -fileName.length()));
+		return pth;
 	}
 }

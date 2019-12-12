@@ -10,6 +10,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
+import constants.SessionConstants;
+
 /**
  * Filter that, after EventServlet has finished, sets the Session's "RSVPdEventPKey" attribute if RSVPing was successful.
  */
@@ -38,13 +40,12 @@ public class RSVPStasherFilter implements Filter {
 		chain.doFilter(request, response);
 		//Done after EventServlet
 		HttpServletRequest httpRequest;
-//		System.out.println("yeet doing RSVPStasher");
 		try
 		{
 			httpRequest = (HttpServletRequest)request;
 			Object epko = request.getAttribute("EventPKey"); // Null if unsuccessfully RSVP; otherwise contains EventPKey of RSVP'd event
 			if (epko != null)
-				httpRequest.getSession().setAttribute("RSVPdEventPKey", epko.toString());
+				httpRequest.getSession().setAttribute(SessionConstants.RSVPD_EVENT_PKEY, epko.toString());
 		}
 		catch (Exception e)
 		{

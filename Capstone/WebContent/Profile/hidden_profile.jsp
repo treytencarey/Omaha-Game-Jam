@@ -1,9 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="constants.ProfileConstants, beans.ProfileBean"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%
-	ProfileBean p = new ProfileBean();
-	p.setId(request.getParameter("id"));
-	Boolean canEdit = (Boolean) request.getAttribute(ProfileConstants.CAN_EDIT);
-	pageContext.setAttribute(ProfileConstants.PROFILE, p);
+	String id = request.getParameter("id");
 %>
 <!DOCTYPE html>
 <html>
@@ -25,25 +22,9 @@
 </head>
 <body>
 	<%@include file="/Common/navbar.jsp"%>
-	<%
-		if (canEdit.booleanValue()) {
-	%>
-	<%@include file="/Profile/editProfileModal.jsp"%>
-		<nav id="subNavBar" class="navbar navbar-expand navbar-light bg-light">
-			<div class=" navbar-collapse" id="navbarSupportedContent">
-		    	<ul class="navbar-nav ml-auto">
-		    		<li class="nav-item indvTabs">
-						<a id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Edit Profile</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	<%
-		}
-	%>
 	<div class="container emp-profile">
 		<div class="row">
-			<h3 style="color: black; width: 100%; text-align: center;">No profile has been created for this account yet.</h3>
+			<h3 style="color: black; width: 100%; text-align: center;">This profile was marked inappropriate. Shame on you person with ID <%= id %>!</h3>
 		</div>
 	</div>
 </body>
