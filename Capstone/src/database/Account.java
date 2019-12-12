@@ -73,7 +73,7 @@ public class Account extends HttpServlet {
 		if (loggingOut)
 		{
     		session.invalidate();
-			response.sendRedirect("/Capstone/");
+			response.sendRedirect(request.getContextPath() + "/");
 			return;
 		}
 	}
