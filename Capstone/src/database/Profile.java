@@ -112,7 +112,7 @@ public class Profile extends HttpServlet {
 	 * Updates the profile in the database with the given primary key to the values of the profile.
 	 * @param PKey an integer value of the profile's primary key.
 	 */
-	private void updateProfile(int PKey)
+	public void updateProfile(int PKey)
 	{
 		Database.executeUpdate("INSERT OR REPLACE INTO Profiles (AccountPKey, Name, Bio, Website, SkillsList) VALUES (" + String.valueOf(PKey) + ", " + this.toString() + ")");
 	}

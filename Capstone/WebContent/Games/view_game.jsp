@@ -73,16 +73,27 @@ if (canEdit)
 						try {
 							p = new Profile(Integer.parseInt(c.getAccountPKey()));
 						} catch (Exception profE) {
-							// TODO - What should happen if a profile doesn't exist?
-							// Continue just to not display. Perhaps it should show a dummy profile pic and the email as the name?
-							continue;
+							p = new Profile();
+							try {
+								p.setName(Database.executeQuery("SELECT Email FROM Accounts WHERE PKey=" + c.getAccountPKey()).get(0).get("Email").toString());
+							} catch (Exception accE) {
+								// No profile found and no account found. Should never happen.
+								continue;
+							}
 						}
 						RoleTableBean rti = new RoleTableBean(c.getRolePKey());
 					%>
 						<div class="d-flex flex-row border rounded" style="border: none !important;">
 				  			<div class="p-0 w-25">
-				  			    <%-- <img src="<%= request.getContextPath() + "/Uploads/Profiles/Pics/" + c.getAccountPKey() %>" class="img-thumbnail border-0" /> --%>
-				  			    <img src="<%= request.getContextPath() + "/Uploads/Profiles/Pics/" + c.getAccountPKey() %>" class="img-thumbnail border-0" />
+				  				<%@page import="java.io.File" %>
+				  			    <%	String contPicPath = "/Uploads/Profiles/Pics/" + c.getAccountPKey();
+					  				File f = new File(Main.context.getRealPath(contPicPath));
+					  				//System.out.println(f.length());
+					  	        	if (!f.exists() || f.length() == 0) // Display default if file is empty or non-existent
+					  	        		contPicPath = "https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg";
+					  	        	else
+					  	        		contPicPath = request.getContextPath() + contPicPath; %>
+								<img src="<%= contPicPath %>" class="img-thumbnail border-0" />
 				  			</div>
 				  			<div class="pl-3 pt-2 pr-2 pb-2 w-75 border-left">
 			  					<h4 class="text-primary"><a href="<%= request.getContextPath() + "/profile?id=" + c.getAccountPKey() %>" ><%= p.getName() %> </a></h4>
