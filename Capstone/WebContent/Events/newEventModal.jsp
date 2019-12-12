@@ -62,6 +62,14 @@
 				  		</div>
 					</div>
 					
+					<br><br>
+				    <h3>Event Schedule</h3>
+				    <div class="form-group">
+						<div class="input-group">
+							<textarea class="form-control modalFields" id="eventSchedule" name="eventSchedule" placeholder="Schedule"></textarea>
+						</div>
+					</div>
+					
 			  		<div class="row">
 				  		<div class="form-group eventDates col-sm-6">
 			    	  		<input class="input-group form-control datePicker" id="startDate" name="startDate" placeholder="MM/DD/YYY" type="text" required/>
@@ -82,10 +90,12 @@
 
 <script>
 var eventBodyField;
+var scheduleBodyField;
 loadEditor();
 
 function loadEditor() { 
 	eventBodyField = new nicEditor({fullPanel: true}).panelInstance("eventDescription");
+	scheduleBodyField = new nicEditor({fullPanel: true}).panelInstance("eventSchedule");
 	$("eventDescription").width("100%");
 	$('.nicEdit-panelContain').parent().css({width:'100%', padding:"0"});
     $('.nicEdit-panelContain').parent().next().css({width:'100%', padding:"5px"});
