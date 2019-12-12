@@ -10,6 +10,7 @@ Event e = new Event(g.getEvent());
 boolean canEdit = GameViewServlet.CanEdit(g, ct, session);
 final String MEDIA_PATH = "/Uploads/Games";
 final String MEDIA_PATH_FULL = request.getContextPath() + MEDIA_PATH;
+pageContext.setAttribute("Website", g.getLink());
 
 %>
 
@@ -39,6 +40,7 @@ final String MEDIA_PATH_FULL = request.getContextPath() + MEDIA_PATH;
 </head>
 <body>
 <%@include  file="/Common/navbar.jsp" %>
+<%@include file="/Common/external_link_warning_modal.jsp"%>
 <% if (session.getAttribute("accountPKey") != null && g.getSubmitter() == Integer.parseInt(session.getAttribute("accountPKey").toString())) { %>
 	<%@include  file="/Games/newGameModal.jsp" %>
 <% } %>
@@ -187,7 +189,8 @@ if (canEdit)
 			</div>
 			<div class="row gameViewDetails">
 				<label class="gameViewLabels" for="tools">Play Now:</label>
-				<p class="gameViewValues" id="tools"><a href="<%= g.getLink() %>"><%= g.getLink() %></a></p>
+				<p class="gameViewValues" id="tools"><a id="websiteBtn" href="#externalLinkWarningModal" class="nav-link" data-toggle="modal"><%= g.getLink() %></a></p>
+				
 			</div>
 	</div>
 </div>
