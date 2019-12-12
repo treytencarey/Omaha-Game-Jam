@@ -67,11 +67,11 @@ Iterator<Event> i = et.getEvents().iterator();
 	{
 	%>
 	<div class="container">
-		<div class="row">
-			<div class="col-sm-3" style="background-color:green;">Public, verified</div>
-			<div class="col-sm-3" style="background-color:greenyellow;">Public, unverified</div>
-			<div class="col-sm-3" style="background-color:yellow;">Not public, unverified</div>
-			<div class="col-sm-3" style="background-color:red;">Not public, verified</div>
+		<div class="row" style="border: solid 5px black;">
+			<div class="col-sm-3" style="background-color:green; color: black; font-weight: 600;">Public, verified</div>
+			<div class="col-sm-3" style="background-color:greenyellow; color: black; font-weight: 600;">Public, unverified</div>
+			<div class="col-sm-3" style="background-color:yellow; color: black; font-weight: 600;">Not public, unverified</div>
+			<div class="col-sm-3" style="background-color:red; color: black; font-weight: 600;">Not public, verified</div>
 		</div>
 	</div>
 	<%
@@ -83,11 +83,13 @@ Iterator<Event> i = et.getEvents().iterator();
 			Event e = i.next();
 	%>
 			<div class="container gamesContainer">
-				<h3 style="color: black; width: 100%; text-align: center;"><%= e.getTitle() %>: <%= e.getTheme() %></h3>
-			</div>
-			<div id="event<%= e.getKey() %>" class="container">
-				<p style="width: fit-content; margin: auto; margin-bottom: 3%">Loading games...</p>
-				<script type="text/javascript"> displayEventGames(<%= e.getKey() %>); </script>
+				<h3><%= e.getTitle() %>: <%= e.getTheme() %></h3>
+				<div class="gamesDivContainer">
+					<div id="event<%= e.getKey() %>" class="container">
+						<p style="width: fit-content; margin: auto; margin-bottom: 3%">Loading games...</p>
+						<script type="text/javascript"> displayEventGames(<%= e.getKey() %>); </script>
+					</div>
+				</div>
 			</div>
 	<%
 		}
