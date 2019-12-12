@@ -76,7 +76,7 @@ public class GamePullerServlet extends HttpServlet {
 				s = "<div class=\"row\" style=\"margin-bottom: 50px;\">";
 			}
 			s = s + String.format(
-					  "<div class=\"card col-sm-3 gameCard\" style='background-color:%s;'>"
+					  "<div class=\"card col-sm-3 gameCard\" style='border: solid 5px %s;'>"
 					+   "<div class=\"cardImgDiv\">"
 					+     "<img class=\"card-img-top\" src=\"%s\" alt=\"Game Icon\">"
 					+   "</div>"

@@ -101,7 +101,6 @@
 .gamesDivContainer > .container {
 	padding: 48px;
 	display: inline-block;
-	width: 352px;
 }
 
 .gamesDivContainer {
@@ -120,6 +119,7 @@
 	height: 500px;
 	min-width: 285px;
 	background-color: #ffffff;
+	margin-bottom: 40px;
 }
 
 .cardImgDiv {
