@@ -9,29 +9,31 @@
 	Map<String, ArrayList<String>> r = (Map<String, ArrayList<String>>) request.getAttribute(ProfileConstants.ROLES);
 	String picPath = (String) request.getAttribute(ProfileConstants.PIC_PATH);
 	Boolean canEdit = (Boolean) request.getAttribute(ProfileConstants.CAN_EDIT);
+	Boolean isPublic = (Boolean) request.getAttribute(ProfileConstants.IS_PUBLIC);
+	
 	// Set the page context so editProfileModal can also access these attributes.
 	pageContext.setAttribute(ProfileConstants.PROFILE, p);
 	pageContext.setAttribute(ProfileConstants.PIC_PATH, picPath);
 	// For external_link_warning_modal
 	pageContext.setAttribute(ProfileConstants.WEBSITE, p.getWebsite());
 
-	boolean isAdmin = Account.isAdmin(session);	
+	boolean isAdmin = Account.isAdmin(session);
 	// Create a message to display to admins moderating the content of this profile.
 	String s = p.getStatus();
 	String m;
 	switch (s)
 	{
 	case "-1":
-		m = "Profile was denied in its current state. NOT publicly visible.";
+		m = "Depublicized: profile was denied in its current state.";
 		break;
 	case "0":
-		m = "Profile was previously denied but has resubmitted. NOT publicly visible.";
+		m = "Depublicized: profile was previously denied but has since been edited.";
 		break;
 	case "1":
-		m = "Profile is unverified. Publicly visible.";
+		m = "Publicized: profile is unverified.";
 		break;
 	case "2":
-		m = "Profile was approved in its current state. Publicly visible.";
+		m = "Publicized: profile was approved in its current state.";
 		break;
 	default:
 		m = "Something went wrong. Oops!";
@@ -81,7 +83,6 @@
 	%>
 
 	<%
-		//if (adminStatus != null && adminStatus.equals("admin"))
 		if (isAdmin) {
 	%>
 	<p><%= m %></p>
@@ -92,6 +93,16 @@
 		<button type="button" class="btn btn-danger" <%=p.getStatus().equals("-1") ? "disabled" : ""%> onclick="deny();">Depublicize Profile</button>
 	</form>
 
+	<%
+		}
+	%>
+	
+	<%
+		if (! isPublic) {
+	%>
+	<div class="alert alert-warning">
+		Your profile has been depublicized by a moderator. Please clean it up!
+	</div>
 	<%
 		}
 	%>

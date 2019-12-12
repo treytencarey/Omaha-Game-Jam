@@ -5,6 +5,7 @@ package constants;
  */
 public final class ProfileConstants {
 	public static final String CAN_EDIT = "CanEdit";
+	public static final String IS_PUBLIC = "IsPublic";
 	public static final String PROFILE = "Profile";
 	public static final String PIC_PATH = "PicPath";
 	public static final String EMAIL = "Email";

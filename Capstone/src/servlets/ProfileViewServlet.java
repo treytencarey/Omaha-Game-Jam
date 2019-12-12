@@ -21,6 +21,7 @@ import beans.EventTableBean;
 import beans.GameTableBean;
 import beans.ProfileBean;
 import beans.RoleTableBean;
+import database.Account;
 import database.Contributor;
 import exceptions.EmptyQueryException;
 import project.Main;
@@ -35,6 +36,7 @@ public class ProfileViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UNSET_PICPATH = "https://middle.pngfans.com/20190511/as/avatar-default-png-avatar-user-profile-clipart-b04ecd6d97b1eb1a.jpg";
 	private static final String EMPTY_PAGE = "Profile/empty_profile.jsp";
+	private static final String HIDDEN_PAGE = "Profile/hidden_profile.jsp";
 	private static final String SUCCESS_PAGE = "Profile/view_profile.jsp";
 	
        
@@ -55,35 +57,45 @@ public class ProfileViewServlet extends HttpServlet {
 	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProfileBean p;
-		AccountBean a;
-		AttendeeTableBean at;
-		EventTableBean et;
+		ProfileBean p; // Holds info about this profile
+		AccountBean a; // Used for retrieving this profile's email
+		AttendeeTableBean at; // List of attended records (AttendeeBean)
+		EventTableBean et; // List of Event objects this account has attended
 		ContributorTableBean ct;
 		RoleTableBean rt;
 		GameTableBean gt;
-		boolean canEdit;
-		String picPath;
-		String toJsp;
+		boolean isOwner; // Is the viewing user the owner of this profile?
+		boolean isPublic = true; // Is the profile public?
+		String picPath; // Real path to this user's profile picture
+		String toPage = SUCCESS_PAGE; // Page to redirect to
 		String id = request.getParameter("id");
 		
 		try // Does an accountPKey attribute exist in the session? If not, can't edit.
 		{
-			HttpSession s = request.getSession();
+			HttpSession s = request.getSession(false);
 			String apk = s.getAttribute(SessionConstants.ACCOUNT_PKEY).toString();
-			//canEdit = database.Account.isAdmin(s) || apk.equals(id); // Did the profile's owner request to see this page? If so, they can edit it.
-			canEdit = apk.equals(id); // Did the profile's owner request to see this page? If so, they can edit it.
+			isOwner = apk.equals(id); // Did the profile's owner request to see this page? If so, they can edit it.
 		}
 		catch (NullPointerException npe)
 		{
-			canEdit = false;
+			isOwner = false;
 		}
-		request.setAttribute(ProfileConstants.CAN_EDIT, new Boolean(canEdit));
+		request.setAttribute(ProfileConstants.CAN_EDIT, new Boolean(isOwner));
 		
 		try // Get the Profile from the DB
 		{
+			// Store Profile in request
 			p = new ProfileBean(id);
 			request.setAttribute(ProfileConstants.PROFILE, p);
+			
+			// Check profile's status
+			if (!p.isPublic() && ! Account.isAdmin(request.getSession())) // If the profile is hidden and the user isn't an admin,
+			{
+				isPublic = false;
+				if (! isOwner) // AND the user doesn't own the profile
+					toPage = HIDDEN_PAGE; // Can't view
+			}
+			request.setAttribute(ProfileConstants.IS_PUBLIC, new Boolean(isPublic)); // Can view
 			
 			// Set profile pic path
 			picPath = "/Uploads/Profiles/Pics/" + id;
@@ -93,13 +105,15 @@ public class ProfileViewServlet extends HttpServlet {
         	else
         		picPath = request.getContextPath() + picPath;
 			request.setAttribute(ProfileConstants.PIC_PATH, picPath);
-			
-			toJsp = SUCCESS_PAGE;
 		}
 		catch (EmptyQueryException eqe)
 		{
-			toJsp = EMPTY_PAGE;
+			toPage = EMPTY_PAGE;
 			System.out.println("Empty profile: " + eqe.getQuery());
+		}
+		catch (NullPointerException npe) // Session expired
+		{
+			
 		}
 		
 		try
@@ -150,7 +164,7 @@ public class ProfileViewServlet extends HttpServlet {
 		gt.fillByIds(gameIds.toArray(new String[gameIds.size()]));
 		request.setAttribute(ProfileConstants.GAMES, gt);
 		
-		request.getRequestDispatcher(toJsp).forward(request, response); // If all successful, forward to view_game.jsp
+		request.getRequestDispatcher(toPage).forward(request, response); // If all successful, forward to view_game.jsp
 	}
 
 	/**
