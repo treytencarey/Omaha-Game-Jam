@@ -143,7 +143,7 @@
 	} else {
 	%>
 	<div class="container eventContainer">
-		<h1>No Current Event</h1>
+		<h1 style="width: -webkit-fit-content;margin: auto;">No Current Event</h1>
 	</div>
 	<%
 	}
@@ -222,7 +222,7 @@
 	<%if(!past.isEmpty()) {%>
 	<div class="container eventContainer" style="max-width: 1400px;">
 		<div id="past-events">
-			<h1 style="width: fit-content; margin: auto;">Past Events</h1>
+			<h1 style="width: fit-content; margin: auto; margin-bottom: 50px;">Past Events</h1>
 			<button onclick="goLeft()" onmousedown="goLeftOpacity()" onmouseup="goLeftOpacityOff()" style="position: relative; top: 209.5px; float: left;"><i id="goLeftIcon" class="fas fa-chevron-circle-left fa-7x"></i></button>
 			<button onclick="goRight()" onmousedown="goRightOpacity()" onmouseup="goRightOpacityOff()" style="position: relative; top: 209.5px; float: right;"><i id="goRightIcon" class="fas fa-chevron-circle-right fa-7x"></i></button>
 			<div class="container scrolling-wrapper">				

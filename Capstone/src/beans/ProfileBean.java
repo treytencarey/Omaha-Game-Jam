@@ -113,6 +113,14 @@ public class ProfileBean implements Serializable{
 	}
 	
 	/**
+	 * @return whether this profile is public or not, based on its status
+	 */
+	public boolean isPublic()
+	{
+		return (this.getStatus().equals("1") || this.getStatus().equals("2"));
+	}
+	
+	/**
 	 * @return The status of this profile.
 	 * <ul>
 	 * <li>-1: denied (not public)</li>

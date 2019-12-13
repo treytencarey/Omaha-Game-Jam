@@ -55,8 +55,9 @@
 		String currentYear = dtf.format(LocalDateTime.now());
 	%>
 	<br>
-	<h4 class="page-text" style="width: fit-content;">Recent News</h4>
-	<br>
+	<div class="container newsContainer">
+		<h1 style="width: -webkit-fit-content;margin: auto;">Recent News</h1>
+	</div>
 	<div class="container" style="text-align: center;">
 		<div class="row justify-content-center">
 			<%

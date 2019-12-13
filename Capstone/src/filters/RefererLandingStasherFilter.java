@@ -15,6 +15,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import constants.SessionConstants;
 
 /**
  * Filter that intercepts all requests, determines if they came from an external website, and if so, sets the Session's "Referer" and "Landing" attributes.
@@ -53,8 +54,8 @@ public class RefererLandingStasherFilter implements Filter {
 			String landing = httpRequest.getRequestURL().toString();
 			if (! referer.contains(httpRequest.getContextPath())) // Only record Referer and Landing if the user came from an external site.
 			{	
-				s.setAttribute("Referer", referer);
-				s.setAttribute("Landing", landing);
+				s.setAttribute(SessionConstants.REFERER, referer);
+				s.setAttribute(SessionConstants.LANDING, landing);
 			}
 		}
 		catch (NullPointerException npe) // After testing, this seems to only occur when the user directly types in the URL.
@@ -64,7 +65,7 @@ public class RefererLandingStasherFilter implements Filter {
 		}
 		finally
 		{
-			s.setAttribute("AccessDate", date); // Set date no matter what (gets set not when they arrive, but at the last page they visit before their session expires).
+			s.setAttribute(SessionConstants.ACCESS_DATE, date); // Set date no matter what (gets set not when they arrive, but at the last page they visit before their session expires).
 			//System.out.println(date);
 		}
 
