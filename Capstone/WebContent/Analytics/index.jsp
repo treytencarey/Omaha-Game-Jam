@@ -3,6 +3,14 @@
 	//if(!Account.isAdmin(request.getSession())) {
 	//	response.sendRedirect(request.getContextPath());
 	//}
+
+	List<Map<String, Object>> query = Database.executeQuery("SELECT PKey, Title FROM Events");
+	String events = "";
+	for(int i = 0; i < query.size(); i++) {
+		events = events + query.get(i).get("PKey").toString() + "-----" + query.get(i).get("Title").toString();
+		if(i != query.size() -1 )
+			events = events + "@@@";
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -59,129 +67,60 @@ svg {
 .graph-select {
 	margin: 0 auto;
 }
+
+.head {
+	width: fit-content;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.analysis-table {
+	width: fit-content;
+	margin: 0 auto;
+	text-align: center;
+}
 </style>
 <body>
 	<%@include file="/Common/navbar.jsp"%>
 	<%@page import="database.Account"%>
+	<%@page import="database.Database"%>
 	<%@page import="java.io.BufferedReader" %>
 	<%@page import="java.io.FileReader" %>
 	<%@page import="java.io.IOException" %>
 	<br>
-	<h4 style="width: fit-content; text-align: center; margin: 0 auto;">Analytics</h4>
+	<h4 class="head">Analytics</h4>
 	<br>
-	<select class="graph-select" id="data-select"></select>
+	<div class="head">RSVPs Overtime (From Different Referrers)</div>
 	<div id="graph-container" class="graph-container"></div>
+	<br>
+	<hr class="my-2" style="background-color: #3b3b3b">
+	<div class="head">Other Data</div>
+	<br>
+	<div>
+		<div id="total-table" class="analysis-table"></div>
+		<div id="percent-change-table" class="analysis-table"></div>
+	</div>
 </body>
 <script>
-	var formattedData = [];
-	
-	function getWebsiteName(n) {
-		var matches = n.match(/^https?\:\/\/(?:www\.)?([^\/:?#]+)(?:[\/:?#]|$)/i);
-		if(matches)
-			return(matches[1]);
-		
-		return "No Referer";
-	}
-	
-	function containsElement(arr, w, d) {
-		for(var i = 0; i < arr.length; i++) {
-			if(arr[i].Referer == w && arr[i].Date == d)
-				return i;
-		}
-		return -1;
-	}
-	
-	function formatDate(d) {
-		var dArr = d.split("/");
-		return dArr[2] + "-" + dArr[0] + "-01";
-		//return new Date(dArr[2], dArr[0], 01);
-		//return new Date(dArr[2] + "-" + dArr[0] + "-01");
-	}
+var eStr = "<%= events %>";
+var evts = eStr.split("@@@");
+var eventPKeys = [];
+var eventTitles = [];
 
-	//go through csv to setup data
-	d3.csv("activities.csv", function(data) {
-		data.forEach(function(d) {
-				var da = formatDate(d["AccessDate"]);
-				var i = containsElement(formattedData, getWebsiteName(d["Referer"]), da);
-				if(d["RSVPdEventPKey"] != "" && d["AccessDate"] != "") {
-					if(i == -1) {
-						formattedData.push({Referer: getWebsiteName(d["Referer"]), Date: da, RSVPs: 1});
-					}
-					else {
-						formattedData[i].RSVPs += 1;
-					}
-				}
-		});
-				// descending order
-				formattedData.sort(function (a, b) {
-		    		if (a.Date > b.Date) {
-		        		return 1;
-		    		}
-		    		if (b.Date > a.Date) {
-		        		return -1;
-		    		}
-		    		return 0;
-				});
-				console.log(formattedData);
-				//console.log(formattedData[1].Dates.length);
-				displayGraph();
-	});
-	
-	function displayGraph() {
-		//var parseDate = d3.timeFormat("%m-%Y");
-		var totalRSVPs = [];
-		formattedData.forEach(function(d) {
-			d.Date = new Date(d.Date);
-			totalRSVPs.push(+d.RSVPs);
-		});
-		
-		totalRSVPs.sort();
-		
-		var margin = {top: 30, right: 20, bottom: 30, left: 50},
-	    width = 310 - margin.left - margin.right,
-	    height = 310 - margin.top - margin.bottom;
-		
-		var sum = d3.nest().key(function(d) {return d.Referer;}).entries(formattedData);
-		allKeys = sum.map(function(d){return d.key});
-		
-		var svgGraph = d3.select("#graph-container")
-						 .selectAll("uniqueChart")
-						 .data(sum)
-						 .enter()
-						 .append("svg")
-						 .attr("width", width + margin.left + margin.right)
-						 .attr("height", height + margin.top + margin.bottom)
-						 .append("g")
-						 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-		
-		var x = d3.scaleTime()
-	    		  .domain(d3.extent(formattedData, function(d) { return d.Date; }))
-	    		  .range([ 0, width ]);
-		//var x = d3.scaleTime().domain([d3.min(domainDates), d3.max(domainDates)]).range([0, width]);
-		svgGraph.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(5));
-		
-		var y = d3.scaleLinear()
-	    		  .domain([0, d3.max(formattedData, function(d) { return +d.RSVPs; })])
-	    		  .range([ height, 0 ]);
-		//var y = d3.scaleLinear().domain([0, d3.max(domainRSVPs)]).range([height, 0]);
-		svgGraph.append("g").call(d3.axisLeft(y).ticks(5).tickValues(totalRSVPs));
-		
-		svgGraph.append("path").attr("fill", "none")
-				.attr("stroke", "blue")
-				.attr("stroke-width", 1.2)
-				.attr("d", function(d) {
-					return d3.line()
-							 .x(function(d) { return x(d.Date); })
-							 .y(function(d) { return y(+d.RSVPs); })
-							 (d.values)
-				});
-		
-		svgGraph.append("text")
-				.attr("text-anchor", "start")
-				.attr("y", -5)
-				.attr("x", 0)
-				.text(function(d){ return(d.key)})
-				.style("fill", "blue");
+for(var i = 0; i < evts.length; i++) {
+	var s = evts[i].split("-----");
+	eventPKeys.push(s[0]);
+	eventTitles.push(s[1]);
+}
+
+function getEventTitleFromKey(k) {
+	for(var i = 0; i < eventPKeys.length; i++) {
+		if(k == eventPKeys[i])
+			return eventTitles[i];
 	}
+	
+	return "";
+}
 </script>
+<script src="analyzeData.js"></script>
 </html>
