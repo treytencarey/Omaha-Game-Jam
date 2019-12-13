@@ -9,7 +9,8 @@
 					<i class="fa fa-cloud-upload"></i> Custom Upload
 				</label>
 		<% } %>
-				<input style="width: unset; opacity: 1; margin-left: 10px;" id="<%= session.getAttribute("uploadInputID") == null ? "file" + String.valueOf(PKey) : session.getAttribute("uploadInputID") %>" name="file<%= PKey %>" type="file" <%= session.getAttribute("uploadInputAttributes") != null ? session.getAttribute("uploadInputAttributes") : "" %> <% if (session.getAttribute("uploadInputOnly") == null) { %> onchange="document.getElementById('uploadSubmit').click();" <% } %>/>
+				<label style="position: absolute; margin-left: 45px; z-index: 2; line-height: 40px; font-weight: 400; font-size: 18px;" for="#<%= session.getAttribute("uploadInputID") == null ? "file" + String.valueOf(PKey) : session.getAttribute("uploadInputID") %>">Image</label>
+				<input class="form-control modalFields custom-file-input" style="opacity: 1; margin-left: 80px; height: auto; z-index: 1;" id="<%= session.getAttribute("uploadInputID") == null ? "file" + String.valueOf(PKey) : session.getAttribute("uploadInputID") %>" name="file<%= PKey %>" type="file" <%= session.getAttribute("uploadInputAttributes") != null ? session.getAttribute("uploadInputAttributes") : "" %> <% if (session.getAttribute("uploadInputOnly") == null) { %> onchange="document.getElementById('uploadSubmit').click();" <% } %>/>
 		<% if (session.getAttribute("uploadInputOnly") == null) { %>
 				<button id="uploadSubmit"></button>
 			<% if (session.getAttribute("uploadIncludeForm") != null) { %>
