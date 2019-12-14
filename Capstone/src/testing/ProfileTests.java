@@ -48,7 +48,7 @@ public class ProfileTests {
 	@Test
 	public void test1_checkNoProfileOnAccCreation() {
 		driver.findElement(By.id("loggedInAccountBtn")).click();
-		driver.findElement(By.id("myProfileBtn")).click();
+		driver.findElement(By.linkText("My Profile")).click();
 		assertEquals(true, driver.getPageSource().contains("No profile has been created for this account yet."));
 	}
 	
