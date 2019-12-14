@@ -75,23 +75,26 @@ function checkYear(arr, date) {
 	return arr;
 }
 
-function addToEventArr(arr, acc, evtKey) {
-	var evt = getEventTitleFromKey(evtKey);
-	for(var i = 0; i < arr.length; i++) {
-		if(arr[i][0] == evt) {
-			arr[i][1].push(acc);
-			arr[i][1] = Array.from(new Set(arr[i][1]));
-			return arr;
+function getEventData() {
+	var out = [];
+	out.push(["EVENT", "TOTAL RSVPs", "REPEAT RSVPs"]);
+	var revCounts = eventCounts.reverse();
+	var revRepeats = eventRepeatCounts.reverse();
+	for(var i = 0; i < revCounts.length; i++) {
+		var eName = revCounts[i][0];
+		var total = revCounts[i][1];
+		var repeats = 0;
+		for(var j = 0; j < revRepeats.length; j++) {
+			if(revCounts[i][0] == revRepeats[j][0]) {
+				repeats = revRepeats[j][1];
+				break;
+			}
 		}
+		
+		out.push([eName, total, repeats]);
 	}
 	
-	arr.push([evt, [acc]]);
-	return arr;
-}
-
-function getEventTable(arr) {
-	var out = [];
-	
+	return out;
 }
 
 var graphData = [];
@@ -101,15 +104,10 @@ var totalVisits = [ 0, 0, 0 ]; // respectively: all-time, this month, this year
 var yearlyVisits = [ 0, 0 ]; // respectively: last year, this year
 var yearlyRSVPs = [ 0, 0 ]; // respectively: last year, this year
 var yearlyLogins = [ 0, 0 ]; // respectively: last year, this year
-var eventRSVPs = []; // holds event key and RSVP account keys for each event in a 2d array
 
 // go through csv to setup data
 d3.csv("activities.csv", function(data) {
 	data.forEach(function(d) {
-				// do not count admin login
-				if(d["AccountPKey"] == 9)
-					return;
-				
 				var da = formatDate(d["AccessDate"]);
 				// track visits and account logins
 				totalVisits = getThisMonthAndYear(totalVisits, da);
@@ -132,7 +130,6 @@ d3.csv("activities.csv", function(data) {
 					
 					totalRSVPs = getThisMonthAndYear(totalRSVPs, da);
 					yearlyRSVPs = checkYear(yearlyRSVPs, da);
-					eventRSVPs = addToEventArr(eventRSVPs, d["AccountPKey"], d["RSVPdEventPKey"]);
 					
 					if (i == -1) {
 						graphData.push({
@@ -156,34 +153,29 @@ d3.csv("activities.csv", function(data) {
 		}
 		return 0;
 	});
-	// console.log(graphData);
-	console.log(eventRSVPs);
 
 	// setup table data
 	var yearlyVisitsPercentChange = percentageChange(yearlyVisits);
 	var yearlyRSVPsPercentChange = percentageChange(yearlyRSVPs);
 	var yearlyLoginsPercentChange = percentageChange(yearlyLogins);
-	var totalTableInputs = [ [ "Total Site Visits (All-Time):", totalVisits[0] ],
-			[ "Total RSVPs (All-Time):", totalRSVPs[0] ],
-			[ "Total Logins (All-Time):", totalLogins[0] ],
-			[ "Total Site Visits (This Year):", totalVisits[2] ],
-			[ "Total RSVPs (This Year):", totalRSVPs[2] ],
-			[ "Total Logins (This Year):", totalLogins[2] ],
-			[ "Total Site Visits (This Month):", totalVisits[1] ],
-			[ "Total RSVPs (This Month):", totalRSVPs[1] ],
-			[ "Total Logins (This Month):", totalLogins[1] ] ];
+	
+	var totalTableInputs = [ [" ", "This Month:", "This Year:", "All-Time:" ],
+							 [ "Site Visits:", totalVisits[1], totalVisits[2], totalVisits[0] ],
+							 [ "Logins:", totalLogins[1], totalLogins[2], totalLogins[0] ],
+							 [ "RSVPs:", totalRSVPs[1], totalRSVPs[2], totalRSVPs[0] ] ];
 	
 	var percentChangeTableInputs = [ [ "Site Visits Percentage Change (Last Year vs. This Year):", yearlyVisitsPercentChange ],
 									 [ "RSVPs Percentage Change (Last Year vs. This Year):", yearlyRSVPsPercentChange ],
 									 [ "Logins Percentage Change (Last Year vs. This Year):", yearlyLoginsPercentChange ] ];
 	
-	var eventRSVPInputs = getEventTable(eventRSVPs);
+	var eventDataInputs = getEventData();
 
-	// calculate/display results
+	// display results
 	var tableWidth = 210;
 	displayGraph();
 	displayTables("total-table", tableWidth, totalTableInputs);
 	displayTables("percent-change-table", tableWidth, percentChangeTableInputs);
+	displayTables("event-data-table", tableWidth, eventDataInputs);
 });
 
 function displayTables(di, tableWidth, dataArr) {
@@ -245,7 +237,7 @@ function displayGraph() {
 	var y = d3.scaleLinear().domain([ 0, d3.max(graphData, function(d) {
 		return +d.RSVPs;
 	}) ]).range([ height, 0 ]);
-	svgGraph.append("g").call(d3.axisLeft(y).ticks(5).tickValues(totalRSVPs));
+	svgGraph.append("g").call(d3.axisLeft(y).ticks(5));
 
 	svgGraph.append("path").attr("fill", "none").attr("stroke", "blue").attr(
 			"stroke-width", 1.2).attr("d", function(d) {

@@ -1,15 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%
-	//if(!Account.isAdmin(request.getSession())) {
-	//	response.sendRedirect(request.getContextPath());
-	//}
+	if(!Account.isAdmin(request.getSession())) {
+		response.sendRedirect(request.getContextPath());
+	}
 
-	List<Map<String, Object>> query = Database.executeQuery("SELECT PKey, Title FROM Events");
-	String events = "";
-	for(int i = 0; i < query.size(); i++) {
-		events = events + query.get(i).get("PKey").toString() + "-----" + query.get(i).get("Title").toString();
-		if(i != query.size() -1 )
-			events = events + "@@@";
+	List<Map<String, Object>> aQuery = Database.executeQuery("SELECT COUNT(AccountPKey), EventPKey FROM Attendees GROUP BY EventPKey");
+	String[][] eventCounts = new String[aQuery.size()][2];
+	for(int i = 0; i < aQuery.size(); i++) {
+		String eventKey = aQuery.get(i).get("EventPKey").toString();
+		String cKey = aQuery.get(i).get("COUNT(AccountPKey)").toString();
+		List<Map<String, Object>> eQuery = Database.executeQuery("SELECT Title FROM Events WHERE PKey=" + eventKey);
+		String title = eQuery.get(0).get("Title").toString();
+		eventCounts[i] = new String[2];
+		eventCounts[i][0] = title;
+		eventCounts[i][1] = cKey;
+		//System.out.println(eventCounts[i][0]);
+	}
+	
+	//build list of repeat attendees
+	aQuery = Database.executeQuery("SELECT COUNT(AccountPKey), EventPKey FROM (SELECT * FROM Attendees WHERE AccountPKey IN (SELECT AccountPKey FROM Attendees GROUP BY AccountPKey HAVING COUNT(AccountPKey) > 1)) GROUP BY EventPKey");
+	String[][] eventRepeatCounts = new String[aQuery.size()][2];
+	for(int i = 0; i < aQuery.size(); i++) {
+		String eventKey = aQuery.get(i).get("EventPKey").toString();
+		List<Map<String, Object>> eQuery = Database.executeQuery("SELECT Title FROM Events WHERE PKey=" + eventKey);
+		eventRepeatCounts[i] = new String[2];
+		eventRepeatCounts[i][0] = eQuery.get(0).get("Title").toString();
+		eventRepeatCounts[i][1] = aQuery.get(i).get("COUNT(AccountPKey)").toString();
 	}
 %>
 <!DOCTYPE html>
@@ -96,31 +112,31 @@ svg {
 	<hr class="my-2" style="background-color: #3b3b3b">
 	<div class="head">Other Data</div>
 	<br>
-	<div>
-		<div id="total-table" class="analysis-table"></div>
-		<div id="percent-change-table" class="analysis-table"></div>
-	</div>
+	<div id="total-table" class="analysis-table"></div>
+	<br>
+	<div id="percent-change-table" class="analysis-table"></div>
+	<br>
+	<div id="event-data-table" class="analysis-table"></div>
+	<br>
 </body>
 <script>
-var eStr = "<%= events %>";
-var evts = eStr.split("@@@");
-var eventPKeys = [];
-var eventTitles = [];
+var eventCounts = new Array();
+var eventRepeatCounts = new Array();
+<%  
+for (int i = 0; i < eventCounts.length; i++) {  
+%>  
+	eventCounts[<%= i %>] = [];
+	eventCounts[<%= i %>].push("<%=eventCounts[i][0]%>");
+	eventCounts[<%= i %>].push("<%=eventCounts[i][1]%>");
+<%}%> 
 
-for(var i = 0; i < evts.length; i++) {
-	var s = evts[i].split("-----");
-	eventPKeys.push(s[0]);
-	eventTitles.push(s[1]);
-}
-
-function getEventTitleFromKey(k) {
-	for(var i = 0; i < eventPKeys.length; i++) {
-		if(k == eventPKeys[i])
-			return eventTitles[i];
-	}
-	
-	return "";
-}
+<%  
+for (int i = 0; i < eventRepeatCounts.length; i++) {  
+%>  
+	eventRepeatCounts[<%= i %>] = [];
+	eventRepeatCounts[<%= i %>].push("<%=eventRepeatCounts[i][0]%>");
+	eventRepeatCounts[<%= i %>].push("<%=eventRepeatCounts[i][1]%>");
+<%}%>
 </script>
 <script src="analyzeData.js"></script>
 </html>
