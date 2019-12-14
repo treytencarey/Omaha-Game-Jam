@@ -61,6 +61,9 @@
 		
 		<h3><b>Submissions:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gameSubmissionsDisplayModal">View Game Submissions</button>
+		
+		<h3><b>Analytics:   </b></h3>
+		<a href="<%= request.getContextPath() %>/Analytics"><button type="button" class="btn btn-primary">View Site Analytics</button></a>
 	</div>
 </body>
 <script>
