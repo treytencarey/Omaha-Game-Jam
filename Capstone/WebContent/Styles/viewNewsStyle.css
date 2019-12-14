@@ -56,6 +56,8 @@
 
 .news-body {
 	padding:15px;
+	word-wrap:break-word;
+	white-space:normal;
 }
 
 .zoom {
