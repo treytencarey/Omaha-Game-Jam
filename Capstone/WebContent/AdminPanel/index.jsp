@@ -33,6 +33,7 @@
 	<%@include file="/Common/navbar.jsp" %>
 	<%@include file="/Events/newEventModal.jsp" %>
 	<%@include file="/Events/eventsDisplayModal.jsp" %>
+	<%@include file="/Events/burstEmailModal.jsp" %>
 	<%@include file="/News/newArticleModal.jsp" %>
 	<%@include file="/Gallery/addGalleryPhotoModal.jsp" %>
 	<%@include file="/AdminPanel/submissions.jsp" %>
@@ -42,11 +43,12 @@
 	<%@page import="database.Account" %>
 	
 	
-	<div style="text-align: center;">
+	<div style="text-align: center; margin-top: 60px;">
 		
 		<h3><b>Event Options:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEventModal">Create Event</button>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventsDisplayModal">View Events</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#burstEmailModal">Email Attendees</button>
 		
 		<h3><b>News Options:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newNewsArticleModal">Create Article</button>
