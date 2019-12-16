@@ -90,8 +90,10 @@ public class NewsServlet extends HttpServlet {
 		String pKey = null;
 		boolean isPublicChecked = request.getParameter("isPublicCheckbox") != null;
 		
-		reqTitle = Database.cleanseInput(reqTitle);
-		reqSubtitle = Database.cleanseInput(reqSubtitle);
+		if(request.getParameter("deleteNewsArticleButton") == null) {
+			reqTitle = Database.formatString(reqTitle);
+			reqSubtitle = Database.formatString(reqSubtitle);
+		}
 
 		/**
 		 * Set isPublic to an Integer so that it can be put into the database
