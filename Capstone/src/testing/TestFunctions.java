@@ -1,6 +1,8 @@
 package testing;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -12,8 +14,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import database.Database;
 
 public class TestFunctions {
 	/**
@@ -117,5 +117,22 @@ public class TestFunctions {
 		}
 		
 		return rtn;
+	}
+	
+	public static String readFileToString(String filename) {
+		String body = "";
+		File file = new File("C:\\Users\\bryce\\eclipse-workspace\\Capstone\\Capstone\\TestingUtils\\TestTxtFiles\\" + filename);
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+			String read = "";
+			while((read = bufferedReader.readLine()) != null) {
+				body = body + read;
+			}
+			bufferedReader.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return body;
 	}
 }
