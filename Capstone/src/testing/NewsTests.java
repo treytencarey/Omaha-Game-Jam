@@ -121,10 +121,27 @@ public class NewsTests {
 	}
 	
 	/**
+	 * Test to see what happens in title and subtitle fields when symbols are inputted
+	 */
+	@Test
+	public void test5_checkSymbolsInput() throws InterruptedException {
+		String symbols = TestFunctions.generateSymbolString();
+		driver.findElement(By.id("editArticleBtn")).click();
+		driver.findElement(By.name("newsTitle")).clear();
+		driver.findElement(By.name("newsTitle")).sendKeys(symbols);
+		driver.findElement(By.name("newsHeader")).clear();
+		driver.findElement(By.name("newsHeader")).sendKeys(symbols);
+		driver.findElement(By.id("editNewsArticleButton")).click();
+		Thread.sleep(1000);
+		
+		assertEquals(true, driver.getPageSource().contains(symbols));
+	}
+	
+	/**
 	 * Test that article properly deletes
 	 */
 	@Test
-	public void test5_checkDeletion() throws InterruptedException {
+	public void test6_checkDeletion() throws InterruptedException {
 		driver.findElement(By.id("deleteArticleBtn")).click();
 		Thread.sleep(500);
 		driver.findElement(By.id("deleteNewsArticleButton")).click();

@@ -119,6 +119,14 @@ public class TestFunctions {
 		return rtn;
 	}
 	
+	/**
+	 * Generates a string of symbols for testing
+	 * @return String
+	 */
+	public static String generateSymbolString() {
+		return "!@#$%^&*()|{}[]<>,./?~`'\"";
+	}
+	
 	public static String readFileToString(String filename) {
 		String body = "";
 		File file = new File("C:\\Users\\bryce\\eclipse-workspace\\Capstone\\Capstone\\TestingUtils\\TestTxtFiles\\" + filename);

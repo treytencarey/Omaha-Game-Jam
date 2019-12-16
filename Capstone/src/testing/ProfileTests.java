@@ -40,6 +40,7 @@ public class ProfileTests {
 		driver.findElement(By.id("validationPass1")).sendKeys(junitPass);
 		driver.findElement(By.id("validationPass2")).sendKeys(junitPass);
 		driver.findElement(By.id("registerBtn")).click();
+		driver.navigate().refresh();
 	}
 	
 	/**
@@ -103,5 +104,32 @@ public class ProfileTests {
 		assertEquals(true, driver.getPageSource().contains(bioTest));
 		assertEquals(true, driver.getPageSource().contains(siteTest));
 		assertEquals(true, driver.getPageSource().contains(skillsTest));
+	}
+	
+	/**
+	 * Test to see what happens when symbols are put in fields
+	 */
+	@Test
+	public void test4_checkSymbolsInFields() throws InterruptedException {
+		driver.findElement(By.id("editProfileBtn")).click();
+		driver.findElement(By.name("pic")).sendKeys("C:/Users/bryce/eclipse-workspace/Capstone/Capstone/TestingUtils/TestImages/smallapple.png");
+		String symbols = TestFunctions.generateSymbolString();
+		
+		driver.findElement(By.name("name")).clear();
+		driver.findElement(By.name("bio")).clear();
+		driver.findElement(By.name("site")).clear();
+		driver.findElement(By.name("skills")).clear();
+		
+		driver.findElement(By.name("name")).sendKeys(symbols);
+		driver.findElement(By.name("bio")).sendKeys(symbols);
+		driver.findElement(By.name("site")).sendKeys(symbols);
+		driver.findElement(By.name("skills")).sendKeys(symbols);
+		driver.findElement(By.name("update")).click();
+		
+		driver.navigate().refresh();
+		Thread.sleep(2000);
+		TestFunctions.takeScreenshot(driver, "ProfileSymbolsTest.png");
+		
+		assertEquals(true, driver.getPageSource().contains(symbols));
 	}
 }

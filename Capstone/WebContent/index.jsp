@@ -57,7 +57,7 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
 	  			<p style="font-size: 15px"><%=rsvpd %> other Jammers have RSVP'd for this Jam.</p>
 	  			<div class="row">
 		  			<form action="./Events" style="margin-left: auto; margin-right: 10px;">
-		  				<input type="submit" class="btn btn-primary" href="./Events" value="Details">
+		  				<input id="detailsBtn" type="submit" class="btn btn-primary" href="./Events" value="Details">
 					</form>
 		  			<div style="margin-right: auto; margin-left: 10px;">
 		  				<%@include file="/components/RSVPButton.jsp" %>
