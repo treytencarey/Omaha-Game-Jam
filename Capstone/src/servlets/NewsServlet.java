@@ -85,10 +85,13 @@ public class NewsServlet extends HttpServlet {
 		 * Get title, header, and body from input on "Create/Edit News Article" modal
 		 */
 		String reqTitle = request.getParameter("newsTitle");
-		String reqHeader = request.getParameter("newsHeader");
+		String reqSubtitle = request.getParameter("newsHeader");
 		String reqBody = request.getParameter("newsBody");
 		String pKey = null;
 		boolean isPublicChecked = request.getParameter("isPublicCheckbox") != null;
+		
+		reqTitle = Database.cleanseInput(reqTitle);
+		reqSubtitle = Database.cleanseInput(reqSubtitle);
 
 		/**
 		 * Set isPublic to an Integer so that it can be put into the database
@@ -107,14 +110,14 @@ public class NewsServlet extends HttpServlet {
 		if (request.getParameter("newNewsArticleButton") != null) {
 			if (!request.getPart("newsFile").getSubmittedFileName().isEmpty())
 				headerImg = request.getPart("newsFile");
-			pKey = addNewsArticle(reqTitle, reqHeader, reqBody, isPublicDb, headerImg);
+			pKey = addNewsArticle(reqTitle, reqSubtitle, reqBody, isPublicDb, headerImg);
 		}
 
 		if (request.getParameter("editNewsArticleButton") != null) {
 			String id = request.getParameter("newsId");
 			if (!request.getPart("newsFile").getSubmittedFileName().isEmpty())
 				headerImg = request.getPart("newsFile");
-			pKey = editNewsArticle(id, reqTitle, reqHeader, reqBody, isPublicDb, headerImg);
+			pKey = editNewsArticle(id, reqTitle, reqSubtitle, reqBody, isPublicDb, headerImg);
 		}
 
 		if (request.getParameter("deleteNewsArticleButton") != null) {

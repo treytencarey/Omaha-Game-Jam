@@ -209,4 +209,20 @@ public class Database extends HttpServlet {
 	    }
 	    return resultList;
 	}
+	
+	/**
+	 * Cleanses input string such that ' is replaced with ''. This escapes the ' character in SQL and avoids errors.
+	 * @param in - the input string (a parameter to be put into an SQL query)
+	 * @return The cleansed string
+	 */
+	public static String cleanseInput(String in) {
+		String cleanse = "";
+		try {
+			cleanse = in.replaceAll("'", "''");
+		} catch(NullPointerException e) {
+			return cleanse;
+		}
+		
+		return cleanse;
+	}
 }
