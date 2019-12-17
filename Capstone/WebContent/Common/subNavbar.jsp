@@ -46,20 +46,20 @@
 	      	<%}%>
 	    <%}%>
 				
-    		<% if (request.getRequestURI().equals(request.getContextPath()+"/profile") && request.getParameter("id").equals(session.getAttribute("accountPKey")))  { %>
-		      <li class="nav-item indvTabs">
-		      	<a id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Edit Profile</a>
-		      </li>
-	      	<%}%>
-	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/profile/edit"))  { %>
-		      <li class="nav-item indvTabs">
-		      	
-		      	<form action="view">
-                 	<input type="hidden" name="id" value="<%= session.getAttribute("accountPKey").toString() %>">
-                 	<input type="submit" class="nav-link" name="btnAddMore" value="Guest View"/>
-                </form>
-		      </li>
-	      	<%}%>
+   		<% if (request.getRequestURI().equals(request.getContextPath()+"/profile") && request.getParameter("id").equals(session.getAttribute("accountPKey")))  { %>
+	      <li class="nav-item indvTabs">
+	      	<a id="editProfileBtn" href="#editProfileModal" class="nav-link" data-toggle="modal">Edit Profile</a>
+	      </li>
+      	<%}%>
+      	<% if (request.getRequestURI().equals(request.getContextPath()+"/profile/edit"))  { %>
+	      <li class="nav-item indvTabs">
+	      	
+	      	<form action="view">
+                	<input type="hidden" name="id" value="<%= session.getAttribute("accountPKey").toString() %>">
+                	<input type="submit" class="nav-link" name="btnAddMore" value="Guest View"/>
+               </form>
+	      </li>
+      	<%}%>
 	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/Games/"))  { 
 	      		EventTableBean etb = new EventTableBean();
 	      		Event curE = etb.getCurrentEvent();
@@ -92,10 +92,10 @@
 	      		<li class="nav-item indvTabs">
 		        	<a id="addGameBtn" href="#" class="nav-link text-light" data-toggle="tooltip" title="You must RSVP for the current event to Submit a Game" >Submit Game</a>
 		      	</li>
-	      	<%} %>
-	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/Games/view_game.jsp")) { %>
+	      	<%}} %>
+	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/game")) { %>
 	      	  <%@page import="database.Game" %>
-	      	  <% if (session.getAttribute("accountPKey") != null && new Game(Integer.parseInt(request.getParameter("id").toString())).getSubmitter() == Integer.parseInt(session.getAttribute("accountPKey").toString())) { %>
+	      	  <% if (Account.isAdmin(session) || session.getAttribute("accountPKey") != null && new Game(Integer.parseInt(request.getParameter("id").toString())).getSubmitter() == Integer.parseInt(session.getAttribute("accountPKey").toString())) { %>
 			      <li class="nav-item indvTabs">
 			      	<a id="editGameBtn" href="#newGameModal" class="nav-link" data-toggle="modal">Edit Game</a>
 			      </li>
@@ -103,5 +103,5 @@
 	      	<%}%>
 	    </ul>
 	  </div>
-<%	}} %>
+<%	} %>
 </nav>
