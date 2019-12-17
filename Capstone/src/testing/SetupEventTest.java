@@ -36,7 +36,7 @@ public class SetupEventTest {
 	
 	/**
 	 * Creates a new event and sets all fields to be very large inputs
-	 * NOTE: After this, manually set this created event to public and then run EventTests
+	 * NOTE: After this, manually set this created event to public and then run EventTests or EventRSVPTests
 	 */
 	@Test
 	public void test1_checkLargeInputs() {
@@ -54,7 +54,7 @@ public class SetupEventTest {
 		driver.findElement(By.name("theme")).sendKeys(Keys.TAB);
 		driver.switchTo().activeElement().sendKeys(TestFunctions.generateLongString(800));
 		
-		driver.findElement(By.id("eventImage")).sendKeys("C:/Users/bryce/eclipse-workspace/Capstone/Capstone/TestingUtils/TestImages/smallapple.png");
+		driver.findElement(By.id("eventImage")).sendKeys("C:/Users/bryce/eclipse-workspace/Capstone/Capstone/TestingUtils/TestImages/Pleiades_large.jpg");
 		driver.findElement(By.id("addMutatorBtn")).click();
 		driver.findElement(By.name("mutator")).sendKeys(TestFunctions.generateLongString(200));
 		driver.findElement(By.name("mutatorDescription")).sendKeys(TestFunctions.generateLongString(200));
