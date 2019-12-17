@@ -304,10 +304,6 @@ public class EventPortalServlet extends HttpServlet {
 			}
 			
 		}
-		/**
-		 * Create news article for submitted event
-		 */
-		NewsServlet.addEventNewsArticle(title, theme, eventDescription, isPublic, Integer.parseInt(PKey));
 		
 		response.sendRedirect(request.getContextPath() + "/AdminPanel/");
 		

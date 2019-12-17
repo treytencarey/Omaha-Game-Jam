@@ -193,7 +193,7 @@
     	</div>
     	
 		<div class="form-group">
-			<button onclick="return checkChange()" class="btn btn-primary">Submit Changes</button>
+			<button onclick="return checkChange()" class="btn btn-primary" id="submitEventButton">Submit Changes</button>
 			<button onclick="return checkRemove();" class="btn btn-primary" id="deleteEventButton" style="background-color: red;">Delete Event</button>
 		</div>
 	</form>
