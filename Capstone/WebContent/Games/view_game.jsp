@@ -41,7 +41,7 @@ pageContext.setAttribute("Website", g.getLink());
 <body>
 <%@include  file="/Common/navbar.jsp" %>
 <%@include file="/Common/external_link_warning_modal.jsp"%>
-<% if (session.getAttribute("accountPKey") != null && g.getSubmitter() == Integer.parseInt(session.getAttribute("accountPKey").toString())) { %>
+<% if (session.getAttribute("accountPKey") != null && g.getSubmitter() == Integer.parseInt(session.getAttribute("accountPKey").toString()) || Account.isAdmin(session)) { %>
 	<%@include  file="/Games/newGameModal.jsp" %>
 <% } %>
 

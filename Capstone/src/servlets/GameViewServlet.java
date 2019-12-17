@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import beans.ContributorTableBean;
 import beans.GameBean;
 import beans.MutatorTableBean;
+import database.Account;
 import database.Contributor;
 import database.Game;
 
@@ -40,7 +41,8 @@ public class GameViewServlet extends HttpServlet {
 	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		return;
+		/*
 		String id = request.getParameter("id");
 		Game g; // Bean to store all game info in; to be passed to the JSP
 		MutatorTableBean mt;
@@ -49,7 +51,7 @@ public class GameViewServlet extends HttpServlet {
 		
 		/**
 		 * ID-related error checking
-		 */
+		 *
 		try
 		{
 			g = new Game(Integer.parseInt(id));
@@ -73,13 +75,16 @@ public class GameViewServlet extends HttpServlet {
 		
 		/**
 		 * Determine if logged in user can edit
-		 */
+		 *
 		canEdit = CanEdit(g, ct, request.getSession());
 		request.setAttribute("CanEdit", canEdit);
         request.getRequestDispatcher(SUCCESS_JSP).forward(request, response); // If all successful, forward to view_game.jsp
+        */
 	}
 	
 	public static boolean CanEdit(Game g, ContributorTableBean ct, HttpSession session) {
+		if (Account.isAdmin(session))
+			return true;
 		boolean canEdit = false;
 		String apk = session.getAttribute("accountPKey") != null ? session.getAttribute("accountPKey").toString() : null;
 		if (apk != null)
