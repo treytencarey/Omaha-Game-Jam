@@ -154,12 +154,12 @@ public class EventPortalServlet extends HttpServlet {
 		/**
 		 * String representing title of event
 		 */
-		String title = request.getParameter("title");
+		String title = request.getParameter("title").replaceAll("'", "''");
 		
 		/**
 		 * String representing theme of event
 		 */
-		String theme = request.getParameter("theme");
+		String theme = request.getParameter("theme").replaceAll("'", "''");
 		
 		/**
 		 * String representing description of event
@@ -179,13 +179,14 @@ public class EventPortalServlet extends HttpServlet {
 		/**
 		 * String representing start date of event
 		 */
-		String startDate = request.getParameter("startDate");
+		String startDate = request.getParameter("startDate").replaceAll("'", "''");;
 		
 		/**
 		 * String representing end date of event
 		 */
-		String endDate = request.getParameter("endDate");
+		String endDate = request.getParameter("endDate").replaceAll("'", "''");;
 		
+		//Delete Event files and database entries
 		if (request.getParameter("toDelete") != null && request.getParameter("toDelete").contentEquals("yes")) {
 			Database.executeUpdate("DELETE FROM Mutators WHERE EventPKey=" + PKey);
 			Database.executeUpdate("DELETE FROM Events WHERE PKey=" + PKey);
@@ -235,7 +236,7 @@ public class EventPortalServlet extends HttpServlet {
 				Mutator toRemove = null;
 				for(Mutator newMutator : newMutators) {
 					if(oldMutator.getTitle() == newMutator.getTitle()) {
-						Database.executeUpdate("UPDATE Mutators SET Title=\'"+newMutator.getTitle()+"\', Description=\'"+newMutator.getDesc()+"\' WHERE Title="+oldMutator.getTitle());
+						Database.executeUpdate("UPDATE Mutators SET Title=\'"+newMutator.getTitle().replaceAll("'", "''")+"\', Description=\'"+newMutator.getDesc().replaceAll("'", "''")+"\' WHERE Title="+oldMutator.getTitle());
 						delete = false;
 						toRemove = newMutator;
 					}
@@ -252,16 +253,16 @@ public class EventPortalServlet extends HttpServlet {
 			for(Mutator newMutator : newMutators) {
 				if(newMutator.getTitle() != null) {
 					if(newMutator.getDesc() != null) {
-						Database.executeUpdate("INSERT OR REPLACE INTO Mutators (EventPKey, Title, Description) VALUES ('" + PKey + "', '" + newMutator.getTitle() + "', '" + newMutator.getDesc() + "')");
+						Database.executeUpdate("INSERT OR REPLACE INTO Mutators (EventPKey, Title, Description) VALUES ('" + PKey + "', '" + newMutator.getTitle().replaceAll("'", "''") + "', '" + newMutator.getDesc().replaceAll("'", "''") + "')");
 					}
 					else {
 						Database.executeUpdate("INSERT OR REPLACE INTO Mutators (EventPKey, Title, Description) VALUES ('" + PKey + "', '" + newMutator.getTitle() + "', \'No Description\')");
 					}
 				}
 			}
-
+			System.out.println(title+" "+theme+" "+eventDescription+" "+startDate+" "+endDate+" ");
 			//Update Event, event description, and event schedule
-			Database.executeUpdate("UPDATE Events SET Title=\'" + title + "\', Theme=\'" + theme + "\', Description=\'" + eventDescription + "\', StartDate=\'" + startDate + "\', EndDate=\'" + endDate + "\', IsPublic=\'" + isPublic + "\' WHERE PKey=" + PKey);
+			Database.executeUpdate("UPDATE Events SET Title='" + title + "', Theme='" + theme + "', StartDate='" + startDate + "', EndDate='" + endDate + "', IsPublic='" + isPublic + "' WHERE PKey=" + PKey);
 			
 			path = getServerPath("/Uploads/Events/Body/Body");
 			createFile(PKey, path, eventDescription);
@@ -285,7 +286,7 @@ public class EventPortalServlet extends HttpServlet {
 			if(mutators != null) {
 				for(int i = 0; i < mutators.length; i++) {
 					if(mutators[i] != null && mutatorDescriptions[i] != null) {
-						Database.executeUpdate("INSERT OR REPLACE INTO Mutators (EventPKey, Title, Description) VALUES ('" + PKey + "', '" + mutators[i] + "', '" + mutatorDescriptions[i] + "')");
+						Database.executeUpdate("INSERT OR REPLACE INTO Mutators (EventPKey, Title, Description) VALUES ('" + PKey + "', '" + mutators[i].replaceAll("'", "''") + "', '" + mutatorDescriptions[i].replaceAll("'", "''") + "')");
 					}
 				}
 			}
