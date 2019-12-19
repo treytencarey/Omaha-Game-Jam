@@ -41,7 +41,8 @@ pageContext.setAttribute("Website", g.getLink());
 <body>
 <%@include  file="/Common/navbar.jsp" %>
 <%@include file="/Common/external_link_warning_modal.jsp"%>
-<% if (session.getAttribute("accountPKey") != null && g.getSubmitter() == Integer.parseInt(session.getAttribute("accountPKey").toString()) || Account.isAdmin(session)) { %>
+<% ContributorTableBean ctView = new ContributorTableBean(); ctView.fillByGame(request.getParameter("id"));
+   if (GameViewServlet.CanEdit(new Game(Integer.parseInt(request.getParameter("id"))), ctView, session)) { %>
 	<%@include  file="/Games/newGameModal.jsp" %>
 <% } %>
 

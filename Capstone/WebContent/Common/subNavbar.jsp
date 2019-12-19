@@ -95,7 +95,10 @@
 	      	<%}} %>
 	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/game")) { %>
 	      	  <%@page import="database.Game" %>
-	      	  <% if (Account.isAdmin(session) || session.getAttribute("accountPKey") != null && new Game(Integer.parseInt(request.getParameter("id").toString())).getSubmitter() == Integer.parseInt(session.getAttribute("accountPKey").toString())) { %>
+	      	  <%@page import="servlets.GameViewServlet" %>
+	      	  <%@page import="beans.ContributorTableBean" %>
+	      	  <% ContributorTableBean ctSub = new ContributorTableBean(); ctSub.fillByGame(request.getParameter("id"));
+	      	  	 if (GameViewServlet.CanEdit(new Game(Integer.parseInt(request.getParameter("id"))), ctSub, session)) { %>
 			      <li class="nav-item indvTabs">
 			      	<a id="editGameBtn" href="#newGameModal" class="nav-link" data-toggle="modal">Edit Game</a>
 			      </li>
