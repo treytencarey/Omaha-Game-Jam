@@ -38,11 +38,11 @@
 								for (int i = 0; i < listEvents.size(); i++) {
 									if (i == 0) {
 							%>
-							<option value="<%=i%>" selected><%=listEvents.get(i).getTitle()%></option>
+							<option value="<%=listEvents.get(i).getKey()%>" selected><%=listEvents.get(i).getTitle()%></option>
 							<%
 								} else {
 							%>
-							<option value="<%=i%>"><%=listEvents.get(i).getTitle()%></option>
+							<option value="<%=listEvents.get(i).getKey()%>"><%=listEvents.get(i).getTitle()%></option>
 							<%
 								}
 								}
