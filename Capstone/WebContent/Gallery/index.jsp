@@ -50,6 +50,7 @@
 		try {
 			for (int i = 0; i < events.size(); i++) {
 	%>
+	<hr class="my-2" style="background-color: #3b3b3b">
 	<div>
 		<img class="main-event-img rounded" src="<%=request.getContextPath()%>/Uploads/Events/HeaderImages/<%= events.get(i).getKey() %>_header.png"/>
 	</div>
@@ -67,7 +68,7 @@
 				<a href="<%=MEDIA_PATH_FULL%>/<%=events.get(i).getKey()%>/<%=galleryPhotos[j]%>" data-toggle="lightbox" data-gallery="event-gallery"><img class="event-img zoom" src="<%=MEDIA_PATH_FULL%>/<%=events.get(i).getKey()%>/<%=galleryPhotos[j]%>"></a>
 				<% if(isAdmin) { %>
 					<div class="delete-overlay">
-						<a id="deleteGalleryPhotosButton" href="#deleteGalleryPhotoModal" class="btn btn-primary btn-med" style="cursor: pointer; background-color: red; border-color: red; margin: 0 auto;" role="button" data-toggle="modal" data-id="<%=galleryPhotos[j]%>@__eventId<%=i%>">Delete</a>
+						<a id="deleteGalleryPhotosButton" href="#deleteGalleryPhotoModal" class="btn btn-primary btn-med" style="cursor: pointer; background-color: red; border-color: red; margin: 0 auto;" role="button" data-toggle="modal" data-id="<%=galleryPhotos[j]%>@__eventId<%=events.get(i).getKey()%>">Delete</a>
 					</div>
 				<% } %>
 			</div>
@@ -81,12 +82,13 @@
 			%>
 		</div>
 	</div>
-	<hr class="my-2" style="background-color: #3b3b3b">
 	<%
 		}
 		} catch (Exception e) {
 		}
 	%>
+	<hr class="my-2" style="background-color: #3b3b3b">
+	<a href="<%=request.getContextPath()%>/Gallery/Archive"><h6 style="text-align: center;">View Gallery Archive</h6></a>
 </body>
 <script>
 	$(document).on('click', '[data-toggle="lightbox"]', function(event) {

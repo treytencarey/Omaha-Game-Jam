@@ -66,6 +66,7 @@
 	<%@include file="/Events/eventsDisplayModal.jsp" %>
 	<%@page import="beans.EventTableBean" %>
 	<%@page import="beans.Event" %>
+	<%@page import="database.Mutator" %>
 	<%@page import="database.Database" %>
 	<%@page import="project.Main" %>
 	<%@page import="java.util.ArrayList" %>
@@ -240,9 +241,8 @@
 						<img src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= event.getKey() %>_header.png" class="card-img-top" alt="Game Icon" style="max-width: 100%; max-height: 100%;">
 						<div class="card-body dark">
 							<h5 class="card-title"><%= event.getTitle() %></h5>
-							<h6 class="card-subtitle mb-2 text-muted"><%= event.getTheme() %></h6>
-							<p class="card-text"><%= event.getDescription() %></p>
-							<p class="card-text" style="position: absolute; bottom: 20px;"><%= event.getStartDate() %></p>
+							<h6 class="card-subtitle mb-2 text-muted">Theme: <%= event.getTheme() %></h6>
+							<p class="card-text" style="position: absolute; bottom: 20px;">[<%= event.getStartDate() %>] - [<%= event.getEndDate() %>]</p>
 						</div>
 						<div class="overlay">
 					  		<button onclick="window.location.href='<%= request.getContextPath()+"/Events/pastEvent.jsp?event="+event.getKey() %>'" class="btn btn-primary">Check it out</button>

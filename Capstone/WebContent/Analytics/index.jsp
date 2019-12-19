@@ -10,7 +10,12 @@
 		String eventKey = aQuery.get(i).get("EventPKey").toString();
 		String cKey = aQuery.get(i).get("COUNT(AccountPKey)").toString();
 		List<Map<String, Object>> eQuery = Database.executeQuery("SELECT Title FROM Events WHERE PKey=" + eventKey);
-		String title = eQuery.get(0).get("Title").toString();
+		String title;
+		try {
+			title = eQuery.get(0).get("Title").toString();
+		} catch(IndexOutOfBoundsException e) {
+			title = "Deleted Event";
+		}
 		eventCounts[i] = new String[2];
 		eventCounts[i][0] = title;
 		eventCounts[i][1] = cKey;
@@ -24,7 +29,13 @@
 		String eventKey = aQuery.get(i).get("EventPKey").toString();
 		List<Map<String, Object>> eQuery = Database.executeQuery("SELECT Title FROM Events WHERE PKey=" + eventKey);
 		eventRepeatCounts[i] = new String[2];
-		eventRepeatCounts[i][0] = eQuery.get(0).get("Title").toString();
+		String title;
+		try {
+			title = eQuery.get(0).get("Title").toString();
+		} catch(IndexOutOfBoundsException e) {
+			title = "Deleted Event";
+		}
+		eventRepeatCounts[i][0] = title;
 		eventRepeatCounts[i][1] = aQuery.get(i).get("COUNT(AccountPKey)").toString();
 	}
 %>

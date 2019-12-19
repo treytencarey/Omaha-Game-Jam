@@ -3,7 +3,7 @@
 <%@page import="database.Database"%>
 <%@page import="project.Main"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="java.util.Collections" %>
+<%@page import="java.util.Collections"%>
 <%
 	EventTableBean eTable = new EventTableBean();
 	ArrayList<Event> listEvents = new ArrayList<Event>();
@@ -14,7 +14,7 @@
 	for (int i = 0; i < pEvents.size(); i++) {
 		listEvents.add(pEvents.get(i));
 	}
-	
+
 	request.setAttribute("listEvents", listEvents);
 %>
 <div id="addGalleryPhotoModal" class="modal fade">
@@ -28,7 +28,7 @@
 				<form class="was-validated" action="<%=request.getContextPath()%>/GalleryServlet" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<div class="input-group">
-							<input type="file" class="custom-file-input" id="galleryUploads" name="galleryUploads" accept="image/png,image/gif,image/jpeg" required multiple> <label class="form-control modalFields custom-file-label" for="galleryUploads">Choose Image(s)...</label>
+							<input type="file" class="custom-file-input" id="galleryUploads" name="galleryUploads" accept="image/png,image/gif,image/jpeg" onchange="Galleryfilevalidation()" required multiple> <label class="form-control modalFields custom-file-label" for="galleryUploads">Choose Image(s)...</label>
 							<div class="invalid-feedback">Please upload a valid image.</div>
 						</div>
 					</div>
@@ -38,11 +38,11 @@
 								for (int i = 0; i < listEvents.size(); i++) {
 									if (i == 0) {
 							%>
-							<option value="<%=i%>" selected><%=listEvents.get(i).getTitle()%></option>
+							<option value="<%=listEvents.get(i).getKey()%>" selected><%=listEvents.get(i).getTitle()%></option>
 							<%
 								} else {
 							%>
-							<option value="<%=i%>"><%=listEvents.get(i).getTitle()%></option>
+							<option value="<%=listEvents.get(i).getKey()%>"><%=listEvents.get(i).getTitle()%></option>
 							<%
 								}
 								}
@@ -57,3 +57,19 @@
 		</div>
 	</div>
 </div>
+<script>
+		Galleryfilevalidation = () => {
+		    const file = document.getElementById("galleryUploads");
+		    if(file.files.length > 0){
+		        for(const i = 0; i <= file.files.length - 1; i++){
+
+		            const filesize = file.files.item(i).size;
+		            const fisz = Math.round((filesize/1024));
+		            if(fisz > 2048){
+		                alert("File too Big, please select a new file less than 2mb");
+		                document.getElementById("galleryUploads").value = null;
+		            }
+		        }
+		    }
+		}
+</script>

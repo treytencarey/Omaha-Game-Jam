@@ -1,6 +1,6 @@
-//gets a URL and uses regex to turn it into format "x.com / x.net / x.org etc."
-//@param n - the URL of the website
-//@return - the formatted website string
+// gets a URL and uses regex to turn it into format "x.com / x.net / x.org etc."
+// @param n - the URL of the website
+// @return - the formatted website string
 function getWebsiteName(n) {
 	var matches = n.match(/^https?\:\/\/(?:www\.)?([^\/:?#]+)(?:[\/:?#]|$)/i);
 	if (matches)
@@ -34,6 +34,7 @@ function formatDate(d) {
 	return dArr[2] + "-" + dArr[0] + "-01";
 }
 
+// gets month and year from input
 function getThisMonthAndYear(arr, da) {
 	var currentDate = new Date();
 	var dateSplit = da.split("-");
@@ -50,6 +51,7 @@ function getThisMonthAndYear(arr, da) {
 	return arr;
 }
 
+// calculates percentage change
 function percentageChange(arr) {
 	var oldNum = arr[0];
 	var newNum = arr[1];
@@ -63,6 +65,7 @@ function percentageChange(arr) {
 	return out + "%";
 }
 
+//checks the year and formats and puts them into given array
 function checkYear(arr, date) {
 	// last year
 	if(date.split("-")[0] == new Date().getFullYear() - 1)
@@ -75,6 +78,7 @@ function checkYear(arr, date) {
 	return arr;
 }
 
+//gets event data to be put into table
 function getEventData() {
 	var out = [];
 	out.push(["EVENT", "TOTAL RSVPs", "REPEAT RSVPs"]);
@@ -178,6 +182,7 @@ d3.csv("activities.csv", function(data) {
 	displayTables("event-data-table", tableWidth, eventDataInputs);
 });
 
+//takes the id, width of table, and array of data to be placed into table and puts table of data into div with id on page
 function displayTables(di, tableWidth, dataArr) {
 	var tableDiv = document.getElementById(di);
 
@@ -202,11 +207,14 @@ function displayTables(di, tableWidth, dataArr) {
 	tableDiv.appendChild(table);
 }
 
+//displays d3 graph
 function displayGraph() {
+	//take dates from data and formats them into a way that D3 can interpret
 	graphData.forEach(function(d) {
 		d.Date = new Date(d.Date);
 	});
 
+	//margins for graphs
 	var margin = {
 		top : 30,
 		right : 20,
@@ -215,6 +223,7 @@ function displayGraph() {
 	}, width = 310 - margin.left - margin.right, height = 310 - margin.top
 			- margin.bottom;
 
+	//nest of graphs
 	var sum = d3.nest().key(function(d) {
 		return d.Referrer;
 	}).entries(graphData);
@@ -228,12 +237,14 @@ function displayGraph() {
 			height + margin.top + margin.bottom).append("g").attr("transform",
 			"translate(" + margin.left + "," + margin.top + ")");
 
+	//scale x to dates
 	var x = d3.scaleTime().domain(d3.extent(graphData, function(d) {
 		return d.Date;
 	})).range([ 0, width ]);
 	svgGraph.append("g").attr("transform", "translate(0," + height + ")").call(
 			d3.axisBottom(x).ticks(4));
 
+	//scale y to RSVPs
 	var y = d3.scaleLinear().domain([ 0, d3.max(graphData, function(d) {
 		return +d.RSVPs;
 	}) ]).range([ height, 0 ]);
