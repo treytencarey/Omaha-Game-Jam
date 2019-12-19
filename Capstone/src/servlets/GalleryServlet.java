@@ -56,24 +56,38 @@ public class GalleryServlet extends HttpServlet {
 			ArrayList<Event> pastEvents = eventTable.getPastEvents();
 			
 			Collections.reverse(pastEvents);
-			events.add(eventTable.getCurrentEvent());
-			/**
-			 * Display only three most recent event galleries for the default page
-			 */
-			for(int i = 0; i < pastEvents.size(); i++) {
-				if(events.size() == 3)
-					break;
-				events.add(pastEvents.get(i));
-			}
-			
+			if(eventTable.getCurrentEvent().IsPublic())
+				events.add(eventTable.getCurrentEvent());
 			if (id == null) {
-				request.setAttribute("events", events);
-				request.getRequestDispatcher(DESTINATION_JSP).forward(request, response);
-				return;
+				/**
+				 * Display only three most recent event galleries for the default page
+				 */
+				for(int i = 0; i < pastEvents.size(); i++) {
+					if(events.size() == 3)
+						break;
+					if(pastEvents.get(i).IsPublic())
+						events.add(pastEvents.get(i));
+				}
+				
+					request.setAttribute("events", events);
+			}
+			else { //gallery page for single event, indicated by id parameter in url
+				//search for the id (pkey), get that event, and return that as a single entry in an arraylist (so that the existing gallery page can read it)
+				pastEvents.add(eventTable.getCurrentEvent());
+				int eKey = Integer.parseInt(id);
+				ArrayList<Event> thisEvent = new ArrayList<Event>();
+				
+				for(int i = 0; i < pastEvents.size(); i++) {
+					if(eKey == pastEvents.get(i).getKey() && pastEvents.get(i).IsPublic()) {
+						thisEvent.add(pastEvents.get(i));
+						request.setAttribute("events", thisEvent);
+					}
+				}
 			}
 		} catch (Exception ex) {
 			System.err.println(ex);
-			return;
+		} finally {
+			request.getRequestDispatcher(DESTINATION_JSP).forward(request, response);
 		}
 	}
 
@@ -87,6 +101,8 @@ public class GalleryServlet extends HttpServlet {
 		 * Redirect link back to the gallery page
 		 */
 		String redirectLink = request.getContextPath() + "/Gallery";
+		int eventNum = Integer.parseInt(request.getParameter("galleryEvent"));
+		int eventPKey = 0;
 		
 		ArrayList<Event> events = new ArrayList<Event>();
 		try {
@@ -98,13 +114,18 @@ public class GalleryServlet extends HttpServlet {
 			for (int i = 0; i < pastEvents.size(); i++) {
 				events.add(pastEvents.get(i));
 			}
+			
+			for (int i = 0; i < events.size(); i++) {
+				if(events.get(i).getKey() == eventNum) {
+					eventPKey = events.get(i).getKey();
+					break;
+				}
+			}
 		} catch (Exception e) {
 			System.err.println(e);
 			return;
 		}
 
-		int eventNum = Integer.parseInt(request.getParameter("galleryEvent"));
-		int eventPKey = events.get(eventNum).getKey();
 
 		if (request.getParameter("addGalleryPhotosButton") != null) {
 			for (Part part : request.getParts()) {
