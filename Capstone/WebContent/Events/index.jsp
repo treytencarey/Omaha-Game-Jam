@@ -30,6 +30,13 @@
 		.card:hover .overlay {
 			opacity: 1;
 		}
+		#current-event img{
+			height: 500px;
+			width: 100%;
+			object-fit: none;
+			overflow: hidden;
+			object-position: relative;
+		}
 	</style>
 	
 	<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>

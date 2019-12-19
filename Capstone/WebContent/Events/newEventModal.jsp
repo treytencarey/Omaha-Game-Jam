@@ -43,7 +43,7 @@
 					
 					<div class="input-group">
 						<span class="input-group-addon icons"><i class="fa fa-upload"></i></span>
-						<input type="file" style="width: unset; opacity: 1; margin-left: 10px;" class="custom-file-input" name="eventImage" id="eventImage" required/>
+						<input type="file" style="width: unset; opacity: 1; margin-left: 10px;" class="custom-file-input" name="eventImage" id="eventImage" onchange="Filevalidation()" required/>
 						<div class="invalid-feedback">Please upload a valid image</div>
 						<div class="valid-feedback">Looks good!</div>
 					</div>
@@ -89,6 +89,22 @@
 </div>
 
 <script>
+
+Filevalidation = () => {
+	const file = document.getElementById('eventImage');
+	if(file.files.length > 0){
+		for(const i = 0; i <= file.files.length - 1; i++){
+			
+			const filesize = file.files.item(i).size;
+			const fisz = Math.round((filesize/1024));
+			if(fisz > 2048){
+				alert("File too Big, please select a new file less than 2mb");
+				document.getElementById('eventImage').value = null;
+			}
+		}
+	}
+}
+
 var eventBodyField;
 var scheduleBodyField;
 loadEditor();
