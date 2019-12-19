@@ -87,10 +87,12 @@ public class GameViewServlet extends HttpServlet {
 			return true;
 		boolean canEdit = false;
 		String apk = session.getAttribute("accountPKey") != null ? session.getAttribute("accountPKey").toString() : null;
+		System.out.println(apk);
+		System.out.println(g.getSubmitter());
 		if (apk != null)
 		{
 			String s = apk.toString();
-			if (s.equals(g.getSubmitter())) // Is user the submittor?
+			if (s.equals(g.getSubmitter().toString())) // Is user the submittor?
 				canEdit = new Boolean(true);
 			for(Contributor c : ct.getContributors()) // Is the user a contributor?
 			{
