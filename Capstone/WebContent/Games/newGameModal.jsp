@@ -130,7 +130,7 @@ if (request.getParameter("id") != null)
 				  				<div class="authorFields">
 						
 							    </div>
-								<button style="width: 100%; margin: auto; margin-top: 8px; margin-bottom: 30px;" type="button" class="add_author_button">Add Author</button>								
+								<button style="width: 100%; margin: auto; margin-top: 8px; margin-bottom: 30px;" type="button" id="add_author_button" class="add_author_button">Add Author</button>								
 								
 							    <script>
 							    $(document).ready(function() {
