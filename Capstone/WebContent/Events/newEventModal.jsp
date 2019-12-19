@@ -78,6 +78,15 @@
 			    	  		<input class="input-group form-control datePicker" id="endDate" name="endDate" placeholder="MM/DD/YYY" type="text" required/>
 				  		</div>
 				    </div>
+				    
+				    <div class="input-group items" style="display: inline-block;">
+					    <div class="row" style="width: 100%;">
+						    <div class="col-sm-1" style="max-width: 30px;"></div>
+						    <div class="form-group col-sm-6" style="margin-left: 10px;">
+					    	  	Make Public: <input type="checkbox" id="visibility" name="visibility" />
+					    	</div>
+				    	</div>
+			    	</div>
 
 					<div class="form-group">
 						<button type="submit" name="newEventButton" class="btn btn-primary btn-block btn-lg">Submit</button>

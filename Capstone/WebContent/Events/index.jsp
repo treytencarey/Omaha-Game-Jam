@@ -137,7 +137,7 @@
 				<div class="col-sm-9">
 					<%@include file="/components/RSVPButton.jsp" %>
 					<button type="button" id="event-schedule-button" class="btn btn-warning">Event Schedule</button>
-					<a href=""><i class="fab fa-discord fa-3x" style="color: #7289da;"></i></a>
+					<a href="https://discord.gg/6EZqkXh"><i class="fab fa-discord fa-3x" style="color: #7289da;"></i></a>
 				</div>
 				<div class="row rounded" id="event-schedule-description" style="width: 100%; margin: auto; padding: auto; display:none;">
 					<h6><%= current.getSchedule() %></h6>

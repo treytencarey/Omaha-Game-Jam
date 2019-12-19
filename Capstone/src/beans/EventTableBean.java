@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -70,10 +72,14 @@ public class EventTableBean implements Serializable {
 	public Event getCurrentEvent() throws ParseException {
 		Event soonestEvent = new Event();
 		Date lowEDate = new SimpleDateFormat("MM/dd/yyyy").parse("12/31/3000");
+		Calendar c = Calendar.getInstance();
 		
 		for(Event event : events) {
 			Date date = new SimpleDateFormat("MM/dd/yyyy").parse(event.getStartDate());
 			Date enddate = new SimpleDateFormat("MM/dd/yyyy").parse(event.getEndDate());
+			c.setTime(enddate);
+			c.add(Calendar.DATE, 1);
+			enddate = c.getTime();
 			
 			if(date.compareTo(lowEDate) < 0 && enddate.compareTo(new Date()) > 0) {
 				lowEDate = date;
@@ -105,22 +111,43 @@ public class EventTableBean implements Serializable {
 		return futureEvent;
 	}
 	
+	/**
+	 * 
+	 * @return ArrayList of past events
+	 * @throws ParseException
+	 */
 	public ArrayList<Event> getPastEvents() throws ParseException {
 		ArrayList<Event> pastEvents = new ArrayList<Event>();
+		Calendar c = Calendar.getInstance();
 		for(Event event : events) {
 			Date eventEndDate = new SimpleDateFormat("MM/dd/yyyy").parse(event.getEndDate());
+			c.setTime(eventEndDate);
+			c.add(Calendar.DATE, 1);
+			eventEndDate = c.getTime();
+			
 			if(eventEndDate.before(new Date())) {
 				pastEvents.add(event);
 			}
 		}
-		
-		return sort(pastEvents);
+		ArrayList<Event> sorted = sort(pastEvents);
+		Collections.reverse(sorted);
+		return sorted;
 	}
 	
+	/**
+	 * 
+	 * @return ArrayList of future events
+	 * @throws ParseException
+	 */
 	public ArrayList<Event> getFutureEvents() throws ParseException {
 		ArrayList<Event> futureEvents = new ArrayList<Event>();
+		Calendar c = Calendar.getInstance();
+		
 		for(Event event : events) {
 			Date eventEndDate = new SimpleDateFormat("MM/dd/yyyy").parse(event.getEndDate());
+			c.setTime(eventEndDate);
+			c.add(Calendar.DATE, 1);
+			eventEndDate = c.getTime();
 			
 			if(eventEndDate.after(new Date())) {
 				futureEvents.add(event);

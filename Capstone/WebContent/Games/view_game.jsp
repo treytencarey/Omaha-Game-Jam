@@ -201,11 +201,31 @@ if (canEdit)
 			</div>
 			<div class="row gameViewDetails">
 				<label class="gameViewLabels" for="tools">Play Now:</label>
-				<p class="gameViewValues" id="tools"><a id="websiteBtn" href="#externalLinkWarningModal" class="nav-link" data-toggle="modal"><%= g.getLink() %></a></p>
+				<p class="gameViewValues" id="tools"><a id="websiteBtn" href="<%= g.getLink() %>" class="nav-link" onclick="return false;"><%= g.getLink() %></a></p>
 				
 			</div>
 	</div>
 </div>
+<script>
+	//Check game link for regular expression including drive.google.com or itch.io
+	$("#websiteBtn").click(function(){
+		var pat1 = new RegExp("(https://)*(drive.google.com)+");
+		var pat2 = new RegExp("(https://)*(itch.io)+");
+		var danger = true;
+		var link = $("#websiteBtn").html();
 
+		var result = pat1.exec(link);
+		var result2 = pat2.exec(link);
+		if(result != null || result2 != null){
+			danger = false;
+		}
+		if(danger){
+			$("#externalLinkWarningModal").modal("show");
+		} else {
+			window.location = $("#websiteBtn").attr("href");
+		}
+		
+	});
+</script>
 </body>
 </html>

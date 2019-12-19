@@ -260,7 +260,7 @@ public class EventPortalServlet extends HttpServlet {
 					}
 				}
 			}
-			System.out.println(title+" "+theme+" "+eventDescription+" "+startDate+" "+endDate+" ");
+
 			//Update Event, event description, and event schedule
 			Database.executeUpdate("UPDATE Events SET Title='" + title + "', Theme='" + theme + "', StartDate='" + startDate + "', EndDate='" + endDate + "', IsPublic='" + isPublic + "' WHERE PKey=" + PKey);
 			
@@ -270,6 +270,9 @@ public class EventPortalServlet extends HttpServlet {
 			createFile(PKey, path, schedule);
 		}
 		else { //Insert new mutators and event into database
+			if(request.getParameter("visibility") != null) {
+				isPublic = 1;
+			}
 			Database.executeUpdate("INSERT OR REPLACE INTO Events (Title, Theme, Description, StartDate, EndDate, IsPublic) VALUES ('" + title + "', '" + theme + "', '" + " " + "', '" + startDate + "', '" + endDate + "', '" + isPublic +"')");
 			List<Map<String, Object>> query = Database.executeQuery("SELECT PKey FROM Events WHERE Title=\'" + title + "\'");
 			PKey = query.get(0).get("PKey").toString();
