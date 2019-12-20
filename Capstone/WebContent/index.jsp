@@ -42,7 +42,7 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
 	<%@page import="java.util.Map" %>
 	<%@page import="beans.News" %>
 	<%@page import="utils.Utils" %>
-	<%@include file="changeSiteDescriptionModal.jsp" %>
+	<%@include file="/AdminPanel/changeSiteDescriptionModal.jsp" %>
 		<%
 	if(ce.IsPublic()) {
 	%>
@@ -104,7 +104,7 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
 	<div class="jumbotron aboutSection">
   		<h1 class="display-5">About Omaha Game Jam</h1>
   		<hr class="my-2" style="background-color: #3b3b3b">
-  		<div style="font-size: 18px">
+  		<div style="font-size: 18px;">
   			<h6><%= Utils.SiteDescription() %></h6>
   		</div>
   		<%	if (session.getAttribute("accountPKey") == null) { %>

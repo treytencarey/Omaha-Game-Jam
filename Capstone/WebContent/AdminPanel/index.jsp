@@ -38,6 +38,7 @@
 	<%@include file="/Gallery/addGalleryPhotoModal.jsp" %>
 	<%@include file="/AdminPanel/submissions.jsp" %>
 	<%@include file="/AdminPanel/accountListModal.jsp" %>
+	<%@include file="/AdminPanel/changeCredentialsModal.jsp" %>
 	
 	<%@page import="java.time.LocalDateTime" %>
 	<%@page import="java.time.format.DateTimeFormatter" %>
@@ -57,6 +58,7 @@
 		
 		<h3><b>Account Options:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#accountListModal">View Accounts</button>
+		<button id="changeCredentialsBtn" type="submit" class="btn btn-primary" data-target="#changeCredentialsModal" data-toggle="modal">Update Credentials</button>
 		
 		<h3><b>Gallery Options:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addGalleryPhotoModal">Add Photo(s)</button>

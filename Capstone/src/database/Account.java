@@ -76,6 +76,22 @@ public class Account extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/");
 			return;
 		}
+		
+		if(request.getParameter("alterCredentialsBtn") != null) {
+			int pkey = Integer.parseInt(request.getParameter("accountpkey"));
+			String nu = request.getParameter("newusername");
+			String np = request.getParameter("newpassword");
+			
+			changeCredentials(pkey, nu, np);
+			
+			try {
+				login(nu,np,session);
+					
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			response.sendRedirect(request.getContextPath() + "/AdminPanel/");
+		}
 	}
 
 	/**
@@ -135,8 +151,17 @@ public class Account extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//Database.executeUpdate("INSERT INTO AccountPermissions (Permissions) VALUES (" + 1 + ")");
 		return Database.executeUpdate("INSERT INTO Accounts (Email, Password) VALUES ('" + email + "', '" + password + "')");
+	}
+	
+	protected void changeCredentials(int pkey, String email, String password) {
+		try {
+			password = encrypt(password);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		Database.executeUpdate("UPDATE Accounts SET Email='' WHERE PKey="+pkey);
+		Database.executeUpdate("UPDATE Accounts SET Email='"+email+"', Password='"+password+"' WHERE PKey="+pkey);
 	}
 
 	/**
