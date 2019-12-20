@@ -37,6 +37,7 @@
 	<%@include file="/News/newArticleModal.jsp" %>
 	<%@include file="/Gallery/addGalleryPhotoModal.jsp" %>
 	<%@include file="/AdminPanel/submissions.jsp" %>
+	<%@include file="/AdminPanel/accountListModal.jsp" %>
 	
 	<%@page import="java.time.LocalDateTime" %>
 	<%@page import="java.time.format.DateTimeFormatter" %>
@@ -53,6 +54,9 @@
 		<h3><b>News Options:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newNewsArticleModal">Create Article</button>
 		<a href="<%= request.getContextPath() %>/News/Archive?year=<%= currentYear %>"><button type="button" class="btn btn-primary">View Articles</button></a>
+		
+		<h3><b>Account Options:   </b></h3>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#accountListModal">View Accounts</button>
 		
 		<h3><b>Gallery Options:   </b></h3>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addGalleryPhotoModal">Add Photo(s)</button>
