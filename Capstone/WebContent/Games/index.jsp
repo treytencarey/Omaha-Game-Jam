@@ -4,7 +4,7 @@
 	import="beans.GameBean, beans.Event, beans.EventTableBean, java.util.ListIterator" %>
 <%
 EventTableBean et = new EventTableBean();
-ListIterator<Event> i = et.getEvents().listIterator(et.getEvents().size());
+ListIterator<Event> i = et.getPastEvents().listIterator(et.getPastEvents().size());
 %>
 
 <!DOCTYPE html>
@@ -62,7 +62,7 @@ ListIterator<Event> i = et.getEvents().listIterator(et.getEvents().size());
 <body onload="changePageColor()">
 	<%@include  file="/Common/navbar.jsp" %>
 	<%@include file="/Games/newGameModal.jsp" %>
-	
+	<br><br>
 	<%
 		while (i.hasPrevious())
 		{

@@ -41,7 +41,8 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
 	<%@page import="java.util.List" %>
 	<%@page import="java.util.Map" %>
 	<%@page import="beans.News" %>
-	
+	<%@page import="utils.Utils" %>
+	<%@include file="changeSiteDescriptionModal.jsp" %>
 		<%
 	if(ce.IsPublic()) {
 	%>
@@ -104,13 +105,15 @@ String rsvpd = Database.executeQuery("SELECT COUNT(*) FROM Attendees WHERE Event
   		<h1 class="display-5">About Omaha Game Jam</h1>
   		<hr class="my-2" style="background-color: #3b3b3b">
   		<div style="font-size: 18px">
-  			<p>Omaha Game Jam is a free 2 day game development event where participants build games from scratch around a secret theme. At the end of dev time, everyone presents, plays, and votes on superlative awards. Individuals 18+ and teams are welcome!</p>
+  			<h6><%= Utils.SiteDescription() %></h6>
   		</div>
   		<%	if (session.getAttribute("accountPKey") == null) { %>
   			<p class="lead" id="registerNowButton">
     			<a class="btn btn-primary btn-med" style="cursor: pointer;" onclick="showRegisterModal()" role="button">Register Now!</a>
   			</p>
-  		<% } %>
+  		<% } else if(Account.isAdmin(request.getSession())){%>
+		  	<button id="changeAboutBtn" type="submit" class="btn btn-primary" data-target="#changeSiteDescriptionModal" data-toggle="modal">Change Site Description</button>
+		<% } %>
 	</div>
 </body>
 <footer class="page-footer font-small mdb-color darken-3">

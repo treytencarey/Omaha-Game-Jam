@@ -1,8 +1,13 @@
 package utils;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+
+import project.Main;
 
 /**
  * 
@@ -32,5 +37,23 @@ public class Utils {
 			files.add(file);
 		
 		return files;
+	}
+	
+	public static String SiteDescription() {
+		String sd = "";
+		String path = getServerPath("/Uploads/Site/");
+		try {
+			sd = new String(Files.readAllBytes(Paths.get(path+"\\Site\\sitedescription_body.txt")));
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		return sd;
+	}
+	
+	private static String getServerPath(String orig) {
+		String[] splits = orig.replaceAll("\\\\", "/").split("/");
+		String fileName = splits[splits.length -1];
+		String pth = Main.context.getRealPath(orig.substring(0, orig.length() - 1 -fileName.length()));
+		return pth;
 	}
 }

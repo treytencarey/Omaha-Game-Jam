@@ -280,6 +280,7 @@ public class EventPortalServlet extends HttpServlet {
 			//Create event description file
 			path = getServerPath("/Uploads/Events/Body/Body");
 			createFile(PKey, path, eventDescription);
+			//Create event schedule file
 			path = getServerPath("/Uploads/Events/Schedule/Schedule");
 			if(schedule == null || schedule == "") {
 				schedule = "No Schedule Available";

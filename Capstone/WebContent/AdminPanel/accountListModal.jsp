@@ -13,11 +13,11 @@
 	ArrayList<Integer> allpkeys = new ArrayList<Integer>();
 	
 	List<Map<String, Object>> query = Database.executeQuery("SELECT AccountPKey FROM Attendees WHERE EventPKey="+current.getKey());
-	String accountPKey = query.get(0).get("AccountPKey").toString();
 	
 	//Get all rsvped profiles
 	for(int i = 0; i < query.size(); i++){
 		List<Map<String, Object>> query2 = Database.executeQuery("SELECT * FROM Accounts WHERE PKey="+query.get(i).get("AccountPKey").toString());
+		
 		Profile p;
 		try{
 			p = new Profile(Integer.parseInt(query2.get(0).get("PKey").toString()));
@@ -67,6 +67,13 @@
 				<button id="display-rsvp" class="btn btn-secondary">Show RSVPed Users</button>
 				<button id="display-all" class="btn btn-secondary">Show All Users</button><br><hr><br>
 				<div id="rsvpd" style="display:none;">
+					<%
+						if(rsvpd.size() == 0){
+					%>
+						<h6>No users have RSVPed for this Event</h6>
+					<%
+						} else {
+					%>
 					<h3>RSVPed Users</h3>
 					<table class="rsvpd-users">
 						<tr>
@@ -81,7 +88,7 @@
 							</tr>
 						<%}%>
 					</table>
-					<br><hr>
+					<br><hr><% } %>
 				</div>
 				
 				<div id="all" style="display:none;">
