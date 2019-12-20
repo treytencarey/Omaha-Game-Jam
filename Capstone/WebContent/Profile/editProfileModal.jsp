@@ -23,7 +23,7 @@
 					<!-- Simple pic upload -->
 					<div class="form-group">
 						<div class="input-group">
-							<img id="picPrev" src="<%=ppp%>" onload="validatePic();" onerror="invalidatePic();"> <span class="input-group-addon icons"><i class="fa fa-user"></i></span> Select profile pic: <input type="file" name="pic" onchange="previewPic(this, 'picPrev');">
+							<img id="picPrev" src="<%=ppp%>" onload="validatePic();" onerror="invalidatePic();"> <span class="input-group-addon icons"><i class="fa fa-user"></i></span> Select profile pic: <input type="file" id="profile-picture" name="pic" onchange="Filevalidation(this);">
 							<div class="invalid-feedback">Please select a valid image file</div>
 						</div>
 					</div>
@@ -78,6 +78,23 @@
 </div>
 
 <script type="text/javascript">
+	Filevalidation = (a) => {
+		const file = document.getElementById('profile-picture');
+		if(file.files.length > 0){
+			for(const i = 0; i <= file.files.length - 1; i++){
+				
+				const filesize = file.files.item(i).size;
+				const fisz = Math.round((filesize/1024));
+				if(fisz > 2048){
+					alert("File too Big, please select a new file less than 2mb");
+					document.getElementById('profile-picture').value = null;
+				}
+				else{
+					previewPic(a, 'picPrev');
+				}
+			}
+		}
+	}
 	let picValid = false;
 	function validatePic() {
 		picValid = true;
