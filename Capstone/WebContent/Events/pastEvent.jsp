@@ -37,7 +37,9 @@
 	%>
 	<div class="container eventContainer rainbowBorder">
 		<div id="current-event" class="event">
-			<img src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= current.getKey() %>_header.png" class="rounded" style="max-width: 100%; max-height: 100%;"/>
+			<div class="eventImageContainer" style="width: 750px; max-height: 420px; margin: auto; text-align: center;">
+				<img src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= current.getKey() %>_header.png" class="rounded" style="object-fit: none;"/>
+			</div>
 			<div class="row">
 				<div class="col-sm-3"></div>
 			</div>
@@ -78,9 +80,13 @@
 					<h3 style="float: right;">Mutators:</h3>
 				</div>
 				<%
+				int count = 0;
 				ArrayList<Mutator> mutators = current.getMutators();
 				for(Mutator mutator : mutators){
+					if (count > 0) {
 				%>
+					<div class="col-sm-3"></div>
+				<% } count++; %>
 				<div class="col-sm-9">
 					<h3 style="font-weight: 300;"><%= mutator.getTitle()%>:  <%= mutator.getDesc() %></h3>
 				</div>

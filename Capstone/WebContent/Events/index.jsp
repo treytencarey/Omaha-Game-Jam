@@ -237,11 +237,13 @@
 				<%
 				for(Event event : past){
 				%>
-					<div class="card dark" style="margin: auto; height: 500px; width: 18rem;">
-						<img src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= event.getKey() %>_header.png" class="card-img-top" alt="Game Icon" style="max-width: 100%; max-height: 100%;">
-						<div class="card-body dark">
-							<h5 class="card-title"><%= event.getTitle() %></h5>
-							<h6 class="card-subtitle mb-2 text-muted">Theme: <%= event.getTheme() %></h6>
+					<div class="card dark" style="margin: auto; height: 505px; width: 18rem;">
+						<div class="pastEventsImgContainer" style="width: 286px; height: 160px;">
+							<img src="<%= request.getContextPath() %>/Uploads/Events/HeaderImages/<%= event.getKey() %>_header.png" class="card-img-top" alt="Game Icon" style="width: 286px; height: 160px; object-fit: contain; background-color: black; margin-top: -48px;">
+						</div>
+						<div class="card-body dark" style="margin-top: -48px;">
+							<h5 class="card-title" style="height: 4.5rem;"><%= event.getTitle() %></h5>
+							<h6 class="card-subtitle mb-2 text-muted" style="height: 4.5rem;">Theme: <%= event.getTheme() %></h6>
 							<p class="card-text" style="position: absolute; bottom: 20px;">[<%= event.getStartDate() %>] - [<%= event.getEndDate() %>]</p>
 						</div>
 						<div class="overlay">
