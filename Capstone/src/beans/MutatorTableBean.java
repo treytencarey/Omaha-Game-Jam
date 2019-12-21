@@ -55,10 +55,15 @@ public class MutatorTableBean implements Serializable {
 	
 	}
 	
-	// Bean getter / setter
+	/**
+	 * @return List of Mutators
+	 */
 	public ArrayList<Mutator> getMutators(){
 		return mutators;
 	}
+	/**
+	 * @param mutators List of Mutators
+	 */
 	public void setMutators(ArrayList<Mutator> mutators) {
 		this.mutators = mutators;
 	}

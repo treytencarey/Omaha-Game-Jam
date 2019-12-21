@@ -58,10 +58,16 @@ public class ContributorTableBean implements Serializable{
         return results.size();
 	}
 	
-	// Bean getter / setter
+
+	/**
+	 * @return the List of Contributors.
+	 */
 	public ArrayList<Contributor> getContributors(){
 		return contributors;
 	}
+	/**
+	 * @param contributors the List of Contributors.
+	 */
 	public void setContributors(ArrayList<Contributor> contributors) {
 		this.contributors = contributors;
 	}

@@ -51,10 +51,15 @@ public class GameTableBean implements Serializable {
 		return this.fillByQuery(query);
 	}
 	
-	// Bean getter / setter
+	/**
+	 * @return List of GameBeans.
+	 */
 	public ArrayList<GameBean> getGames(){
 		return games;
 	}
+	/**
+	 * @param games List of GameBeans.
+	 */
 	public void setGames(ArrayList<GameBean> games) {
 		this.games = games;
 	}

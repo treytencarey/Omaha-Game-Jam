@@ -31,6 +31,10 @@ public class AccountBean implements Serializable {
 		this.setEmail(account.get("Email").toString());
 	}
 	
+	/**
+	 * 
+	 * @return whether the user this Bean represents is an admin or not.
+	 */
 	public boolean isAdmin()
 	{	
 		List<Map<String, Object>> results = Database.executeQuery("SELECT COUNT(*) FROM Admins WHERE AccountPKey=" + this.getId());
@@ -40,15 +44,27 @@ public class AccountBean implements Serializable {
 		return count.equals("1"); // Since there's a unique constraint, there can only be 1 row at most
 	}
 	
+	/**
+	 * @return ID of this account.
+	 */
 	public String getId() {
 		return id;
 	}
+	/**
+	 * @param id ID for this account.
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
+	/**
+	 * @return email of this account.
+	 */
 	public String getEmail() {
 		return email;
 	}
+	/**
+	 * @param email email for this account.
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}

@@ -28,6 +28,9 @@ import project.Main;
 public class ProfileEditServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Handles all new changes submitted to a profile. Reverts profiles status back to 1 if currently a 2; back to 0 if currently a -1.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id").toString();
 		String newStatus = "1"; // Trusted but unverified by default
