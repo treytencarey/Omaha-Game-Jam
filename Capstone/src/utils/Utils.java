@@ -43,7 +43,7 @@ public class Utils {
 		String sd = "";
 		String path = getServerPath("/Uploads/Site/");
 		try {
-			sd = new String(Files.readAllBytes(Paths.get(path+"\\Site\\sitedescription_body.txt")));
+			sd = new String(Files.readAllBytes(Paths.get(path+"/Site/sitedescription_body.txt")));
 		} catch(IOException e) {
 			e.printStackTrace();
 		}

@@ -142,7 +142,7 @@ public class Event {
 		String des = "";
 		String path = getServerPath("/Uploads/Events/Body/");
 		try {
-			des = new String(Files.readAllBytes(Paths.get(path+"\\Body\\"+key+"_body.txt")));
+			des = new String(Files.readAllBytes(Paths.get(path+"/Body/"+key+"_body.txt")));
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -156,7 +156,7 @@ public class Event {
 		String sche = "";
 		String path = getServerPath("/Uploads/Events/Schedule/");
 		try {
-			sche = new String(Files.readAllBytes(Paths.get(path+"\\Schedule\\"+key+"_body.txt")));
+			sche = new String(Files.readAllBytes(Paths.get(path+"/Schedule/"+key+"_body.txt")));
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
