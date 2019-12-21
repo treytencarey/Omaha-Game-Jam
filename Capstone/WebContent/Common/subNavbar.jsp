@@ -63,24 +63,26 @@
 	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/Games/"))  { 
 	      		EventTableBean etb = new EventTableBean();
 	      		Event curE = etb.getCurrentEvent();
-	      		Date start = new SimpleDateFormat("MM/dd/yyyy").parse(curE.getStartDate());
-	      		Date end = new SimpleDateFormat("MM/dd/yyyy").parse(curE.getEndDate());
-	      		Calendar c = Calendar.getInstance();
-	      		c.setTime(start);
-	      		c.add(Calendar.DATE, -1);
-	      		start = c.getTime();
-	      		c = Calendar.getInstance();
-	      		c.setTime(end);
-	      		c.add(Calendar.DATE, 1);
-	      		end = c.getTime();
-	      		Date current = new Date();
-	      		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Attendees WHERE AccountPKey="+session.getAttribute("accountPKey").toString()+" AND EventPKey="+curE.getKey());
-	      		
-	      		if(query.size() > 0){
-	      		System.out.println(start+" - "+end);
-	      		
-	      			if(current.before(end) && current.after(start)){ 
-	      	%>
+	      		System.out.println(curE.getTitle());
+	      		if(curE.getTitle() != "Unavailable"){
+		      		Date start = new SimpleDateFormat("MM/dd/yyyy").parse(curE.getStartDate());
+		      		Date end = new SimpleDateFormat("MM/dd/yyyy").parse(curE.getEndDate());
+		      		Calendar c = Calendar.getInstance();
+		      		c.setTime(start);
+		      		c.add(Calendar.DATE, -1);
+		      		start = c.getTime();
+		      		c = Calendar.getInstance();
+		      		c.setTime(end);
+		      		c.add(Calendar.DATE, 1);
+		      		end = c.getTime();
+		      		Date current = new Date();
+		      		List<Map<String, Object>> query = Database.executeQuery("SELECT * FROM Attendees WHERE AccountPKey="+session.getAttribute("accountPKey").toString()+" AND EventPKey="+curE.getKey());
+		      		
+		      		if(query.size() > 0){
+		      		System.out.println(start+" - "+end);
+		      		
+		      			if(current.before(end) && current.after(start)){ 
+		      	%>
 		      	<li class="nav-item indvTabs">
 		        	<a id="addGameBtn" href="#newGameModal" class="nav-link" data-toggle="modal">Submit Game</a>
 		      	</li>
@@ -91,6 +93,10 @@
 	      	<%}} else { %>
 	      		<li class="nav-item indvTabs">
 		        	<a id="addGameBtn" href="#" class="nav-link text-light" data-toggle="tooltip" title="You must RSVP for the current event to Submit a Game" >Submit Game</a>
+		      	</li>
+	      	<%}} else { %>
+	      		<li class="nav-item indvTabs">
+		        	<a id="addGameBtn" href="#" class="nav-link text-light" data-toggle="tooltip" title="No current event scheduled" >Submit Game</a>
 		      	</li>
 	      	<%}} %>
 	      	<% if (request.getRequestURI().equals(request.getContextPath()+"/game")) { %>
