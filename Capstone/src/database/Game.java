@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.EventTableBean;
+import exceptions.EmptyQueryException;
 import project.Main;
 import utils.Utils;
 
@@ -97,7 +98,14 @@ public class Game extends HttpServlet implements Serializable{
 			{
 				if (param.getKey().indexOf("mutatorCheck") == 0)
 				{
-					mutators.add(new Mutator(Integer.parseInt(param.getValue())));
+					try
+					{
+						mutators.add(new Mutator(Integer.parseInt(param.getValue())));
+					}
+					catch (EmptyQueryException eqe) {
+						// TODO: handle exception
+						System.out.println(eqe.getQuery());
+					}
 				}
 				else if (param.getKey().indexOf("platformCheck") == 0)
 				{
@@ -274,7 +282,14 @@ public class Game extends HttpServlet implements Serializable{
 		List<Mutator> mutators = new ArrayList<Mutator>();
 		for (Map<String, Object> row : query)
 		{
-			mutators.add(new Mutator(Integer.parseInt(row.get("MutatorPKey").toString())));
+			try
+			{
+				mutators.add(new Mutator(Integer.parseInt(row.get("MutatorPKey").toString())));
+			}
+			catch (EmptyQueryException eqe)
+			{
+				System.out.println(eqe.getQuery());
+			}
 		}
 		this.setMutators(mutators);
 		

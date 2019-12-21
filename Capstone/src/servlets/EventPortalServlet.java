@@ -27,6 +27,7 @@ import javax.servlet.http.Part;
 import beans.Event;
 import beans.EventTableBean;
 import database.Mutator;
+import exceptions.EmptyQueryException;
 import database.Database;
 import project.Main;
 
@@ -219,7 +220,14 @@ public class EventPortalServlet extends HttpServlet {
 
 			//Arraylist of all old mutators for event
 			for(Map<String, Object> oldMutator : mutatorquery) {
-				oldMutators.add(new Mutator((int)oldMutator.get("PKey")));
+				try
+				{
+					oldMutators.add(new Mutator((int)oldMutator.get("PKey")));
+				}
+				catch (EmptyQueryException eqe)
+				{
+					System.out.println(eqe.getQuery());
+				}
 			}
 
 			//Arraylist of all new mutators for event

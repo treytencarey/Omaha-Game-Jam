@@ -13,6 +13,7 @@ import java.util.Map;
 
 import database.Database;
 import database.Mutator;
+import exceptions.EmptyQueryException;
 import project.Main;
 
 /**
@@ -84,7 +85,14 @@ public class Event {
 		
 		//Initialize mutators list
 		for(Map<String, Object> mutator : query2) {
-		    mutators.add(new Mutator((int)mutator.get("PKey")));
+			try
+			{
+				mutators.add(new Mutator((int)mutator.get("PKey")));
+			}
+			catch (EmptyQueryException eqe)
+			{
+				System.out.println(eqe.getQuery());
+			}
 		}
 		isPublic = (int)event.get("IsPublic");
 		key = PKey;
