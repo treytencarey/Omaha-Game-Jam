@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import beans.ProfileBean;
+import database.Database;
 import exceptions.EmptyQueryException;
 import exceptions.UnsuccessfulUpdateException;
 import project.Main;
@@ -49,11 +50,11 @@ public class ProfileEditServlet extends HttpServlet{
 			System.out.println("From ProfileEditServlet: " + eqe.getQuery());
 		}
 		ProfileBean p = new ProfileBean(
-				request.getParameter("id").toString(),
-				request.getParameter("name").toString(),
-				request.getParameter("bio").toString(),
-				request.getParameter("site").toString(),
-				request.getParameter("skills").toString(),
+				Database.formatString(request.getParameter("id").toString()),
+				Database.formatString(request.getParameter("name").toString()),
+				Database.formatString(request.getParameter("bio").toString()),
+				Database.formatString(request.getParameter("site").toString()),
+				Database.formatString(request.getParameter("skills").toString()),
 				newStatus );
 		try
 		{

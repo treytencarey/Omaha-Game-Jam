@@ -4,7 +4,7 @@
 <%
 	ProfileBean p = (ProfileBean) request.getAttribute(ProfileConstants.PROFILE);
 	String email = (String) request.getAttribute(ProfileConstants.EMAIL);
-	EventTableBean et = (EventTableBean) request.getAttribute(ProfileConstants.ATTENDED_EVENTS);
+	//EventTableBean et = (EventTableBean) request.getAttribute(ProfileConstants.ATTENDED_EVENTS);
 	GameTableBean gt = (GameTableBean) request.getAttribute(ProfileConstants.GAMES);
 	Map<String, ArrayList<String>> r = (Map<String, ArrayList<String>>) request.getAttribute(ProfileConstants.ROLES);
 	String picPath = (String) request.getAttribute(ProfileConstants.PIC_PATH);
@@ -123,6 +123,7 @@
 						<%=p.getBio()%>
 					</h6>
 
+<%--
 					<%
 						Iterator<Event> ei = et.getEvents().iterator();
 						while (ei.hasNext()) {
@@ -132,6 +133,7 @@
 					<%
 						}
 					%>
+ --%>					
 
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 						<li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a></li>

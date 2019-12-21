@@ -59,8 +59,8 @@ public class ProfileViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProfileBean p; // Holds info about this profile
 		AccountBean a; // Used for retrieving this profile's email
-		AttendeeTableBean at; // List of attended records (AttendeeBean)
-		EventTableBean et; // List of Event objects this account has attended
+		//AttendeeTableBean at; // List of attended records (AttendeeBean)
+		//EventTableBean et; // List of Event objects this account has attended
 		ContributorTableBean ct;
 		RoleTableBean rt;
 		GameTableBean gt;
@@ -126,10 +126,11 @@ public class ProfileViewServlet extends HttpServlet {
 			System.out.println("Account not found. How is this possible???");
 		}
 		
-		at = new AttendeeTableBean();
-		at.fillByAccountIds(id);
-		et = new EventTableBean();
-		request.setAttribute(ProfileConstants.ATTENDED_EVENTS, et);
+		//at = new AttendeeTableBean();
+		//at.fillByAccountIds(id);
+		//et = new EventTableBean();
+		
+		//request.setAttribute(ProfileConstants.ATTENDED_EVENTS, et);
 		
 		ct = new ContributorTableBean();
 		ct.fillByAccount(id);
