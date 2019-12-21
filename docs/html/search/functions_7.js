@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['news_73',['News',['../classdatabase_1_1_news.html#a9a961b42fd7b9f3bfedfe19a791a662a',1,'database::News']]]
+  ['login_343',['login',['../classdatabase_1_1_account.html#a9d30fe45121d2fe7ec1549629f5e2753',1,'database::Account']]]
 ];

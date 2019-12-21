@@ -1,0 +1,98 @@
+\hypertarget{classbeans_1_1_role_table_bean}{}\doxysection{beans.\+Role\+Table\+Bean Class Reference}
+\label{classbeans_1_1_role_table_bean}\index{beans.RoleTableBean@{beans.RoleTableBean}}
+Inheritance diagram for beans.\+Role\+Table\+Bean\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbeans_1_1_role_table_bean}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbeans_1_1_role_table_bean_a771c1d0a52e066b3fcfcf670f0588218}{Role\+Table\+Bean}} ()
+\item 
+\mbox{\hyperlink{classbeans_1_1_role_table_bean_ad62559ca1a580dc543e6dc1e8db435e0}{Role\+Table\+Bean}} (String id)
+\item 
+String \mbox{\hyperlink{classbeans_1_1_role_table_bean_a2842430a1e0c60849fd5f94c7de3ad5f}{get\+Title}} ()
+\item 
+int \mbox{\hyperlink{classbeans_1_1_role_table_bean_a64469206b10ac1527b0a5e74ae71563e}{fill\+By\+Ids}} (String ...ids)
+\item 
+int \mbox{\hyperlink{classbeans_1_1_role_table_bean_a840679617c8a47f3ff4e95d7858f2c51}{fill\+By\+Query}} (String query)
+\item 
+String \mbox{\hyperlink{classbeans_1_1_role_table_bean_adb9c16c63ef065d7ecb664234554b20b}{get\+Title}} (String id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for the DB\textquotesingle{}s Roles table, used to retrieve a single row when given a Role\textquotesingle{}s ID. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classbeans_1_1_role_table_bean_a771c1d0a52e066b3fcfcf670f0588218}\label{classbeans_1_1_role_table_bean_a771c1d0a52e066b3fcfcf670f0588218}} 
+\index{beans.RoleTableBean@{beans.RoleTableBean}!RoleTableBean@{RoleTableBean}}
+\index{RoleTableBean@{RoleTableBean}!beans.RoleTableBean@{beans.RoleTableBean}}
+\doxysubsubsection{\texorpdfstring{RoleTableBean()}{RoleTableBean()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily beans.\+Role\+Table\+Bean.\+Role\+Table\+Bean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Instantiate a blank \mbox{\hyperlink{classbeans_1_1_role_table_bean}{Role\+Table\+Bean}}. \mbox{\Hypertarget{classbeans_1_1_role_table_bean_ad62559ca1a580dc543e6dc1e8db435e0}\label{classbeans_1_1_role_table_bean_ad62559ca1a580dc543e6dc1e8db435e0}} 
+\index{beans.RoleTableBean@{beans.RoleTableBean}!RoleTableBean@{RoleTableBean}}
+\index{RoleTableBean@{RoleTableBean}!beans.RoleTableBean@{beans.RoleTableBean}}
+\doxysubsubsection{\texorpdfstring{RoleTableBean()}{RoleTableBean()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily beans.\+Role\+Table\+Bean.\+Role\+Table\+Bean (\begin{DoxyParamCaption}\item[{String}]{id }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{deprecated__deprecated000001}{Deprecated}}]\end{DoxyRefDesc}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classbeans_1_1_role_table_bean_a64469206b10ac1527b0a5e74ae71563e}\label{classbeans_1_1_role_table_bean_a64469206b10ac1527b0a5e74ae71563e}} 
+\index{beans.RoleTableBean@{beans.RoleTableBean}!fillByIds@{fillByIds}}
+\index{fillByIds@{fillByIds}!beans.RoleTableBean@{beans.RoleTableBean}}
+\doxysubsubsection{\texorpdfstring{fillByIds()}{fillByIds()}}
+{\footnotesize\ttfamily int beans.\+Role\+Table\+Bean.\+fill\+By\+Ids (\begin{DoxyParamCaption}\item[{String ...}]{ids }\end{DoxyParamCaption})}
+
+Fetch all games specified by ID from the DB\textquotesingle{}s Games table. Access these with get\+Games() 
+\begin{DoxyParams}{Parameters}
+{\em Event\+P\+Key} & the id of the event to get games for. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_role_table_bean_a840679617c8a47f3ff4e95d7858f2c51}\label{classbeans_1_1_role_table_bean_a840679617c8a47f3ff4e95d7858f2c51}} 
+\index{beans.RoleTableBean@{beans.RoleTableBean}!fillByQuery@{fillByQuery}}
+\index{fillByQuery@{fillByQuery}!beans.RoleTableBean@{beans.RoleTableBean}}
+\doxysubsubsection{\texorpdfstring{fillByQuery()}{fillByQuery()}}
+{\footnotesize\ttfamily int beans.\+Role\+Table\+Bean.\+fill\+By\+Query (\begin{DoxyParamCaption}\item[{String}]{query }\end{DoxyParamCaption})}
+
+Execute the query and use the results to fill the roles Array\+List. 
+\begin{DoxyParams}{Parameters}
+{\em query} & The query to execute with \mbox{\hyperlink{classdatabase_1_1_database_a49565e5f572c13b161800e3b373c2ab5}{Database.\+execute\+Query()}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of hits. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_role_table_bean_a2842430a1e0c60849fd5f94c7de3ad5f}\label{classbeans_1_1_role_table_bean_a2842430a1e0c60849fd5f94c7de3ad5f}} 
+\index{beans.RoleTableBean@{beans.RoleTableBean}!getTitle@{getTitle}}
+\index{getTitle@{getTitle}!beans.RoleTableBean@{beans.RoleTableBean}}
+\doxysubsubsection{\texorpdfstring{getTitle()}{getTitle()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily String beans.\+Role\+Table\+Bean.\+get\+Title (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{deprecated__deprecated000002}{Deprecated}}]\end{DoxyRefDesc}
+\mbox{\Hypertarget{classbeans_1_1_role_table_bean_adb9c16c63ef065d7ecb664234554b20b}\label{classbeans_1_1_role_table_bean_adb9c16c63ef065d7ecb664234554b20b}} 
+\index{beans.RoleTableBean@{beans.RoleTableBean}!getTitle@{getTitle}}
+\index{getTitle@{getTitle}!beans.RoleTableBean@{beans.RoleTableBean}}
+\doxysubsubsection{\texorpdfstring{getTitle()}{getTitle()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily String beans.\+Role\+Table\+Bean.\+get\+Title (\begin{DoxyParamCaption}\item[{String}]{id }\end{DoxyParamCaption})}
+
+Returns the Title associated with the ID 
+\begin{DoxyParams}{Parameters}
+{\em id} & The ID whose title we want. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Title associated with the ID. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Users/aaron/git/\+Capstone/\+Capstone/src/beans/Role\+Table\+Bean.\+java\end{DoxyCompactItemize}

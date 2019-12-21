@@ -1,0 +1,81 @@
+\hypertarget{classbeans_1_1_attendee_table_bean}{}\doxysection{beans.\+Attendee\+Table\+Bean Class Reference}
+\label{classbeans_1_1_attendee_table_bean}\index{beans.AttendeeTableBean@{beans.AttendeeTableBean}}
+Inheritance diagram for beans.\+Attendee\+Table\+Bean\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbeans_1_1_attendee_table_bean}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbeans_1_1_attendee_table_bean_a0f88efe98621e7d2bfde8f99ca87ec28}{Attendee\+Table\+Bean}} ()
+\item 
+int \mbox{\hyperlink{classbeans_1_1_attendee_table_bean_ad2a856aa818a5664adf194f63138b4ae}{fill\+By\+Account\+Ids}} (String ...ids)
+\item 
+int \mbox{\hyperlink{classbeans_1_1_attendee_table_bean_a09a0cc638b1330e142e8c94e720e8e3d}{fill\+By\+Event\+Ids}} (String ...ids)
+\item 
+int \mbox{\hyperlink{classbeans_1_1_attendee_table_bean_afcd2a8a8d652d72970c8f700f06936d6}{fill\+By\+Query}} (String query)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for the DB\textquotesingle{}s Attendees table, used to retrieve 0..n rows as Attendee\+Bean Objects. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classbeans_1_1_attendee_table_bean_a0f88efe98621e7d2bfde8f99ca87ec28}\label{classbeans_1_1_attendee_table_bean_a0f88efe98621e7d2bfde8f99ca87ec28}} 
+\index{beans.AttendeeTableBean@{beans.AttendeeTableBean}!AttendeeTableBean@{AttendeeTableBean}}
+\index{AttendeeTableBean@{AttendeeTableBean}!beans.AttendeeTableBean@{beans.AttendeeTableBean}}
+\doxysubsubsection{\texorpdfstring{AttendeeTableBean()}{AttendeeTableBean()}}
+{\footnotesize\ttfamily beans.\+Attendee\+Table\+Bean.\+Attendee\+Table\+Bean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Instantiate a blank \mbox{\hyperlink{classbeans_1_1_role_table_bean}{Role\+Table\+Bean}}. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classbeans_1_1_attendee_table_bean_ad2a856aa818a5664adf194f63138b4ae}\label{classbeans_1_1_attendee_table_bean_ad2a856aa818a5664adf194f63138b4ae}} 
+\index{beans.AttendeeTableBean@{beans.AttendeeTableBean}!fillByAccountIds@{fillByAccountIds}}
+\index{fillByAccountIds@{fillByAccountIds}!beans.AttendeeTableBean@{beans.AttendeeTableBean}}
+\doxysubsubsection{\texorpdfstring{fillByAccountIds()}{fillByAccountIds()}}
+{\footnotesize\ttfamily int beans.\+Attendee\+Table\+Bean.\+fill\+By\+Account\+Ids (\begin{DoxyParamCaption}\item[{String ...}]{ids }\end{DoxyParamCaption})}
+
+Fetch all attendees specified by Account\+ID from the DB\textquotesingle{}s Attendees table. Access these with get\+Attendees() 
+\begin{DoxyParams}{Parameters}
+{\em ids} & String\mbox{[}\mbox{]} of Account\+P\+Keys to get attendees for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of hits. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_attendee_table_bean_a09a0cc638b1330e142e8c94e720e8e3d}\label{classbeans_1_1_attendee_table_bean_a09a0cc638b1330e142e8c94e720e8e3d}} 
+\index{beans.AttendeeTableBean@{beans.AttendeeTableBean}!fillByEventIds@{fillByEventIds}}
+\index{fillByEventIds@{fillByEventIds}!beans.AttendeeTableBean@{beans.AttendeeTableBean}}
+\doxysubsubsection{\texorpdfstring{fillByEventIds()}{fillByEventIds()}}
+{\footnotesize\ttfamily int beans.\+Attendee\+Table\+Bean.\+fill\+By\+Event\+Ids (\begin{DoxyParamCaption}\item[{String ...}]{ids }\end{DoxyParamCaption})}
+
+Fetch all attendees specified by Event\+ID from the DB\textquotesingle{}s Attendees table. Access these with get\+Attendees() 
+\begin{DoxyParams}{Parameters}
+{\em ids} & String\mbox{[}\mbox{]} of Event\+P\+Keys to get attendees for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of hits. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_attendee_table_bean_afcd2a8a8d652d72970c8f700f06936d6}\label{classbeans_1_1_attendee_table_bean_afcd2a8a8d652d72970c8f700f06936d6}} 
+\index{beans.AttendeeTableBean@{beans.AttendeeTableBean}!fillByQuery@{fillByQuery}}
+\index{fillByQuery@{fillByQuery}!beans.AttendeeTableBean@{beans.AttendeeTableBean}}
+\doxysubsubsection{\texorpdfstring{fillByQuery()}{fillByQuery()}}
+{\footnotesize\ttfamily int beans.\+Attendee\+Table\+Bean.\+fill\+By\+Query (\begin{DoxyParamCaption}\item[{String}]{query }\end{DoxyParamCaption})}
+
+Execute the query and use the results to fill the attendees Array\+List. 
+\begin{DoxyParams}{Parameters}
+{\em query} & The query to execute with \mbox{\hyperlink{classdatabase_1_1_database_a49565e5f572c13b161800e3b373c2ab5}{Database.\+execute\+Query()}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of hits. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Users/aaron/git/\+Capstone/\+Capstone/src/beans/Attendee\+Table\+Bean.\+java\end{DoxyCompactItemize}

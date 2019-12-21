@@ -1,0 +1,154 @@
+\hypertarget{classbeans_1_1_news}{}\doxysection{beans.\+News Class Reference}
+\label{classbeans_1_1_news}\index{beans.News@{beans.News}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbeans_1_1_news_a3b2fbba4a0690d74c0d52c8a0c3d8044}{News}} (int P\+Key)
+\item 
+\mbox{\hyperlink{classbeans_1_1_news_aae0421a91f77c8f89ec9796f1bf0abfe}{News}} ()
+\item 
+int \mbox{\hyperlink{classbeans_1_1_news_a22b76199b123ffaf5d860c5fb399681e}{get\+Key}} ()
+\item 
+String \mbox{\hyperlink{classbeans_1_1_news_aba9bbdf98083d894198f2978b223c209}{get\+Title}} ()
+\item 
+String \mbox{\hyperlink{classbeans_1_1_news_a6d636589148914c784b2d5afa205c846}{get\+Header}} ()
+\item 
+String \mbox{\hyperlink{classbeans_1_1_news_a0d9aa89640ec8db8706b77429458f459}{get\+Date}} ()
+\item 
+int \mbox{\hyperlink{classbeans_1_1_news_af726f05f876f4c8d8402544c862117dc}{get\+Is\+Public}} ()
+\item 
+int \mbox{\hyperlink{classbeans_1_1_news_a7af15425281cd326cc56a7142ad1beaf}{get\+Event\+Key}} ()
+\item 
+String \mbox{\hyperlink{classbeans_1_1_news_aa19544e43154e24f6d952795beda9460}{get\+Body}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{classbeans_1_1_news_a8c6de617733ce22ad7f12d14a5039611}{get\+Num\+Of\+News\+Posts}} ()
+\item 
+static int\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classbeans_1_1_news_ae298e82f8d7a0c88f43033277bd7b61c}{get\+Most\+Recent\+News\+Posts\+Keys}} (int a, int p, int pub)
+\item 
+\mbox{\Hypertarget{classbeans_1_1_news_a2cde72848345c4128ba3ebef9a52cbd4}\label{classbeans_1_1_news_a2cde72848345c4128ba3ebef9a52cbd4}} 
+static int {\bfseries get\+News\+Key\+From\+Event\+Key} (int k)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles interactions between the news page on the site and news articles in database. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classbeans_1_1_news_a3b2fbba4a0690d74c0d52c8a0c3d8044}\label{classbeans_1_1_news_a3b2fbba4a0690d74c0d52c8a0c3d8044}} 
+\index{beans.News@{beans.News}!News@{News}}
+\index{News@{News}!beans.News@{beans.News}}
+\doxysubsubsection{\texorpdfstring{News()}{News()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily beans.\+News.\+News (\begin{DoxyParamCaption}\item[{int}]{P\+Key }\end{DoxyParamCaption})}
+
+Gets a \mbox{\hyperlink{classbeans_1_1_news}{News}} article from the database. 
+\begin{DoxyParams}{Parameters}
+{\em P\+Key} & an integer value of the \mbox{\hyperlink{classbeans_1_1_news}{News}} article\textquotesingle{}s primary key. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_news_aae0421a91f77c8f89ec9796f1bf0abfe}\label{classbeans_1_1_news_aae0421a91f77c8f89ec9796f1bf0abfe}} 
+\index{beans.News@{beans.News}!News@{News}}
+\index{News@{News}!beans.News@{beans.News}}
+\doxysubsubsection{\texorpdfstring{News()}{News()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily beans.\+News.\+News (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates blank \mbox{\hyperlink{classbeans_1_1_news}{News}} article. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classbeans_1_1_news_aa19544e43154e24f6d952795beda9460}\label{classbeans_1_1_news_aa19544e43154e24f6d952795beda9460}} 
+\index{beans.News@{beans.News}!getBody@{getBody}}
+\index{getBody@{getBody}!beans.News@{beans.News}}
+\doxysubsubsection{\texorpdfstring{getBody()}{getBody()}}
+{\footnotesize\ttfamily String beans.\+News.\+get\+Body (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the body of the article from a txt file corresponding to P\+Key \begin{DoxyReturn}{Returns}
+the body of the article as a String 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_news_a0d9aa89640ec8db8706b77429458f459}\label{classbeans_1_1_news_a0d9aa89640ec8db8706b77429458f459}} 
+\index{beans.News@{beans.News}!getDate@{getDate}}
+\index{getDate@{getDate}!beans.News@{beans.News}}
+\doxysubsubsection{\texorpdfstring{getDate()}{getDate()}}
+{\footnotesize\ttfamily String beans.\+News.\+get\+Date (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the date of the \mbox{\hyperlink{classbeans_1_1_news}{News}} article. \begin{DoxyReturn}{Returns}
+The date of the \mbox{\hyperlink{classbeans_1_1_news}{News}} article. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_news_a7af15425281cd326cc56a7142ad1beaf}\label{classbeans_1_1_news_a7af15425281cd326cc56a7142ad1beaf}} 
+\index{beans.News@{beans.News}!getEventKey@{getEventKey}}
+\index{getEventKey@{getEventKey}!beans.News@{beans.News}}
+\doxysubsubsection{\texorpdfstring{getEventKey()}{getEventKey()}}
+{\footnotesize\ttfamily int beans.\+News.\+get\+Event\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the event\+Key of the \mbox{\hyperlink{classbeans_1_1_news}{News}} article. \begin{DoxyReturn}{Returns}
+The event\+Key of the \mbox{\hyperlink{classbeans_1_1_news}{News}} article. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_news_a6d636589148914c784b2d5afa205c846}\label{classbeans_1_1_news_a6d636589148914c784b2d5afa205c846}} 
+\index{beans.News@{beans.News}!getHeader@{getHeader}}
+\index{getHeader@{getHeader}!beans.News@{beans.News}}
+\doxysubsubsection{\texorpdfstring{getHeader()}{getHeader()}}
+{\footnotesize\ttfamily String beans.\+News.\+get\+Header (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the header of the \mbox{\hyperlink{classbeans_1_1_news}{News}} article. \begin{DoxyReturn}{Returns}
+The header of the \mbox{\hyperlink{classbeans_1_1_news}{News}} article. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_news_af726f05f876f4c8d8402544c862117dc}\label{classbeans_1_1_news_af726f05f876f4c8d8402544c862117dc}} 
+\index{beans.News@{beans.News}!getIsPublic@{getIsPublic}}
+\index{getIsPublic@{getIsPublic}!beans.News@{beans.News}}
+\doxysubsubsection{\texorpdfstring{getIsPublic()}{getIsPublic()}}
+{\footnotesize\ttfamily int beans.\+News.\+get\+Is\+Public (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the public status of the \mbox{\hyperlink{classbeans_1_1_news}{News}} article. \begin{DoxyReturn}{Returns}
+The public status of the \mbox{\hyperlink{classbeans_1_1_news}{News}} article. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_news_a22b76199b123ffaf5d860c5fb399681e}\label{classbeans_1_1_news_a22b76199b123ffaf5d860c5fb399681e}} 
+\index{beans.News@{beans.News}!getKey@{getKey}}
+\index{getKey@{getKey}!beans.News@{beans.News}}
+\doxysubsubsection{\texorpdfstring{getKey()}{getKey()}}
+{\footnotesize\ttfamily int beans.\+News.\+get\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the key of the \mbox{\hyperlink{classbeans_1_1_news}{News}} article. \begin{DoxyReturn}{Returns}
+The key of the \mbox{\hyperlink{classbeans_1_1_news}{News}} article. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_news_ae298e82f8d7a0c88f43033277bd7b61c}\label{classbeans_1_1_news_ae298e82f8d7a0c88f43033277bd7b61c}} 
+\index{beans.News@{beans.News}!getMostRecentNewsPostsKeys@{getMostRecentNewsPostsKeys}}
+\index{getMostRecentNewsPostsKeys@{getMostRecentNewsPostsKeys}!beans.News@{beans.News}}
+\doxysubsubsection{\texorpdfstring{getMostRecentNewsPostsKeys()}{getMostRecentNewsPostsKeys()}}
+{\footnotesize\ttfamily static int \mbox{[}$\,$\mbox{]} beans.\+News.\+get\+Most\+Recent\+News\+Posts\+Keys (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{p,  }\item[{int}]{pub }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gets P\+Keys for the most recent public \mbox{\hyperlink{classbeans_1_1_news}{News}} articles in the database. 
+\begin{DoxyParams}{Parameters}
+{\em a} & -\/ Number of P\+Keys to get \\
+\hline
+{\em p} & -\/ P\+Key to exclude from array \\
+\hline
+{\em pub} & -\/ If the news articles include non-\/public articles (0 to include them, else do not) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The array of P\+Keys for the \mbox{\hyperlink{classbeans_1_1_news}{News}} articles 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_news_a8c6de617733ce22ad7f12d14a5039611}\label{classbeans_1_1_news_a8c6de617733ce22ad7f12d14a5039611}} 
+\index{beans.News@{beans.News}!getNumOfNewsPosts@{getNumOfNewsPosts}}
+\index{getNumOfNewsPosts@{getNumOfNewsPosts}!beans.News@{beans.News}}
+\doxysubsubsection{\texorpdfstring{getNumOfNewsPosts()}{getNumOfNewsPosts()}}
+{\footnotesize\ttfamily static int beans.\+News.\+get\+Num\+Of\+News\+Posts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gets the total number of \mbox{\hyperlink{classbeans_1_1_news}{News}} articles in the database. \begin{DoxyReturn}{Returns}
+The number of \mbox{\hyperlink{classbeans_1_1_news}{News}} articles in the database. 
+\end{DoxyReturn}
+Above query prints one row, get the C\+O\+U\+N\+T($\ast$) value from that row and parse it to an integer to be returned\mbox{\Hypertarget{classbeans_1_1_news_aba9bbdf98083d894198f2978b223c209}\label{classbeans_1_1_news_aba9bbdf98083d894198f2978b223c209}} 
+\index{beans.News@{beans.News}!getTitle@{getTitle}}
+\index{getTitle@{getTitle}!beans.News@{beans.News}}
+\doxysubsubsection{\texorpdfstring{getTitle()}{getTitle()}}
+{\footnotesize\ttfamily String beans.\+News.\+get\+Title (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the title of the \mbox{\hyperlink{classbeans_1_1_news}{News}} article. \begin{DoxyReturn}{Returns}
+The title of the \mbox{\hyperlink{classbeans_1_1_news}{News}} article. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Users/aaron/git/\+Capstone/\+Capstone/src/beans/News.\+java\end{DoxyCompactItemize}

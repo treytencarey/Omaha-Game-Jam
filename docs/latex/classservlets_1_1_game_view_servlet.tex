@@ -1,0 +1,69 @@
+\hypertarget{classservlets_1_1_game_view_servlet}{}\doxysection{servlets.\+Game\+View\+Servlet Class Reference}
+\label{classservlets_1_1_game_view_servlet}\index{servlets.GameViewServlet@{servlets.GameViewServlet}}
+Inheritance diagram for servlets.\+Game\+View\+Servlet\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classservlets_1_1_game_view_servlet}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classservlets_1_1_game_view_servlet_aa39a311e4c82a1dbe9daff31c0f64157}{Game\+View\+Servlet}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classservlets_1_1_game_view_servlet_a4a8b06d74610ade9bb3a6d451a0f564c}\label{classservlets_1_1_game_view_servlet_a4a8b06d74610ade9bb3a6d451a0f564c}} 
+static boolean {\bfseries Can\+Edit} (\mbox{\hyperlink{classdatabase_1_1_game}{Game}} g, \mbox{\hyperlink{classbeans_1_1_contributor_table_bean}{Contributor\+Table\+Bean}} ct, Http\+Session session)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classservlets_1_1_game_view_servlet_a53c0eff3c262694cb3f612e9ce61c3ee}{do\+Get}} (Http\+Servlet\+Request request, Http\+Servlet\+Response response)  throws Servlet\+Exception, I\+O\+Exception 
+\item 
+void \mbox{\hyperlink{classservlets_1_1_game_view_servlet_a0f53a2da51a52c4c69876f5092f88032}{do\+Post}} (Http\+Servlet\+Request request, Http\+Servlet\+Response response)  throws Servlet\+Exception, I\+O\+Exception 
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controller that verifies game exists, stores necessary DB data in the session, and determines whether the logged in user can edit the game. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classservlets_1_1_game_view_servlet_aa39a311e4c82a1dbe9daff31c0f64157}\label{classservlets_1_1_game_view_servlet_aa39a311e4c82a1dbe9daff31c0f64157}} 
+\index{servlets.GameViewServlet@{servlets.GameViewServlet}!GameViewServlet@{GameViewServlet}}
+\index{GameViewServlet@{GameViewServlet}!servlets.GameViewServlet@{servlets.GameViewServlet}}
+\doxysubsubsection{\texorpdfstring{GameViewServlet()}{GameViewServlet()}}
+{\footnotesize\ttfamily servlets.\+Game\+View\+Servlet.\+Game\+View\+Servlet (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxySeeAlso}{See also}
+Http\+Servlet\+::\+Http\+Servlet() 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classservlets_1_1_game_view_servlet_a53c0eff3c262694cb3f612e9ce61c3ee}\label{classservlets_1_1_game_view_servlet_a53c0eff3c262694cb3f612e9ce61c3ee}} 
+\index{servlets.GameViewServlet@{servlets.GameViewServlet}!doGet@{doGet}}
+\index{doGet@{doGet}!servlets.GameViewServlet@{servlets.GameViewServlet}}
+\doxysubsubsection{\texorpdfstring{doGet()}{doGet()}}
+{\footnotesize\ttfamily void servlets.\+Game\+View\+Servlet.\+do\+Get (\begin{DoxyParamCaption}\item[{Http\+Servlet\+Request}]{request,  }\item[{Http\+Servlet\+Response}]{response }\end{DoxyParamCaption}) throws Servlet\+Exception, I\+O\+Exception\hspace{0.3cm}{\ttfamily [protected]}}
+
+Handle the business logic for viewing games. 
+\begin{DoxyItemize}
+\item Validate game exists 
+\item Retrieve and store the requested game and contributors in Beans (\char`\"{}\+Game\char`\"{} and \char`\"{}\+Contributor\+Table\char`\"{} respectively) 
+\item Determine if the logged in user can edit, and store as \char`\"{}\+Can\+Edit\char`\"{} attribute 
+\end{DoxyItemize}\mbox{\Hypertarget{classservlets_1_1_game_view_servlet_a0f53a2da51a52c4c69876f5092f88032}\label{classservlets_1_1_game_view_servlet_a0f53a2da51a52c4c69876f5092f88032}} 
+\index{servlets.GameViewServlet@{servlets.GameViewServlet}!doPost@{doPost}}
+\index{doPost@{doPost}!servlets.GameViewServlet@{servlets.GameViewServlet}}
+\doxysubsubsection{\texorpdfstring{doPost()}{doPost()}}
+{\footnotesize\ttfamily void servlets.\+Game\+View\+Servlet.\+do\+Post (\begin{DoxyParamCaption}\item[{Http\+Servlet\+Request}]{request,  }\item[{Http\+Servlet\+Response}]{response }\end{DoxyParamCaption}) throws Servlet\+Exception, I\+O\+Exception\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxySeeAlso}{See also}
+Http\+Servlet\+::do\+Post(\+Http\+Servlet\+Request request, Http\+Servlet\+Response response) 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Users/aaron/git/\+Capstone/\+Capstone/src/servlets/Game\+View\+Servlet.\+java\end{DoxyCompactItemize}

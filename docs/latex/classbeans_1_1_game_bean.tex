@@ -1,0 +1,238 @@
+\hypertarget{classbeans_1_1_game_bean}{}\doxysection{beans.\+Game\+Bean Class Reference}
+\label{classbeans_1_1_game_bean}\index{beans.GameBean@{beans.GameBean}}
+Inheritance diagram for beans.\+Game\+Bean\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbeans_1_1_game_bean}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbeans_1_1_game_bean_a7c6b624920f78ce6beb9cd6e61dab8b0}{Game\+Bean}} ()
+\item 
+\mbox{\hyperlink{classbeans_1_1_game_bean_a82db08d43b36bb4847d3617cb009ac3b}{Game\+Bean}} (String P\+Key)
+\item 
+\mbox{\hyperlink{classbeans_1_1_game_bean_ab213c957dc71fc0fb61382f54ad3d8ad}{Game\+Bean}} (Map$<$ String, Object $>$ query\+Row)
+\item 
+boolean \mbox{\hyperlink{classbeans_1_1_game_bean_a3bb23bad6a6b190e5a1e750f803768e9}{is\+Public}} ()
+\item 
+String \mbox{\hyperlink{classbeans_1_1_game_bean_ae602c09803d5c65e9444d140901642ba}{get\+Id}} ()
+\item 
+void \mbox{\hyperlink{classbeans_1_1_game_bean_a073f4928b55bfb66bf9a15427ee2c265}{set\+Id}} (String id)
+\item 
+String \mbox{\hyperlink{classbeans_1_1_game_bean_a44367943e0efe3f805c76eaf355cdc8e}{get\+Event}} ()
+\item 
+void \mbox{\hyperlink{classbeans_1_1_game_bean_a173e18fa06470586384f1e2f3a92e8cf}{set\+Event}} (String event)
+\item 
+String \mbox{\hyperlink{classbeans_1_1_game_bean_a760d9090eda61d63299a48b3f04ff887}{get\+Submitter}} ()
+\item 
+void \mbox{\hyperlink{classbeans_1_1_game_bean_ab3989d99edb5b6d5cf68e9fc3cf86f73}{set\+Submitter}} (String submitter)
+\item 
+String \mbox{\hyperlink{classbeans_1_1_game_bean_a2676afd77a01f433064afa6e06a11de4}{get\+Title}} ()
+\item 
+void \mbox{\hyperlink{classbeans_1_1_game_bean_ab9118182a7941d0d79180e3219f83a6d}{set\+Title}} (String title)
+\item 
+String \mbox{\hyperlink{classbeans_1_1_game_bean_a7b6db4213d601da6af847605d4bdb958}{get\+Desc}} ()
+\item 
+void \mbox{\hyperlink{classbeans_1_1_game_bean_aaf705af876e37a103727fa2081c746cb}{set\+Desc}} (String desc)
+\item 
+String \mbox{\hyperlink{classbeans_1_1_game_bean_a556b854e238358d55e92dd580a791c73}{get\+Link}} ()
+\item 
+void \mbox{\hyperlink{classbeans_1_1_game_bean_a04456da4e2549c3fed103f537a956881}{set\+Link}} (String link)
+\item 
+String \mbox{\hyperlink{classbeans_1_1_game_bean_a9dc8dd9989afb5182c63c7cbe183f3d0}{get\+Status}} ()
+\item 
+void \mbox{\hyperlink{classbeans_1_1_game_bean_a57741d81c12b4b34a976a238fef8b765}{set\+Status}} (String status)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for the DB\textquotesingle{}s Games table, used to retrieve a single row when given a Game\textquotesingle{}s ID. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_a7c6b624920f78ce6beb9cd6e61dab8b0}\label{classbeans_1_1_game_bean_a7c6b624920f78ce6beb9cd6e61dab8b0}} 
+\index{beans.GameBean@{beans.GameBean}!GameBean@{GameBean}}
+\index{GameBean@{GameBean}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{GameBean()}{GameBean()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily beans.\+Game\+Bean.\+Game\+Bean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Instantiate a new \mbox{\hyperlink{classbeans_1_1_game_bean}{Game\+Bean}} with blank fields. This does not interact with the DB in any way. \mbox{\Hypertarget{classbeans_1_1_game_bean_a82db08d43b36bb4847d3617cb009ac3b}\label{classbeans_1_1_game_bean_a82db08d43b36bb4847d3617cb009ac3b}} 
+\index{beans.GameBean@{beans.GameBean}!GameBean@{GameBean}}
+\index{GameBean@{GameBean}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{GameBean()}{GameBean()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily beans.\+Game\+Bean.\+Game\+Bean (\begin{DoxyParamCaption}\item[{String}]{P\+Key }\end{DoxyParamCaption})}
+
+Fetch the specified game from the DB and instantiate a \mbox{\hyperlink{classbeans_1_1_game_bean}{Game\+Bean}} with its data. 
+\begin{DoxyParams}{Parameters}
+{\em P\+Key} & the id of the game to fetch from Games table. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_ab213c957dc71fc0fb61382f54ad3d8ad}\label{classbeans_1_1_game_bean_ab213c957dc71fc0fb61382f54ad3d8ad}} 
+\index{beans.GameBean@{beans.GameBean}!GameBean@{GameBean}}
+\index{GameBean@{GameBean}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{GameBean()}{GameBean()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily beans.\+Game\+Bean.\+Game\+Bean (\begin{DoxyParamCaption}\item[{Map$<$ String, Object $>$}]{query\+Row }\end{DoxyParamCaption})}
+
+Constructs a \mbox{\hyperlink{classbeans_1_1_game_bean}{Game\+Bean}} from a row queried from the Games table. Use this if you\textquotesingle{}ve already queried the Games table. 
+\begin{DoxyParams}{Parameters}
+{\em query\+Row} & A row from the Games table, something contained inside the Object you get after a \mbox{\hyperlink{classdatabase_1_1_database_a49565e5f572c13b161800e3b373c2ab5}{Database.\+execute\+Query()}} call. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_a7b6db4213d601da6af847605d4bdb958}\label{classbeans_1_1_game_bean_a7b6db4213d601da6af847605d4bdb958}} 
+\index{beans.GameBean@{beans.GameBean}!getDesc@{getDesc}}
+\index{getDesc@{getDesc}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{getDesc()}{getDesc()}}
+{\footnotesize\ttfamily String beans.\+Game\+Bean.\+get\+Desc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the desc 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_a44367943e0efe3f805c76eaf355cdc8e}\label{classbeans_1_1_game_bean_a44367943e0efe3f805c76eaf355cdc8e}} 
+\index{beans.GameBean@{beans.GameBean}!getEvent@{getEvent}}
+\index{getEvent@{getEvent}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{getEvent()}{getEvent()}}
+{\footnotesize\ttfamily String beans.\+Game\+Bean.\+get\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the event 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_ae602c09803d5c65e9444d140901642ba}\label{classbeans_1_1_game_bean_ae602c09803d5c65e9444d140901642ba}} 
+\index{beans.GameBean@{beans.GameBean}!getId@{getId}}
+\index{getId@{getId}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily String beans.\+Game\+Bean.\+get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the id 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_a556b854e238358d55e92dd580a791c73}\label{classbeans_1_1_game_bean_a556b854e238358d55e92dd580a791c73}} 
+\index{beans.GameBean@{beans.GameBean}!getLink@{getLink}}
+\index{getLink@{getLink}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{getLink()}{getLink()}}
+{\footnotesize\ttfamily String beans.\+Game\+Bean.\+get\+Link (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the link 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_a9dc8dd9989afb5182c63c7cbe183f3d0}\label{classbeans_1_1_game_bean_a9dc8dd9989afb5182c63c7cbe183f3d0}} 
+\index{beans.GameBean@{beans.GameBean}!getStatus@{getStatus}}
+\index{getStatus@{getStatus}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{getStatus()}{getStatus()}}
+{\footnotesize\ttfamily String beans.\+Game\+Bean.\+get\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the status 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_a760d9090eda61d63299a48b3f04ff887}\label{classbeans_1_1_game_bean_a760d9090eda61d63299a48b3f04ff887}} 
+\index{beans.GameBean@{beans.GameBean}!getSubmitter@{getSubmitter}}
+\index{getSubmitter@{getSubmitter}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{getSubmitter()}{getSubmitter()}}
+{\footnotesize\ttfamily String beans.\+Game\+Bean.\+get\+Submitter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the submitter 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_a2676afd77a01f433064afa6e06a11de4}\label{classbeans_1_1_game_bean_a2676afd77a01f433064afa6e06a11de4}} 
+\index{beans.GameBean@{beans.GameBean}!getTitle@{getTitle}}
+\index{getTitle@{getTitle}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{getTitle()}{getTitle()}}
+{\footnotesize\ttfamily String beans.\+Game\+Bean.\+get\+Title (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the title 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_a3bb23bad6a6b190e5a1e750f803768e9}\label{classbeans_1_1_game_bean_a3bb23bad6a6b190e5a1e750f803768e9}} 
+\index{beans.GameBean@{beans.GameBean}!isPublic@{isPublic}}
+\index{isPublic@{isPublic}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{isPublic()}{isPublic()}}
+{\footnotesize\ttfamily boolean beans.\+Game\+Bean.\+is\+Public (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+whether this page is public or not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_aaf705af876e37a103727fa2081c746cb}\label{classbeans_1_1_game_bean_aaf705af876e37a103727fa2081c746cb}} 
+\index{beans.GameBean@{beans.GameBean}!setDesc@{setDesc}}
+\index{setDesc@{setDesc}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{setDesc()}{setDesc()}}
+{\footnotesize\ttfamily void beans.\+Game\+Bean.\+set\+Desc (\begin{DoxyParamCaption}\item[{String}]{desc }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em desc} & the desc to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_a173e18fa06470586384f1e2f3a92e8cf}\label{classbeans_1_1_game_bean_a173e18fa06470586384f1e2f3a92e8cf}} 
+\index{beans.GameBean@{beans.GameBean}!setEvent@{setEvent}}
+\index{setEvent@{setEvent}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{setEvent()}{setEvent()}}
+{\footnotesize\ttfamily void beans.\+Game\+Bean.\+set\+Event (\begin{DoxyParamCaption}\item[{String}]{event }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & the event to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_a073f4928b55bfb66bf9a15427ee2c265}\label{classbeans_1_1_game_bean_a073f4928b55bfb66bf9a15427ee2c265}} 
+\index{beans.GameBean@{beans.GameBean}!setId@{setId}}
+\index{setId@{setId}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{setId()}{setId()}}
+{\footnotesize\ttfamily void beans.\+Game\+Bean.\+set\+Id (\begin{DoxyParamCaption}\item[{String}]{id }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the id to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_a04456da4e2549c3fed103f537a956881}\label{classbeans_1_1_game_bean_a04456da4e2549c3fed103f537a956881}} 
+\index{beans.GameBean@{beans.GameBean}!setLink@{setLink}}
+\index{setLink@{setLink}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{setLink()}{setLink()}}
+{\footnotesize\ttfamily void beans.\+Game\+Bean.\+set\+Link (\begin{DoxyParamCaption}\item[{String}]{link }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em link} & the link to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_a57741d81c12b4b34a976a238fef8b765}\label{classbeans_1_1_game_bean_a57741d81c12b4b34a976a238fef8b765}} 
+\index{beans.GameBean@{beans.GameBean}!setStatus@{setStatus}}
+\index{setStatus@{setStatus}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{setStatus()}{setStatus()}}
+{\footnotesize\ttfamily void beans.\+Game\+Bean.\+set\+Status (\begin{DoxyParamCaption}\item[{String}]{status }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em status} & the status to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_ab3989d99edb5b6d5cf68e9fc3cf86f73}\label{classbeans_1_1_game_bean_ab3989d99edb5b6d5cf68e9fc3cf86f73}} 
+\index{beans.GameBean@{beans.GameBean}!setSubmitter@{setSubmitter}}
+\index{setSubmitter@{setSubmitter}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{setSubmitter()}{setSubmitter()}}
+{\footnotesize\ttfamily void beans.\+Game\+Bean.\+set\+Submitter (\begin{DoxyParamCaption}\item[{String}]{submitter }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em submitter} & the submitter to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_game_bean_ab9118182a7941d0d79180e3219f83a6d}\label{classbeans_1_1_game_bean_ab9118182a7941d0d79180e3219f83a6d}} 
+\index{beans.GameBean@{beans.GameBean}!setTitle@{setTitle}}
+\index{setTitle@{setTitle}!beans.GameBean@{beans.GameBean}}
+\doxysubsubsection{\texorpdfstring{setTitle()}{setTitle()}}
+{\footnotesize\ttfamily void beans.\+Game\+Bean.\+set\+Title (\begin{DoxyParamCaption}\item[{String}]{title }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & the title to set \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Users/aaron/git/\+Capstone/\+Capstone/src/beans/Game\+Bean.\+java\end{DoxyCompactItemize}

@@ -1,0 +1,187 @@
+\hypertarget{classservlets_1_1_news_servlet}{}\doxysection{servlets.\+News\+Servlet Class Reference}
+\label{classservlets_1_1_news_servlet}\index{servlets.NewsServlet@{servlets.NewsServlet}}
+Inheritance diagram for servlets.\+News\+Servlet\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classservlets_1_1_news_servlet}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classservlets_1_1_news_servlet_a435490a61a1b30bace379fb72cc3a750}{News\+Servlet}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static String \mbox{\hyperlink{classservlets_1_1_news_servlet_ae48f60434fd7b95a748a28f8ca41de84}{add\+News\+Article}} (String title, String subtitle, String body, int is\+Public, Part header\+Img)  throws I\+O\+Exception 
+\item 
+static String \mbox{\hyperlink{classservlets_1_1_news_servlet_ab91db06ad23e0a965183349d02d02fc3}{add\+Event\+News\+Article}} (String title, String subtitle, String body, int is\+Public, int event\+P\+Key)  throws I\+O\+Exception 
+\item 
+static String \mbox{\hyperlink{classservlets_1_1_news_servlet_aad5bc005b1697bc2b3b52a513d650369}{edit\+News\+Article}} (String id, String title, String subtitle, String body, int is\+Public, Part header\+Img)  throws I\+O\+Exception 
+\item 
+static void \mbox{\hyperlink{classservlets_1_1_news_servlet_ae0d2d1cc4ba00a380a1253569052eca3}{delete\+News\+Article}} (String id)  throws I\+O\+Exception 
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classservlets_1_1_news_servlet_a74aa7f21b65007ac2bea634f56927542}{do\+Get}} (Http\+Servlet\+Request request, Http\+Servlet\+Response response)  throws Servlet\+Exception, I\+O\+Exception 
+\item 
+void \mbox{\hyperlink{classservlets_1_1_news_servlet_a44f32a68da66e6b2ff13c0829daaebb2}{do\+Post}} (Http\+Servlet\+Request request, Http\+Servlet\+Response response)  throws Servlet\+Exception, I\+O\+Exception 
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Servlet implementation class \mbox{\hyperlink{classservlets_1_1_news_servlet}{News\+Servlet}} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classservlets_1_1_news_servlet_a435490a61a1b30bace379fb72cc3a750}\label{classservlets_1_1_news_servlet_a435490a61a1b30bace379fb72cc3a750}} 
+\index{servlets.NewsServlet@{servlets.NewsServlet}!NewsServlet@{NewsServlet}}
+\index{NewsServlet@{NewsServlet}!servlets.NewsServlet@{servlets.NewsServlet}}
+\doxysubsubsection{\texorpdfstring{NewsServlet()}{NewsServlet()}}
+{\footnotesize\ttfamily servlets.\+News\+Servlet.\+News\+Servlet (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxySeeAlso}{See also}
+Http\+Servlet\+::\+Http\+Servlet() 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classservlets_1_1_news_servlet_ab91db06ad23e0a965183349d02d02fc3}\label{classservlets_1_1_news_servlet_ab91db06ad23e0a965183349d02d02fc3}} 
+\index{servlets.NewsServlet@{servlets.NewsServlet}!addEventNewsArticle@{addEventNewsArticle}}
+\index{addEventNewsArticle@{addEventNewsArticle}!servlets.NewsServlet@{servlets.NewsServlet}}
+\doxysubsubsection{\texorpdfstring{addEventNewsArticle()}{addEventNewsArticle()}}
+{\footnotesize\ttfamily static String servlets.\+News\+Servlet.\+add\+Event\+News\+Article (\begin{DoxyParamCaption}\item[{String}]{title,  }\item[{String}]{subtitle,  }\item[{String}]{body,  }\item[{int}]{is\+Public,  }\item[{int}]{event\+P\+Key }\end{DoxyParamCaption}) throws I\+O\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+Adds a news article to the database 
+\begin{DoxyParams}{Parameters}
+{\em title} & -\/ Title of the news article \\
+\hline
+{\em subtitle} & -\/ Subtitle of the news article \\
+\hline
+{\em body} & -\/ Body of the news article (saved to a txt file) \\
+\hline
+{\em is\+Public} & -\/ If the article is public (0 for not public, 1 for public) \\
+\hline
+{\em event\+P\+Key} & -\/ The P\+Key of the event to copy header photo from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the P\+Key of the created news article database entry 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em I\+O\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classservlets_1_1_news_servlet_ae48f60434fd7b95a748a28f8ca41de84}\label{classservlets_1_1_news_servlet_ae48f60434fd7b95a748a28f8ca41de84}} 
+\index{servlets.NewsServlet@{servlets.NewsServlet}!addNewsArticle@{addNewsArticle}}
+\index{addNewsArticle@{addNewsArticle}!servlets.NewsServlet@{servlets.NewsServlet}}
+\doxysubsubsection{\texorpdfstring{addNewsArticle()}{addNewsArticle()}}
+{\footnotesize\ttfamily static String servlets.\+News\+Servlet.\+add\+News\+Article (\begin{DoxyParamCaption}\item[{String}]{title,  }\item[{String}]{subtitle,  }\item[{String}]{body,  }\item[{int}]{is\+Public,  }\item[{Part}]{header\+Img }\end{DoxyParamCaption}) throws I\+O\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+Adds a news article to the database 
+\begin{DoxyParams}{Parameters}
+{\em title} & -\/ Title of the news article \\
+\hline
+{\em subtitle} & -\/ Subtitle of the news article \\
+\hline
+{\em body} & -\/ Body of the news article (saved to a txt file) \\
+\hline
+{\em is\+Public} & -\/ If the article is public (0 for not public, 1 for public) \\
+\hline
+{\em header\+Img} & -\/ The image for the header \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the P\+Key of the created news article database entry 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em I\+O\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+Format the date to M\+M/dd/yyyy to display in database/page
+
+Find the path where the body txt file will go
+
+Get the part(image) and write to Upload/\+News/\+Photo\mbox{\Hypertarget{classservlets_1_1_news_servlet_ae0d2d1cc4ba00a380a1253569052eca3}\label{classservlets_1_1_news_servlet_ae0d2d1cc4ba00a380a1253569052eca3}} 
+\index{servlets.NewsServlet@{servlets.NewsServlet}!deleteNewsArticle@{deleteNewsArticle}}
+\index{deleteNewsArticle@{deleteNewsArticle}!servlets.NewsServlet@{servlets.NewsServlet}}
+\doxysubsubsection{\texorpdfstring{deleteNewsArticle()}{deleteNewsArticle()}}
+{\footnotesize\ttfamily static void servlets.\+News\+Servlet.\+delete\+News\+Article (\begin{DoxyParamCaption}\item[{String}]{id }\end{DoxyParamCaption}) throws I\+O\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+Deletes news article from the database, along with its body and image from file directories 
+\begin{DoxyParams}{Parameters}
+{\em id} & -\/ The id/\+P\+Key of the news article in the database \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em I\+O\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classservlets_1_1_news_servlet_a74aa7f21b65007ac2bea634f56927542}\label{classservlets_1_1_news_servlet_a74aa7f21b65007ac2bea634f56927542}} 
+\index{servlets.NewsServlet@{servlets.NewsServlet}!doGet@{doGet}}
+\index{doGet@{doGet}!servlets.NewsServlet@{servlets.NewsServlet}}
+\doxysubsubsection{\texorpdfstring{doGet()}{doGet()}}
+{\footnotesize\ttfamily void servlets.\+News\+Servlet.\+do\+Get (\begin{DoxyParamCaption}\item[{Http\+Servlet\+Request}]{request,  }\item[{Http\+Servlet\+Response}]{response }\end{DoxyParamCaption}) throws Servlet\+Exception, I\+O\+Exception\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxySeeAlso}{See also}
+Http\+Servlet\+::do\+Get(Http\+Servlet\+Request request, Http\+Servlet\+Response response) 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classservlets_1_1_news_servlet_a44f32a68da66e6b2ff13c0829daaebb2}\label{classservlets_1_1_news_servlet_a44f32a68da66e6b2ff13c0829daaebb2}} 
+\index{servlets.NewsServlet@{servlets.NewsServlet}!doPost@{doPost}}
+\index{doPost@{doPost}!servlets.NewsServlet@{servlets.NewsServlet}}
+\doxysubsubsection{\texorpdfstring{doPost()}{doPost()}}
+{\footnotesize\ttfamily void servlets.\+News\+Servlet.\+do\+Post (\begin{DoxyParamCaption}\item[{Http\+Servlet\+Request}]{request,  }\item[{Http\+Servlet\+Response}]{response }\end{DoxyParamCaption}) throws Servlet\+Exception, I\+O\+Exception\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxySeeAlso}{See also}
+Http\+Servlet\+::do\+Post(Http\+Servlet\+Request request, Http\+Servlet\+Response response) 
+\end{DoxySeeAlso}
+When the user submits an article/edits and article, this link will redirect them to the article
+
+Get title, header, and body from input on \char`\"{}\+Create/\+Edit News Article\char`\"{} modal
+
+Set is\+Public to an Integer so that it can be put into the database
+
+Get Part/image from form in each (exception occurs if get\+Part is used up here with the delete function)
+
+Add the P\+Key to the id parameter in url so that user gets redirected to the page they just created/edited\mbox{\Hypertarget{classservlets_1_1_news_servlet_aad5bc005b1697bc2b3b52a513d650369}\label{classservlets_1_1_news_servlet_aad5bc005b1697bc2b3b52a513d650369}} 
+\index{servlets.NewsServlet@{servlets.NewsServlet}!editNewsArticle@{editNewsArticle}}
+\index{editNewsArticle@{editNewsArticle}!servlets.NewsServlet@{servlets.NewsServlet}}
+\doxysubsubsection{\texorpdfstring{editNewsArticle()}{editNewsArticle()}}
+{\footnotesize\ttfamily static String servlets.\+News\+Servlet.\+edit\+News\+Article (\begin{DoxyParamCaption}\item[{String}]{id,  }\item[{String}]{title,  }\item[{String}]{subtitle,  }\item[{String}]{body,  }\item[{int}]{is\+Public,  }\item[{Part}]{header\+Img }\end{DoxyParamCaption}) throws I\+O\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+Edits the news article based on given parameters 
+\begin{DoxyParams}{Parameters}
+{\em id} & -\/ the id/\+P\+Key of the article in the database \\
+\hline
+{\em title} & -\/ the title of the news article \\
+\hline
+{\em subtitle} & -\/ Subtitle of the news article \\
+\hline
+{\em body} & -\/ Body of the news article (saved to a txt file) \\
+\hline
+{\em is\+Public} & -\/ If the article is public (0 for not public, 1 for public) \\
+\hline
+{\em header\+Img} & -\/ The image for the header (if null, image will stay the same) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the P\+Key of the created news article database entry 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em I\+O\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+Format the date to M\+M/dd/yyyy to display in database/page
+
+Find the path where the body txt file will go
+
+Get the part(image) and write to Upload/\+News/\+Photo
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Users/aaron/git/\+Capstone/\+Capstone/src/servlets/News\+Servlet.\+java\end{DoxyCompactItemize}

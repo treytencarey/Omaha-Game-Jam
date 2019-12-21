@@ -6,6 +6,13 @@ Inheritance diagram for database.\+Files\+:\begin{figure}[H]
 \includegraphics[height=2.000000cm]{classdatabase_1_1_files}
 \end{center}
 \end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{classdatabase_1_1_files_a2d5ce5ce8e51e2fde3355d85c4c664cd}{set\+Session\+Next\+Upload\+File}} (Http\+Session session, String path)
+\item 
+static Map$<$ String, String $>$ \mbox{\hyperlink{classdatabase_1_1_files_ac2766ba10457092680a1208f4916e215}{get\+Last\+Post\+Params}} (Http\+Session session)
+\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -30,8 +37,38 @@ Handles form submissions for the files\+Servlet.
 {\em response} & the servlet for response. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classdatabase_1_1_files_ac2766ba10457092680a1208f4916e215}\label{classdatabase_1_1_files_ac2766ba10457092680a1208f4916e215}} 
+\index{database.Files@{database.Files}!getLastPostParams@{getLastPostParams}}
+\index{getLastPostParams@{getLastPostParams}!database.Files@{database.Files}}
+\doxysubsubsection{\texorpdfstring{getLastPostParams()}{getLastPostParams()}}
+{\footnotesize\ttfamily static Map$<$String, String$>$ database.\+Files.\+get\+Last\+Post\+Params (\begin{DoxyParamCaption}\item[{Http\+Session}]{session }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gets the last \mbox{\hyperlink{classdatabase_1_1_files_ab411472829db6cefb8c5b681372636bb}{Files.\+do\+Post()}} parameters for a session. This allows us to use the \mbox{\hyperlink{classdatabase_1_1_files}{Files}} class for any forms that contain file(s), and then to get the params rather than re-\/implementing file upload per class that uses it. 
+\begin{DoxyParams}{Parameters}
+{\em session} & the servlet session. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A map of the params got by the do\+Post method. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdatabase_1_1_files_a2d5ce5ce8e51e2fde3355d85c4c664cd}\label{classdatabase_1_1_files_a2d5ce5ce8e51e2fde3355d85c4c664cd}} 
+\index{database.Files@{database.Files}!setSessionNextUploadFile@{setSessionNextUploadFile}}
+\index{setSessionNextUploadFile@{setSessionNextUploadFile}!database.Files@{database.Files}}
+\doxysubsubsection{\texorpdfstring{setSessionNextUploadFile()}{setSessionNextUploadFile()}}
+{\footnotesize\ttfamily static int database.\+Files.\+set\+Session\+Next\+Upload\+File (\begin{DoxyParamCaption}\item[{Http\+Session}]{session,  }\item[{String}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a primary key for a file being uploaded. This is used in the upload component only. This is for security reasons so that users cannot hack where files are uploaded to, yet we can dynamically control it ourselves in the backend. 
+\begin{DoxyParams}{Parameters}
+{\em session} & the servlet session. \\
+\hline
+{\em path} & the full filepath of whether the file will be saved (note that in Eclipse, this is in .metadata). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+P\+Key a primary key of the next file. 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-C\+:/\+Users/bryce/eclipse-\/workspace/\+Capstone/\+Capstone/src/database/Files.\+java\end{DoxyCompactItemize}
+D\+:/\+Users/aaron/git/\+Capstone/\+Capstone/src/database/Files.\+java\end{DoxyCompactItemize}

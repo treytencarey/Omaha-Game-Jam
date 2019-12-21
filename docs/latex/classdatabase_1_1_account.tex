@@ -10,6 +10,8 @@ Inheritance diagram for database.\+Account\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 static String \mbox{\hyperlink{classdatabase_1_1_account_abe01ff2c5d53ad6fda9b98b41bfbf082}{encrypt}} (String value\+To\+Enc)  throws Exception 
+\item 
+static boolean \mbox{\hyperlink{classdatabase_1_1_account_a852c8e0fb1c9737847071e3e95eb9918}{is\+Admin}} (Http\+Session session)
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -19,6 +21,9 @@ void \mbox{\hyperlink{classdatabase_1_1_account_a7d5102fd96340fd598c5295e2ab9c44
 boolean \mbox{\hyperlink{classdatabase_1_1_account_a9d30fe45121d2fe7ec1549629f5e2753}{login}} (String email, String password, Http\+Session session)
 \item 
 String \mbox{\hyperlink{classdatabase_1_1_account_afb7be0d771f509d02d6a0df9585d8221}{register}} (String email, String password)
+\item 
+\mbox{\Hypertarget{classdatabase_1_1_account_af7ed1a4d5afaf87658a8d50143e84bfe}\label{classdatabase_1_1_account_af7ed1a4d5afaf87658a8d50143e84bfe}} 
+void {\bfseries change\+Credentials} (int pkey, String email, String password)
 \end{DoxyCompactItemize}
 
 
@@ -58,6 +63,20 @@ A string of the value\+To\+Enc string encrypted.
 {\em Exception} & \\
 \hline
 \end{DoxyExceptions}
+\mbox{\Hypertarget{classdatabase_1_1_account_a852c8e0fb1c9737847071e3e95eb9918}\label{classdatabase_1_1_account_a852c8e0fb1c9737847071e3e95eb9918}} 
+\index{database.Account@{database.Account}!isAdmin@{isAdmin}}
+\index{isAdmin@{isAdmin}!database.Account@{database.Account}}
+\doxysubsubsection{\texorpdfstring{isAdmin()}{isAdmin()}}
+{\footnotesize\ttfamily static boolean database.\+Account.\+is\+Admin (\begin{DoxyParamCaption}\item[{Http\+Session}]{session }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Determines whether the logged-\/in user stored in the session is an admin or not. This doesn\textquotesingle{}t contact the database, it simply checks for a session attribute that should be stored on login. 
+\begin{DoxyParams}{Parameters}
+{\em session} & The session object to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether user is an admin or not. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classdatabase_1_1_account_a9d30fe45121d2fe7ec1549629f5e2753}\label{classdatabase_1_1_account_a9d30fe45121d2fe7ec1549629f5e2753}} 
 \index{database.Account@{database.Account}!login@{login}}
 \index{login@{login}!database.Account@{database.Account}}
@@ -98,4 +117,4 @@ True if the registration was successful, otherwise false.
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-C\+:/\+Users/bryce/eclipse-\/workspace/\+Capstone/\+Capstone/src/database/Account.\+java\end{DoxyCompactItemize}
+D\+:/\+Users/aaron/git/\+Capstone/\+Capstone/src/database/Account.\+java\end{DoxyCompactItemize}

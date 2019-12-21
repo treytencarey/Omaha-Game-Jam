@@ -66,6 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classdatabase_1_1_files-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -79,6 +80,13 @@ Inheritance diagram for database.Files:</div>
   <img src="classdatabase_1_1_files.png" alt=""/>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a2d5ce5ce8e51e2fde3355d85c4c664cd"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdatabase_1_1_files.html#a2d5ce5ce8e51e2fde3355d85c4c664cd">setSessionNextUploadFile</a> (HttpSession session, String path)</td></tr>
+<tr class="separator:a2d5ce5ce8e51e2fde3355d85c4c664cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2766ba10457092680a1208f4916e215"><td class="memItemLeft" align="right" valign="top">static Map&lt; String, String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdatabase_1_1_files.html#ac2766ba10457092680a1208f4916e215">getLastPostParams</a> (HttpSession session)</td></tr>
+<tr class="separator:ac2766ba10457092680a1208f4916e215"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ab411472829db6cefb8c5b681372636bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdatabase_1_1_files.html#ab411472829db6cefb8c5b681372636bb">doPost</a> (HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException </td></tr>
@@ -130,8 +138,85 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ac2766ba10457092680a1208f4916e215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2766ba10457092680a1208f4916e215">&#9670;&nbsp;</a></span>getLastPostParams()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Map&lt;String, String&gt; database.Files.getLastPostParams </td>
+          <td>(</td>
+          <td class="paramtype">HttpSession&#160;</td>
+          <td class="paramname"><em>session</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Gets the last <a class="el" href="classdatabase_1_1_files.html#ab411472829db6cefb8c5b681372636bb">Files.doPost()</a> parameters for a session. This allows us to use the <a class="el" href="classdatabase_1_1_files.html">Files</a> class for any forms that contain file(s), and then to get the params rather than re-implementing file upload per class that uses it. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">session</td><td>the servlet session. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A map of the params got by the doPost method. </dd></dl>
+
+</div>
+</div>
+<a id="a2d5ce5ce8e51e2fde3355d85c4c664cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d5ce5ce8e51e2fde3355d85c4c664cd">&#9670;&nbsp;</a></span>setSessionNextUploadFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int database.Files.setSessionNextUploadFile </td>
+          <td>(</td>
+          <td class="paramtype">HttpSession&#160;</td>
+          <td class="paramname"><em>session</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>path</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Creates a primary key for a file being uploaded. This is used in the upload component only. This is for security reasons so that users cannot hack where files are uploaded to, yet we can dynamically control it ourselves in the backend. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">session</td><td>the servlet session. </td></tr>
+    <tr><td class="paramname">path</td><td>the full filepath of whether the file will be saved (note that in Eclipse, this is in .metadata). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>PKey a primary key of the next file. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Users/bryce/eclipse-workspace/Capstone/Capstone/src/database/Files.java</li>
+<li>D:/Users/aaron/git/Capstone/Capstone/src/database/Files.java</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

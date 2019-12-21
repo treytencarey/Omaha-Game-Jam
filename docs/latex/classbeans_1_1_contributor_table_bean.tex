@@ -1,0 +1,116 @@
+\hypertarget{classbeans_1_1_contributor_table_bean}{}\doxysection{beans.\+Contributor\+Table\+Bean Class Reference}
+\label{classbeans_1_1_contributor_table_bean}\index{beans.ContributorTableBean@{beans.ContributorTableBean}}
+Inheritance diagram for beans.\+Contributor\+Table\+Bean\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbeans_1_1_contributor_table_bean}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbeans_1_1_contributor_table_bean_a28ac6d60deaec8d30569c2ff88b895e1}{Contributor\+Table\+Bean}} ()
+\item 
+int \mbox{\hyperlink{classbeans_1_1_contributor_table_bean_ae738393f11b25073c7293e5c05b8b970}{fill\+By\+Game}} (String Game\+P\+Key)
+\item 
+int \mbox{\hyperlink{classbeans_1_1_contributor_table_bean_a196af42391a0a5eb12561bd961c1fa47}{fill\+By\+Account}} (String Account\+P\+Key)
+\item 
+int \mbox{\hyperlink{classbeans_1_1_contributor_table_bean_aa57726fbd1c18d6a4278971df7031e7b}{fill\+By\+Query}} (String query)
+\item 
+Array\+List$<$ \mbox{\hyperlink{classdatabase_1_1_contributor}{Contributor}} $>$ \mbox{\hyperlink{classbeans_1_1_contributor_table_bean_a96545b7cbc179e59ce26c64ae357d3bd}{get\+Contributors}} ()
+\item 
+void \mbox{\hyperlink{classbeans_1_1_contributor_table_bean_a7814b16202e590b6df27f2d087117b80}{set\+Contributors}} (Array\+List$<$ \mbox{\hyperlink{classdatabase_1_1_contributor}{Contributor}} $>$ contributors)
+\item 
+Array\+List$<$ String $>$ \mbox{\hyperlink{classbeans_1_1_contributor_table_bean_a0f80f62ea934b2924e2d6c2bd966bf9c}{get\+Game\+Ids}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for the DB\textquotesingle{}s Contributors table, used to retrieve 0..n rows of contributors for a single Game. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classbeans_1_1_contributor_table_bean_a28ac6d60deaec8d30569c2ff88b895e1}\label{classbeans_1_1_contributor_table_bean_a28ac6d60deaec8d30569c2ff88b895e1}} 
+\index{beans.ContributorTableBean@{beans.ContributorTableBean}!ContributorTableBean@{ContributorTableBean}}
+\index{ContributorTableBean@{ContributorTableBean}!beans.ContributorTableBean@{beans.ContributorTableBean}}
+\doxysubsubsection{\texorpdfstring{ContributorTableBean()}{ContributorTableBean()}}
+{\footnotesize\ttfamily beans.\+Contributor\+Table\+Bean.\+Contributor\+Table\+Bean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Instantiate a blank Contributer\+Bean\+Table. Call \mbox{\hyperlink{classbeans_1_1_contributor_table_bean_ae738393f11b25073c7293e5c05b8b970}{fill\+By\+Game()}} or \mbox{\hyperlink{classbeans_1_1_contributor_table_bean_a196af42391a0a5eb12561bd961c1fa47}{fill\+By\+Account()}} to fill it up. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classbeans_1_1_contributor_table_bean_a196af42391a0a5eb12561bd961c1fa47}\label{classbeans_1_1_contributor_table_bean_a196af42391a0a5eb12561bd961c1fa47}} 
+\index{beans.ContributorTableBean@{beans.ContributorTableBean}!fillByAccount@{fillByAccount}}
+\index{fillByAccount@{fillByAccount}!beans.ContributorTableBean@{beans.ContributorTableBean}}
+\doxysubsubsection{\texorpdfstring{fillByAccount()}{fillByAccount()}}
+{\footnotesize\ttfamily int beans.\+Contributor\+Table\+Bean.\+fill\+By\+Account (\begin{DoxyParamCaption}\item[{String}]{Account\+P\+Key }\end{DoxyParamCaption})}
+
+Fetch the contributors for the specified account from the DB and store in contributors. 
+\begin{DoxyParams}{Parameters}
+{\em Account\+P\+Key} & the id of the account to get contributors for from Contributors table. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of rows fetched. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_contributor_table_bean_ae738393f11b25073c7293e5c05b8b970}\label{classbeans_1_1_contributor_table_bean_ae738393f11b25073c7293e5c05b8b970}} 
+\index{beans.ContributorTableBean@{beans.ContributorTableBean}!fillByGame@{fillByGame}}
+\index{fillByGame@{fillByGame}!beans.ContributorTableBean@{beans.ContributorTableBean}}
+\doxysubsubsection{\texorpdfstring{fillByGame()}{fillByGame()}}
+{\footnotesize\ttfamily int beans.\+Contributor\+Table\+Bean.\+fill\+By\+Game (\begin{DoxyParamCaption}\item[{String}]{Game\+P\+Key }\end{DoxyParamCaption})}
+
+Fetch the contributors for the specified game from the DB and store in contributors. 
+\begin{DoxyParams}{Parameters}
+{\em Game\+P\+Key} & the id of the game to get contributors for from Contributors table. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of rows fetched. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_contributor_table_bean_aa57726fbd1c18d6a4278971df7031e7b}\label{classbeans_1_1_contributor_table_bean_aa57726fbd1c18d6a4278971df7031e7b}} 
+\index{beans.ContributorTableBean@{beans.ContributorTableBean}!fillByQuery@{fillByQuery}}
+\index{fillByQuery@{fillByQuery}!beans.ContributorTableBean@{beans.ContributorTableBean}}
+\doxysubsubsection{\texorpdfstring{fillByQuery()}{fillByQuery()}}
+{\footnotesize\ttfamily int beans.\+Contributor\+Table\+Bean.\+fill\+By\+Query (\begin{DoxyParamCaption}\item[{String}]{query }\end{DoxyParamCaption})}
+
+Execute the query and use the results to fill the contributors Array\+List. 
+\begin{DoxyParams}{Parameters}
+{\em query} & The query to execute with \mbox{\hyperlink{classdatabase_1_1_database_a49565e5f572c13b161800e3b373c2ab5}{Database.\+execute\+Query()}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of hits. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_contributor_table_bean_a96545b7cbc179e59ce26c64ae357d3bd}\label{classbeans_1_1_contributor_table_bean_a96545b7cbc179e59ce26c64ae357d3bd}} 
+\index{beans.ContributorTableBean@{beans.ContributorTableBean}!getContributors@{getContributors}}
+\index{getContributors@{getContributors}!beans.ContributorTableBean@{beans.ContributorTableBean}}
+\doxysubsubsection{\texorpdfstring{getContributors()}{getContributors()}}
+{\footnotesize\ttfamily Array\+List$<$\mbox{\hyperlink{classdatabase_1_1_contributor}{Contributor}}$>$ beans.\+Contributor\+Table\+Bean.\+get\+Contributors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the List of Contributors. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_contributor_table_bean_a0f80f62ea934b2924e2d6c2bd966bf9c}\label{classbeans_1_1_contributor_table_bean_a0f80f62ea934b2924e2d6c2bd966bf9c}} 
+\index{beans.ContributorTableBean@{beans.ContributorTableBean}!getGameIds@{getGameIds}}
+\index{getGameIds@{getGameIds}!beans.ContributorTableBean@{beans.ContributorTableBean}}
+\doxysubsubsection{\texorpdfstring{getGameIds()}{getGameIds()}}
+{\footnotesize\ttfamily Array\+List$<$String$>$ beans.\+Contributor\+Table\+Bean.\+get\+Game\+Ids (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the Game\+P\+Key of the current contributors as an Array\+List$<$\+String$>$. \begin{DoxyReturn}{Returns}
+The Game\+P\+Keys of the currents contributors. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_contributor_table_bean_a7814b16202e590b6df27f2d087117b80}\label{classbeans_1_1_contributor_table_bean_a7814b16202e590b6df27f2d087117b80}} 
+\index{beans.ContributorTableBean@{beans.ContributorTableBean}!setContributors@{setContributors}}
+\index{setContributors@{setContributors}!beans.ContributorTableBean@{beans.ContributorTableBean}}
+\doxysubsubsection{\texorpdfstring{setContributors()}{setContributors()}}
+{\footnotesize\ttfamily void beans.\+Contributor\+Table\+Bean.\+set\+Contributors (\begin{DoxyParamCaption}\item[{Array\+List$<$ \mbox{\hyperlink{classdatabase_1_1_contributor}{Contributor}} $>$}]{contributors }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em contributors} & the List of Contributors. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Users/aaron/git/\+Capstone/\+Capstone/src/beans/Contributor\+Table\+Bean.\+java\end{DoxyCompactItemize}

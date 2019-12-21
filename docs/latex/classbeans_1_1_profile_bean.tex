@@ -1,0 +1,274 @@
+\hypertarget{classbeans_1_1_profile_bean}{}\doxysection{beans.\+Profile\+Bean Class Reference}
+\label{classbeans_1_1_profile_bean}\index{beans.ProfileBean@{beans.ProfileBean}}
+Inheritance diagram for beans.\+Profile\+Bean\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbeans_1_1_profile_bean}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbeans_1_1_profile_bean_a3e94387f0cb85c4ceb63108fcb1963e8}{Profile\+Bean}} (String P\+Key)  throws Empty\+Query\+Exception 	
+\item 
+\mbox{\hyperlink{classbeans_1_1_profile_bean_a426bb00bba2bbc7eef44de8dc846d211}{Profile\+Bean}} (String id, String name, String bio, String website, String skills, String status)
+\item 
+\mbox{\hyperlink{classbeans_1_1_profile_bean_a1177efe9bd2fc8a6bd1966f535d2ce70}{Profile\+Bean}} ()
+\item 
+void \mbox{\hyperlink{classbeans_1_1_profile_bean_abb87c3ef284cc0c235f6870bf8eaf630}{write\+Changes}} ()  throws Unsuccessful\+Update\+Exception 	
+\item 
+boolean \mbox{\hyperlink{classbeans_1_1_profile_bean_a07d041c49a98b22da765585b3f7b8e53}{is\+Public}} ()
+\item 
+String \mbox{\hyperlink{classbeans_1_1_profile_bean_a8ec6ff66396bab7cde5ff4f554728a50}{get\+Status}} ()
+\item 
+void \mbox{\hyperlink{classbeans_1_1_profile_bean_a79df3322a680ee4970cc5e081c14ecc3}{set\+Status}} (String status)
+\item 
+String \mbox{\hyperlink{classbeans_1_1_profile_bean_acfba7ffd6e60e139e7dace69f30fb08a}{get\+Id}} ()
+\item 
+void \mbox{\hyperlink{classbeans_1_1_profile_bean_a9233c495fc522879f09584de47a592bf}{set\+Id}} (String id)
+\item 
+String \mbox{\hyperlink{classbeans_1_1_profile_bean_af78a1ad262d4237709fa60abe7504b33}{get\+Name}} ()
+\item 
+String \mbox{\hyperlink{classbeans_1_1_profile_bean_adae2855fa6dc5fc60ee71951e537afc0}{get\+Bio}} ()
+\item 
+String \mbox{\hyperlink{classbeans_1_1_profile_bean_ad7a5b837a07ae07832ec84c9a8bed88c}{get\+Website}} ()
+\item 
+String \mbox{\hyperlink{classbeans_1_1_profile_bean_af8e9c7b1bc5d6c7541bf02e18e1ee8b4}{get\+Skills}} ()
+\item 
+void \mbox{\hyperlink{classbeans_1_1_profile_bean_aa3e7b2efda80bec19d27b8b3d770dd48}{set\+Name}} (String name)
+\item 
+void \mbox{\hyperlink{classbeans_1_1_profile_bean_a259f6e198fa80feccbf69955d811df64}{set\+Bio}} (String bio)
+\item 
+void \mbox{\hyperlink{classbeans_1_1_profile_bean_a03dcfcb7a9e1f71645a2c94b8068c2d6}{set\+Website}} (String website)
+\item 
+void \mbox{\hyperlink{classbeans_1_1_profile_bean_a9aa674a04fcb0e2c1f27db4a5f11c5b1}{set\+Skills}} (String skills)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static String \mbox{\hyperlink{classbeans_1_1_profile_bean_a72c8cc955dccb0b4b9bf9b0adcf57d77}{query\+Status}} (String id)  throws Empty\+Query\+Exception 	
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for the DB\textquotesingle{}s Profiles table, used to retrieve 1 row for a single Profile. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_a3e94387f0cb85c4ceb63108fcb1963e8}\label{classbeans_1_1_profile_bean_a3e94387f0cb85c4ceb63108fcb1963e8}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!ProfileBean@{ProfileBean}}
+\index{ProfileBean@{ProfileBean}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{ProfileBean()}{ProfileBean()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily beans.\+Profile\+Bean.\+Profile\+Bean (\begin{DoxyParamCaption}\item[{String}]{P\+Key }\end{DoxyParamCaption}) throws \mbox{\hyperlink{classexceptions_1_1_empty_query_exception}{Empty\+Query\+Exception}}}
+
+Gets a profile from the database. 
+\begin{DoxyParams}{Parameters}
+{\em P\+Key} & an integer value of the profile\textquotesingle{}s primary key. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_a426bb00bba2bbc7eef44de8dc846d211}\label{classbeans_1_1_profile_bean_a426bb00bba2bbc7eef44de8dc846d211}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!ProfileBean@{ProfileBean}}
+\index{ProfileBean@{ProfileBean}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{ProfileBean()}{ProfileBean()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily beans.\+Profile\+Bean.\+Profile\+Bean (\begin{DoxyParamCaption}\item[{String}]{id,  }\item[{String}]{name,  }\item[{String}]{bio,  }\item[{String}]{website,  }\item[{String}]{skills,  }\item[{String}]{status }\end{DoxyParamCaption})}
+
+Gets a profile based on the given values. 
+\begin{DoxyParams}{Parameters}
+{\em name} & a string of the name of the account (email/username). \\
+\hline
+{\em bio} & a string of the profile\textquotesingle{}s bio. \\
+\hline
+{\em website} & a string of the profile\textquotesingle{}s website. \\
+\hline
+{\em skills} & a string of the profile\textquotesingle{}s skills. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_a1177efe9bd2fc8a6bd1966f535d2ce70}\label{classbeans_1_1_profile_bean_a1177efe9bd2fc8a6bd1966f535d2ce70}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!ProfileBean@{ProfileBean}}
+\index{ProfileBean@{ProfileBean}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{ProfileBean()}{ProfileBean()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily beans.\+Profile\+Bean.\+Profile\+Bean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets a blank profile. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_adae2855fa6dc5fc60ee71951e537afc0}\label{classbeans_1_1_profile_bean_adae2855fa6dc5fc60ee71951e537afc0}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!getBio@{getBio}}
+\index{getBio@{getBio}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{getBio()}{getBio()}}
+{\footnotesize\ttfamily String beans.\+Profile\+Bean.\+get\+Bio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the bio of the profile. \begin{DoxyReturn}{Returns}
+The bio of the profile. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_acfba7ffd6e60e139e7dace69f30fb08a}\label{classbeans_1_1_profile_bean_acfba7ffd6e60e139e7dace69f30fb08a}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!getId@{getId}}
+\index{getId@{getId}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily String beans.\+Profile\+Bean.\+get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The P\+Key of this profile. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_af78a1ad262d4237709fa60abe7504b33}\label{classbeans_1_1_profile_bean_af78a1ad262d4237709fa60abe7504b33}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!getName@{getName}}
+\index{getName@{getName}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily String beans.\+Profile\+Bean.\+get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the name of the profile username. \begin{DoxyReturn}{Returns}
+The name of the profile username. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_af8e9c7b1bc5d6c7541bf02e18e1ee8b4}\label{classbeans_1_1_profile_bean_af8e9c7b1bc5d6c7541bf02e18e1ee8b4}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!getSkills@{getSkills}}
+\index{getSkills@{getSkills}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{getSkills()}{getSkills()}}
+{\footnotesize\ttfamily String beans.\+Profile\+Bean.\+get\+Skills (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the skills of the profile. \begin{DoxyReturn}{Returns}
+The skills of the profile. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_a8ec6ff66396bab7cde5ff4f554728a50}\label{classbeans_1_1_profile_bean_a8ec6ff66396bab7cde5ff4f554728a50}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!getStatus@{getStatus}}
+\index{getStatus@{getStatus}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{getStatus()}{getStatus()}}
+{\footnotesize\ttfamily String beans.\+Profile\+Bean.\+get\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The status of this profile. 
+\begin{DoxyItemize}
+\item -\/1\+: denied (not public) 
+\item 0\+: untrusted, unverified (not public) 
+\item 1\+: trusted, unverified (public) 
+\item 2\+: verified (public) 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_ad7a5b837a07ae07832ec84c9a8bed88c}\label{classbeans_1_1_profile_bean_ad7a5b837a07ae07832ec84c9a8bed88c}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!getWebsite@{getWebsite}}
+\index{getWebsite@{getWebsite}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{getWebsite()}{getWebsite()}}
+{\footnotesize\ttfamily String beans.\+Profile\+Bean.\+get\+Website (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the website of the profile. \begin{DoxyReturn}{Returns}
+The website of the profile. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_a07d041c49a98b22da765585b3f7b8e53}\label{classbeans_1_1_profile_bean_a07d041c49a98b22da765585b3f7b8e53}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!isPublic@{isPublic}}
+\index{isPublic@{isPublic}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{isPublic()}{isPublic()}}
+{\footnotesize\ttfamily boolean beans.\+Profile\+Bean.\+is\+Public (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+whether this profile is public or not, based on its status 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_a72c8cc955dccb0b4b9bf9b0adcf57d77}\label{classbeans_1_1_profile_bean_a72c8cc955dccb0b4b9bf9b0adcf57d77}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!queryStatus@{queryStatus}}
+\index{queryStatus@{queryStatus}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{queryStatus()}{queryStatus()}}
+{\footnotesize\ttfamily static String beans.\+Profile\+Bean.\+query\+Status (\begin{DoxyParamCaption}\item[{String}]{id }\end{DoxyParamCaption}) throws \mbox{\hyperlink{classexceptions_1_1_empty_query_exception}{Empty\+Query\+Exception}}\hspace{0.3cm}{\ttfamily [static]}}
+
+Query the database for the status of the profile for Account\+P\+Key of id. 
+\begin{DoxyParams}{Parameters}
+{\em id} & Account\+P\+Key of desired profile \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status of profile 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Empty\+Query\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_a259f6e198fa80feccbf69955d811df64}\label{classbeans_1_1_profile_bean_a259f6e198fa80feccbf69955d811df64}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!setBio@{setBio}}
+\index{setBio@{setBio}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{setBio()}{setBio()}}
+{\footnotesize\ttfamily void beans.\+Profile\+Bean.\+set\+Bio (\begin{DoxyParamCaption}\item[{String}]{bio }\end{DoxyParamCaption})}
+
+Sets the bio of the profile. 
+\begin{DoxyParams}{Parameters}
+{\em bio} & a string of the bio. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_a9233c495fc522879f09584de47a592bf}\label{classbeans_1_1_profile_bean_a9233c495fc522879f09584de47a592bf}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!setId@{setId}}
+\index{setId@{setId}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{setId()}{setId()}}
+{\footnotesize\ttfamily void beans.\+Profile\+Bean.\+set\+Id (\begin{DoxyParamCaption}\item[{String}]{id }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The ID to set P\+Key to. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_aa3e7b2efda80bec19d27b8b3d770dd48}\label{classbeans_1_1_profile_bean_aa3e7b2efda80bec19d27b8b3d770dd48}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!setName@{setName}}
+\index{setName@{setName}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{setName()}{setName()}}
+{\footnotesize\ttfamily void beans.\+Profile\+Bean.\+set\+Name (\begin{DoxyParamCaption}\item[{String}]{name }\end{DoxyParamCaption})}
+
+Sets the name of the profile. 
+\begin{DoxyParams}{Parameters}
+{\em name} & a string of the name (email/username). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_a9aa674a04fcb0e2c1f27db4a5f11c5b1}\label{classbeans_1_1_profile_bean_a9aa674a04fcb0e2c1f27db4a5f11c5b1}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!setSkills@{setSkills}}
+\index{setSkills@{setSkills}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{setSkills()}{setSkills()}}
+{\footnotesize\ttfamily void beans.\+Profile\+Bean.\+set\+Skills (\begin{DoxyParamCaption}\item[{String}]{skills }\end{DoxyParamCaption})}
+
+Sets the skills of the profile. 
+\begin{DoxyParams}{Parameters}
+{\em skills} & a string of the skills. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_a79df3322a680ee4970cc5e081c14ecc3}\label{classbeans_1_1_profile_bean_a79df3322a680ee4970cc5e081c14ecc3}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!setStatus@{setStatus}}
+\index{setStatus@{setStatus}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{setStatus()}{setStatus()}}
+{\footnotesize\ttfamily void beans.\+Profile\+Bean.\+set\+Status (\begin{DoxyParamCaption}\item[{String}]{status }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em status} & The status set to. 
+\begin{DoxyItemize}
+\item -\/1\+: denied (not public) 
+\item 0\+: untrusted, unverified (not public) 
+\item 1\+: trusted, unverified (public) 
+\item 2\+: verified (public) 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_a03dcfcb7a9e1f71645a2c94b8068c2d6}\label{classbeans_1_1_profile_bean_a03dcfcb7a9e1f71645a2c94b8068c2d6}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!setWebsite@{setWebsite}}
+\index{setWebsite@{setWebsite}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{setWebsite()}{setWebsite()}}
+{\footnotesize\ttfamily void beans.\+Profile\+Bean.\+set\+Website (\begin{DoxyParamCaption}\item[{String}]{website }\end{DoxyParamCaption})}
+
+Sets the website of the profile. 
+\begin{DoxyParams}{Parameters}
+{\em website} & a string of the website. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbeans_1_1_profile_bean_abb87c3ef284cc0c235f6870bf8eaf630}\label{classbeans_1_1_profile_bean_abb87c3ef284cc0c235f6870bf8eaf630}} 
+\index{beans.ProfileBean@{beans.ProfileBean}!writeChanges@{writeChanges}}
+\index{writeChanges@{writeChanges}!beans.ProfileBean@{beans.ProfileBean}}
+\doxysubsubsection{\texorpdfstring{writeChanges()}{writeChanges()}}
+{\footnotesize\ttfamily void beans.\+Profile\+Bean.\+write\+Changes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws \mbox{\hyperlink{classexceptions_1_1_unsuccessful_update_exception}{Unsuccessful\+Update\+Exception}}}
+
+Updates the profile in the database with the given primary key to the values of the profile. 
+\begin{DoxyParams}{Parameters}
+{\em P\+Key} & an integer value of the profile\textquotesingle{}s primary key. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Unsuccessful\+Update\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Users/aaron/git/\+Capstone/\+Capstone/src/beans/Profile\+Bean.\+java\end{DoxyCompactItemize}

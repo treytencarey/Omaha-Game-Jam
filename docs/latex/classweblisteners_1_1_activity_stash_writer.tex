@@ -1,0 +1,30 @@
+\hypertarget{classweblisteners_1_1_activity_stash_writer}{}\doxysection{weblisteners.\+Activity\+Stash\+Writer Class Reference}
+\label{classweblisteners_1_1_activity_stash_writer}\index{weblisteners.ActivityStashWriter@{weblisteners.ActivityStashWriter}}
+Inheritance diagram for weblisteners.\+Activity\+Stash\+Writer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classweblisteners_1_1_activity_stash_writer}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classweblisteners_1_1_activity_stash_writer_af1a7cfb56947bcfd431fb088725bc4e6}{session\+Destroyed}} (Http\+Session\+Event se)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Listens for Session expiration and appends its attributes to activities.\+csv. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classweblisteners_1_1_activity_stash_writer_af1a7cfb56947bcfd431fb088725bc4e6}\label{classweblisteners_1_1_activity_stash_writer_af1a7cfb56947bcfd431fb088725bc4e6}} 
+\index{weblisteners.ActivityStashWriter@{weblisteners.ActivityStashWriter}!sessionDestroyed@{sessionDestroyed}}
+\index{sessionDestroyed@{sessionDestroyed}!weblisteners.ActivityStashWriter@{weblisteners.ActivityStashWriter}}
+\doxysubsubsection{\texorpdfstring{sessionDestroyed()}{sessionDestroyed()}}
+{\footnotesize\ttfamily void weblisteners.\+Activity\+Stash\+Writer.\+session\+Destroyed (\begin{DoxyParamCaption}\item[{Http\+Session\+Event}]{se }\end{DoxyParamCaption})}
+
+Once a Session is about to expire, collects its attributes and stores them in activities.\+csv. If that file doesn\textquotesingle{}t exist, create it and write its headers. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Users/aaron/git/\+Capstone/\+Capstone/src/weblisteners/Activity\+Stash\+Writer.\+java\end{DoxyCompactItemize}
