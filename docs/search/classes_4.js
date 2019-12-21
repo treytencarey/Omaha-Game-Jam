@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['profile_45',['Profile',['../classdatabase_1_1_profile.html',1,'database']]]
+  ['files_210',['Files',['../classdatabase_1_1_files.html',1,'database']]],
+  ['folderreader_211',['FolderReader',['../classutils_1_1_folder_reader.html',1,'utils']]]
 ];

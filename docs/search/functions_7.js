@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['openbrowser_63',['openBrowser',['../classtesting_1_1_run_tests.html#aebd0b4d1f5cbf49a58968ae0065e5d87',1,'testing::RunTests']]]
+  ['login_343',['login',['../classdatabase_1_1_account.html#a9d30fe45121d2fe7ec1549629f5e2753',1,'database::Account']]]
 ];

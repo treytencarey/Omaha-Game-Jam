@@ -84,6 +84,8 @@ Inheritance diagram for database.Account:</div>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:abe01ff2c5d53ad6fda9b98b41bfbf082"><td class="memItemLeft" align="right" valign="top">static String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdatabase_1_1_account.html#abe01ff2c5d53ad6fda9b98b41bfbf082">encrypt</a> (String valueToEnc)  throws Exception </td></tr>
 <tr class="separator:abe01ff2c5d53ad6fda9b98b41bfbf082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a852c8e0fb1c9737847071e3e95eb9918"><td class="memItemLeft" align="right" valign="top">static boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdatabase_1_1_account.html#a852c8e0fb1c9737847071e3e95eb9918">isAdmin</a> (HttpSession session)</td></tr>
+<tr class="separator:a852c8e0fb1c9737847071e3e95eb9918"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -93,6 +95,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a9d30fe45121d2fe7ec1549629f5e2753"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb7be0d771f509d02d6a0df9585d8221"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdatabase_1_1_account.html#afb7be0d771f509d02d6a0df9585d8221">register</a> (String email, String password)</td></tr>
 <tr class="separator:afb7be0d771f509d02d6a0df9585d8221"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7ed1a4d5afaf87658a8d50143e84bfe"><td class="memItemLeft" align="right" valign="top"><a id="af7ed1a4d5afaf87658a8d50143e84bfe"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>changeCredentials</b> (int pkey, String email, String password)</td></tr>
+<tr class="separator:af7ed1a4d5afaf87658a8d50143e84bfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Handles all interactions between the site and an account. </p>
@@ -176,6 +181,39 @@ Protected Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a852c8e0fb1c9737847071e3e95eb9918"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a852c8e0fb1c9737847071e3e95eb9918">&#9670;&nbsp;</a></span>isAdmin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static boolean database.Account.isAdmin </td>
+          <td>(</td>
+          <td class="paramtype">HttpSession&#160;</td>
+          <td class="paramname"><em>session</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Determines whether the logged-in user stored in the session is an admin or not. This doesn't contact the database, it simply checks for a session attribute that should be stored on login. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">session</td><td>The session object to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether user is an admin or not. </dd></dl>
 
 </div>
 </div>
@@ -276,7 +314,7 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Users/treyt/Desktop/Capstone/Capstone/src/database/Account.java</li>
+<li>D:/Users/aaron/git/Capstone/Capstone/src/database/Account.java</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
