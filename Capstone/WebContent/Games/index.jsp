@@ -1,10 +1,12 @@
 <%@page import="java.io.Console"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="beans.GameBean, beans.Event, beans.EventTableBean, java.util.ListIterator" %>
+	import="beans.GameBean, beans.Event, beans.EventTableBean, java.util.ListIterator, java.util.ArrayList" %>
 <%
 EventTableBean et = new EventTableBean();
-ListIterator<Event> i = et.getPastEvents().listIterator(et.getPastEvents().size());
+ArrayList<Event> es = et.getPastEvents();
+es.add(et.getCurrentEvent());
+ListIterator<Event> i = es.listIterator(es.size());
 %>
 
 <!DOCTYPE html>

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import database.Database;
+import exceptions.UnsuccessfulUpdateException;
 
 /**
  * Model for the DB's Games table, used to retrieve a single row when given a Game's ID.
@@ -53,6 +54,20 @@ public class GameBean implements Serializable{
 	public boolean isPublic()
 	{
 		return (this.status.equals("2") || this.status.equals("1"));
+	}
+	
+	/**
+	 * Updates the game in the database with the given primary key to the values of this GameBean.
+	 * @param PKey an integer value of the games's primary key.
+	 * @throws UnsuccessfulUpdateException 
+	 */
+	public void writeChanges() throws UnsuccessfulUpdateException
+	{
+		String query = String.format("INSERT OR REPLACE INTO Games (PKey, EventPKey, SubmitterPKey, Title, Description, PlayLink, Status) VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s');",
+				this.getId(), this.getEvent(), this.getSubmitter(), this.getTitle(), this.getDesc(), this.getLink(), this.getStatus());
+		String message = Database.executeUpdate(query);
+		if (! message.equals(""))
+			throw new UnsuccessfulUpdateException(query, message);
 	}
 
 	/**

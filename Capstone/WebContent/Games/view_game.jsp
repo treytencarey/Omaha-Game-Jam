@@ -1,6 +1,7 @@
+<%@page import="exceptions.EmptyQueryException"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="utils.FolderReader, servlets.GameViewServlet, database.Game, database.Profile, beans.ContributorTableBean, database.Contributor, beans.RoleTableBean, beans.Event, database.Role, database.Mutator, database.Platform, database.Tool, beans.MutatorTableBean" %>
+	import="utils.FolderReader, servlets.GameViewServlet, database.Game, database.Profile, beans.ContributorTableBean, database.Contributor, beans.RoleTableBean, beans.Event, database.Role, database.Mutator, database.Platform, database.Tool, beans.MutatorTableBean, beans.GameBean" %>
 
 <%
 Game g = new Game(Integer.parseInt(request.getParameter("id")));
@@ -12,8 +13,33 @@ final String MEDIA_PATH = "/Uploads/Games";
 final String MEDIA_PATH_FULL = request.getContextPath() + MEDIA_PATH;
 pageContext.setAttribute("Website", g.getLink());
 
-%>
+// This code is disgusting but I'm in a rush so whatever
+boolean isAdmin = Account.isAdmin(session);
 
+GameBean gb = new GameBean(request.getParameter("id"));
+// Create a message to display to admins moderating the content of this profile.
+String s = gb.getStatus();
+String me;
+switch (s)
+{
+case "-1":
+	me = "Depublicized: game page was denied in its current state.";
+	break;
+case "0":
+	me = "Depublicized: game page was previously denied but has since been edited.";
+	break;
+case "1":
+	me = "Publicized: game page is unverified.";
+	break;
+case "2":
+	me = "Publicized: game page was approved in its current state.";
+	break;
+default:
+	me = "Something went wrong. Oops!";
+}
+
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +62,18 @@ pageContext.setAttribute("Website", g.getLink());
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/navStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/subNavStyle.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/Styles/gameViewStyle.css">
+	<script>
+	function verify() {
+		moderate(2);
+	}
+	function deny() {
+		moderate(-1);
+	}
+	function moderate(x) {
+		document.getElementById('status').value = x;
+		document.getElementById('moderate_form').submit();
+	}
+</script>
 	<title>View Games</title>
 </head>
 <body>
@@ -46,14 +84,30 @@ pageContext.setAttribute("Website", g.getLink());
 	<%@include  file="/Games/newGameModal.jsp" %>
 <% } %>
 
-<%-- <%
-if (canEdit)
-{
-%>
-<button>Edit</button>
 <%
-}
-%> --%>
+	if (isAdmin) {
+%>
+<p><%= me %></p>
+<form id="moderate_form" action="<%=request.getContextPath()%>/game_moderate" method="GET">
+	<input type="hidden" name="status" id="status">
+	<input type="hidden" name="id" value="<%= gb.getId() %>">
+	<button type="button" class="btn btn-success" <%=gb.getStatus().equals("2") ? "disabled" : ""%> onclick="verify();">Publicize Game Page</button>
+	<button type="button" class="btn btn-danger" <%=gb.getStatus().equals("-1") ? "disabled" : ""%> onclick="deny();">Depublicize Game Page</button>
+</form>
+
+<%
+	}
+%>
+
+<%
+	if (me.equals("-1") || me.equals("0")) {
+%>
+<div class="alert alert-warning">
+	This game page has been depublicized by a moderator. Please clean it up!
+</div>
+<%
+	}
+%>
 
 <div class="gameViewMainDiv">
 	<div class="row gameViewMainRow">
@@ -122,9 +176,21 @@ if (canEdit)
 					<label class="gameViewLabels" for="mutators">Mutators:</label>
 				</div>
 				<div class="col-sm-12 gameViewDetailCols">
-					<% for(Mutator m : g.getMutators()) { %>
-						<p class="gameViewValues" id="mutators"><%= m.getTitle() %> - <%= m.getDesc() %></p>
-					<%}%>
+					<%
+					try
+					{
+						for(Mutator m : g.getMutators())
+						{
+						%>
+							<p class="gameViewValues" id="mutators"><%= m.getTitle() %> - <%= m.getDesc() %></p>
+						<%
+						}
+					}
+					catch (Exception ex)
+					{
+						ex.printStackTrace();
+					}
+					%>
 				</div>
 			</div>
 			<div class="row gameViewDetails">
