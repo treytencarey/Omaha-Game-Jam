@@ -82,10 +82,10 @@
 		current = eventTable.getCurrentEvent();
 		future = eventTable.getFutureEvent();
 		past = eventTable.getPastEvents();
+		
 	} catch(Exception e){
-		//Do nothing for now
+		e.printStackTrace();
 	}
-	
 	%>
 	
 	<!-- Current Event -->

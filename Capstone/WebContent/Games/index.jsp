@@ -4,8 +4,12 @@
 	import="beans.GameBean, beans.Event, beans.EventTableBean, java.util.ListIterator, java.util.ArrayList" %>
 <%
 EventTableBean et = new EventTableBean();
-ArrayList<Event> es = et.getPastEvents();
+ArrayList<Event> es = new ArrayList<Event>();
+ArrayList<Event> pe = et.getPastEvents();
 es.add(et.getCurrentEvent());
+for(Event event : pe){
+	es.add(event);
+}
 ListIterator<Event> i = es.listIterator(es.size());
 %>
 
@@ -69,6 +73,7 @@ ListIterator<Event> i = es.listIterator(es.size());
 		while (i.hasPrevious())
 		{
 			Event e = i.previous();
+			if(e.getTitle() != "Unavailable"){
 	%>
 			<div class="container gamesContainer">
 				<h3><%= e.getTitle() %>: <%= e.getTheme() %></h3>
@@ -80,7 +85,7 @@ ListIterator<Event> i = es.listIterator(es.size());
 				</div>
 			</div>
 	<%
-		}
+			}}
 	%>
 	<% if (request.getRequestURI().equals(request.getContextPath()+"/Games/"))  { %>
     <div id="createGameModal" class="modal fade">

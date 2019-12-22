@@ -96,7 +96,12 @@ public class EventTableBean implements Serializable {
 	 */
 	public Event getFutureEvent() throws ParseException {
 		Event futureEvent = new Event();
-		Date curEDate = new SimpleDateFormat("MM/dd/yyyy").parse(getCurrentEvent().getStartDate());
+		Date curEDate;
+		if(getCurrentEvent().getTitle() != "Unavailable") {
+			curEDate = new SimpleDateFormat("MM/dd/yyyy").parse(getCurrentEvent().getStartDate());
+		} else {
+			curEDate = new Date();
+		}
 		Date secondLowestDate = new SimpleDateFormat("MM/dd/yyyy").parse("12/31/3000");
 		
 		for(Event event : events) {
