@@ -80,7 +80,7 @@ public class GameBean implements Serializable{
 	 * @param id the id to set
 	 */
 	public void setId(String id) {
-		this.id = id;
+		this.id = Database.formatString(id);
 	}
 	/**
 	 * @return the event
@@ -92,7 +92,7 @@ public class GameBean implements Serializable{
 	 * @param event the event to set
 	 */
 	public void setEvent(String event) {
-		this.event = event;
+		this.event = Database.formatString(event);
 	}
 	/**
 	 * @return the submitter
@@ -104,7 +104,7 @@ public class GameBean implements Serializable{
 	 * @param submitter the submitter to set
 	 */
 	public void setSubmitter(String submitter) {
-		this.submitter = submitter;
+		this.submitter = Database.formatString(submitter);
 	}
 	/**
 	 * @return the title
@@ -116,7 +116,7 @@ public class GameBean implements Serializable{
 	 * @param title the title to set
 	 */
 	public void setTitle(String title) {
-		this.title = title;
+		this.title = Database.formatString(title);
 	}
 	/**
 	 * @return the desc
@@ -128,7 +128,7 @@ public class GameBean implements Serializable{
 	 * @param desc the desc to set
 	 */
 	public void setDesc(String desc) {
-		this.desc = desc;
+		this.desc = Database.formatString(desc);
 	}
 	/**
 	 * @return the link
@@ -140,7 +140,7 @@ public class GameBean implements Serializable{
 	 * @param link the link to set
 	 */
 	public void setLink(String link) {
-		this.link = link;
+		this.link = Database.formatString(link);
 	}
 	/**
 	 * @return the status
@@ -152,6 +152,6 @@ public class GameBean implements Serializable{
 	 * @param status the status to set
 	 */
 	public void setStatus(String status) {
-		this.status = status;
+		this.status = Database.formatString(status);
 	}
 }
