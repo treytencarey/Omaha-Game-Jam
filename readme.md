@@ -10,21 +10,27 @@ Registration is also a major feature. Participants can register for a profile on
 # Screenshots
 
 The home page allows users to see upcoming event details, featuring themes and registration. Users may also sign up or log in using a dynamic modal, where admins can use an administrator pannel for moderation.
+
 ![Home](https://user-images.githubusercontent.com/38487128/149235414-e82b4dab-cdf1-4696-9753-1fe2b86baa34.png)
 
 The events page displays the same event the home page displays, with some extra details and visuals. It also includes past events and the option to page between them.
+
 ![Events](https://user-images.githubusercontent.com/38487128/149235532-325a2313-1468-4b20-bc3d-d03c61910806.png)
 
 Users are able to create their own dynamic pages by uploading photos of the game, descriptions, and searching for registered accounts to add as "contributors" to games. By selecting a contributor, you are taken to their public profile. Contributors also have the ability to make their game public or private, where public submissions go through an approval process by administrators.
+
 ![Game_page](https://user-images.githubusercontent.com/38487128/149235782-ea6def4c-e289-44f7-a91e-35d99f52a084.png)
 
 Speaking of approval processes, admins are able to view recently changed game submissions and hide or show them to the public.
+
 ![Admin_submissions](https://user-images.githubusercontent.com/38487128/149235890-ce64ab41-b081-4cfc-a039-04da202a3650.png)
 
 The gallery is a great place to view photos by event, where admins are able to attach or remove photos from events.
+
 ![Gallery](https://user-images.githubusercontent.com/38487128/149236006-c6bfee74-95ce-4f06-bda4-69aa53ef6fc8.png)
 
 Additionally, the news page allows admins to create, modify, or delete articles. Articles are also created dynamically and allow moderators to keep the public up-to-date on any new and upcoming events.
+
 ![News](https://user-images.githubusercontent.com/38487128/149236138-26a9da4a-539a-49f9-9806-0fb5c24329bc.png)
 
 # Initial Development Environment Setup
